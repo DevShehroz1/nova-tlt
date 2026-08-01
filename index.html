@@ -878,7 +878,7 @@
 			justify-content: center;
 		}
 		.feat-card {
-			border-radius: 6px;
+			border-radius: 22px;
 			padding: clamp(28px, 2.5vw, 40px) clamp(24px, 2vw, 36px);
 			display: flex;
 			flex-direction: column;
@@ -891,28 +891,88 @@
 			--gx: 50%;
 			--gy: 50%;
 		}
+		/* liquid glass shimmer sweep on hover */
 		.feat-card::before {
 			content: '';
 			position: absolute;
 			inset: 0;
 			background: radial-gradient(
 				320px circle at var(--gx) var(--gy),
-				rgba(202,149,61,0.22) 0%,
-				transparent 70%
+				rgba(202,149,61,0.18) 0%,
+				transparent 68%
 			);
 			opacity: 0;
-			transition: opacity 300ms ease;
+			transition: opacity 350ms ease;
 			pointer-events: none;
 			z-index: 1;
 			border-radius: inherit;
 		}
 		.feat-card:hover::before { opacity: 1; }
-		/* keep card content above glow layer */
+		/* top specular highlight (glass lens) */
+		.feat-card--light::after,
+		.feat-card--dark::after {
+			content: '';
+			position: absolute;
+			top: 0; left: 0; right: 0;
+			height: 52%;
+			background: linear-gradient(
+				160deg,
+				rgba(255,255,255,0.10) 0%,
+				rgba(255,255,255,0.04) 40%,
+				transparent 100%
+			);
+			border-radius: 22px 22px 60% 60% / 22px 22px 32px 32px;
+			pointer-events: none;
+			z-index: 1;
+		}
+		/* keep card content above glow layers */
 		.feat-card__top,
 		.feat-card__icon { position: relative; z-index: 2; }
-		.feat-card--green { background: linear-gradient(135deg, #B67C2A 0%, #CA953D 50%, #E5B85A 100%); }
-		.feat-card--light { background: #1c1c1c; border: 1px solid rgba(202,149,61,0.18); }
-		.feat-card--dark  { background: #181818; }
+
+		/* gold card: stays the same */
+		.feat-card--green {
+			background: linear-gradient(135deg, #B67C2A 0%, #CA953D 50%, #E5B85A 100%);
+			box-shadow: 0 8px 32px rgba(202,149,61,0.25), 0 2px 0 rgba(255,255,255,0.15) inset;
+		}
+
+		/* liquid glass cards */
+		.feat-card--light {
+			background:
+				linear-gradient(135deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.04) 100%);
+			border: 1px solid rgba(255,255,255,0.14);
+			border-top-color: rgba(255,255,255,0.28);
+			border-left-color: rgba(255,255,255,0.20);
+			backdrop-filter: blur(18px);
+			-webkit-backdrop-filter: blur(18px);
+			box-shadow:
+				0 4px 24px rgba(0,0,0,0.35),
+				0 1px 0 rgba(255,255,255,0.12) inset,
+				0 -1px 0 rgba(0,0,0,0.25) inset;
+		}
+		.feat-card--dark {
+			background:
+				linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
+			border: 1px solid rgba(255,255,255,0.10);
+			border-top-color: rgba(255,255,255,0.22);
+			border-left-color: rgba(255,255,255,0.15);
+			backdrop-filter: blur(18px);
+			-webkit-backdrop-filter: blur(18px);
+			box-shadow:
+				0 4px 24px rgba(0,0,0,0.40),
+				0 1px 0 rgba(255,255,255,0.09) inset,
+				0 -1px 0 rgba(0,0,0,0.30) inset;
+		}
+		.feat-card--light:hover,
+		.feat-card--dark:hover {
+			border-top-color: rgba(202,149,61,0.45);
+			border-left-color: rgba(202,149,61,0.25);
+			border-color: rgba(202,149,61,0.22);
+			transition: border-color 300ms ease, box-shadow 300ms ease;
+			box-shadow:
+				0 8px 36px rgba(0,0,0,0.45),
+				0 0 20px rgba(202,149,61,0.12),
+				0 1px 0 rgba(255,255,255,0.12) inset;
+		}
 		.feat-card__top {}
 		.feat-card__title {
 			font-size: clamp(15px, 1.4vw, 20px);
@@ -1245,6 +1305,14 @@
 			border: 1px solid rgba(255,255,255,0.1);
 			border-radius: 12px;
 			overflow: hidden;
+			transition: border-color 280ms ease, background 280ms ease;
+		}
+		.faq-item--open {
+			border-color: transparent;
+			background:
+				linear-gradient(#111111, #111111) padding-box,
+				linear-gradient(135deg, #B67C2A 0%, #CA953D 50%, #E5B85A 100%) border-box;
+			box-shadow: 0 0 18px rgba(202,149,61,0.18), 0 0 40px rgba(202,149,61,0.08);
 		}
 		.faq-item__btn {
 			width: 100%;
