@@ -1198,16 +1198,42 @@
 			transition: background 250ms ease, border-color 250ms ease;
 		}
 		.faq-sec__cta:hover { background: rgba(202,149,61,0.08); border-color: #CA953D; }
+		@keyframes faq-float {
+			0%   { transform: translateY(0px) rotate(-1deg); }
+			50%  { transform: translateY(-14px) rotate(1deg); }
+			100% { transform: translateY(0px) rotate(-1deg); }
+		}
+		@keyframes faq-shadow-pulse {
+			0%, 100% { opacity: 0.35; transform: scaleX(1); }
+			50%       { opacity: 0.18; transform: scaleX(0.85); }
+		}
 		.faq-sec__img-wrap {
 			border-radius: 20px;
-			overflow: hidden;
+			overflow: visible;
 			aspect-ratio: 4/3;
+			position: relative;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		.faq-sec__img-wrap::after {
+			content: '';
+			position: absolute;
+			bottom: -18px;
+			left: 10%;
+			width: 80%;
+			height: 24px;
+			background: radial-gradient(ellipse at center, rgba(202,149,61,0.45) 0%, transparent 70%);
+			border-radius: 50%;
+			animation: faq-shadow-pulse 4s ease-in-out infinite;
 		}
 		.faq-sec__img-wrap img {
 			width: 100%;
 			height: 100%;
-			object-fit: cover;
+			object-fit: contain;
 			display: block;
+			animation: faq-float 4s ease-in-out infinite;
+			filter: drop-shadow(0 24px 40px rgba(0,0,0,0.6));
 		}
 		/* 2-column accordion grid */
 		.faq-list {
