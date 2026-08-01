@@ -797,7 +797,13 @@
 			transition: opacity 250ms ease;
 		}
 		.services-sec__row--active .services-sec__num,
-		.services-sec__row--active .services-sec__name { opacity: 1; color: #CA953D; }
+		.services-sec__row--active .services-sec__name {
+			opacity: 1;
+			background: linear-gradient(135deg, #B67C2A 0%, #CA953D 50%, #E5B85A 100%);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			background-clip: text;
+		}
 		/* Panel */
 		.services-sec__panel {
 			position: sticky;
