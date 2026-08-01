@@ -1921,7 +1921,7 @@
 		.gfeat-globe-wrap { max-width: 340px; margin: 0 auto; }
 	}
 
-	/* ── Luxury Gold glow on all gradient CTAs ── */
+	/* ── Luxury Gold glow + glassmorphism on all gradient CTAs ── */
 	.globe-btn.solid,
 	.about-card__btn,
 	.stats-split__cta,
@@ -1929,10 +1929,39 @@
 	.cta2-card__btn,
 	.btn._accent {
 		box-shadow: 0 0 14px rgba(202, 149, 61, 0.45), 0 0 36px rgba(202, 149, 61, 0.18);
+		backdrop-filter: blur(10px);
+		-webkit-backdrop-filter: blur(10px);
+		position: relative;
+		overflow: hidden;
+	}
+	/* top-edge shimmer highlight */
+	.globe-btn.solid::before,
+	.about-card__btn::before,
+	.stats-split__cta::before,
+	.services-sec__panel-btn::before,
+	.cta2-card__btn::before {
+		content: '';
+		position: absolute;
+		top: 0; left: 0; right: 0;
+		height: 40%;
+		background: linear-gradient(to bottom, rgba(255,255,255,0.18) 0%, transparent 100%);
+		border-radius: inherit;
+		pointer-events: none;
 	}
 	.footer-cta__btn-dot {
 		box-shadow: 0 0 12px rgba(202, 149, 61, 0.45), 0 0 28px rgba(202, 149, 61, 0.18);
 	}
+
+	/* ── Ghost/outline buttons: frosted glass ── */
+	.globe-btn:not(.solid),
+	.faq-sec__cta,
+	.gfeat-btn {
+		background: rgba(255,255,255,0.07) !important;
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+		border-color: rgba(255,255,255,0.18) !important;
+	}
+	.globe-btn:not(.solid):hover { background: rgba(255,255,255,0.12) !important; }
 	</style>
 </head>
 
