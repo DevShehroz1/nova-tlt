@@ -124,7 +124,7 @@
 		/* ── Globe hero ── */
 		.hero-sticky-outer {
 			position: relative;
-			min-height: 300vh;
+			min-height: 400vh;
 		}
 
 		.globe-hero {
@@ -462,17 +462,22 @@
 		.about-pin-outer {
 			position: relative;
 			z-index: 10;
-			background: var(--hero-bg);
+			margin-top: -200vh;
+			background: transparent;
 			padding: 0 clamp(10px, 1.5vw, 24px);
+			min-height: 200vh;
 		}
 
 		/* ── About section ── */
 		.about-section {
+			position: sticky;
+			top: 0;
+			height: 100vh;
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
-			padding-top: clamp(60px, 8vh, 100px);
-			padding-bottom: clamp(60px, 8vh, 100px);
+			padding-top: clamp(40px, 5vh, 60px);
+			padding-bottom: clamp(32px, 4vh, 48px);
 		}
 
 		.about-card {
