@@ -1,0 +1,5 @@
+.wpcf7-form-control-wrap { width: 100%; }
+.wpcf7-not-valid { border-color: #e30b0b; }
+.wpcf7-not-valid-tip { display: none !important; }
+.wpcf7-response-output { display: none !important; }
+[aria-invalid='true'] { outline: none; }
