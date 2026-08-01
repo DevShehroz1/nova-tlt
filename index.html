@@ -124,7 +124,7 @@
 		/* ── Globe hero ── */
 		.hero-sticky-outer {
 			position: relative;
-			min-height: 400vh;
+			min-height: 100vh;
 		}
 
 		.globe-hero {
@@ -462,22 +462,17 @@
 		.about-pin-outer {
 			position: relative;
 			z-index: 10;
-			margin-top: -200vh;
-			background: transparent;
+			background: var(--hero-bg);
 			padding: 0 clamp(10px, 1.5vw, 24px);
-			min-height: 200vh;
 		}
 
 		/* ── About section ── */
 		.about-section {
-			position: sticky;
-			top: 0;
-			height: 100vh;
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
-			padding-top: clamp(40px, 5vh, 60px);
-			padding-bottom: clamp(32px, 4vh, 48px);
+			padding-top: clamp(60px, 8vh, 100px);
+			padding-bottom: clamp(60px, 8vh, 100px);
 		}
 
 		.about-card {
@@ -485,9 +480,8 @@
 			-webkit-backdrop-filter: blur(14px);
 			backdrop-filter: blur(14px);
 			border-radius: clamp(16px, 2vw, 28px);
-			padding: clamp(56px, 8vh, 100px) clamp(16px, 3vw, 48px) 0;
+			padding: clamp(48px, 7vh, 80px) clamp(24px, 3vw, 56px) 0;
 			transform-origin: top center;
-			will-change: transform;
 		}
 
 		.about-card__header {
