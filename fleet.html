@@ -402,7 +402,15 @@
     }
 
     /* ── Header: matches homepage style ── */
-    .header { position: fixed !important; transform: none !important; background: rgba(10,10,10,0.90) !important; backdrop-filter: blur(14px) !important; -webkit-backdrop-filter: blur(14px) !important; }
+    .header { position: fixed !important; transform: none !important; background: transparent !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; transition: background 0.35s ease, backdrop-filter 0.35s ease !important; }
+    .header.is-scrolled { background: rgba(10,10,10,0.90) !important; backdrop-filter: blur(14px) !important; -webkit-backdrop-filter: blur(14px) !important; }
+    .page-fullhero { position: relative; min-height: 92vh; display: flex; align-items: center; justify-content: center; background-image: url('assets/img/fleet-hero.jpg'); background-size: cover; background-position: center 40%; }
+    .page-fullhero__overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.45) 50%, rgba(0,0,0,0.75) 100%); }
+    .page-fullhero__content { position: relative; z-index: 1; text-align: center; padding: clamp(100px,14vh,140px) clamp(24px,6vw,80px) clamp(60px,8vh,100px); max-width: none; width: 100%; }
+    .page-fullhero__eyebrow { font-family: 'Inter',sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; color: #CA953D; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 12px; }
+    .page-fullhero__eyebrow::before, .page-fullhero__eyebrow::after { content: ''; width: 24px; height: 1.5px; background: linear-gradient(135deg,#B67C2A,#CA953D,#E5B85A); flex-shrink: 0; }
+    .page-fullhero__title { font-family: BebasNeuePro,sans-serif; font-weight: 700; font-size: clamp(52px,8vw,110px); line-height: 0.9; letter-spacing: 0.03em; text-transform: uppercase; color: #fff; margin-bottom: 28px; white-space: nowrap; }
+    .page-fullhero__desc { font-family: 'Inter',sans-serif; font-size: clamp(14px,1.1vw,17px); color: rgba(255,255,255,0.65); line-height: 1.72; max-width: 520px; margin: 0 auto; }
     .header__container { position: relative !important; }
     .header__menu { position: absolute !important; left: 50% !important; transform: translateX(-50%) !important; background-color: #141414 !important; border: 1px solid rgba(255,255,255,0.1) !important; font-family: BebasNeuePro, sans-serif !important; font-weight: 700 !important; }
     .header__menu-item, .header__menu-item .text-hover__elem { color: rgba(255,255,255,0.85) !important; }
@@ -503,11 +511,14 @@
 </header>
 
 <main>
-  <div class="inner-hero">
-    <p class="inner-hero__eyebrow">Our Fleet</p>
-    <h1 class="inner-hero__title">Modern Trucks. Zero Downtime.</h1>
-    <p class="inner-hero__sub">150+ heavy vehicles across 4 categories — maintained to the highest standard and available with or without certified operators across all 12 KSA regions.</p>
-  </div>
+  <section class="page-fullhero">
+    <div class="page-fullhero__overlay"></div>
+    <div class="page-fullhero__content">
+      <p class="page-fullhero__eyebrow">Our Fleet</p>
+      <h1 class="page-fullhero__title">Modern Trucks. Zero Downtime.</h1>
+      <p class="page-fullhero__desc">150+ heavy vehicles across 4 categories — maintained to the highest standard and available with or without certified operators across all 12 KSA regions.</p>
+    </div>
+  </section>
 
   <!-- Stats Row -->
   <div class="section-inner" style="padding-top:0;padding-bottom:0;">
@@ -1016,6 +1027,16 @@
 
 <script src="assets/js/scroll-reveal.js"></script>
 <script src="assets/js/mobile-menu.js"></script>
+<script src="assets/js/page-transition.js"></script>
+<script>
+(function(){
+  var header = document.querySelector('.header');
+  var hero = document.querySelector('.page-fullhero');
+  function onScroll(){ header.classList.toggle('is-scrolled', window.scrollY > hero.offsetHeight - 80); }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
 <script src="assets/js/page-transition.js"></script>
 </body>
 </html>
