@@ -156,6 +156,35 @@
       .cta-band { flex-direction: column; }
     }
     @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+    /* ── Mobile header ── */
+    @media (max-width: 1024px) {
+      .header__container { display:flex !important; align-items:center !important; justify-content:space-between !important; position:relative !important; padding:0 16px !important; min-height:64px !important; }
+      .header__logo { position:absolute !important; left:50% !important; transform:translateX(-50%) !important; z-index:2 !important; padding:0 !important; }
+      .header__logo-img { height:60px !important; width:auto !important; }
+      .header__actions { display:flex !important; align-items:center !important; justify-content:space-between !important; width:100% !important; gap:0 !important; }
+      .header__btn { display:none !important; }
+      .header__menu { display:none !important; }
+      .header__hamburger { display:none !important; }
+      .header__hamburger-btn.btn { display:flex !important; align-items:center !important; justify-content:center !important; width:44px !important; height:44px !important; padding:0 !important; min-width:unset !important; background:transparent !important; border:none !important; color:#fff !important; z-index:3 !important; position:relative !important; }
+      .header__lang-heading.btn { height:40px !important; width:64px !important; font-size:13px !important; }
+    }
+    /* Mobile menu overlay */
+    #about-mobile-menu { display:none; position:fixed; top:0; left:0; right:0; bottom:0; width:100vw; max-width:100%; height:100vh; height:100dvh; z-index:9999; background:#0d0d0d; flex-direction:column; padding:80px 32px 48px; overflow-y:auto; overflow-x:hidden; box-sizing:border-box; }
+    #about-mobile-menu.is-open { display:flex; }
+    #about-mobile-menu .mob-nav-item { font-family:BebasNeuePro,sans-serif; font-size:36px; letter-spacing:.04em; color:#fff; text-decoration:none; padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.07); display:flex; align-items:center; justify-content:space-between; cursor:pointer; }
+    #about-mobile-menu .mob-nav-item:last-child { border-bottom:none; }
+    #about-mobile-menu .mob-nav-item:hover { color:#CA953D; }
+    #about-mobile-menu .mob-sub { display:none; padding:6px 0 6px 16px; }
+    #about-mobile-menu .mob-sub.is-open { display:block; }
+    #about-mobile-menu .mob-sub-link { display:block; font-family:'Inter',sans-serif; font-size:15px; font-weight:500; color:rgba(255,255,255,0.65); text-decoration:none; padding:10px 0; letter-spacing:.04em; border-bottom:1px solid rgba(255,255,255,0.04); }
+    #about-mobile-menu .mob-sub-link:last-child { border-bottom:none; }
+    #about-mobile-menu .mob-sub-link:hover { color:#CA953D; }
+    #about-mobile-menu .mob-close { position:absolute; top:18px; right:18px; font-family:'Inter',sans-serif; font-size:13px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,0.55); background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.12); border-radius:8px; padding:8px 16px; cursor:pointer; }
+    #about-mobile-menu .mob-close:hover { color:#fff; }
+    #about-mobile-menu .mob-chevron { width:20px; height:20px; flex-shrink:0; transition:transform 220ms ease; }
+    #about-mobile-menu .mob-chevron.open { transform:rotate(180deg); }
+    #about-mobile-menu .mob-gold-rule { width:40px; height:2px; background:linear-gradient(135deg,#B67C2A 0%,#CA953D 50%,#E5B85A 100%); margin-bottom:32px; }
   </style>
 </head>
 <body>
@@ -209,8 +238,8 @@
       </a>
     </nav>
     <div class="header__actions">
-      <button type="button" class="header__hamburger-btn btn" aria-label="Open hamburger menu">
-        <span class="is-not-active">Menu</span><span class="is-active">Close</span>
+      <button type="button" class="header__hamburger-btn btn" aria-label="Open hamburger menu" id="about-mob-open">
+        <svg width="22" height="16" viewBox="0 0 22 16" fill="none" aria-hidden="true"><rect y="0" width="22" height="2" rx="1" fill="currentColor"/><rect y="7" width="22" height="2" rx="1" fill="currentColor"/><rect y="14" width="22" height="2" rx="1" fill="currentColor"/></svg>
       </button>
       <button type="button" class="header__btn text-hover btn _accent" data-da=".header__hamburger, 1024, 1" data-contact-modal>
         <span class="btn__inner text-hover__inner">
@@ -480,6 +509,59 @@
 </script>
 <script>
 (function(){var canvas=document.getElementById('ptypes-canvas');if(!canvas)return;var wrap=canvas.parentElement,ctx=canvas.getContext('2d',{willReadFrequently:true});if(!ctx)return;var FONT='BebasNeuePro, sans-serif',SZ=1.5,DENS=6,DISP=15,RET=0.08,COL='#CA953D';var mx=-1000,my=-1000,parts=[],W=0,H=0,dpr=1,aId;function P(x,y){this.x=x+(Math.random()-.5)*10;this.y=y+(Math.random()-.5)*10;this.ox=x;this.oy=y;this.vx=(Math.random()-.5)*5;this.vy=(Math.random()-.5)*5;}P.prototype.update=function(){var dx=mx-this.x,dy=my-this.y,d=Math.sqrt(dx*dx+dy*dy);if(d<120&&mx!==-1000){var f=(120-d)/120;this.vx-=(dx/d)*f*DISP;this.vy-=(dy/d)*f*DISP;}this.vx+=(this.ox-this.x)*RET;this.vy+=(this.oy-this.y)*RET;this.vx*=0.85;this.vy*=0.85;this.x+=this.vx;this.y+=this.vy;};P.prototype.draw=function(){ctx.beginPath();ctx.arc(this.x,this.y,SZ,0,Math.PI*2);ctx.fill();};function label(){return(window.innerWidth<=768?'NOVA TLT':'NOVA TERRA').toUpperCase();}function fs(){return Math.min(200,W*0.30);}function init(){dpr=window.devicePixelRatio||1;W=wrap.clientWidth;H=wrap.clientHeight;if(!W||!H)return;canvas.width=Math.round(W*dpr);canvas.height=Math.round(H*dpr);canvas.style.width=W+'px';canvas.style.height=H+'px';ctx.setTransform(1,0,0,1,0,0);ctx.scale(dpr,dpr);ctx.clearRect(0,0,W,H);ctx.fillStyle=COL;ctx.font='bold '+fs()+'px '+FONT;ctx.letterSpacing='0.12em';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(label(),W/2,H/2);var img=ctx.getImageData(0,0,canvas.width,canvas.height),step=Math.max(1,Math.floor(DENS*dpr));parts=[];for(var y=0;y<img.height;y+=step)for(var x=0;x<img.width;x+=step)if((img.data[(y*img.width+x)*4+3]||0)>128)parts.push(new P(x/dpr,y/dpr));}function animate(){ctx.clearRect(0,0,W,H);ctx.fillStyle=COL;for(var i=0;i<parts.length;i++){parts[i].update();parts[i].draw();}aId=requestAnimationFrame(animate);}canvas.addEventListener('mousemove',function(e){var r=canvas.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top;});canvas.addEventListener('mouseleave',function(){mx=-1000;my=-1000;});var rt;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){if(aId)cancelAnimationFrame(aId);init();aId=requestAnimationFrame(animate);},150);});function start(){setTimeout(function(){init();aId=requestAnimationFrame(animate);},120);}if(document.fonts&&document.fonts.load){document.fonts.load('bold 140px BebasNeuePro').then(start)['catch'](start);}else{start();}})();
+</script>
+
+<!-- ── About page mobile menu ── -->
+<div id="about-mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation">
+  <button class="mob-close" id="about-mob-close">Close</button>
+  <div class="mob-gold-rule"></div>
+  <a href="index.html" class="mob-nav-item">Home</a>
+  <div class="mob-nav-item" data-mob-drop="company">
+    Company
+    <svg class="mob-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
+  <div class="mob-sub" id="mob-sub-company">
+    <a href="about.html" class="mob-sub-link">About Us</a>
+    <a href="safety.html" class="mob-sub-link">Safety &amp; Quality</a>
+    <a href="careers.html" class="mob-sub-link">Careers</a>
+  </div>
+  <div class="mob-nav-item" data-mob-drop="services">
+    What We Do
+    <svg class="mob-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
+  <div class="mob-sub" id="mob-sub-services">
+    <a href="services.html" class="mob-sub-link">Services</a>
+    <a href="fleet.html" class="mob-sub-link">Fleet</a>
+    <a href="industries.html" class="mob-sub-link">Industries We Serve</a>
+  </div>
+  <a href="news.html" class="mob-nav-item">News</a>
+</div>
+<script>
+(function(){
+  if(window.innerWidth > 1024) return;
+  var overlay = document.getElementById('about-mobile-menu');
+  var menuBtn = document.getElementById('about-mob-open');
+  var closeBtn = document.getElementById('about-mob-close');
+  if(!overlay || !menuBtn) return;
+  menuBtn.addEventListener('click', function(){
+    overlay.classList.toggle('is-open');
+    document.body.style.overflow = overlay.classList.contains('is-open') ? 'hidden' : '';
+  });
+  closeBtn && closeBtn.addEventListener('click', function(){
+    overlay.classList.remove('is-open');
+    document.body.style.overflow = '';
+  });
+  overlay.querySelectorAll('[data-mob-drop]').forEach(function(trigger){
+    trigger.addEventListener('click', function(){
+      var key = trigger.getAttribute('data-mob-drop');
+      var sub = document.getElementById('mob-sub-' + key);
+      var chevron = trigger.querySelector('.mob-chevron');
+      if(!sub) return;
+      var open = sub.classList.toggle('is-open');
+      chevron && chevron.classList.toggle('open', open);
+    });
+  });
+})();
 </script>
 </body>
 </html>
