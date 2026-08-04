@@ -5461,3 +5461,8 @@ html.with-fancybox body.hide-scrollbar {
   border-radius: 5rem; transition: background 0.25s, border-color 0.25s;
 }
 #nova-mob-overlay .mob-footer-cta:hover { background: rgba(202,149,61,0.1); border-color: #CA953D; }
+
+/* Force header visible on mobile (no GSAP preloader on inner pages) */
+@media (max-width: 1024px) {
+  .header { transform: none !important; }
+}
