@@ -219,6 +219,135 @@
     .btn._accent:hover { color: #fff !important; filter: brightness(0.9); }
     .header__logo { background: transparent !important; padding: 0 !important; height: auto !important; }
     .header__logo-img { width: auto !important; height: 52px !important; object-fit: contain; }
+
+    /* ── About fullhero ── */
+    .about-fullhero {
+      position: relative;
+      min-height: 88vh;
+      display: flex;
+      align-items: flex-end;
+      background-image: url('assets/img/about-hero.jpg');
+      background-size: cover;
+      background-position: center 40%;
+      padding-top: 80px;
+    }
+    .about-fullhero__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom,
+        rgba(0,0,0,0.55) 0%,
+        rgba(0,0,0,0.25) 40%,
+        rgba(0,0,0,0.82) 100%);
+    }
+    .about-fullhero__content {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      padding: clamp(40px,5vw,80px);
+      padding-bottom: clamp(52px,7vh,88px);
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: clamp(32px,4vw,80px);
+    }
+    .about-fullhero__eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #CA953D;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .about-fullhero__eyebrow::before {
+      content: '';
+      width: 28px;
+      height: 1.5px;
+      background: linear-gradient(135deg,#B67C2A,#CA953D,#E5B85A);
+      flex-shrink: 0;
+    }
+    .about-fullhero__title {
+      font-family: BebasNeuePro, sans-serif;
+      font-weight: 700;
+      font-size: clamp(80px,12vw,160px);
+      line-height: 0.88;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: #fff;
+    }
+    .about-fullhero__right {
+      flex: 0 1 480px;
+      padding-bottom: 12px;
+    }
+    .about-fullhero__desc {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(14px,1.1vw,17px);
+      color: rgba(255,255,255,0.78);
+      line-height: 1.72;
+      margin-bottom: 32px;
+    }
+    .about-fullhero__rule {
+      width: 40px;
+      height: 1.5px;
+      background: linear-gradient(135deg,#B67C2A,#CA953D);
+      margin-bottom: 28px;
+    }
+    .about-fullhero__stats {
+      display: flex;
+      gap: clamp(20px,3vw,36px);
+      flex-wrap: wrap;
+    }
+    .about-fullhero__stat { display: flex; flex-direction: column; gap: 4px; }
+    .about-fullhero__stat-num {
+      font-family: BebasNeuePro, sans-serif;
+      font-size: clamp(30px,3.2vw,44px);
+      line-height: 1;
+      letter-spacing: 0.02em;
+      background: linear-gradient(135deg,#B67C2A,#CA953D,#E5B85A);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .about-fullhero__stat-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    @media (max-width: 768px) {
+      .about-fullhero__content { flex-direction: column; align-items: flex-start; }
+      .about-fullhero__right { flex: 1; width: 100%; }
+      .about-fullhero__title { font-size: clamp(64px,18vw,96px); }
+    }
+
+    /* ── Word-reveal section ── */
+    .wrev-sec {
+      background: #0a0a0a;
+      padding: clamp(80px,12vh,140px) clamp(24px,8vw,120px);
+    }
+    .wrev-inner {
+      max-width: 1040px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .wrev-para {
+      font-family: BebasNeuePro, sans-serif;
+      font-weight: 700;
+      font-size: clamp(28px,3.8vw,54px);
+      line-height: 1.22;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin: 0 0 clamp(28px,4vh,52px);
+    }
+    .wrev-para:last-child { margin-bottom: 0; }
+    .wrev-word {
+      display: inline;
+      color: rgba(255,255,255,0.08);
+    }
   </style>
 </head>
 <body>
@@ -287,43 +416,71 @@
 </header>
 
 <main>
-  <div class="page-hero">
-    <div class="page-hero__text">
-      <p class="page-hero__eyebrow">Company</p>
-      <h1 class="page-hero__title">20 Years Powering Saudi Arabia's <span>Ground Movement</span></h1>
-      <p class="page-hero__sub">NOVA Terra Logistics &amp; Transport is the Kingdom's leading heavy haulage and earthmoving specialist — built for Vision 2030 projects and beyond.</p>
-    </div>
-    <div class="page-hero__badge-col">
-      <div class="hero-badge">
-        <div class="hero-badge__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#CA953D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
-        <div>
-          <div class="hero-badge__num">150+</div>
-          <div class="hero-badge__label">Heavy Vehicles in Fleet</div>
-        </div>
+  <section class="about-fullhero">
+    <div class="about-fullhero__overlay"></div>
+    <div class="about-fullhero__content">
+      <div class="about-fullhero__left">
+        <p class="about-fullhero__eyebrow">Company / About</p>
+        <h1 class="about-fullhero__title">About Us</h1>
       </div>
-      <div class="hero-badge">
-        <div class="hero-badge__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#CA953D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-        <div>
-          <div class="hero-badge__num">12</div>
-          <div class="hero-badge__label">KSA Regions Covered</div>
-        </div>
-      </div>
-      <div class="hero-badge">
-        <div class="hero-badge__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#CA953D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-        <div>
-          <div class="hero-badge__num">500+</div>
-          <div class="hero-badge__label">Projects Completed</div>
-        </div>
-      </div>
-      <div class="hero-badge">
-        <div class="hero-badge__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#CA953D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
-        <div>
-          <div class="hero-badge__num">20 Yrs</div>
-          <div class="hero-badge__label">In Operation since 2004</div>
+      <div class="about-fullhero__right">
+        <p class="about-fullhero__desc">NOVA Terra Logistics &amp; Transport is the Kingdom's leading heavy haulage and earthmoving specialist — built for Vision 2030 projects and beyond. With 20 years of experience and 150+ heavy vehicles operating across all 12 KSA regions, we deliver reliability at scale.</p>
+        <div class="about-fullhero__rule"></div>
+        <div class="about-fullhero__stats">
+          <div class="about-fullhero__stat">
+            <span class="about-fullhero__stat-num">150+</span>
+            <span class="about-fullhero__stat-label">Heavy Vehicles</span>
+          </div>
+          <div class="about-fullhero__stat">
+            <span class="about-fullhero__stat-num">12</span>
+            <span class="about-fullhero__stat-label">KSA Regions</span>
+          </div>
+          <div class="about-fullhero__stat">
+            <span class="about-fullhero__stat-num">500+</span>
+            <span class="about-fullhero__stat-label">Projects Done</span>
+          </div>
+          <div class="about-fullhero__stat">
+            <span class="about-fullhero__stat-num">20 Yrs</span>
+            <span class="about-fullhero__stat-label">In Operation</span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
+
+  <!-- Word-reveal statement section -->
+  <section class="wrev-sec">
+    <div class="wrev-inner">
+      <p class="wrev-para" id="wrev-p1">Established in 2004, Nova Terra has built Saudi Arabia's most trusted heavy haulage network.</p>
+      <p class="wrev-para" id="wrev-p2">Delivering 500+ projects across 12 KSA regions with 150 heavy vehicles and two decades of proven excellence on every Vision 2030 site.</p>
+    </div>
+  </section>
+  <script>
+  (function () {
+    var paras = document.querySelectorAll('.wrev-para');
+    paras.forEach(function (para) {
+      var words = para.textContent.trim().split(/\s+/);
+      para.innerHTML = words.map(function (w) {
+        return '<span class="wrev-word">' + w + '</span>';
+      }).join(' ');
+    });
+
+    var allWords = Array.from(document.querySelectorAll('.wrev-word'));
+
+    function update() {
+      var vh = window.innerHeight;
+      allWords.forEach(function (w) {
+        var rect = w.getBoundingClientRect();
+        var mid = rect.top + rect.height / 2;
+        var p = Math.max(0, Math.min(1, (vh * 0.72 - mid) / (vh * 0.38)));
+        w.style.color = 'rgba(255,255,255,' + (0.08 + p * 0.92) + ')';
+      });
+    }
+
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  })();
+  </script>
 
   <div class="sec">
     <div class="two-col">
