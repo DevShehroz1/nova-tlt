@@ -3712,11 +3712,7 @@
 			<div class="footer-bottom-bar">
 				<span class="footer-bottom-bar__copy">© 2025 NOVA Terra Logistics &amp; Transport. All rights reserved.</span>
 				<span class="footer-bottom-bar__copy">Developed &amp; Designed by Tech Venchure</span>
-				<div class="footer-bottom-bar__legal">
-					<a href="#">Privacy Policy</a>
-					<a href="#">Terms of Service</a>
 				</div>
-			</div>
 		</div>
 
 	</footer>
@@ -3822,7 +3818,7 @@
 		};
 
 		function getLabel()    { return (window.innerWidth <= 768 ? 'NOVA TLT' : 'NOVA TERRA').toUpperCase(); }
-		function getFontSize() { return Math.min(200, W * 0.30); }
+		function getFontSize() { return Math.min(200, W * (window.innerWidth <= 768 ? 0.20 : 0.30)); }
 
 		function init() {
 			dpr = window.devicePixelRatio || 1;
