@@ -202,8 +202,9 @@
     #about-mobile-menu .mob-footer-cta { display:inline-flex; align-items:center; gap:10px; font-family:BebasNeuePro,sans-serif; font-size:16px; letter-spacing:.1em; color:#CA953D; text-decoration:none; padding:12px 24px; border:1px solid rgba(202,149,61,0.35); border-radius:5rem; transition:background 0.25s,border-color 0.25s; }
     #about-mobile-menu .mob-footer-cta:hover { background:rgba(202,149,61,0.1); border-color:#CA953D; }
 
-    /* ── Header: matches homepage style ── */
-    .header { position: fixed !important; transform: none !important; background: rgba(10,10,10,0.90) !important; backdrop-filter: blur(14px) !important; -webkit-backdrop-filter: blur(14px) !important; }
+    /* ── Header: transparent over hero, frosted on scroll ── */
+    .header { position: fixed !important; transform: none !important; background: transparent !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; transition: background 0.35s ease, backdrop-filter 0.35s ease !important; }
+    .header.is-scrolled { background: rgba(10,10,10,0.90) !important; backdrop-filter: blur(14px) !important; -webkit-backdrop-filter: blur(14px) !important; }
     .header__container { position: relative !important; }
     .header__menu { position: absolute !important; left: 50% !important; transform: translateX(-50%) !important; background-color: #141414 !important; border: 1px solid rgba(255,255,255,0.1) !important; font-family: BebasNeuePro, sans-serif !important; font-weight: 700 !important; }
     .header__menu-item, .header__menu-item .text-hover__elem { color: rgba(255,255,255,0.85) !important; }
@@ -431,6 +432,20 @@
 
     window.addEventListener('scroll', update, { passive: true });
     update();
+  })();
+  </script>
+  <script>
+  /* Header transparency — frosted after scrolling past hero */
+  (function () {
+    var header = document.querySelector('.header');
+    var hero   = document.querySelector('.about-fullhero');
+    if (!header || !hero) return;
+    function onScroll() {
+      var threshold = hero.offsetHeight - 80;
+      header.classList.toggle('is-scrolled', window.scrollY > threshold);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
   })();
   </script>
 
