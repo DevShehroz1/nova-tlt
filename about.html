@@ -189,9 +189,10 @@
     @media (max-width: 768px) {
       .site-footer__top { flex-direction: column; }
       .footer-bottom-bar { flex-direction: column; align-items: flex-start; }
-      .stats-row { flex-direction: column; }
+      .stats-row { display: grid; grid-template-columns: 1fr 1fr; flex-direction: unset; }
       .stat { border-right: none; border-bottom: 1px solid var(--line); }
-      .stat:last-child { border-bottom: none; }
+      .stat:nth-child(odd) { border-right: 1px solid var(--line); }
+      .stat:nth-last-child(-n+2) { border-bottom: none; }
       .cta-band { flex-direction: column; }
     }
     @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
@@ -379,7 +380,6 @@
         </button>
         <div class="nav-drop__panel" role="menu">
           <a href="about.html" class="nav-drop__link" role="menuitem">About Us</a>
-          <a href="safety.html" class="nav-drop__link" role="menuitem">Safety &amp; Quality</a>
           <a href="careers.html" class="nav-drop__link" role="menuitem">Careers</a>
         </div>
       </div>
@@ -691,7 +691,6 @@
         <p class="footer-links-col__title">Company</p>
         <ul class="footer-links-col__list">
           <li><a href="about.html" class="footer-links-col__link">About Us <span class="footer-link-arrow"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5h6M4.5 1.5l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
-          <li><a href="safety.html" class="footer-links-col__link">Safety &amp; Quality <span class="footer-link-arrow"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5h6M4.5 1.5l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
           <li><a href="projects.html" class="footer-links-col__link">Projects <span class="footer-link-arrow"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5h6M4.5 1.5l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
           <li><a href="careers.html" class="footer-links-col__link">Careers <span class="footer-link-arrow"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5h6M4.5 1.5l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
           <li><a href="news.html" class="footer-links-col__link">News <span class="footer-link-arrow"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5h6M4.5 1.5l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
