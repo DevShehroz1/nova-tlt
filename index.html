@@ -2153,6 +2153,140 @@
 		.footer-bottom-bar { flex-direction: column; align-items: center; text-align: center; gap: 8px; }
 		.footer-bottom-bar__legal { justify-content: center; }
 	}
+
+	/* ── Floating morph menu ── */
+	#nova-fmenu {
+		position: fixed;
+		bottom: 32px;
+		left: 50%;
+		transform: translateX(-50%);
+		z-index: 10000;
+		pointer-events: auto;
+		display: none;
+	}
+	@media (max-width: 1024px) {
+		#nova-fmenu { display: block; }
+		/* Hide header hamburger — floating menu handles nav */
+		.header__hamburger-btn { display: none !important; }
+		/* Balance header: just logo center + ENG right */
+		.header__actions { justify-content: flex-end !important; }
+	}
+	#nova-fmenu-inner {
+		position: relative;
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		width: 150px;
+		height: 48px;
+		border-radius: 72px;
+		background: #CA953D;
+		cursor: pointer;
+		transition:
+			width 0.8s cubic-bezier(0.22,1,0.36,1),
+			height 0.8s cubic-bezier(0.22,1,0.36,1),
+			border-radius 0.8s cubic-bezier(0.22,1,0.36,1);
+	}
+	#nova-fmenu-inner.is-open {
+		width: 280px;
+		height: 310px;
+		border-radius: 32px;
+		cursor: default;
+	}
+	#nova-fmenu-circle {
+		position: absolute;
+		left: 50%;
+		width: 200%;
+		padding-bottom: 200%;
+		border-radius: 50%;
+		background: #0d0d0d;
+		transform: translateX(-50%);
+		bottom: -200%;
+		transition: bottom 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s;
+		pointer-events: none;
+	}
+	#nova-fmenu-inner.is-open #nova-fmenu-circle { bottom: -20%; }
+	#nova-fmenu-inner:not(.is-open) #nova-fmenu-circle { transition-delay: 0s; }
+	#nova-fmenu-links {
+		position: relative;
+		z-index: 10;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 18px;
+		flex: 1;
+		overflow: hidden;
+		pointer-events: none;
+	}
+	#nova-fmenu-inner.is-open #nova-fmenu-links { pointer-events: auto; }
+	.nova-fmenu-link {
+		font-family: BebasNeuePro, sans-serif;
+		font-size: 24px;
+		letter-spacing: -0.02em;
+		text-transform: uppercase;
+		color: #f7f1ed;
+		text-decoration: none;
+		line-height: 1;
+		overflow: hidden;
+		height: 1em;
+		display: flex;
+		justify-content: center;
+		opacity: 0;
+		transform: translateY(6px);
+		transition: opacity 0.35s, transform 0.35s cubic-bezier(0.22,1,0.36,1);
+	}
+	.nova-fmenu-link:hover { color: #CA953D; }
+	#nova-fmenu-inner.is-open .nova-fmenu-link:nth-child(1) { opacity:1; transform:none; transition-delay:0.38s; }
+	#nova-fmenu-inner.is-open .nova-fmenu-link:nth-child(2) { opacity:1; transform:none; transition-delay:0.46s; }
+	#nova-fmenu-inner.is-open .nova-fmenu-link:nth-child(3) { opacity:1; transform:none; transition-delay:0.54s; }
+	#nova-fmenu-inner.is-open .nova-fmenu-link:nth-child(4) { opacity:1; transform:none; transition-delay:0.62s; }
+	#nova-fmenu-inner.is-open .nova-fmenu-link:nth-child(5) { opacity:1; transform:none; transition-delay:0.70s; }
+	#nova-fmenu-bar {
+		position: relative;
+		z-index: 10;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		height: 48px;
+		padding: 0 20px;
+		flex-shrink: 0;
+		cursor: pointer;
+		transition: padding 0.8s cubic-bezier(0.22,1,0.36,1);
+	}
+	#nova-fmenu-inner.is-open #nova-fmenu-bar { padding: 0 24px 18px; }
+	#nova-fmenu-label {
+		font-family: 'Inter', sans-serif;
+		font-size: 14px;
+		font-weight: 600;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		color: #0d0d0d;
+		line-height: 1;
+		transition: color 0.3s;
+	}
+	#nova-fmenu-inner.is-open #nova-fmenu-label { color: #f7f1ed; }
+	#nova-fmenu-icon {
+		position: relative;
+		width: 24px;
+		height: 24px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.fmenu-hline {
+		position: absolute;
+		display: block;
+		width: 18px;
+		height: 2px;
+		border-radius: 99px;
+		background: #0d0d0d;
+		transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), background 0.3s;
+	}
+	.fmenu-hline:nth-child(1) { transform: translateY(-3px); }
+	.fmenu-hline:nth-child(2) { transform: translateY(3px); }
+	#nova-fmenu-inner.is-open .fmenu-hline { background: #f7f1ed; }
+	#nova-fmenu-inner.is-open .fmenu-hline:nth-child(1) { transform: translateY(0) rotate(45deg); }
+	#nova-fmenu-inner.is-open .fmenu-hline:nth-child(2) { transform: translateY(0) rotate(-45deg); }
 	</style>
 </head>
 
@@ -4263,6 +4397,117 @@ import createGlobe from 'https://esm.sh/cobe@0.6.3';
       chevron && chevron.classList.toggle('open', open);
     });
   });
+})();
+</script>
+
+<!-- ── Floating morph menu ── -->
+<div id="nova-fmenu" role="navigation" aria-label="Site navigation">
+  <div id="nova-fmenu-inner">
+    <div id="nova-fmenu-circle"></div>
+    <div id="nova-fmenu-links">
+      <a href="index.html"  class="nova-fmenu-link">Home</a>
+      <a href="about.html"  class="nova-fmenu-link">Company</a>
+      <a href="#feat-cards" class="nova-fmenu-link">Services</a>
+      <a href="news.html"   class="nova-fmenu-link">News</a>
+      <a href="#"           class="nova-fmenu-link" id="nova-fmenu-contact-btn">Contact</a>
+    </div>
+    <div id="nova-fmenu-bar">
+      <span id="nova-fmenu-label">Menu</span>
+      <div id="nova-fmenu-icon">
+        <span class="fmenu-hline"></span>
+        <span class="fmenu-hline"></span>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var wrap  = document.getElementById('nova-fmenu');
+  var inner = document.getElementById('nova-fmenu-inner');
+  var bar   = document.getElementById('nova-fmenu-bar');
+  if (!inner) return;
+
+  /* Char-split hover animation */
+  document.querySelectorAll('.nova-fmenu-link').forEach(function(link){
+    var text = link.textContent.trim();
+    link.textContent = '';
+    text.split('').forEach(function(char, i){
+      var cell = document.createElement('span');
+      cell.style.cssText = 'display:inline-block;overflow:hidden;height:1em;';
+      var stack = document.createElement('span');
+      stack.style.cssText = 'display:flex;flex-direction:column;transform:translateY(0);transition-property:transform;transition-timing-function:cubic-bezier(0.22,1,0.36,1);';
+      [char, char].forEach(function(c, j){
+        var s = document.createElement('span');
+        s.style.cssText = 'display:block;height:1em;line-height:1em;';
+        s.textContent = c;
+        if (j === 1) s.setAttribute('aria-hidden','true');
+        stack.appendChild(s);
+      });
+      cell.appendChild(stack);
+      link.appendChild(cell);
+    });
+
+    var stacks = link.querySelectorAll('span > span');
+    var locked = false, pendingLeave = false;
+
+    link.addEventListener('mouseenter', function(){
+      pendingLeave = false;
+      if (locked) return;
+      locked = true;
+      stacks.forEach(function(s, i){
+        s.style.transitionDuration = '800ms';
+        s.style.transitionDelay    = (30 * i) + 'ms';
+        s.style.transform          = 'translateY(-50%)';
+      });
+      setTimeout(function(){
+        locked = false;
+        if (pendingLeave){
+          pendingLeave = false;
+          stacks.forEach(function(s){
+            s.style.transitionDuration = '0ms';
+            s.style.transitionDelay    = '0ms';
+            s.style.transform          = 'translateY(0)';
+          });
+        }
+      }, 30 * text.length + 300);
+    });
+
+    link.addEventListener('mouseleave', function(){
+      if (locked){ pendingLeave = true; return; }
+      stacks.forEach(function(s){
+        s.style.transitionDuration = '0ms';
+        s.style.transitionDelay    = '0ms';
+        s.style.transform          = 'translateY(0)';
+      });
+    });
+  });
+
+  function openMenu(){  inner.classList.add('is-open'); }
+  function closeMenu(){ inner.classList.remove('is-open'); }
+
+  bar.addEventListener('click', function(e){
+    e.stopPropagation();
+    inner.classList.contains('is-open') ? closeMenu() : openMenu();
+  });
+
+  inner.addEventListener('click', function(){
+    if (!inner.classList.contains('is-open')) openMenu();
+  });
+
+  document.addEventListener('mousedown', function(e){
+    if (inner.classList.contains('is-open') && wrap && !wrap.contains(e.target)) closeMenu();
+  });
+
+  /* Wire Contact link to existing modal */
+  var contactBtn = document.getElementById('nova-fmenu-contact-btn');
+  if (contactBtn){
+    contactBtn.addEventListener('click', function(e){
+      e.preventDefault();
+      closeMenu();
+      var modal = document.getElementById('modal-contact');
+      if (modal) modal.classList.remove('hidden');
+    });
+  }
 })();
 </script>
 
