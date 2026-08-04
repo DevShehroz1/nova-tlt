@@ -146,9 +146,25 @@
     .tm-quote__avatar img { width: 100%; height: 100%; object-fit: cover; }
     .tm-quote__name { font-family: BebasNeuePro,sans-serif; font-size: 18px; letter-spacing: 0.05em; color: var(--ink); }
     .tm-quote__role { font-family: 'Inter',sans-serif; font-size: 12px; color: var(--ink-dim); letter-spacing: 0.06em; }
-    .cta-band { background: linear-gradient(135deg,rgba(182,124,42,0.10) 0%,rgba(202,149,61,0.06) 100%); border-top: 1px solid rgba(202,149,61,0.18); border-bottom: 1px solid rgba(202,149,61,0.18); padding: clamp(48px,7vw,88px) clamp(20px,5vw,80px); display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
-    .cta-band__title { font-family: BebasNeuePro,sans-serif; font-size: clamp(36px,4.5vw,62px); letter-spacing: 0.03em; color: var(--ink); max-width: 680px; }
-    .cta-band__title span { background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .cta2-sec { background: #0a0a0a; padding: clamp(80px,12vw,160px) clamp(20px,5vw,60px); position: relative; overflow: hidden; }
+    .cta2-ring { position: absolute; top: 50%; left: 50%; border-radius: 50%; pointer-events: none; -webkit-mask: radial-gradient(circle at center, transparent calc(50% - 2px), #000 calc(50% - 1px), #000 calc(50% + 1px), transparent calc(50% + 2px)); mask: radial-gradient(circle at center, transparent calc(50% - 2px), #000 calc(50% - 1px), #000 calc(50% + 1px), transparent calc(50% + 2px)); background: conic-gradient(rgba(202,149,61,0.85) 0deg, rgba(202,149,61,0.45) 35deg, rgba(202,149,61,0.12) 90deg, transparent 140deg, transparent 360deg); animation: cta2-spin 18s linear infinite; }
+    .cta2-ring--1 { width: clamp(800px,95vw,1100px); height: clamp(800px,95vw,1100px); margin-left: calc(clamp(800px,95vw,1100px) / -2); margin-top: calc(clamp(800px,95vw,1100px) / -2); }
+    .cta2-ring--2 { width: clamp(620px,76vw,870px); height: clamp(620px,76vw,870px); margin-left: calc(clamp(620px,76vw,870px) / -2); margin-top: calc(clamp(620px,76vw,870px) / -2); background: conic-gradient(rgba(202,149,61,0.6) 0deg, rgba(202,149,61,0.25) 45deg, rgba(202,149,61,0.05) 100deg, transparent 155deg, transparent 360deg); animation-direction: reverse; animation-duration: 28s; }
+    @keyframes cta2-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes cta2-circuit { 0% { stroke-dashoffset: 300; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { stroke-dashoffset: -300; opacity: 0; } }
+    .cta2-card__deco path { stroke-dasharray: 65 300; animation: cta2-circuit 3.2s linear infinite; }
+    .cta2-card__deco path:nth-of-type(2) { animation-delay: 1.1s; }
+    .cta2-card__deco path:nth-of-type(3) { animation-delay: 2.2s; }
+    .cta2-card { position: relative; z-index: 2; max-width: 1400px; margin: 0 auto; border-radius: 24px; background: linear-gradient(135deg, #a8721e 0%, #CA953D 45%, #d4a84e 75%, #b5832e 100%); padding: clamp(64px,9vw,110px) clamp(32px,6vw,80px); text-align: center; overflow: hidden; }
+    .cta2-card__deco { position: absolute; pointer-events: none; opacity: 0.32; }
+    .cta2-card__deco--left { top: 0; left: 0; width: 240px; height: 220px; }
+    .cta2-card__deco--right { bottom: 0; right: 0; width: 240px; height: 220px; transform: rotate(180deg); }
+    .cta2-card__title { font-size: clamp(30px,4vw,58px); font-weight: 700; color: #fff; letter-spacing: -0.025em; line-height: 1.1; margin-bottom: 20px; }
+    .cta2-card__sub { font-family: 'Inter',sans-serif; font-size: clamp(14px,1.1vw,17px); color: rgba(255,255,255,0.75); max-width: 540px; margin: 0 auto 36px; line-height: 1.7; }
+    .cta2-card__btn { display: inline-flex; align-items: center; padding: 16px 36px; background: #fff; border: none; border-radius: 12px; font-family: 'Inter',sans-serif; font-size: 15px; font-weight: 600; color: #111; cursor: pointer; text-decoration: none; transition: background 160ms ease, transform 100ms ease; }
+    .cta2-card__btn:hover { background: #f0f0f0; }
+    .cta2-card__btn:active { transform: scale(0.97); }
+    @media (max-width: 600px) { .cta2-card { text-align: center; padding-left: 24px; padding-right: 24px; border-radius: 16px; } .cta2-card__title { font-size: clamp(26px,7vw,36px); } .cta2-card__sub { font-size: 14px; } }
     .site-footer { background: #0f0f0f; overflow: hidden; }
     .site-footer__top { display: flex; align-items: flex-start; justify-content: space-between; gap: clamp(32px,5vw,64px); padding: clamp(48px,6vw,80px) clamp(24px,5vw,80px) clamp(32px,4vw,48px); max-width: 1400px; margin: 0 auto; }
     .footer-brand { max-width: 280px; flex-shrink: 0; }
@@ -629,13 +645,31 @@
     </div>
   </section>
 
-  <div class="cta-band">
-    <h2 class="cta-band__title">Partner with <span>NOVA Terra</span></h2>
-    <div class="btn-row">
-      <a href="contact.html" class="btn-gold">Get in Touch</a>
-      <a href="projects.html" class="btn-ghost">View Our Projects</a>
+  <section class="cta2-sec">
+    <div class="cta2-ring cta2-ring--1"></div>
+    <div class="cta2-ring cta2-ring--2"></div>
+    <div class="cta2-card">
+      <svg class="cta2-card__deco cta2-card__deco--left" viewBox="0 0 240 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 0 60 L 80 60 L 80 90 L 140 90" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M 0 90 L 50 90 L 50 130 L 120 130" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M 0 120 L 30 120 L 30 155 L 100 155 L 100 170 L 160 170" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="80" cy="60" r="3" fill="#fff"/>
+        <circle cx="50" cy="90" r="3" fill="#fff"/>
+        <circle cx="100" cy="155" r="3" fill="#fff"/>
+      </svg>
+      <svg class="cta2-card__deco cta2-card__deco--right" viewBox="0 0 240 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 0 60 L 80 60 L 80 90 L 140 90" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M 0 90 L 50 90 L 50 130 L 120 130" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M 0 120 L 30 120 L 30 155 L 100 155 L 100 170 L 160 170" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="80" cy="60" r="3" fill="#fff"/>
+        <circle cx="50" cy="90" r="3" fill="#fff"/>
+        <circle cx="100" cy="155" r="3" fill="#fff"/>
+      </svg>
+      <h2 class="cta2-card__title">Move Your Fleet Forward, On Time Every Time</h2>
+      <p class="cta2-card__sub">With a fleet of modern heavy vehicles and experienced operators, we offer transport solutions that keep your projects running on schedule across Saudi Arabia.</p>
+      <a href="contact.html" class="cta2-card__btn">Get a Quote</a>
     </div>
-  </div>
+  </section>
 </main>
 
 <footer class="site-footer">
