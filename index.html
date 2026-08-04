@@ -2064,80 +2064,170 @@
 	#nova-mobile-menu {
 		display: none;
 		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		width: 100vw;
-		max-width: 100%;
-		height: 100vh;
-		height: 100dvh;
+		top: 0; left: 0; right: 0; bottom: 0;
+		width: 100vw; max-width: 100%;
+		height: 100vh; height: 100dvh;
 		z-index: 9999;
-		background: #0d0d0d;
+		background: #0a0a0a;
 		flex-direction: column;
-		padding: 80px 32px 48px;
-		overflow-y: auto;
-		overflow-x: hidden;
+		padding: 0;
+		overflow-y: auto; overflow-x: hidden;
 		box-sizing: border-box;
 	}
 	#nova-mobile-menu.is-open { display: flex; }
+
+	/* Top bar */
+	#nova-mobile-menu .mob-topbar {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 20px 28px;
+		border-bottom: 1px solid rgba(255,255,255,0.06);
+		flex-shrink: 0;
+	}
+	#nova-mobile-menu .mob-brand {
+		font-family: BebasNeuePro, sans-serif;
+		font-size: 18px;
+		letter-spacing: 0.12em;
+		color: rgba(255,255,255,0.35);
+		text-transform: uppercase;
+	}
+	#nova-mobile-menu .mob-close {
+		width: 40px; height: 40px;
+		border-radius: 50%;
+		border: 1px solid rgba(255,255,255,0.18);
+		background: rgba(255,255,255,0.05);
+		display: flex; align-items: center; justify-content: center;
+		cursor: pointer;
+		padding: 0;
+		transition: border-color 0.25s, background 0.25s;
+		flex-shrink: 0;
+	}
+	#nova-mobile-menu .mob-close:hover { border-color: #CA953D; background: rgba(202,149,61,0.1); }
+	#nova-mobile-menu .mob-close svg { display: block; }
+
+	/* Nav list */
+	#nova-mobile-menu .mob-nav-list {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		padding: 24px 28px 32px;
+		gap: 0;
+		counter-reset: navitem;
+	}
 	#nova-mobile-menu .mob-nav-item {
 		font-family: BebasNeuePro, sans-serif;
-		font-size: 36px;
-		letter-spacing: 0.04em;
-		color: #fff;
+		font-size: 48px;
+		letter-spacing: -0.01em;
+		line-height: 1;
+		color: #f7f1ed;
 		text-decoration: none;
-		padding: 10px 0;
-		border-bottom: 1px solid rgba(255,255,255,0.07);
+		padding: 14px 0;
+		border-bottom: 1px solid rgba(255,255,255,0.06);
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 		cursor: pointer;
+		position: relative;
+		overflow: hidden;
+		counter-increment: navitem;
 	}
-	#nova-mobile-menu .mob-nav-item:last-child { border-bottom: none; }
-	#nova-mobile-menu .mob-nav-item:hover { color: #CA953D; }
-	#nova-mobile-menu .mob-sub { display: none; padding: 6px 0 6px 16px; }
+	#nova-mobile-menu .mob-nav-item:first-child { border-top: 1px solid rgba(255,255,255,0.06); }
+	#nova-mobile-menu .mob-item-inner {
+		display: flex;
+		align-items: baseline;
+		gap: 14px;
+	}
+	#nova-mobile-menu .mob-num {
+		font-family: 'Inter', sans-serif;
+		font-size: 11px;
+		font-weight: 500;
+		letter-spacing: 0.08em;
+		color: #CA953D;
+		opacity: 0.7;
+		line-height: 1;
+		padding-bottom: 4px;
+	}
+	/* Char wrapper for animation */
+	#nova-mobile-menu .mob-char-wrap {
+		display: inline-block;
+		overflow: hidden;
+		height: 1.05em;
+		vertical-align: bottom;
+	}
+	#nova-mobile-menu .mob-char-stack {
+		display: flex;
+		flex-direction: column;
+		transition-property: transform;
+		transition-timing-function: cubic-bezier(0.22,1,0.36,1);
+	}
+	#nova-mobile-menu .mob-char-stack span {
+		display: block;
+		height: 1.05em;
+		line-height: 1.05;
+	}
+	#nova-mobile-menu .mob-chevron {
+		width: 22px; height: 22px; flex-shrink: 0;
+		color: rgba(255,255,255,0.35);
+		transition: transform 300ms cubic-bezier(0.22,1,0.36,1), color 200ms;
+	}
+	#nova-mobile-menu .mob-chevron.open {
+		transform: rotate(180deg);
+		color: #CA953D;
+	}
+	#nova-mobile-menu .mob-sub {
+		display: none;
+		padding: 4px 0 12px 0;
+		border-bottom: 1px solid rgba(255,255,255,0.06);
+	}
 	#nova-mobile-menu .mob-sub.is-open { display: block; }
 	#nova-mobile-menu .mob-sub-link {
-		display: block;
+		display: flex;
+		align-items: center;
+		gap: 10px;
 		font-family: 'Inter', sans-serif;
-		font-size: 15px;
+		font-size: 14px;
 		font-weight: 500;
-		color: rgba(255,255,255,0.65);
+		color: rgba(255,255,255,0.45);
 		text-decoration: none;
-		padding: 10px 0;
-		letter-spacing: 0.04em;
-		border-bottom: 1px solid rgba(255,255,255,0.04);
+		padding: 9px 0 9px 4px;
+		letter-spacing: 0.03em;
+		transition: color 200ms;
 	}
-	#nova-mobile-menu .mob-sub-link:last-child { border-bottom: none; }
-	#nova-mobile-menu .mob-sub-link:hover { color: #CA953D; }
-	#nova-mobile-menu .mob-close {
-		position: absolute;
-		top: 18px;
-		right: 18px;
-		font-family: 'Inter', sans-serif;
-		font-size: 13px;
-		font-weight: 600;
-		letter-spacing: 0.12em;
-		text-transform: uppercase;
-		color: rgba(255,255,255,0.55);
-		background: rgba(255,255,255,0.07);
-		border: 1px solid rgba(255,255,255,0.12);
-		border-radius: 8px;
-		padding: 8px 16px;
-		cursor: pointer;
+	#nova-mobile-menu .mob-sub-link::before {
+		content: '';
+		display: block;
+		width: 4px; height: 4px;
+		border-radius: 50%;
+		background: #CA953D;
+		opacity: 0.5;
+		flex-shrink: 0;
 	}
-	#nova-mobile-menu .mob-close:hover { color: #fff; }
-	#nova-mobile-menu .mob-chevron {
-		width: 20px; height: 20px; flex-shrink: 0;
-		transition: transform 220ms ease;
+	#nova-mobile-menu .mob-sub-link:hover { color: #f7f1ed; }
+	#nova-mobile-menu .mob-sub-link:hover::before { opacity: 1; }
+
+	/* Bottom CTA */
+	#nova-mobile-menu .mob-footer {
+		padding: 20px 28px 32px;
+		border-top: 1px solid rgba(255,255,255,0.06);
+		flex-shrink: 0;
 	}
-	#nova-mobile-menu .mob-chevron.open { transform: rotate(180deg); }
-	#nova-mobile-menu .mob-gold-rule {
-		width: 40px; height: 2px;
-		background: linear-gradient(135deg,#B67C2A 0%,#CA953D 50%,#E5B85A 100%);
-		margin-bottom: 32px;
+	#nova-mobile-menu .mob-footer-cta {
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+		font-family: BebasNeuePro, sans-serif;
+		font-size: 16px;
+		letter-spacing: 0.1em;
+		color: #CA953D;
+		text-decoration: none;
+		padding: 12px 24px;
+		border: 1px solid rgba(202,149,61,0.35);
+		border-radius: 5rem;
+		transition: background 0.25s, border-color 0.25s;
 	}
+	#nova-mobile-menu .mob-footer-cta:hover { background: rgba(202,149,61,0.1); border-color: #CA953D; }
 
 	@media (max-width: 768px) {
 		/* CTA2 card: center align */
@@ -4208,36 +4298,67 @@ import createGlobe from 'https://esm.sh/cobe@0.6.3';
 
 <!-- ── Custom mobile menu ── -->
 <div id="nova-mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation">
-  <button class="mob-close" id="nova-mob-close">Close</button>
-  <div class="mob-gold-rule"></div>
-  <a href="index.html" class="mob-nav-item">Home</a>
-  <div class="mob-nav-item" data-mob-drop="company">
-    Company
-    <svg class="mob-chevron" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <!-- Top bar -->
+  <div class="mob-topbar">
+    <span class="mob-brand">NOVA TLT</span>
+    <button class="mob-close" id="nova-mob-close" aria-label="Close menu">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
   </div>
-  <div class="mob-sub" id="mob-sub-company">
-    <a href="about.html" class="mob-sub-link">About Us</a>
-    <a href="safety.html" class="mob-sub-link">Safety &amp; Quality</a>
-    <a href="careers.html" class="mob-sub-link">Careers</a>
+  <!-- Nav list -->
+  <nav class="mob-nav-list">
+    <a href="index.html" class="mob-nav-item">
+      <div class="mob-item-inner">
+        <span class="mob-num">01</span>
+        <span class="mob-label">Home</span>
+      </div>
+    </a>
+    <div class="mob-nav-item" data-mob-drop="company">
+      <div class="mob-item-inner">
+        <span class="mob-num">02</span>
+        <span class="mob-label">Company</span>
+      </div>
+      <svg class="mob-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="mob-sub" id="mob-sub-company">
+      <a href="about.html" class="mob-sub-link">About Us</a>
+      <a href="safety.html" class="mob-sub-link">Safety &amp; Quality</a>
+      <a href="careers.html" class="mob-sub-link">Careers</a>
+    </div>
+    <div class="mob-nav-item" data-mob-drop="whatwedo">
+      <div class="mob-item-inner">
+        <span class="mob-num">03</span>
+        <span class="mob-label">What We Do</span>
+      </div>
+      <svg class="mob-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="mob-sub" id="mob-sub-whatwedo">
+      <a href="services.html" class="mob-sub-link">Services</a>
+      <a href="fleet.html" class="mob-sub-link">Fleet</a>
+      <a href="industries.html" class="mob-sub-link">Industries We Serve</a>
+    </div>
+    <div class="mob-nav-item" data-mob-drop="work">
+      <div class="mob-item-inner">
+        <span class="mob-num">04</span>
+        <span class="mob-label">Work</span>
+      </div>
+      <svg class="mob-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="mob-sub" id="mob-sub-work">
+      <a href="projects.html" class="mob-sub-link">Projects</a>
+      <a href="gallery.html" class="mob-sub-link">Gallery</a>
+    </div>
+    <a href="news.html" class="mob-nav-item">
+      <div class="mob-item-inner">
+        <span class="mob-num">05</span>
+        <span class="mob-label">News</span>
+      </div>
+    </a>
+  </nav>
+  <!-- Footer CTA -->
+  <div class="mob-footer">
+    <a href="#" class="mob-footer-cta" data-contact-modal>Get in Touch &rarr;</a>
   </div>
-  <div class="mob-nav-item" data-mob-drop="whatwedo">
-    What We Do
-    <svg class="mob-chevron" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </div>
-  <div class="mob-sub" id="mob-sub-whatwedo">
-    <a href="services.html" class="mob-sub-link">Services</a>
-    <a href="fleet.html" class="mob-sub-link">Fleet</a>
-    <a href="industries.html" class="mob-sub-link">Industries We Serve</a>
-  </div>
-  <div class="mob-nav-item" data-mob-drop="work">
-    Work
-    <svg class="mob-chevron" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </div>
-  <div class="mob-sub" id="mob-sub-work">
-    <a href="projects.html" class="mob-sub-link">Projects</a>
-    <a href="gallery.html" class="mob-sub-link">Gallery</a>
-  </div>
-  <a href="news.html" class="mob-nav-item">News</a>
 </div>
 <script>
 (function(){
@@ -4246,6 +4367,58 @@ import createGlobe from 'https://esm.sh/cobe@0.6.3';
   var menuBtn = document.getElementById('nova-mob-open') || document.querySelector('.header__hamburger-btn');
   var closeBtn = document.getElementById('nova-mob-close');
   if(!overlay || !menuBtn) return;
+
+  /* ── Char-split animation on .mob-label ── */
+  overlay.querySelectorAll('.mob-label').forEach(function(label){
+    var text = label.textContent;
+    label.innerHTML = '';
+    label.style.display = 'inline-flex';
+    text.split('').forEach(function(char){
+      if(char === ' '){ var sp = document.createElement('span'); sp.innerHTML = '&nbsp;'; label.appendChild(sp); return; }
+      var wrap = document.createElement('span');
+      wrap.className = 'mob-char-wrap';
+      var stack = document.createElement('span');
+      stack.className = 'mob-char-stack';
+      [char, char].forEach(function(c, j){
+        var s = document.createElement('span');
+        s.textContent = c;
+        if(j === 1) s.setAttribute('aria-hidden','true');
+        stack.appendChild(s);
+      });
+      wrap.appendChild(stack);
+      label.appendChild(wrap);
+    });
+    var stacks = label.querySelectorAll('.mob-char-stack');
+    var locked = false, pendingLeave = false;
+    var item = label.closest('.mob-nav-item');
+    if(!item) return;
+    function animIn(){
+      pendingLeave = false;
+      if(locked) return;
+      locked = true;
+      stacks.forEach(function(s,i){
+        s.style.transitionDuration = '600ms';
+        s.style.transitionDelay = (18*i)+'ms';
+        s.style.transform = 'translateY(-50%)';
+      });
+      setTimeout(function(){
+        locked = false;
+        if(pendingLeave){ pendingLeave=false; animOut(); }
+      }, 18*stacks.length + 400);
+    }
+    function animOut(){
+      stacks.forEach(function(s){
+        s.style.transitionDuration = '0ms';
+        s.style.transitionDelay = '0ms';
+        s.style.transform = 'translateY(0)';
+      });
+    }
+    item.addEventListener('mouseenter', animIn);
+    item.addEventListener('mouseleave', function(){ if(locked){ pendingLeave=true; } else { animOut(); } });
+    item.addEventListener('touchstart', animIn, {passive:true});
+  });
+
+  /* ── Toggle & close ── */
   menuBtn.addEventListener('click', function(){
     overlay.classList.toggle('is-open');
     document.body.style.overflow = overlay.classList.contains('is-open') ? 'hidden' : '';
@@ -4254,15 +4427,27 @@ import createGlobe from 'https://esm.sh/cobe@0.6.3';
     overlay.classList.remove('is-open');
     document.body.style.overflow = '';
   });
+
+  /* ── Accordion dropdowns ── */
   overlay.querySelectorAll('[data-mob-drop]').forEach(function(trigger){
     trigger.addEventListener('click', function(){
       var key = trigger.getAttribute('data-mob-drop');
-      var sub = document.getElementById('mob-sub-' + key);
+      var sub = document.getElementById('mob-sub-'+key);
       var chevron = trigger.querySelector('.mob-chevron');
       if(!sub) return;
       var open = sub.classList.toggle('is-open');
       chevron && chevron.classList.toggle('open', open);
     });
+  });
+
+  /* ── Contact CTA in footer ── */
+  var ctaBtn = overlay.querySelector('[data-contact-modal]');
+  if(ctaBtn) ctaBtn.addEventListener('click', function(e){
+    e.preventDefault();
+    overlay.classList.remove('is-open');
+    document.body.style.overflow = '';
+    var modal = document.getElementById('modal-contact');
+    if(modal) modal.classList.remove('hidden');
   });
 })();
 </script>
