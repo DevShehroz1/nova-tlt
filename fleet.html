@@ -243,47 +243,89 @@
     .ghost-btn:hover { border-color: #CA953D; color: #CA953D; }
     .btn-row { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
 
-    /* Fleet-specific */
-    .fleet-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 28px; margin-top: 40px;
+    /* Fleet rows */
+    .fleet-list { margin-top: 56px; border-top: 1px solid rgba(255,255,255,0.1); }
+    .fleet-row {
+      display: grid;
+      grid-template-columns: 48px 1fr 1fr;
+      gap: 40px;
+      padding: 44px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      position: relative;
+      transition: background 0.35s;
     }
-    .fleet-card {
-      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 20px; overflow: hidden; transition: border-color 200ms ease;
+    .fleet-row::before {
+      content: '';
+      position: absolute;
+      left: -32px; top: 0; bottom: 0;
+      width: 2px;
+      background: var(--gold-grad);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.4s cubic-bezier(0.76,0,0.24,1);
     }
-    .fleet-card:hover { border-color: rgba(202,149,61,0.3); }
-    .fleet-card__img {
-      width: 100%; height: 200px; object-fit: cover;
-      background: rgba(255,255,255,0.05); display: block;
+    .fleet-row:hover { background: rgba(202,149,61,0.03); }
+    .fleet-row:hover::before { transform: scaleY(1); }
+    .fleet-row__num {
+      font-family: BebasNeuePro, sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.2);
+      padding-top: 6px;
     }
-    .fleet-card__img-placeholder {
-      width: 100%; height: 200px; background: rgba(255,255,255,0.04);
-      display: flex; align-items: center; justify-content: center;
-      font-family: BebasNeuePro, sans-serif; font-size: 18px;
-      letter-spacing: 0.1em; color: rgba(255,255,255,0.18);
-    }
-    .fleet-card__body { padding: 28px; }
-    .fleet-card__title {
-      font-family: BebasNeuePro, sans-serif; font-size: 24px;
-      letter-spacing: 0.04em; color: var(--ink); margin-bottom: 10px;
-    }
-    .fleet-card__sub { font-family: 'Inter', sans-serif; font-size: 13px; color: var(--ink-dim); margin-bottom: 20px; line-height: 1.6; }
-    .fleet-specs { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
-    .fleet-spec {
-      display: flex; justify-content: space-between; align-items: center;
-      font-family: 'Inter', sans-serif; font-size: 13px;
-      border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;
-    }
-    .fleet-spec:last-child { border-bottom: none; padding-bottom: 0; }
-    .fleet-spec__key { color: var(--ink-dim); }
-    .fleet-spec__val { color: var(--ink); font-weight: 600; }
+    .fleet-row__left { display: flex; flex-direction: column; gap: 14px; }
     .fleet-badge {
-      display: inline-block; font-family: 'Inter', sans-serif; font-size: 10px;
+      display: inline-flex; align-items: center;
+      font-family: 'Inter', sans-serif; font-size: 10px;
       font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
       padding: 4px 10px; border-radius: 4px;
-      background: rgba(202,149,61,0.15); color: #CA953D;
-      border: 1px solid rgba(202,149,61,0.25); margin-bottom: 14px;
+      background: rgba(202,149,61,0.12); color: #CA953D;
+      border: 1px solid rgba(202,149,61,0.22);
+      width: fit-content;
+    }
+    .fleet-row__name {
+      font-family: BebasNeuePro, sans-serif;
+      font-size: clamp(28px,3.2vw,52px);
+      letter-spacing: 0.03em;
+      color: #fff;
+      line-height: 1;
+      margin: 0;
+    }
+    .fleet-row__desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: var(--ink-dim);
+      line-height: 1.65;
+      max-width: 420px;
+    }
+    .fleet-row__specs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px 48px;
+      align-content: center;
+    }
+    .fleet-spec-item__key {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 4px;
+    }
+    .fleet-spec-item__val {
+      font-family: BebasNeuePro, sans-serif;
+      font-size: clamp(22px,2vw,32px);
+      color: #fff;
+      letter-spacing: 0.03em;
+      line-height: 1;
+    }
+    @media (max-width: 860px) {
+      .fleet-row { grid-template-columns: 32px 1fr; gap: 20px; }
+      .fleet-row__specs { grid-column: 2; }
+    }
+    @media (max-width: 560px) {
+      .fleet-row { grid-template-columns: 1fr; gap: 16px; padding: 32px 0; }
+      .fleet-row__num { display: none; }
     }
 
     /* Calculator */
@@ -527,69 +569,69 @@
     <h2 class="section-title">Every Vehicle. Every Job.</h2>
     <p class="section-sub">From standard dump trucks for city projects to articulated haulers for remote mining sites — NOVA Terra operates the right machine for your terrain.</p>
 
-    <div class="fleet-grid">
+    <div class="fleet-list">
 
-      <div class="fleet-card">
-        <div class="fleet-card__img-placeholder">STANDARD DUMP TRUCK</div>
-        <div class="fleet-card__body">
+      <div class="fleet-row">
+        <span class="fleet-row__num">01</span>
+        <div class="fleet-row__left">
           <span class="fleet-badge">Standard Series</span>
-          <h3 class="fleet-card__title">Standard Dump Trucks</h3>
-          <p class="fleet-card__sub">Workhorse fleet for urban construction, road projects, and general earthmoving across paved and graded terrain.</p>
-          <ul class="fleet-specs">
-            <li class="fleet-spec"><span class="fleet-spec__key">Payload Capacity</span><span class="fleet-spec__val">10 – 20 t</span></li>
-            <li class="fleet-spec"><span class="fleet-spec__key">Body Volume</span><span class="fleet-spec__val">8 – 15 m³</span></li>
-            <li class="fleet-spec"><span class="fleet-spec__key">Drive Configuration</span><span class="fleet-spec__val">6×4 / 6×6</span></li>
-            <li class="fleet-spec"><span class="fleet-spec__key">Engine Output</span><span class="fleet-spec__val">350 – 450 hp</span></li>
-            <li class="fleet-spec"><span class="fleet-spec__key">Fleet Size</span><span class="fleet-spec__val">60 units</span></li>
-          </ul>
+          <h3 class="fleet-row__name">Standard Dump Trucks</h3>
+          <p class="fleet-row__desc">Workhorse fleet for urban construction, road projects, and general earthmoving across paved and graded terrain.</p>
+        </div>
+        <div class="fleet-row__specs">
+          <div><p class="fleet-spec-item__key">Payload Capacity</p><p class="fleet-spec-item__val">10 – 20 t</p></div>
+          <div><p class="fleet-spec-item__key">Body Volume</p><p class="fleet-spec-item__val">8 – 15 m³</p></div>
+          <div><p class="fleet-spec-item__key">Drive Config</p><p class="fleet-spec-item__val">6×4 / 6×6</p></div>
+          <div><p class="fleet-spec-item__key">Engine Output</p><p class="fleet-spec-item__val">350 – 450 hp</p></div>
+          <div><p class="fleet-spec-item__key">Fleet Size</p><p class="fleet-spec-item__val">60 units</p></div>
         </div>
       </div>
 
-      <div class="fleet-card">
-        <div class="fleet-card__img-placeholder">HEAVY DUTY HAULER</div>
-        <div class="fleet-card__body">
+      <div class="fleet-row">
+        <span class="fleet-row__num">02</span>
+        <div class="fleet-row__left">
           <span class="fleet-badge">Heavy-Duty Series</span>
-          <h3 class="fleet-card__title">Heavy-Duty Haulers</h3>
-          <p class="fleet-card__sub">High-payload rigid trucks for quarry operations, mass excavation, and large-scale infrastructure development.</p>
-          <ul class="fleet-specs">
-            <li class="fleet-spec"><span class="fleet-spec__key">Payload Capacity</span><span class="fleet-spec__val">25 – 40 t</span></li>
-            <li class="fleet-spec"><span class="fleet-spec__key">Body Volume</span><span class="fleet-spec__val">18 – 30 m³</span></li>
-            <li class="fleet-spec"><span class="fleet-spec__key">Drive Configuration</span><span class="fleet-spec__val">8×4</span></li>
-            <li class="fleet-spec"><span class="fleet-spec__key">Engine Output</span><span class="fleet-spec__val">500 – 600 hp</span></li>
-            <li class="fleet-spec"><span class="fleet-spec__key">Fleet Size</span><span class="fleet-spec__val">45 units</span></li>
-          </ul>
+          <h3 class="fleet-row__name">Heavy-Duty Haulers</h3>
+          <p class="fleet-row__desc">High-payload rigid trucks for quarry operations, mass excavation, and large-scale infrastructure development.</p>
+        </div>
+        <div class="fleet-row__specs">
+          <div><p class="fleet-spec-item__key">Payload Capacity</p><p class="fleet-spec-item__val">25 – 40 t</p></div>
+          <div><p class="fleet-spec-item__key">Body Volume</p><p class="fleet-spec-item__val">18 – 30 m³</p></div>
+          <div><p class="fleet-spec-item__key">Drive Config</p><p class="fleet-spec-item__val">8×4</p></div>
+          <div><p class="fleet-spec-item__key">Engine Output</p><p class="fleet-spec-item__val">500 – 600 hp</p></div>
+          <div><p class="fleet-spec-item__key">Fleet Size</p><p class="fleet-spec-item__val">45 units</p></div>
         </div>
       </div>
 
-      <div class="fleet-card">
-        <div class="fleet-card__img-placeholder">ARTICULATED ADT</div>
-        <div class="fleet-card__body">
+      <div class="fleet-row">
+        <span class="fleet-row__num">03</span>
+        <div class="fleet-row__left">
           <span class="fleet-badge">Off-Road Series</span>
-          <h3 class="fleet-card__title">Articulated ADTs</h3>
-          <p class="fleet-card__sub">Articulated dump trucks engineered for rough, off-road terrain — ideal for giga projects, NEOM sites, and remote desert operations.</p>
-          <ul class="fleet-specs">
-            <li class="fleet-spec"><span class="fleet-spec__key">Payload Capacity</span><span class="fleet-spec__val">30 – 60 t</span></li>
-            <li class="fleet-spec"><span class="fleet-spec__key">Body Volume</span><span class="fleet-spec__val">20 – 42 m³</span></li>
-            <li class="fleet-spec"><span class="fleet-spec__key">Drive Configuration</span><span class="fleet-spec__val">6×6 All-Wheel</span></li>
-            <li class="fleet-spec"><span class="fleet-spec__key">Engine Output</span><span class="fleet-spec__val">520 – 700 hp</span></li>
-            <li class="fleet-spec"><span class="fleet-spec__key">Fleet Size</span><span class="fleet-spec__val">30 units</span></li>
-          </ul>
+          <h3 class="fleet-row__name">Articulated ADTs</h3>
+          <p class="fleet-row__desc">Articulated dump trucks engineered for rough, off-road terrain — ideal for giga projects, NEOM sites, and remote desert operations.</p>
+        </div>
+        <div class="fleet-row__specs">
+          <div><p class="fleet-spec-item__key">Payload Capacity</p><p class="fleet-spec-item__val">30 – 60 t</p></div>
+          <div><p class="fleet-spec-item__key">Body Volume</p><p class="fleet-spec-item__val">20 – 42 m³</p></div>
+          <div><p class="fleet-spec-item__key">Drive Config</p><p class="fleet-spec-item__val">6×6 All-Wheel</p></div>
+          <div><p class="fleet-spec-item__key">Engine Output</p><p class="fleet-spec-item__val">520 – 700 hp</p></div>
+          <div><p class="fleet-spec-item__key">Fleet Size</p><p class="fleet-spec-item__val">30 units</p></div>
         </div>
       </div>
 
-      <div class="fleet-card">
-        <div class="fleet-card__img-placeholder">TIPPER SEMI-TRAILER</div>
-        <div class="fleet-card__body">
+      <div class="fleet-row">
+        <span class="fleet-row__num">04</span>
+        <div class="fleet-row__left">
           <span class="fleet-badge">Long-Haul Series</span>
-          <h3 class="fleet-card__title">Tipper Semi-Trailers</h3>
-          <p class="fleet-card__sub">Long-haul tipper configurations for inter-regional bulk material transport — aggregate, sand, asphalt, and construction fill.</p>
-          <ul class="fleet-specs">
-            <li class="fleet-spec"><span class="fleet-spec__key">Payload Capacity</span><span class="fleet-spec__val">35 – 50 t</span></li>
-            <li class="fleet-spec"><span class="fleet-spec__key">Body Volume</span><span class="fleet-spec__val">28 – 45 m³</span></li>
-            <li class="fleet-spec"><span class="fleet-spec__key">Drive Configuration</span><span class="fleet-spec__val">6×4 Tractor</span></li>
-            <li class="fleet-spec"><span class="fleet-spec__key">Engine Output</span><span class="fleet-spec__val">480 – 560 hp</span></li>
-            <li class="fleet-spec"><span class="fleet-spec__key">Fleet Size</span><span class="fleet-spec__val">15 units</span></li>
-          </ul>
+          <h3 class="fleet-row__name">Tipper Semi-Trailers</h3>
+          <p class="fleet-row__desc">Long-haul tipper configurations for inter-regional bulk material transport — aggregate, sand, asphalt, and construction fill.</p>
+        </div>
+        <div class="fleet-row__specs">
+          <div><p class="fleet-spec-item__key">Payload Capacity</p><p class="fleet-spec-item__val">35 – 50 t</p></div>
+          <div><p class="fleet-spec-item__key">Body Volume</p><p class="fleet-spec-item__val">28 – 45 m³</p></div>
+          <div><p class="fleet-spec-item__key">Drive Config</p><p class="fleet-spec-item__val">6×4 Tractor</p></div>
+          <div><p class="fleet-spec-item__key">Engine Output</p><p class="fleet-spec-item__val">480 – 560 hp</p></div>
+          <div><p class="fleet-spec-item__key">Fleet Size</p><p class="fleet-spec-item__val">15 units</p></div>
         </div>
       </div>
 
