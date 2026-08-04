@@ -223,48 +223,47 @@
     /* ── About fullhero ── */
     .about-fullhero {
       position: relative;
-      min-height: 88vh;
+      min-height: 92vh;
       display: flex;
-      align-items: flex-end;
+      align-items: center;
+      justify-content: center;
       background-image: url('assets/img/about-hero.jpg');
       background-size: cover;
       background-position: center 40%;
-      padding-top: 80px;
     }
     .about-fullhero__overlay {
       position: absolute;
       inset: 0;
       background: linear-gradient(to bottom,
-        rgba(0,0,0,0.55) 0%,
-        rgba(0,0,0,0.25) 40%,
-        rgba(0,0,0,0.82) 100%);
+        rgba(0,0,0,0.65) 0%,
+        rgba(0,0,0,0.45) 50%,
+        rgba(0,0,0,0.75) 100%);
     }
     .about-fullhero__content {
       position: relative;
       z-index: 1;
+      text-align: center;
+      padding: clamp(100px,14vh,140px) clamp(24px,6vw,80px) clamp(60px,8vh,100px);
+      max-width: 760px;
       width: 100%;
-      padding: clamp(40px,5vw,80px);
-      padding-bottom: clamp(52px,7vh,88px);
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: clamp(32px,4vw,80px);
     }
     .about-fullhero__eyebrow {
       font-family: 'Inter', sans-serif;
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.22em;
+      letter-spacing: 0.24em;
       text-transform: uppercase;
       color: #CA953D;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
       display: flex;
       align-items: center;
-      gap: 10px;
+      justify-content: center;
+      gap: 12px;
     }
-    .about-fullhero__eyebrow::before {
+    .about-fullhero__eyebrow::before,
+    .about-fullhero__eyebrow::after {
       content: '';
-      width: 28px;
+      width: 24px;
       height: 1.5px;
       background: linear-gradient(135deg,#B67C2A,#CA953D,#E5B85A);
       flex-shrink: 0;
@@ -272,81 +271,50 @@
     .about-fullhero__title {
       font-family: BebasNeuePro, sans-serif;
       font-weight: 700;
-      font-size: clamp(80px,12vw,160px);
-      line-height: 0.88;
-      letter-spacing: 0.02em;
+      font-size: clamp(72px,12vw,150px);
+      line-height: 0.9;
+      letter-spacing: 0.03em;
       text-transform: uppercase;
       color: #fff;
-    }
-    .about-fullhero__right {
-      flex: 0 1 480px;
-      padding-bottom: 12px;
+      margin-bottom: 28px;
     }
     .about-fullhero__desc {
       font-family: 'Inter', sans-serif;
       font-size: clamp(14px,1.1vw,17px);
-      color: rgba(255,255,255,0.78);
+      color: rgba(255,255,255,0.65);
       line-height: 1.72;
-      margin-bottom: 32px;
-    }
-    .about-fullhero__rule {
-      width: 40px;
-      height: 1.5px;
-      background: linear-gradient(135deg,#B67C2A,#CA953D);
-      margin-bottom: 28px;
-    }
-    .about-fullhero__stats {
-      display: flex;
-      gap: clamp(20px,3vw,36px);
-      flex-wrap: wrap;
-    }
-    .about-fullhero__stat { display: flex; flex-direction: column; gap: 4px; }
-    .about-fullhero__stat-num {
-      font-family: BebasNeuePro, sans-serif;
-      font-size: clamp(30px,3.2vw,44px);
-      line-height: 1;
-      letter-spacing: 0.02em;
-      background: linear-gradient(135deg,#B67C2A,#CA953D,#E5B85A);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .about-fullhero__stat-label {
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      color: rgba(255,255,255,0.45);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-    @media (max-width: 768px) {
-      .about-fullhero__content { flex-direction: column; align-items: flex-start; }
-      .about-fullhero__right { flex: 1; width: 100%; }
-      .about-fullhero__title { font-size: clamp(64px,18vw,96px); }
+      max-width: 520px;
+      margin: 0 auto;
     }
 
-    /* ── Word-reveal section ── */
+    /* ── Word-reveal pinned section ── */
     .wrev-sec {
+      height: 280vh;
+      position: relative;
+    }
+    .wrev-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       background: #0a0a0a;
-      padding: clamp(80px,12vh,140px) clamp(24px,8vw,120px);
+      padding: 0 clamp(24px,8vw,120px);
     }
     .wrev-inner {
-      max-width: 1040px;
-      margin: 0 auto;
+      max-width: 960px;
       text-align: center;
-    }
-    .wrev-para {
       font-family: BebasNeuePro, sans-serif;
       font-weight: 700;
-      font-size: clamp(28px,3.8vw,54px);
-      line-height: 1.22;
+      font-size: clamp(26px,3.8vw,54px);
+      line-height: 1.28;
       letter-spacing: 0.04em;
       text-transform: uppercase;
-      margin: 0 0 clamp(28px,4vh,52px);
     }
-    .wrev-para:last-child { margin-bottom: 0; }
     .wrev-word {
       display: inline;
-      color: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.1);
     }
   </style>
 </head>
@@ -419,61 +387,45 @@
   <section class="about-fullhero">
     <div class="about-fullhero__overlay"></div>
     <div class="about-fullhero__content">
-      <div class="about-fullhero__left">
-        <p class="about-fullhero__eyebrow">Company / About</p>
-        <h1 class="about-fullhero__title">About Us</h1>
-      </div>
-      <div class="about-fullhero__right">
-        <p class="about-fullhero__desc">NOVA Terra Logistics &amp; Transport is the Kingdom's leading heavy haulage and earthmoving specialist — built for Vision 2030 projects and beyond. With 20 years of experience and 150+ heavy vehicles operating across all 12 KSA regions, we deliver reliability at scale.</p>
-        <div class="about-fullhero__rule"></div>
-        <div class="about-fullhero__stats">
-          <div class="about-fullhero__stat">
-            <span class="about-fullhero__stat-num">150+</span>
-            <span class="about-fullhero__stat-label">Heavy Vehicles</span>
-          </div>
-          <div class="about-fullhero__stat">
-            <span class="about-fullhero__stat-num">12</span>
-            <span class="about-fullhero__stat-label">KSA Regions</span>
-          </div>
-          <div class="about-fullhero__stat">
-            <span class="about-fullhero__stat-num">500+</span>
-            <span class="about-fullhero__stat-label">Projects Done</span>
-          </div>
-          <div class="about-fullhero__stat">
-            <span class="about-fullhero__stat-num">20 Yrs</span>
-            <span class="about-fullhero__stat-label">In Operation</span>
-          </div>
-        </div>
-      </div>
+      <p class="about-fullhero__eyebrow">Company</p>
+      <h1 class="about-fullhero__title">About Us</h1>
+      <p class="about-fullhero__desc">Saudi Arabia's leading heavy haulage and earthmoving specialist, built for Vision 2030 and beyond — moving the Kingdom's most critical projects since 2004.</p>
     </div>
   </section>
 
-  <!-- Word-reveal statement section -->
+  <!-- Pinned word-reveal section -->
   <section class="wrev-sec">
-    <div class="wrev-inner">
-      <p class="wrev-para" id="wrev-p1">Established in 2004, Nova Terra has built Saudi Arabia's most trusted heavy haulage network.</p>
-      <p class="wrev-para" id="wrev-p2">Delivering 500+ projects across 12 KSA regions with 150 heavy vehicles and two decades of proven excellence on every Vision 2030 site.</p>
+    <div class="wrev-sticky">
+      <p class="wrev-inner" id="wrev-text">Built on two decades of precision and trust, Nova Terra moves Saudi Arabia's most critical infrastructure with 150 heavy vehicles delivering proven excellence across every region of the Kingdom.</p>
     </div>
   </section>
   <script>
   (function () {
-    var paras = document.querySelectorAll('.wrev-para');
-    paras.forEach(function (para) {
-      var words = para.textContent.trim().split(/\s+/);
-      para.innerHTML = words.map(function (w) {
-        return '<span class="wrev-word">' + w + '</span>';
-      }).join(' ');
-    });
+    var sec = document.querySelector('.wrev-sec');
+    var inner = document.getElementById('wrev-text');
+    if (!sec || !inner) return;
 
-    var allWords = Array.from(document.querySelectorAll('.wrev-word'));
+    /* split into word spans */
+    var words = inner.textContent.trim().split(/\s+/);
+    inner.innerHTML = words.map(function (w) {
+      return '<span class="wrev-word">' + w + '</span>';
+    }).join(' ');
+    var allWords = Array.from(inner.querySelectorAll('.wrev-word'));
 
     function update() {
-      var vh = window.innerHeight;
-      allWords.forEach(function (w) {
-        var rect = w.getBoundingClientRect();
-        var mid = rect.top + rect.height / 2;
-        var p = Math.max(0, Math.min(1, (vh * 0.72 - mid) / (vh * 0.38)));
-        w.style.color = 'rgba(255,255,255,' + (0.08 + p * 0.92) + ')';
+      var rect = sec.getBoundingClientRect();
+      var secH = sec.offsetHeight;
+      var vh   = window.innerHeight;
+      /* progress 0→1 through the pinned scroll distance */
+      var scrolled  = Math.max(0, -rect.top);
+      var maxScroll = secH - vh;
+      var progress  = maxScroll > 0 ? Math.min(1, scrolled / maxScroll) : 0;
+
+      allWords.forEach(function (w, i) {
+        var start = (i / allWords.length) * 0.75;
+        var end   = start + 0.28;
+        var p     = Math.max(0, Math.min(1, (progress - start) / (end - start)));
+        w.style.color = 'rgba(255,255,255,' + (0.1 + p * 0.9) + ')';
       });
     }
 
