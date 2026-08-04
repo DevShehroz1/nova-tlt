@@ -2134,21 +2134,6 @@
 		counter-increment: navitem;
 	}
 	#nova-mobile-menu .mob-nav-item:first-child { border-top: 1px solid rgba(255,255,255,0.06); }
-	#nova-mobile-menu .mob-item-inner {
-		display: flex;
-		align-items: baseline;
-		gap: 14px;
-	}
-	#nova-mobile-menu .mob-num {
-		font-family: 'Inter', sans-serif;
-		font-size: 11px;
-		font-weight: 500;
-		letter-spacing: 0.08em;
-		color: #CA953D;
-		opacity: 0.7;
-		line-height: 1;
-		padding-bottom: 4px;
-	}
 	/* Char wrapper for animation */
 	#nova-mobile-menu .mob-char-wrap {
 		display: inline-block;
@@ -4307,17 +4292,9 @@ import createGlobe from 'https://esm.sh/cobe@0.6.3';
   </div>
   <!-- Nav list -->
   <nav class="mob-nav-list">
-    <a href="index.html" class="mob-nav-item">
-      <div class="mob-item-inner">
-        <span class="mob-num">01</span>
-        <span class="mob-label">Home</span>
-      </div>
-    </a>
+    <a href="index.html" class="mob-nav-item"><span class="mob-label">Home</span></a>
     <div class="mob-nav-item" data-mob-drop="company">
-      <div class="mob-item-inner">
-        <span class="mob-num">02</span>
-        <span class="mob-label">Company</span>
-      </div>
+      <span class="mob-label">Company</span>
       <svg class="mob-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
     <div class="mob-sub" id="mob-sub-company">
@@ -4326,10 +4303,7 @@ import createGlobe from 'https://esm.sh/cobe@0.6.3';
       <a href="careers.html" class="mob-sub-link">Careers</a>
     </div>
     <div class="mob-nav-item" data-mob-drop="whatwedo">
-      <div class="mob-item-inner">
-        <span class="mob-num">03</span>
-        <span class="mob-label">What We Do</span>
-      </div>
+      <span class="mob-label">What We Do</span>
       <svg class="mob-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
     <div class="mob-sub" id="mob-sub-whatwedo">
@@ -4338,22 +4312,14 @@ import createGlobe from 'https://esm.sh/cobe@0.6.3';
       <a href="industries.html" class="mob-sub-link">Industries We Serve</a>
     </div>
     <div class="mob-nav-item" data-mob-drop="work">
-      <div class="mob-item-inner">
-        <span class="mob-num">04</span>
-        <span class="mob-label">Work</span>
-      </div>
+      <span class="mob-label">Work</span>
       <svg class="mob-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
     <div class="mob-sub" id="mob-sub-work">
       <a href="projects.html" class="mob-sub-link">Projects</a>
       <a href="gallery.html" class="mob-sub-link">Gallery</a>
     </div>
-    <a href="news.html" class="mob-nav-item">
-      <div class="mob-item-inner">
-        <span class="mob-num">05</span>
-        <span class="mob-label">News</span>
-      </div>
-    </a>
+    <a href="news.html" class="mob-nav-item"><span class="mob-label">News</span></a>
   </nav>
   <!-- Footer CTA -->
   <div class="mob-footer">
