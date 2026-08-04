@@ -5466,3 +5466,6 @@ html.with-fancybox body.hide-scrollbar {
 @media (max-width: 1024px) {
   .header { transform: none !important; }
 }
+
+/* Show header on all inner pages (homepage overrides via inline style) */
+.header { transform: none !important; }
