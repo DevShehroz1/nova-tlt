@@ -88,11 +88,15 @@
     .btn-ghost { display: inline-flex; align-items: center; gap: 8px; padding: 14px 36px; border-radius: 5rem; border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.07); backdrop-filter: blur(12px); color: var(--ink); font-family: BebasNeuePro,sans-serif; font-size: 20px; letter-spacing: 0.05em; cursor: pointer; text-decoration: none; transition: border-color 200ms ease, background 200ms ease; }
     .btn-ghost:hover { border-color: #CA953D; background: rgba(202,149,61,0.08); }
     .btn-row { display: flex; gap: 14px; flex-wrap: wrap; }
-    .card-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(280px,1fr)); gap: 16px; }
-    .card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: clamp(24px,2.5vw,36px); transition: border-color 220ms ease, box-shadow 220ms ease; }
-    .card:hover { border-color: rgba(202,149,61,0.3); box-shadow: 0 4px 24px rgba(0,0,0,0.3); }
+    .card-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    @media (max-width: 768px) { .card-grid { grid-template-columns: 1fr; } }
+    .card { position: relative; overflow: hidden; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: clamp(28px,3vw,44px); transition: border-color 300ms ease, box-shadow 300ms ease; }
+    .card::before { content: ''; position: absolute; inset: 0; border-radius: 12px; background: radial-gradient(600px circle at var(--mouse-x,50%) var(--mouse-y,50%), rgba(202,149,61,0.13), transparent 55%); opacity: 0; transition: opacity 300ms ease; pointer-events: none; }
+    .card:hover { border-color: rgba(202,149,61,0.45); box-shadow: 0 0 48px rgba(202,149,61,0.18), 0 8px 32px rgba(0,0,0,0.4); }
+    .card:hover::before { opacity: 1; }
     .card__icon { margin-bottom: 20px; }
-    .icon-wrap { width: 56px; height: 56px; border-radius: 8px; background: rgba(202,149,61,0.12); border: 1px solid rgba(202,149,61,0.25); display: flex; align-items: center; justify-content: center; margin-bottom: 22px; flex-shrink: 0; }
+    .icon-wrap { width: 64px; height: 64px; border-radius: 12px; background: rgba(202,149,61,0.10); border: 1px solid rgba(202,149,61,0.30); display: flex; align-items: center; justify-content: center; margin-bottom: 24px; flex-shrink: 0; transition: background 300ms ease, border-color 300ms ease; }
+    .card:hover .icon-wrap { background: rgba(202,149,61,0.18); border-color: rgba(202,149,61,0.55); }
     .icon-wrap svg { display: block; }
     .about-img-wrap { border-radius: 8px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.04); min-height: 360px; display: flex; align-items: stretch; }
     .about-img { width: 100%; height: 100%; object-fit: cover; display: block; min-height: 360px; }
@@ -493,69 +497,39 @@
       <div class="card-grid">
         <div class="card">
           <div class="icon-wrap">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#CA953D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg>
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#CA953D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"/>
+              <circle cx="12" cy="12" r="7"/>
+              <line x1="12" y1="2" x2="12" y2="5"/>
+              <line x1="12" y1="19" x2="12" y2="22"/>
+              <line x1="2" y1="12" x2="5" y2="12"/>
+              <line x1="19" y1="12" x2="22" y2="12"/>
+            </svg>
           </div>
           <h3 class="card__title">Our Mission</h3>
           <p class="card__text">To deliver reliable, safe, and cost-efficient heavy transport and earthmoving services that enable Saudi Arabia's infrastructure development — one project, one load, one kilometre at a time.</p>
         </div>
         <div class="card">
           <div class="icon-wrap">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#CA953D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#CA953D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/>
+            </svg>
           </div>
           <h3 class="card__title">Our Values</h3>
           <p class="card__text">Safety above all. Integrity in every commitment. Reliability our clients can plan around. Continuous improvement as a daily practice. Respect for people, communities, and the environment.</p>
         </div>
         <div class="card">
           <div class="icon-wrap">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#CA953D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z"/></svg>
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#CA953D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 8l4 4-4 4"/>
+              <path d="M6 12h4"/>
+              <path d="M10 6l8 6-8 6V6z"/>
+              <line x1="18" y1="12" x2="22" y2="12"/>
+            </svg>
           </div>
           <h3 class="card__title">Our Vision</h3>
           <p class="card__text">To be recognised as Saudi Arabia's most trusted heavy transport partner — the company that Vision 2030's biggest projects call first, and the benchmark for fleet quality and HSE standards in the Kingdom.</p>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="sec">
-    <p class="sec__eyebrow">Compliance &amp; Certification</p>
-    <h2 class="sec__title">Certified. Compliant. <span>Accountable.</span></h2>
-    <p class="sec__sub">NOVA Terra maintains active certification across international quality, safety, and environmental management standards — so our clients can operate with full confidence in our compliance.</p>
-    <div class="cert-grid">
-      <div class="cert-tile">
-        <div class="cert-tile__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#CA953D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M8 8l-5 8h18l-5-8"/><path d="M12 12v4"/></svg></div>
-        <span class="cert-tile__badge">ISO 9001:2015</span>
-        <h3 class="cert-tile__title">Quality Management</h3>
-        <p class="cert-tile__desc">Our quality management system ensures consistent service delivery, documented processes, and continuous improvement across all operations.</p>
-      </div>
-      <div class="cert-tile">
-        <div class="cert-tile__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#CA953D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <span class="cert-tile__badge">ISO 45001:2018</span>
-        <h3 class="cert-tile__title">Occupational Health &amp; Safety</h3>
-        <p class="cert-tile__desc">Internationally recognised occupational health and safety framework applied across all fleet operations, depots, and project sites.</p>
-      </div>
-      <div class="cert-tile">
-        <div class="cert-tile__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#CA953D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 8c-1.5 0-3 .8-3 2s1.5 2 3 2 3 .8 3 2-1.5 2-3 2"/><path d="M12 6v1m0 10v1"/></svg></div>
-        <span class="cert-tile__badge">ISO 14001:2015</span>
-        <h3 class="cert-tile__title">Environmental Management</h3>
-        <p class="cert-tile__desc">Structured environmental management system covering emissions, fuel efficiency, waste handling, and site impact minimisation.</p>
-      </div>
-      <div class="cert-tile">
-        <div class="cert-tile__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#CA953D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></div>
-        <span class="cert-tile__badge">MODON</span>
-        <h3 class="cert-tile__title">MODON Registration</h3>
-        <p class="cert-tile__desc">Registered with the Saudi Authority for Industrial Cities and Technology Zones, enabling operations within designated industrial areas across the Kingdom.</p>
-      </div>
-      <div class="cert-tile">
-        <div class="cert-tile__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#CA953D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-        <span class="cert-tile__badge">GOSI</span>
-        <h3 class="cert-tile__title">GOSI Compliance</h3>
-        <p class="cert-tile__desc">Fully compliant with the General Organisation for Social Insurance, ensuring all employees — Saudi and expat — receive mandated coverage.</p>
-      </div>
-      <div class="cert-tile">
-        <div class="cert-tile__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#CA953D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
-        <span class="cert-tile__badge">ZAKAT</span>
-        <h3 class="cert-tile__title">ZAKAT &amp; Tax Compliance</h3>
-        <p class="cert-tile__desc">Registered and compliant with the Zakat, Tax and Customs Authority — providing clients peace of mind on all financial and regulatory matters.</p>
       </div>
     </div>
   </div>
@@ -670,5 +644,14 @@
 
 <script src="assets/js/scroll-reveal.js"></script>
 <script src="assets/js/mobile-menu.js"></script>
+<script>
+document.querySelectorAll('.card').forEach(function(card) {
+  card.addEventListener('mousemove', function(e) {
+    var rect = card.getBoundingClientRect();
+    card.style.setProperty('--mouse-x', (e.clientX - rect.left) + 'px');
+    card.style.setProperty('--mouse-y', (e.clientY - rect.top) + 'px');
+  });
+});
+</script>
 </body>
 </html>
