@@ -123,6 +123,22 @@
 
     /* Services-specific */
     .acc-list { display: flex; flex-direction: column; border-top: 1px solid var(--line); }
+    /* ── Interactive services section ── */
+    .services-sec { background: #0A0A0A; padding: clamp(60px,7vw,100px) clamp(24px,5vw,80px); }
+    .services-sec__inner { max-width: 1400px; margin: 0 auto; }
+    .services-sec__body { display: grid; grid-template-columns: 1fr 38%; gap: 0 clamp(32px,4vw,64px); align-items: start; }
+    .services-sec__rows { display: flex; flex-direction: column; }
+    .services-sec__row { display: flex; align-items: center; gap: clamp(16px,2.5vw,36px); padding: clamp(14px,1.8vw,24px) 0; cursor: pointer; user-select: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .services-sec__num { font-family: BebasNeuePro,sans-serif; font-size: clamp(40px,4.5vw,64px); font-weight: 700; color: #fff; opacity: 0.25; min-width: clamp(60px,6vw,88px); line-height: 1; transition: opacity 250ms ease; flex-shrink: 0; }
+    .services-sec__name { font-family: BebasNeuePro,sans-serif; font-size: clamp(32px,4vw,56px); font-weight: 700; color: #fff; opacity: 0.25; line-height: 1; transition: opacity 250ms ease; }
+    .services-sec__row--active .services-sec__num, .services-sec__row--active .services-sec__name { opacity: 1; background: linear-gradient(135deg,#B67C2A 0%,#CA953D 50%,#E5B85A 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .services-sec__panel { position: sticky; top: 100px; display: flex; flex-direction: column; gap: 20px; }
+    .services-sec__panel-img { width: 100%; aspect-ratio: 1.12; object-fit: cover; display: block; border-radius: 12px; transition: opacity 180ms ease; }
+    .services-sec__panel-desc { font-family: 'Inter',sans-serif; font-size: clamp(13px,1vw,15px); color: rgba(255,255,255,0.65); line-height: 1.65; }
+    .services-sec__panel-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: linear-gradient(135deg,#B67C2A 0%,#CA953D 50%,#E5B85A 100%); color: #fff; border: none; border-radius: 5rem; font-family: 'Inter',sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; transition: filter 200ms, transform 120ms ease-out; align-self: flex-start; text-decoration: none; }
+    .services-sec__panel-btn:hover { filter: brightness(0.88); }
+    .services-sec__panel-btn:active { transform: scale(0.97); }
+    @media (max-width: 900px) { .services-sec__body { grid-template-columns: 1fr; } .services-sec__panel { position: static; margin-top: 32px; } }
     .acc-item { border-bottom: 1px solid var(--line); }
     .acc-item__head { display: flex; align-items: center; gap: 24px; padding: 28px 0; cursor: pointer; list-style: none; }
     .acc-item__head::-webkit-details-marker { display: none; }
@@ -205,7 +221,44 @@
     </div>
   </section>
 
-  <div class="sec">
+  <section class="services-sec">
+    <div class="services-sec__inner">
+      <div class="services-sec__body">
+        <div class="services-sec__rows" id="svc-rows">
+          <div class="services-sec__row services-sec__row--active" data-svc="0">
+            <span class="services-sec__num">01</span>
+            <span class="services-sec__name">Dump Truck Rental</span>
+          </div>
+          <div class="services-sec__row" data-svc="1">
+            <span class="services-sec__num">02</span>
+            <span class="services-sec__name">Earthmoving &amp; Excavation Support</span>
+          </div>
+          <div class="services-sec__row" data-svc="2">
+            <span class="services-sec__num">03</span>
+            <span class="services-sec__name">Bulk Material Transport</span>
+          </div>
+          <div class="services-sec__row" data-svc="3">
+            <span class="services-sec__num">04</span>
+            <span class="services-sec__name">Logistics &amp; Fleet Management</span>
+          </div>
+          <div class="services-sec__row" data-svc="4">
+            <span class="services-sec__num">05</span>
+            <span class="services-sec__name">Project-Based Contracts</span>
+          </div>
+        </div>
+        <div class="services-sec__panel" id="svc-panel">
+          <img class="services-sec__panel-img" id="svc-img" src="assets/img/svc-dump-truck.webp" alt="Dump Truck Rental" loading="lazy" />
+          <p class="services-sec__panel-desc" id="svc-panel-desc">Flexible short- and long-term rental of dump trucks with or without professional operators, tailored to project timelines and load requirements.</p>
+          <a class="services-sec__panel-btn" id="svc-panel-btn" href="contact.html">
+            Explore Dump Truck Rental
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="sec" style="display:none;">
     <p class="sec__eyebrow">Our Services</p>
     <h2 class="sec__title">Built for <span>Every Scale</span></h2>
     <div class="acc-list">
@@ -398,6 +451,40 @@
 </script>
 <script src="assets/js/scroll-reveal.js"></script>
 <script src="assets/js/mobile-menu.js"></script>
+<script src="assets/js/page-transition.js"></script>
+<script>
+(function(){
+  var services = [
+    { name: 'Dump Truck Rental', img: 'assets/img/svc-dump-truck.webp', desc: 'Flexible short- and long-term rental of dump trucks with or without professional operators, tailored to project timelines and load requirements.' },
+    { name: 'Earthmoving &amp; Excavation Support', img: 'assets/img/svc-earthmoving.webp', desc: 'Site clearing, grading, and bulk material movement in coordination with excavation contractors.' },
+    { name: 'Bulk Material Transport', img: 'assets/img/svc-bulk-material.webp', desc: 'Transport of sand, gravel, asphalt, aggregate, and construction debris across job sites and regional routes.' },
+    { name: 'Logistics &amp; Fleet Management', img: 'assets/img/svc-fleet-management.webp', desc: 'End-to-end logistics coordination including route planning, load scheduling, and real-time dispatch tracking.' },
+    { name: 'Project-Based Contracts', img: 'assets/img/svc-contracts.webp', desc: 'Dedicated fleet allocation for large-scale, long-duration infrastructure and industrial projects.' }
+  ];
+  var rows = document.querySelectorAll('.services-sec__row');
+  var imgEl = document.getElementById('svc-img');
+  var descEl = document.getElementById('svc-panel-desc');
+  var btnEl = document.getElementById('svc-panel-btn');
+  if (!rows.length || !imgEl) return;
+  var currentIdx = 0;
+  function activate(idx) {
+    if (idx === currentIdx && imgEl.src.includes(services[idx].img.split('/').pop())) return;
+    currentIdx = idx;
+    rows.forEach(function(el, i) { el.classList.toggle('services-sec__row--active', i === idx); });
+    var svc = services[idx];
+    imgEl.style.opacity = '0';
+    var newImg = new Image();
+    newImg.src = svc.img;
+    newImg.onload = function() { imgEl.src = svc.img; imgEl.alt = svc.name.replace(/&amp;/g,'&'); imgEl.style.opacity = '1'; };
+    descEl.textContent = svc.desc;
+    btnEl.innerHTML = 'Explore ' + svc.name + ' <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  }
+  rows.forEach(function(el) {
+    el.addEventListener('mouseenter', function() { activate(+el.dataset.svc); });
+    el.addEventListener('click', function() { activate(+el.dataset.svc); });
+  });
+})();
+</script>
 <script>
 (function(){
   var header = document.querySelector('.header');
