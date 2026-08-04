@@ -201,6 +201,24 @@
     #about-mobile-menu .mob-footer { padding:20px 28px 32px; border-top:1px solid rgba(255,255,255,0.06); flex-shrink:0; }
     #about-mobile-menu .mob-footer-cta { display:inline-flex; align-items:center; gap:10px; font-family:BebasNeuePro,sans-serif; font-size:16px; letter-spacing:.1em; color:#CA953D; text-decoration:none; padding:12px 24px; border:1px solid rgba(202,149,61,0.35); border-radius:5rem; transition:background 0.25s,border-color 0.25s; }
     #about-mobile-menu .mob-footer-cta:hover { background:rgba(202,149,61,0.1); border-color:#CA953D; }
+
+    /* ── Header: matches homepage style ── */
+    .header { position: fixed !important; transform: none !important; background: rgba(10,10,10,0.90) !important; backdrop-filter: blur(14px) !important; -webkit-backdrop-filter: blur(14px) !important; }
+    .header__container { position: relative !important; }
+    .header__menu { position: absolute !important; left: 50% !important; transform: translateX(-50%) !important; background-color: #141414 !important; border: 1px solid rgba(255,255,255,0.1) !important; }
+    .header__menu-item, .header__menu-item .text-hover__elem { color: rgba(255,255,255,0.85) !important; }
+    .header__menu-item:hover { color: #CA953D !important; }
+    .nav-drop__trigger { color: rgba(255,255,255,0.85) !important; background: none !important; border: none !important; }
+    .nav-drop__chevron path { stroke: rgba(255,255,255,0.7) !important; }
+    .nav-drop--open .nav-drop__chevron path { stroke: #CA953D !important; }
+    .btn { background-color: #141414 !important; border-color: rgba(255,255,255,0.15) !important; color: rgba(255,255,255,0.88) !important; }
+    .btn:hover { color: #fff !important; }
+    .btn:after { background: linear-gradient(135deg, #B67C2A 0%, #CA953D 50%, #E5B85A 100%) !important; }
+    .btn._accent { background: linear-gradient(135deg, #B67C2A 0%, #CA953D 50%, #E5B85A 100%) !important; border-color: transparent !important; color: #fff !important; }
+    .btn._accent:after { background-color: #141414 !important; }
+    .btn._accent:hover { color: #fff !important; filter: brightness(0.9); }
+    .header__logo { background: transparent !important; padding: 0 !important; height: auto !important; }
+    .header__logo-img { width: auto !important; height: 52px !important; object-fit: contain; }
   </style>
 </head>
 <body>
