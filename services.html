@@ -139,6 +139,17 @@
     .services-sec__panel-btn:hover { filter: brightness(0.88); }
     .services-sec__panel-btn:active { transform: scale(0.97); }
     @media (max-width: 900px) { .services-sec__body { grid-template-columns: 1fr; } .services-sec__panel { position: static; margin-top: 32px; } }
+    /* ── Partners marquee ── */
+    .partner-band { background: #0a0a0a; padding: clamp(48px,7vw,88px) 0 0; text-align: center; }
+    .partner-band__num { font-family: BebasNeuePro,sans-serif; font-size: clamp(64px,10vw,140px); font-weight: 700; line-height: 1; background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: 0.02em; }
+    .partner-band__label { font-family: 'Inter',sans-serif; font-size: clamp(14px,1.1vw,18px); color: var(--ink-dim); margin-top: 10px; margin-bottom: clamp(40px,5vw,64px); }
+    .marquee-sec { background: #0a0a0a; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .marquee-track { display: flex; width: max-content; animation: marquee-scroll 32s linear infinite; }
+    .marquee-track:hover { animation-play-state: paused; }
+    @keyframes marquee-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .marquee-item { display: flex; align-items: center; gap: 14px; padding: clamp(22px,2.5vw,34px) clamp(32px,3.5vw,56px); white-space: nowrap; border-right: 1px solid rgba(255,255,255,0.08); transition: color 200ms ease; }
+    .marquee-logo { height: 48px; width: auto; display: block; opacity: 0.65; transition: opacity 200ms ease; }
+    .marquee-item:hover .marquee-logo { opacity: 1; }
     .acc-item { border-bottom: 1px solid var(--line); }
     .acc-item__head { display: flex; align-items: center; gap: 24px; padding: 28px 0; cursor: pointer; list-style: none; }
     .acc-item__head::-webkit-details-marker { display: none; }
@@ -345,6 +356,36 @@
       </details>
     </div>
   </div>
+
+  <div class="partner-band">
+    <p class="partner-band__num">200+</p>
+    <p class="partner-band__label">Partners and logistics collaborators.</p>
+  </div>
+  <section class="marquee-sec">
+    <div class="marquee-track">
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <!-- duplicate for seamless loop -->
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+    </div>
+  </section>
 
   <div class="sec--dark">
     <div class="sec">
