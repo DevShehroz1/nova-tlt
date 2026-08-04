@@ -120,13 +120,32 @@
     .cert-tile__badge { display: inline-block; font-family: 'Inter',sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 5px 12px; border-radius: 5px; background: rgba(202,149,61,0.12); color: #CA953D; border: 1px solid rgba(202,149,61,0.22); margin-bottom: 16px; }
     .cert-tile__title { font-family: BebasNeuePro,sans-serif; font-size: 22px; letter-spacing: 0.04em; color: var(--ink); margin-bottom: 8px; }
     .cert-tile__desc { font-family: 'Inter',sans-serif; font-size: 13px; color: var(--ink-dim); line-height: 1.65; }
-    .team-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 24px; }
-    .team-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 32px; text-align: center; transition: border-color 200ms ease; }
-    .team-card:hover { border-color: rgba(202,149,61,0.3); }
-    .team-avatar { width: 72px; height: 72px; border-radius: 50%; background: rgba(202,149,61,0.12); border: 1px solid rgba(202,149,61,0.25); margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-family: BebasNeuePro,sans-serif; font-size: 26px; letter-spacing: 0.05em; color: #CA953D; }
-    .team-card__name { font-family: BebasNeuePro,sans-serif; font-size: 22px; letter-spacing: 0.04em; color: var(--ink); margin-bottom: 6px; }
-    .team-card__role { font-family: 'Inter',sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #CA953D; margin-bottom: 16px; }
-    .team-card__bio { font-family: 'Inter',sans-serif; font-size: 13px; color: var(--ink-dim); line-height: 1.65; }
+    @keyframes nt-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .tm-sec { padding: clamp(64px,9vw,110px) 0; background: #0a0a0a; overflow: hidden; }
+    .tm-head { max-width: 680px; margin: 0 auto clamp(48px,6vw,72px); padding: 0 clamp(24px,5vw,80px); text-align: center; }
+    .tm-head__icon { width: 56px; height: 56px; border-radius: 12px; background: rgba(202,149,61,0.12); border: 1px solid rgba(202,149,61,0.30); display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; }
+    .tm-head__title { font-family: BebasNeuePro,sans-serif; font-size: clamp(38px,5vw,68px); letter-spacing: 0.03em; color: var(--ink); margin-bottom: 14px; line-height: 1; }
+    .tm-head__title span { background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .tm-head__desc { font-family: 'Inter',sans-serif; font-size: clamp(14px,1.05vw,16px); color: var(--ink-dim); line-height: 1.7; }
+    .tm-viewport { position: relative; }
+    .tm-fade { position: absolute; top: 0; z-index: 2; width: clamp(80px,10vw,160px); height: 100%; pointer-events: none; }
+    .tm-fade--l { left: 0; background: linear-gradient(to right, #0a0a0a 0%, transparent 100%); }
+    .tm-fade--r { right: 0; background: linear-gradient(to left, #0a0a0a 0%, transparent 100%); }
+    .tm-track { display: flex; gap: 20px; width: max-content; animation: nt-marquee 36s linear infinite; }
+    .tm-viewport:hover .tm-track { animation-play-state: paused; }
+    .tm-card { flex-shrink: 0; width: 230px; border-radius: 16px; overflow: hidden; position: relative; }
+    .tm-card img { width: 100%; height: 320px; object-fit: cover; object-position: top center; display: block; filter: grayscale(1); transition: filter 0.4s ease; }
+    .tm-card:hover img { filter: grayscale(0); }
+    .tm-caption { position: absolute; bottom: 0; left: 0; right: 0; padding: 14px 16px; background: rgba(10,10,10,0.80); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+    .tm-caption__name { font-family: BebasNeuePro,sans-serif; font-size: 18px; letter-spacing: 0.04em; color: #fff; }
+    .tm-caption__role { font-family: 'Inter',sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #CA953D; margin-top: 2px; }
+    .tm-quote { max-width: 640px; margin: clamp(48px,6vw,72px) auto 0; padding: 0 clamp(24px,5vw,80px); text-align: center; }
+    .tm-quote__text { font-family: 'Inter',sans-serif; font-size: clamp(15px,1.15vw,18px); color: var(--ink); line-height: 1.7; font-weight: 500; margin-bottom: 28px; }
+    .tm-quote__author { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .tm-quote__avatar { width: 52px; height: 52px; border-radius: 50%; overflow: hidden; border: 2px solid rgba(202,149,61,0.4); }
+    .tm-quote__avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .tm-quote__name { font-family: BebasNeuePro,sans-serif; font-size: 18px; letter-spacing: 0.05em; color: var(--ink); }
+    .tm-quote__role { font-family: 'Inter',sans-serif; font-size: 12px; color: var(--ink-dim); letter-spacing: 0.06em; }
     .cta-band { background: linear-gradient(135deg,rgba(182,124,42,0.10) 0%,rgba(202,149,61,0.06) 100%); border-top: 1px solid rgba(202,149,61,0.18); border-bottom: 1px solid rgba(202,149,61,0.18); padding: clamp(48px,7vw,88px) clamp(20px,5vw,80px); display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
     .cta-band__title { font-family: BebasNeuePro,sans-serif; font-size: clamp(36px,4.5vw,62px); letter-spacing: 0.03em; color: var(--ink); max-width: 680px; }
     .cta-band__title span { background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
@@ -534,36 +553,81 @@
     </div>
   </div>
 
-  <div class="sec--dark">
-    <div class="sec">
-      <p class="sec__eyebrow">Leadership</p>
-      <h2 class="sec__title">The Team Behind <span>NOVA Terra</span></h2>
-      <p class="sec__sub">Our leadership team brings decades of combined experience in logistics, fleet management, and Saudi infrastructure development.</p>
-      <div class="team-grid">
-        <div class="team-card">
-          <div class="team-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#CA953D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-          <div class="team-avatar">KA</div>
-          <h3 class="team-card__name">Khalid Al-Amer</h3>
-          <p class="team-card__role">Chief Executive Officer</p>
-          <p class="team-card__bio">20+ years in Saudi logistics and infrastructure. Khalid founded NOVA Terra in 2004 and has led its growth from 12 trucks to 150+ vehicles across the Kingdom.</p>
+  <section class="tm-sec">
+    <div class="tm-head">
+      <div class="tm-head__icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#CA953D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <h2 class="tm-head__title">The People Behind <span>NOVA Terra</span></h2>
+      <p class="tm-head__desc">Two decades of collective expertise in Saudi logistics, fleet operations, HSE, and Vision 2030 infrastructure — driven by one shared mission.</p>
+    </div>
+    <div class="tm-viewport">
+      <div class="tm-fade tm-fade--l"></div>
+      <div class="tm-fade tm-fade--r"></div>
+      <div class="tm-track">
+        <!-- set 1 -->
+        <div class="tm-card">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=460&h=640&fit=crop&crop=face" alt="Khalid Al-Amer" loading="lazy">
+          <div class="tm-caption"><p class="tm-caption__name">Khalid Al-Amer</p><p class="tm-caption__role">CEO &amp; Founder</p></div>
         </div>
-        <div class="team-card">
-          <div class="team-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#CA953D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg></div>
-          <div class="team-avatar">SR</div>
-          <h3 class="team-card__name">Saad Al-Rashidi</h3>
-          <p class="team-card__role">Chief Operating Officer</p>
-          <p class="team-card__bio">Oversees day-to-day fleet deployment, logistics coordination, and client contract management across all 12 KSA regions.</p>
+        <div class="tm-card">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=460&h=640&fit=crop&crop=face" alt="Rania Mahmoud" loading="lazy">
+          <div class="tm-caption"><p class="tm-caption__name">Rania Mahmoud</p><p class="tm-caption__role">Finance Director</p></div>
         </div>
-        <div class="team-card">
-          <div class="team-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#CA953D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
-          <div class="team-avatar">FM</div>
-          <h3 class="team-card__name">Fahad Al-Mutairi</h3>
-          <p class="team-card__role">Head of Fleet &amp; Maintenance</p>
-          <p class="team-card__bio">Leads the 40-person fleet operations and workshop team, responsible for preventive maintenance, uptime guarantees, and equipment procurement.</p>
+        <div class="tm-card">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=460&h=640&fit=crop&crop=face" alt="Saad Al-Rashidi" loading="lazy">
+          <div class="tm-caption"><p class="tm-caption__name">Saad Al-Rashidi</p><p class="tm-caption__role">Chief Operating Officer</p></div>
+        </div>
+        <div class="tm-card">
+          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=460&h=640&fit=crop&crop=face" alt="Lina Al-Qahtani" loading="lazy">
+          <div class="tm-caption"><p class="tm-caption__name">Lina Al-Qahtani</p><p class="tm-caption__role">HSE Director</p></div>
+        </div>
+        <div class="tm-card">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=460&h=640&fit=crop&crop=face" alt="Fahad Al-Mutairi" loading="lazy">
+          <div class="tm-caption"><p class="tm-caption__name">Fahad Al-Mutairi</p><p class="tm-caption__role">Head of Fleet</p></div>
+        </div>
+        <div class="tm-card">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=460&h=640&fit=crop&crop=face" alt="Sara Al-Ghamdi" loading="lazy">
+          <div class="tm-caption"><p class="tm-caption__name">Sara Al-Ghamdi</p><p class="tm-caption__role">Business Development</p></div>
+        </div>
+        <!-- set 2 (duplicate for seamless loop) -->
+        <div class="tm-card">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=460&h=640&fit=crop&crop=face" alt="Khalid Al-Amer" loading="lazy">
+          <div class="tm-caption"><p class="tm-caption__name">Khalid Al-Amer</p><p class="tm-caption__role">CEO &amp; Founder</p></div>
+        </div>
+        <div class="tm-card">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=460&h=640&fit=crop&crop=face" alt="Rania Mahmoud" loading="lazy">
+          <div class="tm-caption"><p class="tm-caption__name">Rania Mahmoud</p><p class="tm-caption__role">Finance Director</p></div>
+        </div>
+        <div class="tm-card">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=460&h=640&fit=crop&crop=face" alt="Saad Al-Rashidi" loading="lazy">
+          <div class="tm-caption"><p class="tm-caption__name">Saad Al-Rashidi</p><p class="tm-caption__role">Chief Operating Officer</p></div>
+        </div>
+        <div class="tm-card">
+          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=460&h=640&fit=crop&crop=face" alt="Lina Al-Qahtani" loading="lazy">
+          <div class="tm-caption"><p class="tm-caption__name">Lina Al-Qahtani</p><p class="tm-caption__role">HSE Director</p></div>
+        </div>
+        <div class="tm-card">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=460&h=640&fit=crop&crop=face" alt="Fahad Al-Mutairi" loading="lazy">
+          <div class="tm-caption"><p class="tm-caption__name">Fahad Al-Mutairi</p><p class="tm-caption__role">Head of Fleet</p></div>
+        </div>
+        <div class="tm-card">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=460&h=640&fit=crop&crop=face" alt="Sara Al-Ghamdi" loading="lazy">
+          <div class="tm-caption"><p class="tm-caption__name">Sara Al-Ghamdi</p><p class="tm-caption__role">Business Development</p></div>
         </div>
       </div>
     </div>
-  </div>
+    <div class="tm-quote">
+      <p class="tm-quote__text">"NOVA Terra's team delivered our most complex earthmoving contract on time and within budget. Their professionalism and safety record set a benchmark we now require from all our subcontractors."</p>
+      <div class="tm-quote__author">
+        <div class="tm-quote__avatar">
+          <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=120&h=120&fit=crop&crop=face" alt="Mohammed Al-Harbi">
+        </div>
+        <p class="tm-quote__name">Mohammed Al-Harbi</p>
+        <p class="tm-quote__role">Project Director &middot; NEOM Infrastructure</p>
+      </div>
+    </div>
+  </section>
 
   <div class="cta-band">
     <h2 class="cta-band__title">Partner with <span>NOVA Terra</span></h2>
