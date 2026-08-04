@@ -556,7 +556,7 @@
 			font-weight: 400;
 			letter-spacing: 0.08em;
 			padding: 13px 40px;
-			border-radius: 5rem;
+			border-radius: 12px;
 			background: linear-gradient(135deg, #B67C2A 0%, #CA953D 50%, #E5B85A 100%);
 			color: #fff;
 			border: none;
@@ -713,7 +713,7 @@
 			padding: 14px 28px;
 			background: linear-gradient(135deg, #B67C2A 0%, #CA953D 50%, #E5B85A 100%);
 			color: #fff;
-			border-radius: 5rem;
+			border-radius: 12px;
 			font-size: 14px;
 			font-weight: 500;
 			text-decoration: none;
@@ -1087,8 +1087,26 @@
 			.feat-card { width: auto; }
 		}
 		@media (max-width: 700px) {
-			.feat-cards__grid { grid-template-columns: repeat(2, 1fr); }
-			.feat-card { min-height: 420px; }
+			.feat-cards { padding-left: 0; padding-right: 0; }
+			.feat-cards__heading { padding: 0 20px; }
+			.feat-cards__grid {
+				display: flex;
+				overflow-x: auto;
+				scroll-snap-type: x mandatory;
+				-webkit-overflow-scrolling: touch;
+				gap: 12px;
+				padding: 0 20px 20px;
+				scrollbar-width: none;
+				grid-template-columns: unset;
+				justify-content: unset;
+			}
+			.feat-cards__grid::-webkit-scrollbar { display: none; }
+			.feat-card {
+				flex: 0 0 calc(100vw / 1.3);
+				width: calc(100vw / 1.3);
+				min-height: 420px;
+				scroll-snap-align: start;
+			}
 		}
 
 		/* ════════════════════════════════════════════
@@ -1845,7 +1863,7 @@
 		padding: 16px 36px;
 		background: #fff;
 		border: none;
-		border-radius: 100px;
+		border-radius: 12px;
 		font-family: 'Inter', sans-serif;
 		font-size: 15px;
 		font-weight: 600;
@@ -1975,6 +1993,29 @@
 		border-color: rgba(255,255,255,0.18) !important;
 	}
 	.globe-btn:not(.solid):hover { background: rgba(255,255,255,0.12) !important; }
+
+	/* ── Mobile fixes ── */
+	@media (max-width: 768px) {
+		/* Header: compact action buttons */
+		.header__actions { gap: 6px; }
+		.header__hamburger-btn.btn { height: 40px !important; padding: 0 14px !important; font-size: 12px !important; min-width: unset !important; }
+		.header__btn.btn { height: 40px !important; font-size: 12px !important; padding: 0 14px !important; white-space: nowrap; overflow: hidden; }
+		.header__btn .text-hover__inner { height: 40px; display: flex; align-items: center; }
+		.header__lang-heading.btn { height: 40px !important; width: 56px !important; font-size: 12px !important; }
+
+		/* CTA2 card: center align */
+		.cta2-card { text-align: center; padding-left: 24px; padding-right: 24px; border-radius: 16px; }
+		.cta2-card__title { font-size: clamp(26px, 7vw, 36px); }
+		.cta2-card__sub { font-size: 14px; }
+		.cta2-card__btn { margin: 0 auto; }
+
+		/* Footer canvas: scale down so it fits */
+		.footer-canvas-wrap { height: clamp(120px, 32vw, 180px); overflow: hidden; }
+
+		/* Footer bottom bar: center everything */
+		.footer-bottom-bar { flex-direction: column; align-items: center; text-align: center; gap: 8px; }
+		.footer-bottom-bar__legal { justify-content: center; }
+	}
 	</style>
 </head>
 
