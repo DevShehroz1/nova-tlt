@@ -129,7 +129,7 @@
     /* ── Buttons ── */
     .gold-btn {
       display: inline-flex; align-items: center; gap: 8px;
-      padding: 16px 40px; border-radius: 100px;
+      padding: 16px 40px; border-radius: 5rem;
       background: linear-gradient(135deg, #B67C2A 0%, #CA953D 50%, #E5B85A 100%);
       font-family: BebasNeuePro, sans-serif; font-size: 20px;
       letter-spacing: 0.04em; color: #fff; text-decoration: none;
@@ -140,7 +140,7 @@
     .gold-btn:hover { filter: brightness(1.1); }
     .ghost-btn {
       display: inline-flex; align-items: center; gap: 8px;
-      padding: 15px 36px; border-radius: 100px;
+      padding: 15px 36px; border-radius: 5rem;
       border: 1px solid rgba(255,255,255,0.18);
       font-family: BebasNeuePro, sans-serif; font-size: 20px;
       letter-spacing: 0.04em; color: var(--ink); text-decoration: none;
@@ -348,109 +348,6 @@
     }
     @media (max-width: 560px) { .fleet-nav { grid-template-columns: 1fr; } }
 
-    /* ── Calculator ── */
-    .calc-grid {
-      display: grid;
-      grid-template-columns: 380px 1fr;
-      gap: 20px;
-      margin-top: 48px;
-      align-items: stretch;
-    }
-    @media (max-width: 960px) { .calc-grid { grid-template-columns: 1fr; } }
-
-    .calc-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 20px;
-      padding: clamp(28px,3.5vw,44px);
-    }
-    .calc-left-card { display: flex; flex-direction: column; }
-    .calc-card__hl {
-      font-family: BebasNeuePro, sans-serif;
-      font-size: clamp(28px,3vw,44px); line-height: 1;
-      letter-spacing: 0.02em; color: #fff; margin-bottom: 10px;
-    }
-    .calc-card__hl span {
-      background: var(--gold-grad); -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent; background-clip: text;
-    }
-    .calc-card__desc {
-      font-family: 'Inter', sans-serif; font-size: 13px;
-      color: var(--ink-dim); line-height: 1.6; margin-bottom: 28px;
-    }
-    .slider-group { margin-bottom: 22px; }
-    .slider-label {
-      display: flex; justify-content: space-between; align-items: baseline;
-      font-family: 'Inter', sans-serif; font-size: 12px;
-      color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.08em;
-      margin-bottom: 10px;
-    }
-    .slider-val { color: #CA953D; font-weight: 700; font-size: 14px; text-transform: none; letter-spacing: 0; }
-    input[type="range"] {
-      -webkit-appearance: none; width: 100%; height: 3px;
-      background: rgba(255,255,255,0.1); border-radius: 2px; outline: none; cursor: pointer;
-    }
-    input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%;
-      background: linear-gradient(135deg, #B67C2A 0%, #CA953D 50%, #E5B85A 100%);
-      cursor: pointer; box-shadow: 0 0 8px rgba(202,149,61,0.5);
-    }
-    input[type="range"]::-moz-range-thumb {
-      width: 18px; height: 18px; border-radius: 50%; border: none;
-      background: linear-gradient(135deg, #B67C2A 0%, #CA953D 50%, #E5B85A 100%);
-      cursor: pointer;
-    }
-    .calc-metrics {
-      display: grid; grid-template-columns: 1fr 1fr 1fr;
-      gap: 0; border-top: 1px solid rgba(255,255,255,0.08);
-      margin-top: auto; padding-top: 24px;
-    }
-    .calc-metrics__cell { padding: 0 12px 0 0; }
-    .calc-metrics__cell:first-child { padding-left: 0; }
-    .calc-metrics__cell + .calc-metrics__cell {
-      border-left: 1px solid rgba(255,255,255,0.07); padding-left: 12px; padding-right: 12px;
-    }
-    .calc-metrics__cell:last-child { padding-right: 0; }
-    .calc-metrics__lbl {
-      font-family: 'Inter', sans-serif; font-size: 9px; font-weight: 700;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: rgba(255,255,255,0.3); margin-bottom: 6px;
-    }
-    .calc-metrics__num {
-      font-family: BebasNeuePro, sans-serif; font-size: clamp(16px,1.8vw,22px);
-      letter-spacing: 0.02em; color: #fff; line-height: 1;
-    }
-    .calc-metrics__num.is-gold {
-      background: var(--gold-grad); -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent; background-clip: text;
-    }
-
-    .calc-chart-card { display: flex; flex-direction: column; gap: 0; }
-    .calc-chart-top {
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 12px; margin-bottom: 16px;
-    }
-    .calc-chart-title {
-      font-family: BebasNeuePro, sans-serif; font-size: clamp(16px,1.8vw,24px);
-      letter-spacing: 0.03em; color: var(--ink);
-    }
-    .calc-legend { display: flex; gap: 20px; }
-    .calc-legend__item {
-      display: flex; align-items: center; gap: 8px;
-      font-family: 'Inter', sans-serif; font-size: 11px; color: var(--ink-dim);
-    }
-    .calc-legend__swatch { width: 28px; height: 10px; border-radius: 2px; flex-shrink: 0; }
-    #calc-canvas { width: 100%; flex: 1; min-height: 240px; display: block; }
-    .calc-cta-row {
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 12px; padding-top: 20px;
-      border-top: 1px solid rgba(255,255,255,0.06);
-    }
-    .calc-disclaimer {
-      font-family: 'Inter', sans-serif; font-size: 11px;
-      color: rgba(255,255,255,0.25); max-width: 340px; line-height: 1.5;
-    }
-
     /* ── Maintenance section ── */
     .maint-sec { background: #080808; }
     .maint-grid {
@@ -485,46 +382,6 @@
     .maint-text { font-family: 'Inter', sans-serif; font-size: 13.5px; color: var(--ink-dim); line-height: 1.65; }
 
     /* ── CTA rings ── */
-    .cta2-sec {
-      position: relative; overflow: hidden;
-      background: #0a0a0a; padding: clamp(80px,10vw,140px) clamp(20px,5vw,80px);
-    }
-    .cta2-sec__rings {
-      position: absolute; right: -120px; top: 50%; transform: translateY(-50%);
-      width: 600px; height: 600px; pointer-events: none;
-    }
-    .cta2-sec__ring {
-      position: absolute; border-radius: 50%;
-      border: 1px solid rgba(202,149,61,0.12);
-      top: 50%; left: 50%; transform: translate(-50%,-50%);
-    }
-    .cta2-sec__ring:nth-child(1) { width: 200px; height: 200px; animation: spinRing 18s linear infinite; }
-    .cta2-sec__ring:nth-child(2) { width: 340px; height: 340px; animation: spinRing 26s linear infinite reverse; border-color: rgba(202,149,61,0.08); }
-    .cta2-sec__ring:nth-child(3) { width: 480px; height: 480px; animation: spinRing 36s linear infinite; border-color: rgba(202,149,61,0.05); }
-    .cta2-sec__ring:nth-child(4) { width: 600px; height: 600px; border-color: rgba(202,149,61,0.03); }
-    @keyframes spinRing { to { transform: translate(-50%,-50%) rotate(360deg); } }
-    .cta2-sec__card {
-      position: relative; z-index: 2; max-width: 680px;
-      background: linear-gradient(135deg, rgba(182,124,42,0.18) 0%, rgba(202,149,61,0.08) 100%);
-      border: 1px solid rgba(202,149,61,0.25); border-radius: 24px;
-      padding: clamp(40px,5vw,64px) clamp(32px,4vw,56px);
-    }
-    .cta2-sec__eyebrow {
-      font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700;
-      letter-spacing: 0.18em; text-transform: uppercase; color: #CA953D; margin-bottom: 20px;
-      display: flex; align-items: center; gap: 10px;
-    }
-    .cta2-sec__eyebrow::before { content: ''; width: 20px; height: 1.5px; background: var(--gold-grad); }
-    .cta2-sec__title {
-      font-family: BebasNeuePro, sans-serif; font-size: clamp(36px,4.5vw,68px);
-      letter-spacing: 0.03em; color: #fff; line-height: 0.95; margin-bottom: 18px;
-    }
-    .cta2-sec__sub {
-      font-family: 'Inter', sans-serif; font-size: 15px; color: var(--ink-dim);
-      line-height: 1.65; margin-bottom: 36px; max-width: 460px;
-    }
-    .cta2-sec__btns { display: flex; gap: 16px; flex-wrap: wrap; }
-
     /* ── Footer ── */
     .site-footer { background: #0f0f0f; overflow: hidden; position: relative; }
     .site-footer__top {
@@ -580,21 +437,6 @@
       text-decoration: none; transition: color 160ms ease;
     }
     .footer-bottom-bar__legal a:hover { color: rgba(255,255,255,0.55); }
-
-    /* ── Rental options ── */
-    .rental-opt { display: flex; align-items: flex-start; gap: 14px; padding: 18px 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.02); transition: border-color 0.3s, background 0.3s; }
-    .rental-opt:hover { border-color: rgba(202,149,61,0.25); background: rgba(202,149,61,0.04); }
-    .rental-opt__title { font-family: BebasNeuePro, sans-serif; font-size: 18px; letter-spacing: 0.04em; color: #fff; line-height: 1; margin-bottom: 4px; }
-    .rental-opt__sub { font-family: 'Inter', sans-serif; font-size: 13px; color: var(--ink-dim); line-height: 1.5; }
-    @media (max-width: 768px) { div[style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; } }
-
-    /* ── Specs table ── */
-    .specs-table { width: 100%; border-collapse: collapse; font-family: 'Inter', sans-serif; font-size: 13px; min-width: 540px; }
-    .specs-table th { text-align: left; padding: 12px 16px; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.3); border-bottom: 1px solid rgba(255,255,255,0.08); }
-    .specs-table td { padding: 14px 16px; color: var(--ink-dim); border-bottom: 1px solid rgba(255,255,255,0.05); }
-    .specs-table td:first-child { font-family: BebasNeuePro, sans-serif; font-size: 17px; letter-spacing: 0.04em; color: #fff; }
-    .specs-table tbody tr:hover td { background: rgba(202,149,61,0.04); }
-    .specs-table tbody tr:last-child td { border-bottom: none; }
 
     /* ── Feature-5: Fleet Intelligence ── */
     .feat5-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px,6vw,100px); align-items: center; }
@@ -682,6 +524,48 @@
     .sr-d3 { transition-delay: 0.3s; }
     .sr-d4 { transition-delay: 0.4s; }
     .sr-d5 { transition-delay: 0.5s; }
+
+    /* ── Gold CTA Banner ── */
+    .gcta-sec { background: #090909; padding: clamp(48px,7vw,100px) clamp(20px,5vw,80px); }
+    .gcta-wrap { max-width: 1200px; margin: 0 auto; }
+    .gcta-card {
+      position: relative; overflow: hidden;
+      background: linear-gradient(135deg, #B67C2A 0%, #CA953D 50%, #E5B85A 100%);
+      border-radius: 24px; padding: clamp(56px,7vw,96px) clamp(32px,5vw,64px);
+      text-align: center;
+    }
+    .gcta-deco { position: absolute; inset: 0; pointer-events: none; }
+    .gcta-deco__dot {
+      position: absolute; width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,0.35);
+    }
+    .gcta-deco__dot:nth-child(1) { top: 18%; left: 8%; }
+    .gcta-deco__dot:nth-child(2) { top: 60%; right: 6%; }
+    .gcta-deco__dot:nth-child(3) { bottom: 22%; left: 20%; }
+    .gcta-deco__line {
+      position: absolute; background: rgba(255,255,255,0.25);
+    }
+    .gcta-deco__line--1 { top: 24%; left: 12%; width: 22px; height: 1.5px; }
+    .gcta-deco__line--2 { bottom: 28%; right: 10%; width: 18px; height: 1.5px; }
+    .gcta-deco__arc { position: absolute; bottom: -60px; left: 50%; transform: translateX(-50%); width: 300px; height: 300px; }
+    .gcta-deco__arc--sm { bottom: -40px; left: 60%; width: 200px; height: 200px; }
+    .gcta-title {
+      position: relative; font-family: BebasNeuePro, sans-serif;
+      font-size: clamp(30px,4.5vw,56px); font-weight: 700; letter-spacing: 0.02em;
+      color: #fff; line-height: 1.1; margin: 0 0 20px;
+    }
+    .gcta-sub {
+      position: relative; font-family: Inter, sans-serif;
+      font-size: clamp(14px,1.6vw,17px); line-height: 1.65;
+      color: rgba(255,255,255,0.82); max-width: 560px; margin: 0 auto 36px;
+    }
+    .gcta-btn {
+      position: relative; display: inline-flex; align-items: center;
+      background: #fff; color: #1a1000;
+      font-family: Inter, sans-serif; font-size: 15px; font-weight: 600;
+      padding: 16px 44px; border-radius: 5rem; text-decoration: none;
+      transition: opacity 0.2s ease, transform 0.15s ease;
+    }
+    .gcta-btn:hover { opacity: 0.9; transform: translateY(-1px); }
 
     @media (max-width: 768px) {
       .site-footer__top { flex-direction: column; }
@@ -1098,99 +982,6 @@
     </div>
   </section>
 
-  <!-- RENTAL OPTIONS -->
-  <div style="background:#080808; border-top:1px solid rgba(255,255,255,0.06);">
-    <div class="section-pad" style="max-width:1400px;margin:0 auto;">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,100px);align-items:start;">
-        <div class="sr">
-          <p class="eyebrow">Rental Options</p>
-          <h2 class="display-title" style="font-size:clamp(36px,4.5vw,68px);">Flexible.<br><span>On Your Terms.</span></h2>
-          <p class="body-text" style="margin-top:20px;">Every contract is built around your project — not the other way around. Choose the duration, operator preference, and fuel package that fits your operation.</p>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:12px;padding-top:8px;">
-          <div class="rental-opt sr sr-d1"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" style="flex-shrink:0;margin-top:2px;"><path d="M3 9l4.5 4.5 7.5-9" stroke="#CA953D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><div><p class="rental-opt__title">Short-Term</p><p class="rental-opt__sub">Daily / Weekly hire for spot needs and project peaks</p></div></div>
-          <div class="rental-opt sr sr-d2"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" style="flex-shrink:0;margin-top:2px;"><path d="M3 9l4.5 4.5 7.5-9" stroke="#CA953D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><div><p class="rental-opt__title">Long-Term</p><p class="rental-opt__sub">Monthly / Annual contracts with priority fleet access</p></div></div>
-          <div class="rental-opt sr sr-d3"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" style="flex-shrink:0;margin-top:2px;"><path d="M3 9l4.5 4.5 7.5-9" stroke="#CA953D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><div><p class="rental-opt__title">Project-Based Contracts</p><p class="rental-opt__sub">Scoped to your project timeline — start to handover</p></div></div>
-          <div class="rental-opt sr sr-d4"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" style="flex-shrink:0;margin-top:2px;"><path d="M3 9l4.5 4.5 7.5-9" stroke="#CA953D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><div><p class="rental-opt__title">With / Without Operator</p><p class="rental-opt__sub">Certified operators available for all fleet categories</p></div></div>
-          <div class="rental-opt sr sr-d5"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" style="flex-shrink:0;margin-top:2px;"><path d="M3 9l4.5 4.5 7.5-9" stroke="#CA953D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><div><p class="rental-opt__title">Fuel-Inclusive Packages</p><p class="rental-opt__sub">All-in pricing — fuel, maintenance, and insurance covered</p></div></div>
-        </div>
-      </div>
-      <div class="sr" style="margin-top:clamp(48px,6vw,80px);">
-        <p style="font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:20px;">Fleet Specs — Sample Vehicles</p>
-        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
-          <table class="specs-table">
-            <thead><tr><th>Model</th><th>Payload</th><th>Fuel</th><th>Terrain</th><th>Rental Option</th></tr></thead>
-            <tbody>
-              <tr><td>Volvo FMX 8×4</td><td>35 tons</td><td>Diesel</td><td>On / Off-road</td><td>Daily / Monthly</td></tr>
-              <tr><td>CAT 730 ADT</td><td>30 tons</td><td>Diesel</td><td>Off-road</td><td>Monthly / Project-based</td></tr>
-              <tr><td>Man TGS 6×4</td><td>20 tons</td><td>Diesel</td><td>On-road</td><td>Daily / Weekly</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- COST CALCULATOR -->
-  <div style="background:#080808; border-top:1px solid rgba(255,255,255,0.06);">
-    <section class="section-pad" style="max-width:1400px;margin:0 auto;">
-      <p class="eyebrow sr">Cost Calculator</p>
-      <h2 class="display-title sr sr-d1">See Your <span>Savings</span></h2>
-      <p class="body-text sr sr-d2" style="max-width:560px;margin-top:16px;margin-bottom:0;">Drag the sliders — see exactly how much you save by renting from NOVA Terra instead of owning.</p>
-
-      <div class="calc-grid">
-        <!-- Sliders card -->
-        <div class="calc-card calc-left-card sr sr-d1">
-          <h3 class="calc-card__hl">Stop Paying for <span>Idle Fleet.</span></h3>
-          <p class="calc-card__desc">Fixed ownership costs 100% regardless of utilisation. NOVA Terra's model bills only for productive days.</p>
-          <div class="slider-group">
-            <div class="slider-label"><span>Number of Trucks</span><span class="slider-val" id="val-trucks">10</span></div>
-            <input type="range" id="sl-trucks" min="1" max="50" value="10" />
-          </div>
-          <div class="slider-group">
-            <div class="slider-label"><span>Contract Duration</span><span class="slider-val" id="val-months">6 months</span></div>
-            <input type="range" id="sl-months" min="1" max="24" value="6" />
-          </div>
-          <div class="slider-group">
-            <div class="slider-label"><span>Fleet Utilisation</span><span class="slider-val" id="val-util">70%</span></div>
-            <input type="range" id="sl-util" min="40" max="100" step="5" value="70" />
-          </div>
-          <!-- Comparison metrics -->
-          <div class="calc-metrics">
-            <div class="calc-metrics__cell">
-              <p class="calc-metrics__lbl">Fixed Cost</p>
-              <p class="calc-metrics__num" id="out-fixed">SAR 0</p>
-            </div>
-            <div class="calc-metrics__cell">
-              <p class="calc-metrics__lbl">NOVA TLT</p>
-              <p class="calc-metrics__num" id="out-nova">SAR 0</p>
-            </div>
-            <div class="calc-metrics__cell">
-              <p class="calc-metrics__lbl">You Save (<span id="out-pct">0</span>%)</p>
-              <p class="calc-metrics__num is-gold" id="out-savings">SAR 0</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Chart card -->
-        <div class="calc-card calc-chart-card sr sr-d2">
-          <div class="calc-chart-top">
-            <p class="calc-chart-title">Monthly Cost — Fixed vs. NOVA TLT</p>
-            <div class="calc-legend">
-              <div class="calc-legend__item"><span class="calc-legend__swatch" style="background:rgba(255,255,255,0.18);"></span>Fixed</div>
-              <div class="calc-legend__item"><span class="calc-legend__swatch" style="background:linear-gradient(90deg,#B67C2A,#E5B85A);"></span>NOVA TLT</div>
-            </div>
-          </div>
-          <canvas id="calc-canvas"></canvas>
-          <div class="calc-cta-row">
-            <p class="calc-disclaimer">*Illustrative estimates based on typical KSA fleet rates. Actual savings vary by project scope.</p>
-            <a href="contact.html" class="gold-btn">Get a Formal Quote</a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-
   <!-- MAINTENANCE STANDARDS -->
   <section class="maint-sec">
     <div class="section-pad" style="max-width:1400px;margin:0 auto;">
@@ -1586,23 +1377,20 @@
     </div>
   </section>
 
-  <!-- CTA — rotating rings -->
-  <section class="cta2-sec">
-    <div class="cta2-sec__rings">
-      <div class="cta2-sec__ring"></div>
-      <div class="cta2-sec__ring"></div>
-      <div class="cta2-sec__ring"></div>
-      <div class="cta2-sec__ring"></div>
-    </div>
-    <div class="section-pad" style="max-width:1400px;margin:0 auto;position:relative;z-index:2;">
-      <div class="cta2-sec__card">
-        <p class="cta2-sec__eyebrow">Ready to Deploy</p>
-        <h2 class="cta2-sec__title">Let's Match<br>Your Fleet</h2>
-        <p class="cta2-sec__sub">Tell us your project scope and we'll match you with the right fleet configuration — with or without certified operators — across all 12 KSA regions.</p>
-        <div class="cta2-sec__btns">
-          <a href="contact.html" class="gold-btn">Request Fleet Quote</a>
-          <a href="services.html" class="ghost-btn">View Services</a>
+  <!-- Gold CTA Banner -->
+  <section class="gcta-sec">
+    <div class="gcta-wrap">
+      <div class="gcta-card">
+        <div class="gcta-deco" aria-hidden="true">
+          <span class="gcta-deco__dot"></span><span class="gcta-deco__dot"></span><span class="gcta-deco__dot"></span>
+          <span class="gcta-deco__line gcta-deco__line--1"></span>
+          <span class="gcta-deco__line gcta-deco__line--2"></span>
+          <svg class="gcta-deco__arc" viewBox="0 0 300 300" fill="none"><circle cx="150" cy="300" r="240" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></svg>
+          <svg class="gcta-deco__arc gcta-deco__arc--sm" viewBox="0 0 200 200" fill="none"><circle cx="100" cy="200" r="160" stroke="rgba(255,255,255,0.08)" stroke-width="1"/></svg>
         </div>
+        <h2 class="gcta-title">Move Your Fleet Forward,<br>On Time Every Time</h2>
+        <p class="gcta-sub">With a fleet of modern heavy vehicles and experienced operators, we offer transport solutions that keep your projects running on schedule across Saudi Arabia.</p>
+        <a href="contact.html" class="gcta-btn">Get a Quote</a>
       </div>
     </div>
   </section>
@@ -1713,133 +1501,6 @@
     requestAnimationFrame(loop);
   }
   loop();
-})();
-</script>
-
-<!-- Cost Calculator JS -->
-<script>
-(function(){
-  var FIXED_RATE = 2000;
-  var NOVA_RATE  = 1600;
-  var DAYS_PER_MONTH = 22;
-
-  function calcCosts(trucks, months, util) {
-    var fixedPerMonth = trucks * FIXED_RATE * DAYS_PER_MONTH;
-    var novaPerMonth  = trucks * (util/100) * NOVA_RATE * DAYS_PER_MONTH;
-    var fixedTotal = fixedPerMonth * months;
-    var novaTotal  = novaPerMonth  * months;
-    var savings    = fixedTotal - novaTotal;
-    var savingsPct = Math.round(savings / fixedTotal * 100);
-    return { fixedPerMonth: fixedPerMonth, novaPerMonth: novaPerMonth, fixedTotal: fixedTotal, novaTotal: novaTotal, savings: savings, savingsPct: savingsPct };
-  }
-
-  function formatSAR(n) {
-    return 'SAR ' + Math.round(n).toLocaleString();
-  }
-
-  var slTrucks  = document.getElementById('sl-trucks');
-  var slMonths  = document.getElementById('sl-months');
-  var slUtil    = document.getElementById('sl-util');
-  var valTrucks = document.getElementById('val-trucks');
-  var valMonths = document.getElementById('val-months');
-  var valUtil   = document.getElementById('val-util');
-  var outFixed  = document.getElementById('out-fixed');
-  var outNova   = document.getElementById('out-nova');
-  var outSav    = document.getElementById('out-savings');
-  var outPct    = document.getElementById('out-pct');
-  var canvas    = document.getElementById('calc-canvas');
-
-  function drawChart(trucks, months, util) {
-    if (!canvas) return;
-    var ctx = canvas.getContext('2d');
-    var dpr = window.devicePixelRatio || 1;
-    var W = canvas.parentElement.clientWidth;
-    var H = Math.max(canvas.parentElement.clientHeight, 260);
-    canvas.width  = Math.round(W * dpr);
-    canvas.height = Math.round(H * dpr);
-    canvas.style.width  = W + 'px';
-    canvas.style.height = H + 'px';
-    ctx.setTransform(1,0,0,1,0,0);
-    ctx.scale(dpr, dpr);
-    ctx.clearRect(0, 0, W, H);
-
-    var fixedPM = trucks * FIXED_RATE * DAYS_PER_MONTH;
-    var novaPM  = trucks * (util/100) * NOVA_RATE * DAYS_PER_MONTH;
-    var maxVal  = fixedPM * 1.15;
-
-    var maxBars = Math.min(months, window.innerWidth <= 600 ? 6 : 12);
-    var padL = 64, padR = 16, padT = 16, padB = 32;
-    var chartW = W - padL - padR;
-    var chartH = H - padT - padB;
-
-    var gridSteps = 5;
-    ctx.font = '10px Inter, sans-serif';
-    ctx.textBaseline = 'middle';
-    for (var g = 0; g <= gridSteps; g++) {
-      var gy = padT + chartH - (g / gridSteps) * chartH;
-      ctx.strokeStyle = 'rgba(255,255,255,0.06)';
-      ctx.lineWidth = 1;
-      ctx.beginPath(); ctx.moveTo(padL, gy); ctx.lineTo(padL + chartW, gy); ctx.stroke();
-      var sarVal = (maxVal * g / gridSteps);
-      var label = sarVal >= 1000000 ? (sarVal/1000000).toFixed(1)+'M' : sarVal >= 1000 ? Math.round(sarVal/1000)+'K' : Math.round(sarVal)+'';
-      ctx.fillStyle = 'rgba(255,255,255,0.28)';
-      ctx.textAlign = 'right';
-      ctx.fillText(label, padL - 6, gy);
-    }
-
-    var pairW = chartW / maxBars;
-    var barW  = Math.max(4, Math.min(20, pairW * 0.32));
-    var gap   = Math.max(2, pairW * 0.06);
-    var pairOffset = (pairW - barW*2 - gap) / 2;
-
-    for (var i = 0; i < maxBars; i++) {
-      var bx = padL + i * pairW + pairOffset;
-      var fixedH = (fixedPM / maxVal) * chartH;
-      var novaH  = (novaPM  / maxVal) * chartH;
-
-      ctx.fillStyle = 'rgba(255,255,255,0.15)';
-      ctx.beginPath();
-      ctx.roundRect(bx, padT + chartH - fixedH, barW, fixedH, [3,3,0,0]);
-      ctx.fill();
-
-      var grad = ctx.createLinearGradient(0, padT + chartH - novaH, 0, padT + chartH);
-      grad.addColorStop(0, '#E5B85A');
-      grad.addColorStop(0.5, '#CA953D');
-      grad.addColorStop(1, '#B67C2A');
-      ctx.fillStyle = grad;
-      ctx.beginPath();
-      ctx.roundRect(bx + barW + gap, padT + chartH - novaH, barW, novaH, [3,3,0,0]);
-      ctx.fill();
-
-      ctx.fillStyle = 'rgba(255,255,255,0.3)';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'top';
-      ctx.fillText('Mo.'+(i+1), bx + barW + gap/2, padT + chartH + 6);
-    }
-  }
-
-  function update() {
-    var trucks = parseInt(slTrucks.value, 10);
-    var months = parseInt(slMonths.value, 10);
-    var util   = parseInt(slUtil.value, 10);
-    valTrucks.textContent = trucks;
-    valMonths.textContent = months + ' month' + (months === 1 ? '' : 's');
-    valUtil.textContent   = util + '%';
-    var c = calcCosts(trucks, months, util);
-    if (outFixed) outFixed.textContent = formatSAR(c.fixedTotal);
-    if (outNova)  outNova.textContent  = formatSAR(c.novaTotal);
-    outSav.textContent = formatSAR(c.savings);
-    outPct.textContent = c.savingsPct;
-    drawChart(trucks, months, util);
-  }
-
-  if (slTrucks && slMonths && slUtil) {
-    slTrucks.addEventListener('input', update);
-    slMonths.addEventListener('input', update);
-    slUtil.addEventListener('input', update);
-    update();
-    window.addEventListener('resize', update);
-  }
 })();
 </script>
 
