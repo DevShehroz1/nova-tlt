@@ -573,6 +573,21 @@
     }
     .footer-bottom-bar__legal a:hover { color: rgba(255,255,255,0.55); }
 
+    /* ── Rental options ── */
+    .rental-opt { display: flex; align-items: flex-start; gap: 14px; padding: 18px 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.02); transition: border-color 0.3s, background 0.3s; }
+    .rental-opt:hover { border-color: rgba(202,149,61,0.25); background: rgba(202,149,61,0.04); }
+    .rental-opt__title { font-family: BebasNeuePro, sans-serif; font-size: 18px; letter-spacing: 0.04em; color: #fff; line-height: 1; margin-bottom: 4px; }
+    .rental-opt__sub { font-family: 'Inter', sans-serif; font-size: 13px; color: var(--ink-dim); line-height: 1.5; }
+    @media (max-width: 768px) { div[style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; } }
+
+    /* ── Specs table ── */
+    .specs-table { width: 100%; border-collapse: collapse; font-family: 'Inter', sans-serif; font-size: 13px; min-width: 540px; }
+    .specs-table th { text-align: left; padding: 12px 16px; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.3); border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .specs-table td { padding: 14px 16px; color: var(--ink-dim); border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .specs-table td:first-child { font-family: BebasNeuePro, sans-serif; font-size: 17px; letter-spacing: 0.04em; color: #fff; }
+    .specs-table tbody tr:hover td { background: rgba(202,149,61,0.04); }
+    .specs-table tbody tr:last-child td { border-bottom: none; }
+
     /* ── Scroll reveal ── */
     .sr { opacity: 0; transform: translateY(32px); transition: opacity 0.7s cubic-bezier(0.23,1,0.32,1), transform 0.7s cubic-bezier(0.23,1,0.32,1); }
     .sr.is-visible { opacity: 1; transform: translateY(0); }
@@ -675,7 +690,7 @@
     <div class="page-fullhero__content">
       <p class="page-fullhero__eyebrow">Our Fleet</p>
       <h1 class="page-fullhero__title">Modern Trucks. Zero Downtime.</h1>
-      <p class="page-fullhero__desc">150+ heavy vehicles across 4 categories — maintained to the highest standard and available with or without certified operators across all 12 KSA regions.</p>
+      <p class="page-fullhero__desc">NOVA Terra maintains a modern, well-maintained fleet built for the harshest job-site conditions — from desert terrain to urban construction sites. Available with or without certified operators.</p>
       <a href="contact.html" class="gold-btn">Request Fleet Quote</a>
     </div>
     <div class="hero-scroll-hint">
@@ -757,31 +772,31 @@
           <!-- Panel 0 -->
           <div class="fleet-panel__pane is-active" data-fleet="0">
             <h2 class="fleet-panel__title">Standard<br>Dump Trucks</h2>
-            <p class="fleet-panel__desc">Workhorse fleet for urban construction, road projects, and general earthmoving across paved and graded terrain. The backbone of most KSA civil works contracts.</p>
+            <p class="fleet-panel__desc">General construction, aggregate, and sand hauling across paved and graded terrain. The backbone of most KSA civil works contracts.</p>
             <div class="fleet-specs-grid">
               <div class="fleet-spec-cell">
-                <p class="fleet-spec-cell__key">Payload Capacity</p>
-                <p class="fleet-spec-cell__val is-gold">10 – 20 t</p>
+                <p class="fleet-spec-cell__key">Models</p>
+                <p class="fleet-spec-cell__val is-gold" style="font-size:clamp(16px,1.5vw,22px);">MB Actros, Man TGS</p>
               </div>
               <div class="fleet-spec-cell">
-                <p class="fleet-spec-cell__key">Body Volume</p>
-                <p class="fleet-spec-cell__val">8 – 15 m³</p>
+                <p class="fleet-spec-cell__key">Payload Capacity</p>
+                <p class="fleet-spec-cell__val">15 – 25 t</p>
+              </div>
+              <div class="fleet-spec-cell">
+                <p class="fleet-spec-cell__key">Fuel Type</p>
+                <p class="fleet-spec-cell__val">Diesel</p>
               </div>
               <div class="fleet-spec-cell">
                 <p class="fleet-spec-cell__key">Drive Config</p>
                 <p class="fleet-spec-cell__val">6×4 / 6×6</p>
               </div>
               <div class="fleet-spec-cell">
-                <p class="fleet-spec-cell__key">Engine Output</p>
-                <p class="fleet-spec-cell__val">350 – 450 hp</p>
-              </div>
-              <div class="fleet-spec-cell">
-                <p class="fleet-spec-cell__key">Fleet Size</p>
-                <p class="fleet-spec-cell__val is-gold">60 units</p>
-              </div>
-              <div class="fleet-spec-cell">
                 <p class="fleet-spec-cell__key">Terrain</p>
-                <p class="fleet-spec-cell__val">Paved / Graded</p>
+                <p class="fleet-spec-cell__val">On-Road</p>
+              </div>
+              <div class="fleet-spec-cell">
+                <p class="fleet-spec-cell__key">Rental</p>
+                <p class="fleet-spec-cell__val">Daily / Weekly</p>
               </div>
             </div>
             <a href="contact.html" class="fleet-panel__cta">
@@ -794,32 +809,32 @@
 
           <!-- Panel 1 -->
           <div class="fleet-panel__pane" data-fleet="1">
-            <h2 class="fleet-panel__title">Heavy-Duty<br>Haulers</h2>
-            <p class="fleet-panel__desc">High-payload rigid trucks for quarry operations, mass excavation, and large-scale infrastructure development. Built for relentless daily cycles on demanding terrain.</p>
+            <h2 class="fleet-panel__title">Heavy-Duty<br>Dump Trucks</h2>
+            <p class="fleet-panel__desc">Mining, quarry, and bulk earthmoving — high-payload rigid trucks built for relentless daily cycles on the most demanding KSA terrain.</p>
             <div class="fleet-specs-grid">
               <div class="fleet-spec-cell">
-                <p class="fleet-spec-cell__key">Payload Capacity</p>
-                <p class="fleet-spec-cell__val is-gold">25 – 40 t</p>
+                <p class="fleet-spec-cell__key">Models</p>
+                <p class="fleet-spec-cell__val is-gold" style="font-size:clamp(16px,1.5vw,22px);">Volvo FMX, Scania XT</p>
               </div>
               <div class="fleet-spec-cell">
-                <p class="fleet-spec-cell__key">Body Volume</p>
-                <p class="fleet-spec-cell__val">18 – 30 m³</p>
+                <p class="fleet-spec-cell__key">Payload Capacity</p>
+                <p class="fleet-spec-cell__val">30 – 45 t</p>
+              </div>
+              <div class="fleet-spec-cell">
+                <p class="fleet-spec-cell__key">Fuel Type</p>
+                <p class="fleet-spec-cell__val">Diesel</p>
               </div>
               <div class="fleet-spec-cell">
                 <p class="fleet-spec-cell__key">Drive Config</p>
                 <p class="fleet-spec-cell__val">8×4</p>
               </div>
               <div class="fleet-spec-cell">
-                <p class="fleet-spec-cell__key">Engine Output</p>
-                <p class="fleet-spec-cell__val">500 – 600 hp</p>
+                <p class="fleet-spec-cell__key">Terrain</p>
+                <p class="fleet-spec-cell__val">On / Off-Road</p>
               </div>
               <div class="fleet-spec-cell">
-                <p class="fleet-spec-cell__key">Fleet Size</p>
-                <p class="fleet-spec-cell__val is-gold">45 units</p>
-              </div>
-              <div class="fleet-spec-cell">
-                <p class="fleet-spec-cell__key">Best For</p>
-                <p class="fleet-spec-cell__val">Quarry / Mass Exc.</p>
+                <p class="fleet-spec-cell__key">Rental</p>
+                <p class="fleet-spec-cell__val">Daily / Monthly</p>
               </div>
             </div>
             <a href="contact.html" class="fleet-panel__cta">
@@ -833,31 +848,31 @@
           <!-- Panel 2 -->
           <div class="fleet-panel__pane" data-fleet="2">
             <h2 class="fleet-panel__title">Articulated<br>ADTs</h2>
-            <p class="fleet-panel__desc">Articulated dump trucks engineered for rough, off-road terrain — ideal for giga projects, NEOM sites, and remote desert operations where rigid trucks cannot operate.</p>
+            <p class="fleet-panel__desc">Off-road, uneven terrain, and wet ground conditions — articulated dump trucks engineered for NEOM, giga projects, and remote desert sites where rigid trucks cannot operate.</p>
             <div class="fleet-specs-grid">
               <div class="fleet-spec-cell">
-                <p class="fleet-spec-cell__key">Payload Capacity</p>
-                <p class="fleet-spec-cell__val is-gold">30 – 60 t</p>
+                <p class="fleet-spec-cell__key">Models</p>
+                <p class="fleet-spec-cell__val is-gold" style="font-size:clamp(16px,1.5vw,22px);">CAT 730, Komatsu HM300</p>
               </div>
               <div class="fleet-spec-cell">
-                <p class="fleet-spec-cell__key">Body Volume</p>
-                <p class="fleet-spec-cell__val">20 – 42 m³</p>
+                <p class="fleet-spec-cell__key">Payload Capacity</p>
+                <p class="fleet-spec-cell__val">28 – 32 t</p>
+              </div>
+              <div class="fleet-spec-cell">
+                <p class="fleet-spec-cell__key">Fuel Type</p>
+                <p class="fleet-spec-cell__val">Diesel</p>
               </div>
               <div class="fleet-spec-cell">
                 <p class="fleet-spec-cell__key">Drive Config</p>
                 <p class="fleet-spec-cell__val">6×6 AWD</p>
               </div>
               <div class="fleet-spec-cell">
-                <p class="fleet-spec-cell__key">Engine Output</p>
-                <p class="fleet-spec-cell__val">520 – 700 hp</p>
-              </div>
-              <div class="fleet-spec-cell">
-                <p class="fleet-spec-cell__key">Fleet Size</p>
-                <p class="fleet-spec-cell__val is-gold">30 units</p>
-              </div>
-              <div class="fleet-spec-cell">
                 <p class="fleet-spec-cell__key">Terrain</p>
-                <p class="fleet-spec-cell__val">Off-Road / Desert</p>
+                <p class="fleet-spec-cell__val">Off-Road</p>
+              </div>
+              <div class="fleet-spec-cell">
+                <p class="fleet-spec-cell__key">Rental</p>
+                <p class="fleet-spec-cell__val">Monthly / Project</p>
               </div>
             </div>
             <a href="contact.html" class="fleet-panel__cta">
@@ -870,32 +885,32 @@
 
           <!-- Panel 3 -->
           <div class="fleet-panel__pane" data-fleet="3">
-            <h2 class="fleet-panel__title">Tipper<br>Semi-Trailers</h2>
-            <p class="fleet-panel__desc">Long-haul tipper configurations for inter-regional bulk material transport — aggregate, sand, asphalt, and construction fill across KSA's major highway corridors.</p>
+            <h2 class="fleet-panel__title">Tipper &amp;<br>Semi-Trailers</h2>
+            <p class="fleet-panel__desc">Long-haul bulk transport and infrastructure projects — high-capacity tipper units covering KSA's major highway corridors with aggregate, sand, and asphalt loads.</p>
             <div class="fleet-specs-grid">
               <div class="fleet-spec-cell">
+                <p class="fleet-spec-cell__key">Configuration</p>
+                <p class="fleet-spec-cell__val is-gold" style="font-size:clamp(16px,1.5vw,22px);">6×4 Tractor Unit</p>
+              </div>
+              <div class="fleet-spec-cell">
                 <p class="fleet-spec-cell__key">Payload Capacity</p>
-                <p class="fleet-spec-cell__val is-gold">35 – 50 t</p>
+                <p class="fleet-spec-cell__val">40 – 60 t</p>
               </div>
               <div class="fleet-spec-cell">
-                <p class="fleet-spec-cell__key">Body Volume</p>
-                <p class="fleet-spec-cell__val">28 – 45 m³</p>
+                <p class="fleet-spec-cell__key">Fuel Type</p>
+                <p class="fleet-spec-cell__val">Diesel</p>
               </div>
               <div class="fleet-spec-cell">
-                <p class="fleet-spec-cell__key">Drive Config</p>
-                <p class="fleet-spec-cell__val">6×4 Tractor</p>
+                <p class="fleet-spec-cell__key">Use Case</p>
+                <p class="fleet-spec-cell__val">Infra Projects</p>
               </div>
               <div class="fleet-spec-cell">
-                <p class="fleet-spec-cell__key">Engine Output</p>
-                <p class="fleet-spec-cell__val">480 – 560 hp</p>
+                <p class="fleet-spec-cell__key">Terrain</p>
+                <p class="fleet-spec-cell__val">On-Road / Highway</p>
               </div>
               <div class="fleet-spec-cell">
-                <p class="fleet-spec-cell__key">Fleet Size</p>
-                <p class="fleet-spec-cell__val is-gold">15 units</p>
-              </div>
-              <div class="fleet-spec-cell">
-                <p class="fleet-spec-cell__key">Best For</p>
-                <p class="fleet-spec-cell__val">Long-Haul Bulk</p>
+                <p class="fleet-spec-cell__key">Rental</p>
+                <p class="fleet-spec-cell__val">Project-Based</p>
               </div>
             </div>
             <a href="contact.html" class="fleet-panel__cta">
@@ -909,6 +924,39 @@
       </div>
     </div>
   </section>
+
+  <!-- RENTAL OPTIONS -->
+  <div style="background:#080808; border-top:1px solid rgba(255,255,255,0.06);">
+    <div class="section-pad" style="max-width:1400px;margin:0 auto;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,100px);align-items:start;">
+        <div class="sr">
+          <p class="eyebrow">Rental Options</p>
+          <h2 class="display-title" style="font-size:clamp(36px,4.5vw,68px);">Flexible.<br><span>On Your Terms.</span></h2>
+          <p class="body-text" style="margin-top:20px;">Every contract is built around your project — not the other way around. Choose the duration, operator preference, and fuel package that fits your operation.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;padding-top:8px;">
+          <div class="rental-opt sr sr-d1"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" style="flex-shrink:0;margin-top:2px;"><path d="M3 9l4.5 4.5 7.5-9" stroke="#CA953D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><div><p class="rental-opt__title">Short-Term</p><p class="rental-opt__sub">Daily / Weekly hire for spot needs and project peaks</p></div></div>
+          <div class="rental-opt sr sr-d2"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" style="flex-shrink:0;margin-top:2px;"><path d="M3 9l4.5 4.5 7.5-9" stroke="#CA953D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><div><p class="rental-opt__title">Long-Term</p><p class="rental-opt__sub">Monthly / Annual contracts with priority fleet access</p></div></div>
+          <div class="rental-opt sr sr-d3"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" style="flex-shrink:0;margin-top:2px;"><path d="M3 9l4.5 4.5 7.5-9" stroke="#CA953D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><div><p class="rental-opt__title">Project-Based Contracts</p><p class="rental-opt__sub">Scoped to your project timeline — start to handover</p></div></div>
+          <div class="rental-opt sr sr-d4"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" style="flex-shrink:0;margin-top:2px;"><path d="M3 9l4.5 4.5 7.5-9" stroke="#CA953D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><div><p class="rental-opt__title">With / Without Operator</p><p class="rental-opt__sub">Certified operators available for all fleet categories</p></div></div>
+          <div class="rental-opt sr sr-d5"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" style="flex-shrink:0;margin-top:2px;"><path d="M3 9l4.5 4.5 7.5-9" stroke="#CA953D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><div><p class="rental-opt__title">Fuel-Inclusive Packages</p><p class="rental-opt__sub">All-in pricing — fuel, maintenance, and insurance covered</p></div></div>
+        </div>
+      </div>
+      <div class="sr" style="margin-top:clamp(48px,6vw,80px);">
+        <p style="font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:20px;">Fleet Specs — Sample Vehicles</p>
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+          <table class="specs-table">
+            <thead><tr><th>Model</th><th>Payload</th><th>Fuel</th><th>Terrain</th><th>Rental Option</th></tr></thead>
+            <tbody>
+              <tr><td>Volvo FMX 8×4</td><td>35 tons</td><td>Diesel</td><td>On / Off-road</td><td>Daily / Monthly</td></tr>
+              <tr><td>CAT 730 ADT</td><td>30 tons</td><td>Diesel</td><td>Off-road</td><td>Monthly / Project-based</td></tr>
+              <tr><td>Man TGS 6×4</td><td>20 tons</td><td>Diesel</td><td>On-road</td><td>Daily / Weekly</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- COST CALCULATOR -->
   <div style="background:#0a0a0a;">
