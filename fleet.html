@@ -328,31 +328,61 @@
       .fleet-row__num { display: none; }
     }
 
-    /* Calculator */
+    /* ── Calculator redesign ── */
     .calc-wrap {
-      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 24px; overflow: hidden; margin-top: 40px;
+      border-radius: 5rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      overflow: hidden;
+      margin-top: 48px;
     }
     .calc-inner {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+      display: grid;
+      grid-template-columns: 38% 1fr;
+      min-height: 520px;
     }
-    @media (max-width: 860px) { .calc-inner { grid-template-columns: 1fr; } }
-    .calc-controls { padding: 36px; border-right: 1px solid rgba(255,255,255,0.06); }
-    @media (max-width: 860px) { .calc-controls { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); } }
-    .calc-results { padding: 36px; }
-    .calc-title {
-      font-family: BebasNeuePro, sans-serif; font-size: 28px; letter-spacing: 0.04em;
-      color: var(--ink); margin-bottom: 6px;
+    @media (max-width: 900px) {
+      .calc-wrap { border-radius: 24px; }
+      .calc-inner { grid-template-columns: 1fr; }
     }
-    .calc-sub { font-family: 'Inter', sans-serif; font-size: 13px; color: var(--ink-dim); margin-bottom: 28px; }
-    .slider-group { margin-bottom: 28px; }
+    /* Left panel */
+    .calc-left {
+      padding: clamp(36px,4vw,56px);
+      border-right: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    @media (max-width: 900px) { .calc-left { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); } }
+    .calc-left__headline {
+      font-family: BebasNeuePro, sans-serif;
+      font-size: clamp(32px,3.5vw,52px);
+      line-height: 1;
+      letter-spacing: 0.02em;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+    .calc-left__headline span {
+      background: var(--gold-grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .calc-left__desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: var(--ink-dim);
+      line-height: 1.65;
+      margin-bottom: 36px;
+    }
+    .slider-group { margin-bottom: 26px; }
     .slider-label {
       display: flex; justify-content: space-between; align-items: baseline;
       font-family: 'Inter', sans-serif; font-size: 13px; color: var(--ink-dim); margin-bottom: 10px;
     }
     .slider-val { color: #CA953D; font-weight: 700; font-size: 15px; }
     input[type="range"] {
-      -webkit-appearance: none; width: 100%; height: 4px;
+      -webkit-appearance: none; width: 100%; height: 3px;
       background: rgba(255,255,255,0.1); border-radius: 2px; outline: none; cursor: pointer;
     }
     input[type="range"]::-webkit-slider-thumb {
@@ -365,19 +395,91 @@
       background: linear-gradient(135deg, #B67C2A 0%, #CA953D 50%, #E5B85A 100%);
       cursor: pointer;
     }
-    .calc-results-title {
-      font-family: BebasNeuePro, sans-serif; font-size: 22px; letter-spacing: 0.04em;
-      color: var(--ink); margin-bottom: 20px;
+    /* Right panel */
+    .calc-right {
+      padding: clamp(32px,4vw,48px);
+      display: flex;
+      flex-direction: column;
+      gap: 0;
     }
-    .calc-metric { margin-bottom: 18px; }
-    .calc-metric__label { font-family: 'Inter', sans-serif; font-size: 12px; color: var(--ink-dim); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
-    .calc-metric__val { font-family: BebasNeuePro, sans-serif; font-size: 28px; letter-spacing: 0.03em; color: var(--ink); }
-    .calc-metric__val.is-gold {
-      background: var(--gold-grad); -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent; background-clip: text;
+    .calc-chart-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 12px;
     }
-    .calc-divider { height: 1px; background: rgba(255,255,255,0.06); margin: 20px 0; }
-    #calc-canvas { width: 100%; height: 180px; display: block; margin-top: 20px; border-radius: 10px; }
+    .calc-chart-title {
+      font-family: BebasNeuePro, sans-serif;
+      font-size: clamp(18px,2vw,28px);
+      letter-spacing: 0.03em;
+      color: var(--ink);
+    }
+    .calc-savings-badge {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 2px;
+    }
+    .calc-savings-badge__label {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      color: var(--ink-dim);
+      letter-spacing: 0.05em;
+    }
+    .calc-savings-badge__num {
+      font-family: BebasNeuePro, sans-serif;
+      font-size: clamp(24px,3vw,40px);
+      letter-spacing: 0.02em;
+      background: var(--gold-grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+    .calc-legend {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 16px;
+    }
+    .calc-legend__item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      color: var(--ink-dim);
+    }
+    .calc-legend__swatch {
+      width: 28px;
+      height: 10px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    #calc-canvas {
+      width: 100%;
+      flex: 1;
+      min-height: 260px;
+      display: block;
+    }
+    .calc-cta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .calc-disclaimer {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      color: rgba(255,255,255,0.25);
+      max-width: 380px;
+      line-height: 1.5;
+    }
 
     /* Footer */
     .site-footer { background: #0f0f0f; overflow: hidden; position: relative; }
@@ -498,7 +600,6 @@
         </button>
         <div class="nav-drop__panel" role="menu">
           <a href="about.html" class="nav-drop__link" role="menuitem">About Us</a>
-          <a href="safety.html" class="nav-drop__link" role="menuitem">Safety &amp; Quality</a>
           <a href="careers.html" class="nav-drop__link" role="menuitem">Careers</a>
         </div>
       </div>
@@ -642,13 +743,15 @@
   <section class="section-inner" style="padding-top:0;">
     <p class="section-eyebrow">Cost Calculator</p>
     <h2 class="section-title">See Your Savings</h2>
-    <p class="section-sub">Compare your current fixed ownership cost against NOVA Terra's flexible rental model. Adjust the sliders to match your project requirements.</p>
+    <p class="section-sub">Compare fixed ownership against NOVA Terra's flexible rental. Drag the sliders to match your project.</p>
 
     <div class="calc-wrap">
       <div class="calc-inner">
-        <div class="calc-controls">
-          <h3 class="calc-title">Project Parameters</h3>
-          <p class="calc-sub">Drag the sliders to model your fleet needs.</p>
+
+        <!-- Left: controls -->
+        <div class="calc-left">
+          <h3 class="calc-left__headline">Stop Paying for <span>Idle Fleet.</span></h3>
+          <p class="calc-left__desc">Fixed truck ownership forces you to pay 100% of costs even when utilisation drops. Compare the real numbers against NOVA Terra's flexible model.</p>
 
           <div class="slider-group">
             <div class="slider-label">
@@ -660,10 +763,10 @@
 
           <div class="slider-group">
             <div class="slider-label">
-              <span>Contract Duration (months)</span>
-              <span class="slider-val" id="val-months">6</span>
+              <span>Contract Duration</span>
+              <span class="slider-val" id="val-months">6 months</span>
             </div>
-            <input type="range" id="sl-months" min="1" max="36" value="6" />
+            <input type="range" id="sl-months" min="1" max="24" value="6" />
           </div>
 
           <div class="slider-group">
@@ -673,49 +776,34 @@
             </div>
             <input type="range" id="sl-util" min="40" max="100" step="5" value="70" />
           </div>
+        </div>
 
+        <!-- Right: chart -->
+        <div class="calc-right">
+          <div class="calc-chart-header">
+            <div>
+              <p class="calc-chart-title">Fixed vs. NOVA TLT Monthly Cost</p>
+            </div>
+            <div class="calc-savings-badge">
+              <span class="calc-savings-badge__label">Estimated Savings (<span id="out-pct">44</span>%)</span>
+              <span class="calc-savings-badge__num" id="out-savings">SAR 1,161,600</span>
+            </div>
+          </div>
+          <div class="calc-legend">
+            <div class="calc-legend__item">
+              <span class="calc-legend__swatch" style="background:rgba(255,255,255,0.2);"></span> Fixed Cost
+            </div>
+            <div class="calc-legend__item">
+              <span class="calc-legend__swatch" style="background:linear-gradient(90deg,#B67C2A,#E5B85A);"></span> NOVA TLT Cost
+            </div>
+          </div>
           <canvas id="calc-canvas"></canvas>
-          <div style="display:flex;gap:20px;margin-top:12px;">
-            <div style="display:flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:11px;color:var(--ink-dim);">
-              <span style="width:12px;height:12px;background:rgba(255,255,255,0.2);border-radius:2px;display:inline-block;"></span> Fixed Cost
-            </div>
-            <div style="display:flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:11px;color:var(--ink-dim);">
-              <span style="width:12px;height:12px;background:#CA953D;border-radius:2px;display:inline-block;"></span> NOVA TLT Cost
-            </div>
+          <div class="calc-cta-row">
+            <p class="calc-disclaimer">*Estimates are illustrative and based on typical KSA fleet rates. Actual savings vary by project scope and contract terms.</p>
+            <a href="contact.html" class="gold-btn">Get a Formal Quote</a>
           </div>
         </div>
-        <div class="calc-results">
-          <h3 class="calc-results-title">Cost Breakdown</h3>
 
-          <div class="calc-metric">
-            <div class="calc-metric__label">Fixed Cost / Month</div>
-            <div class="calc-metric__val" id="out-fixed-pm">SAR 440,000</div>
-          </div>
-          <div class="calc-metric">
-            <div class="calc-metric__label">NOVA TLT Cost / Month</div>
-            <div class="calc-metric__val" id="out-nova-pm">SAR 246,400</div>
-          </div>
-          <div class="calc-divider"></div>
-          <div class="calc-metric">
-            <div class="calc-metric__label">Total Fixed Cost</div>
-            <div class="calc-metric__val" id="out-fixed-total">SAR 2,640,000</div>
-          </div>
-          <div class="calc-metric">
-            <div class="calc-metric__label">Total NOVA TLT Cost</div>
-            <div class="calc-metric__val" id="out-nova-total">SAR 1,478,400</div>
-          </div>
-          <div class="calc-divider"></div>
-          <div class="calc-metric">
-            <div class="calc-metric__label">Estimated Total Savings</div>
-            <div class="calc-metric__val is-gold" id="out-savings">SAR 1,161,600</div>
-          </div>
-          <div class="calc-metric">
-            <div class="calc-metric__label">Savings Percentage</div>
-            <div class="calc-metric__val is-gold" id="out-pct">44%</div>
-          </div>
-          <div class="calc-divider"></div>
-          <a href="contact.html" class="gold-btn" style="margin-top:8px;">Get a Formal Quote</a>
-        </div>
       </div>
     </div>
   </section>
@@ -791,7 +879,6 @@
         <p class="footer-links-col__title">Company</p>
         <ul class="footer-links-col__list">
           <li><a href="about.html" class="footer-links-col__link">About Us <span class="footer-link-arrow"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5h6M4.5 1.5l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
-          <li><a href="safety.html" class="footer-links-col__link">Safety &amp; Quality <span class="footer-link-arrow"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5h6M4.5 1.5l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
           <li><a href="projects.html" class="footer-links-col__link">Projects <span class="footer-link-arrow"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5h6M4.5 1.5l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
           <li><a href="careers.html" class="footer-links-col__link">Careers <span class="footer-link-arrow"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5h6M4.5 1.5l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
           <li><a href="news.html" class="footer-links-col__link">News <span class="footer-link-arrow"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5h6M4.5 1.5l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
@@ -902,16 +989,12 @@
     return 'SAR ' + Math.round(n).toLocaleString();
   }
 
-  var slTrucks = document.getElementById('sl-trucks');
-  var slMonths = document.getElementById('sl-months');
-  var slUtil   = document.getElementById('sl-util');
+  var slTrucks  = document.getElementById('sl-trucks');
+  var slMonths  = document.getElementById('sl-months');
+  var slUtil    = document.getElementById('sl-util');
   var valTrucks = document.getElementById('val-trucks');
   var valMonths = document.getElementById('val-months');
   var valUtil   = document.getElementById('val-util');
-  var outFpm    = document.getElementById('out-fixed-pm');
-  var outNpm    = document.getElementById('out-nova-pm');
-  var outFt     = document.getElementById('out-fixed-total');
-  var outNt     = document.getElementById('out-nova-total');
   var outSav    = document.getElementById('out-savings');
   var outPct    = document.getElementById('out-pct');
   var canvas    = document.getElementById('calc-canvas');
@@ -921,52 +1004,72 @@
     var ctx = canvas.getContext('2d');
     var dpr = window.devicePixelRatio || 1;
     var W = canvas.parentElement.clientWidth;
-    var H = 180;
-    canvas.width = Math.round(W * dpr);
+    var H = Math.max(canvas.parentElement.clientHeight, 260);
+    canvas.width  = Math.round(W * dpr);
     canvas.height = Math.round(H * dpr);
-    canvas.style.width = W + 'px';
+    canvas.style.width  = W + 'px';
     canvas.style.height = H + 'px';
     ctx.setTransform(1,0,0,1,0,0);
     ctx.scale(dpr, dpr);
     ctx.clearRect(0, 0, W, H);
 
-    var maxBars = window.innerWidth <= 600 ? 6 : months;
-    var barPairs = Math.min(months, maxBars);
-    var padL = 10, padR = 10, padT = 10, padB = 20;
-    var pairW = (W - padL - padR) / barPairs;
-    var barW  = Math.max(4, pairW * 0.3);
-    var gap   = pairW * 0.05;
-
     var fixedPM = trucks * FIXED_RATE * DAYS_PER_MONTH;
     var novaPM  = trucks * (util/100) * NOVA_RATE * DAYS_PER_MONTH;
-    var maxVal  = fixedPM * 1.1;
-    var availH  = H - padT - padB;
+    var maxVal  = fixedPM * 1.15;
 
-    for (var i = 0; i < barPairs; i++) {
-      var x = padL + i * pairW + (pairW - barW*2 - gap) / 2;
-      var fixedH = (fixedPM / maxVal) * availH;
-      var novaH  = (novaPM  / maxVal) * availH;
+    var maxBars = Math.min(months, window.innerWidth <= 600 ? 6 : 12);
+    var padL = 64, padR = 16, padT = 16, padB = 32;
+    var chartW = W - padL - padR;
+    var chartH = H - padT - padB;
 
-      ctx.fillStyle = 'rgba(255,255,255,0.18)';
+    // Grid lines + y-axis labels
+    var gridSteps = 5;
+    ctx.font = '10px Inter, sans-serif';
+    ctx.textBaseline = 'middle';
+    for (var g = 0; g <= gridSteps; g++) {
+      var gy = padT + chartH - (g / gridSteps) * chartH;
+      ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+      ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(padL, gy); ctx.lineTo(padL + chartW, gy); ctx.stroke();
+      var sarVal = (maxVal * g / gridSteps);
+      var label = sarVal >= 1000000 ? (sarVal/1000000).toFixed(1)+'M' : sarVal >= 1000 ? Math.round(sarVal/1000)+'K' : Math.round(sarVal)+'';
+      ctx.fillStyle = 'rgba(255,255,255,0.28)';
+      ctx.textAlign = 'right';
+      ctx.fillText(label, padL - 6, gy);
+    }
+
+    // Bars
+    var pairW = chartW / maxBars;
+    var barW  = Math.max(4, Math.min(20, pairW * 0.32));
+    var gap   = Math.max(2, pairW * 0.06);
+    var pairOffset = (pairW - barW*2 - gap) / 2;
+
+    for (var i = 0; i < maxBars; i++) {
+      var bx = padL + i * pairW + pairOffset;
+      var fixedH = (fixedPM / maxVal) * chartH;
+      var novaH  = (novaPM  / maxVal) * chartH;
+
+      // Fixed bar
+      ctx.fillStyle = 'rgba(255,255,255,0.15)';
       ctx.beginPath();
-      ctx.roundRect(x, padT + availH - fixedH, barW, fixedH, [3, 3, 0, 0]);
+      ctx.roundRect(bx, padT + chartH - fixedH, barW, fixedH, [3,3,0,0]);
       ctx.fill();
 
-      var grad = ctx.createLinearGradient(0, padT + availH - novaH, 0, padT + availH);
+      // NOVA bar
+      var grad = ctx.createLinearGradient(0, padT + chartH - novaH, 0, padT + chartH);
       grad.addColorStop(0, '#E5B85A');
       grad.addColorStop(0.5, '#CA953D');
       grad.addColorStop(1, '#B67C2A');
       ctx.fillStyle = grad;
       ctx.beginPath();
-      ctx.roundRect(x + barW + gap, padT + availH - novaH, barW, novaH, [3, 3, 0, 0]);
+      ctx.roundRect(bx + barW + gap, padT + chartH - novaH, barW, novaH, [3,3,0,0]);
       ctx.fill();
 
-      if (i === 0 || (i + 1) % Math.ceil(barPairs / 4) === 0) {
-        ctx.fillStyle = 'rgba(255,255,255,0.3)';
-        ctx.font = '10px Inter, sans-serif';
-        ctx.textAlign = 'center';
-        ctx.fillText('M' + (i + 1), x + barW + gap / 2, H - 4);
-      }
+      // X label
+      ctx.fillStyle = 'rgba(255,255,255,0.3)';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'top';
+      ctx.fillText('Mo.'+(i+1), bx + barW + gap/2, padT + chartH + 6);
     }
   }
 
@@ -975,15 +1078,11 @@
     var months = parseInt(slMonths.value, 10);
     var util   = parseInt(slUtil.value, 10);
     valTrucks.textContent = trucks;
-    valMonths.textContent = months;
+    valMonths.textContent = months + ' month' + (months === 1 ? '' : 's');
     valUtil.textContent   = util + '%';
     var c = calcCosts(trucks, months, util);
-    outFpm.textContent = formatSAR(c.fixedPerMonth);
-    outNpm.textContent = formatSAR(c.novaPerMonth);
-    outFt.textContent  = formatSAR(c.fixedTotal);
-    outNt.textContent  = formatSAR(c.novaTotal);
     outSav.textContent = formatSAR(c.savings);
-    outPct.textContent = c.savingsPct + '%';
+    outPct.textContent = c.savingsPct;
     drawChart(trucks, months, util);
   }
 
