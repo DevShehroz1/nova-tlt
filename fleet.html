@@ -282,16 +282,18 @@
     .fleet-nav__item:hover .fleet-nav__name { color: #fff; }
 
     /* Right panel */
-    .fleet-panel { position: relative; padding-left: clamp(32px,4vw,64px); overflow: hidden; }
+    .fleet-panel { padding-left: clamp(32px,4vw,64px); }
     .fleet-panel__pane {
-      position: absolute; inset: 0; padding: clamp(32px,4vw,56px) clamp(32px,4vw,64px);
-      opacity: 0; transform: translateY(24px);
-      transition: opacity 0.45s cubic-bezier(0.23,1,0.32,1), transform 0.45s cubic-bezier(0.23,1,0.32,1);
-      pointer-events: none;
+      display: none;
+      padding: clamp(32px,4vw,56px) clamp(32px,4vw,64px);
     }
     .fleet-panel__pane.is-active {
-      opacity: 1; transform: translateY(0); pointer-events: auto;
-      position: relative;
+      display: block;
+      animation: paneIn 0.45s cubic-bezier(0.23,1,0.32,1) forwards;
+    }
+    @keyframes paneIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
     .fleet-panel__title {
       font-family: BebasNeuePro, sans-serif; font-size: clamp(40px,5vw,80px);
@@ -342,53 +344,48 @@
     @media (max-width: 1024px) {
       .fleet-nav { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); padding-right: 0; padding-bottom: 0; display: grid; grid-template-columns: 1fr 1fr; }
       .fleet-panel { padding-left: 0; padding-top: 40px; }
-      .fleet-panel__pane { position: relative; padding: 0; }
-      .fleet-panel__pane:not(.is-active) { display: none; }
+      .fleet-panel__pane { padding: 0; }
     }
     @media (max-width: 560px) { .fleet-nav { grid-template-columns: 1fr; } }
 
     /* ── Calculator ── */
-    .calc-wrap {
-      border-radius: 5rem;
+    .calc-grid {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 20px;
+      margin-top: 48px;
+      align-items: stretch;
+    }
+    @media (max-width: 960px) { .calc-grid { grid-template-columns: 1fr; } }
+
+    .calc-card {
       background: rgba(255,255,255,0.03);
       border: 1px solid rgba(255,255,255,0.08);
-      overflow: hidden;
-      margin-top: 48px;
+      border-radius: 20px;
+      padding: clamp(28px,3.5vw,44px);
     }
-    .calc-inner {
-      display: grid;
-      grid-template-columns: 38% 1fr;
-      min-height: 520px;
-    }
-    @media (max-width: 900px) {
-      .calc-wrap { border-radius: 24px; }
-      .calc-inner { grid-template-columns: 1fr; }
-    }
-    .calc-left {
-      padding: clamp(36px,4vw,56px);
-      border-right: 1px solid rgba(255,255,255,0.06);
-      display: flex; flex-direction: column; gap: 0;
-    }
-    @media (max-width: 900px) { .calc-left { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); } }
-    .calc-left__headline {
+    .calc-left-card { display: flex; flex-direction: column; }
+    .calc-card__hl {
       font-family: BebasNeuePro, sans-serif;
-      font-size: clamp(32px,3.5vw,52px); line-height: 1;
-      letter-spacing: 0.02em; color: #fff; margin-bottom: 16px;
+      font-size: clamp(28px,3vw,44px); line-height: 1;
+      letter-spacing: 0.02em; color: #fff; margin-bottom: 10px;
     }
-    .calc-left__headline span {
+    .calc-card__hl span {
       background: var(--gold-grad); -webkit-background-clip: text;
       -webkit-text-fill-color: transparent; background-clip: text;
     }
-    .calc-left__desc {
+    .calc-card__desc {
       font-family: 'Inter', sans-serif; font-size: 13px;
-      color: var(--ink-dim); line-height: 1.65; margin-bottom: 36px;
+      color: var(--ink-dim); line-height: 1.6; margin-bottom: 28px;
     }
-    .slider-group { margin-bottom: 26px; }
+    .slider-group { margin-bottom: 22px; }
     .slider-label {
       display: flex; justify-content: space-between; align-items: baseline;
-      font-family: 'Inter', sans-serif; font-size: 13px; color: var(--ink-dim); margin-bottom: 10px;
+      font-family: 'Inter', sans-serif; font-size: 12px;
+      color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.08em;
+      margin-bottom: 10px;
     }
-    .slider-val { color: #CA953D; font-weight: 700; font-size: 15px; }
+    .slider-val { color: #CA953D; font-weight: 700; font-size: 14px; text-transform: none; letter-spacing: 0; }
     input[type="range"] {
       -webkit-appearance: none; width: 100%; height: 3px;
       background: rgba(255,255,255,0.1); border-radius: 2px; outline: none; cursor: pointer;
@@ -403,44 +400,55 @@
       background: linear-gradient(135deg, #B67C2A 0%, #CA953D 50%, #E5B85A 100%);
       cursor: pointer;
     }
-    .calc-right {
-      padding: clamp(32px,4vw,48px);
-      display: flex; flex-direction: column; gap: 0;
+    .calc-metrics {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 0; border-top: 1px solid rgba(255,255,255,0.08);
+      margin-top: auto; padding-top: 24px;
     }
-    .calc-chart-header {
-      display: flex; align-items: flex-start; justify-content: space-between;
-      margin-bottom: 20px; flex-wrap: wrap; gap: 12px;
+    .calc-metrics__cell { padding: 0 12px 0 0; }
+    .calc-metrics__cell:first-child { padding-left: 0; }
+    .calc-metrics__cell + .calc-metrics__cell {
+      border-left: 1px solid rgba(255,255,255,0.07); padding-left: 12px; padding-right: 12px;
+    }
+    .calc-metrics__cell:last-child { padding-right: 0; }
+    .calc-metrics__lbl {
+      font-family: 'Inter', sans-serif; font-size: 9px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(255,255,255,0.3); margin-bottom: 6px;
+    }
+    .calc-metrics__num {
+      font-family: BebasNeuePro, sans-serif; font-size: clamp(16px,1.8vw,22px);
+      letter-spacing: 0.02em; color: #fff; line-height: 1;
+    }
+    .calc-metrics__num.is-gold {
+      background: var(--gold-grad); -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+    .calc-chart-card { display: flex; flex-direction: column; gap: 0; }
+    .calc-chart-top {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px; margin-bottom: 16px;
     }
     .calc-chart-title {
-      font-family: BebasNeuePro, sans-serif; font-size: clamp(18px,2vw,28px);
+      font-family: BebasNeuePro, sans-serif; font-size: clamp(16px,1.8vw,24px);
       letter-spacing: 0.03em; color: var(--ink);
     }
-    .calc-savings-badge { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
-    .calc-savings-badge__label {
-      font-family: 'Inter', sans-serif; font-size: 11px;
-      color: var(--ink-dim); letter-spacing: 0.05em;
-    }
-    .calc-savings-badge__num {
-      font-family: BebasNeuePro, sans-serif; font-size: clamp(24px,3vw,40px);
-      letter-spacing: 0.02em;
-      background: var(--gold-grad); -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent; background-clip: text; line-height: 1;
-    }
-    .calc-legend { display: flex; gap: 20px; margin-bottom: 16px; }
+    .calc-legend { display: flex; gap: 20px; }
     .calc-legend__item {
       display: flex; align-items: center; gap: 8px;
       font-family: 'Inter', sans-serif; font-size: 11px; color: var(--ink-dim);
     }
     .calc-legend__swatch { width: 28px; height: 10px; border-radius: 2px; flex-shrink: 0; }
-    #calc-canvas { width: 100%; flex: 1; min-height: 260px; display: block; }
+    #calc-canvas { width: 100%; flex: 1; min-height: 240px; display: block; }
     .calc-cta-row {
       display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 12px; margin-top: 24px; padding-top: 20px;
+      flex-wrap: wrap; gap: 12px; padding-top: 20px;
       border-top: 1px solid rgba(255,255,255,0.06);
     }
     .calc-disclaimer {
       font-family: 'Inter', sans-serif; font-size: 11px;
-      color: rgba(255,255,255,0.25); max-width: 380px; line-height: 1.5;
+      color: rgba(255,255,255,0.25); max-width: 340px; line-height: 1.5;
     }
 
     /* ── Maintenance section ── */
@@ -959,47 +967,59 @@
   </div>
 
   <!-- COST CALCULATOR -->
-  <div style="background:#0a0a0a;">
+  <div style="background:#080808; border-top:1px solid rgba(255,255,255,0.06);">
     <section class="section-pad" style="max-width:1400px;margin:0 auto;">
       <p class="eyebrow sr">Cost Calculator</p>
       <h2 class="display-title sr sr-d1">See Your <span>Savings</span></h2>
-      <p class="body-text sr sr-d2" style="max-width:560px;margin-top:16px;margin-bottom:0;">Compare fixed ownership against NOVA Terra's flexible rental. Drag the sliders to match your project.</p>
+      <p class="body-text sr sr-d2" style="max-width:560px;margin-top:16px;margin-bottom:0;">Drag the sliders — see exactly how much you save by renting from NOVA Terra instead of owning.</p>
 
-      <div class="calc-wrap">
-        <div class="calc-inner">
-          <div class="calc-left">
-            <h3 class="calc-left__headline">Stop Paying for <span>Idle Fleet.</span></h3>
-            <p class="calc-left__desc">Fixed truck ownership forces you to pay 100% of costs even when utilisation drops. Compare the real numbers against NOVA Terra's flexible model.</p>
-            <div class="slider-group">
-              <div class="slider-label"><span>Number of Trucks</span><span class="slider-val" id="val-trucks">10</span></div>
-              <input type="range" id="sl-trucks" min="1" max="50" value="10" />
+      <div class="calc-grid">
+        <!-- Sliders card -->
+        <div class="calc-card calc-left-card sr sr-d1">
+          <h3 class="calc-card__hl">Stop Paying for <span>Idle Fleet.</span></h3>
+          <p class="calc-card__desc">Fixed ownership costs 100% regardless of utilisation. NOVA Terra's model bills only for productive days.</p>
+          <div class="slider-group">
+            <div class="slider-label"><span>Number of Trucks</span><span class="slider-val" id="val-trucks">10</span></div>
+            <input type="range" id="sl-trucks" min="1" max="50" value="10" />
+          </div>
+          <div class="slider-group">
+            <div class="slider-label"><span>Contract Duration</span><span class="slider-val" id="val-months">6 months</span></div>
+            <input type="range" id="sl-months" min="1" max="24" value="6" />
+          </div>
+          <div class="slider-group">
+            <div class="slider-label"><span>Fleet Utilisation</span><span class="slider-val" id="val-util">70%</span></div>
+            <input type="range" id="sl-util" min="40" max="100" step="5" value="70" />
+          </div>
+          <!-- Comparison metrics -->
+          <div class="calc-metrics">
+            <div class="calc-metrics__cell">
+              <p class="calc-metrics__lbl">Fixed Cost</p>
+              <p class="calc-metrics__num" id="out-fixed">SAR 0</p>
             </div>
-            <div class="slider-group">
-              <div class="slider-label"><span>Contract Duration</span><span class="slider-val" id="val-months">6 months</span></div>
-              <input type="range" id="sl-months" min="1" max="24" value="6" />
+            <div class="calc-metrics__cell">
+              <p class="calc-metrics__lbl">NOVA TLT</p>
+              <p class="calc-metrics__num" id="out-nova">SAR 0</p>
             </div>
-            <div class="slider-group">
-              <div class="slider-label"><span>Fleet Utilisation</span><span class="slider-val" id="val-util">70%</span></div>
-              <input type="range" id="sl-util" min="40" max="100" step="5" value="70" />
+            <div class="calc-metrics__cell">
+              <p class="calc-metrics__lbl">You Save (<span id="out-pct">0</span>%)</p>
+              <p class="calc-metrics__num is-gold" id="out-savings">SAR 0</p>
             </div>
           </div>
-          <div class="calc-right">
-            <div class="calc-chart-header">
-              <div><p class="calc-chart-title">Fixed vs. NOVA TLT Monthly Cost</p></div>
-              <div class="calc-savings-badge">
-                <span class="calc-savings-badge__label">Estimated Savings (<span id="out-pct">44</span>%)</span>
-                <span class="calc-savings-badge__num" id="out-savings">SAR 1,161,600</span>
-              </div>
-            </div>
+        </div>
+
+        <!-- Chart card -->
+        <div class="calc-card calc-chart-card sr sr-d2">
+          <div class="calc-chart-top">
+            <p class="calc-chart-title">Monthly Cost — Fixed vs. NOVA TLT</p>
             <div class="calc-legend">
-              <div class="calc-legend__item"><span class="calc-legend__swatch" style="background:rgba(255,255,255,0.2);"></span> Fixed Cost</div>
-              <div class="calc-legend__item"><span class="calc-legend__swatch" style="background:linear-gradient(90deg,#B67C2A,#E5B85A);"></span> NOVA TLT Cost</div>
+              <div class="calc-legend__item"><span class="calc-legend__swatch" style="background:rgba(255,255,255,0.18);"></span>Fixed</div>
+              <div class="calc-legend__item"><span class="calc-legend__swatch" style="background:linear-gradient(90deg,#B67C2A,#E5B85A);"></span>NOVA TLT</div>
             </div>
-            <canvas id="calc-canvas"></canvas>
-            <div class="calc-cta-row">
-              <p class="calc-disclaimer">*Estimates are illustrative and based on typical KSA fleet rates. Actual savings vary by project scope and contract terms.</p>
-              <a href="contact.html" class="gold-btn">Get a Formal Quote</a>
-            </div>
+          </div>
+          <canvas id="calc-canvas"></canvas>
+          <div class="calc-cta-row">
+            <p class="calc-disclaimer">*Illustrative estimates based on typical KSA fleet rates. Actual savings vary by project scope.</p>
+            <a href="contact.html" class="gold-btn">Get a Formal Quote</a>
           </div>
         </div>
       </div>
@@ -1229,6 +1249,8 @@
   var valTrucks = document.getElementById('val-trucks');
   var valMonths = document.getElementById('val-months');
   var valUtil   = document.getElementById('val-util');
+  var outFixed  = document.getElementById('out-fixed');
+  var outNova   = document.getElementById('out-nova');
   var outSav    = document.getElementById('out-savings');
   var outPct    = document.getElementById('out-pct');
   var canvas    = document.getElementById('calc-canvas');
@@ -1310,6 +1332,8 @@
     valMonths.textContent = months + ' month' + (months === 1 ? '' : 's');
     valUtil.textContent   = util + '%';
     var c = calcCosts(trucks, months, util);
+    if (outFixed) outFixed.textContent = formatSAR(c.fixedTotal);
+    if (outNova)  outNova.textContent  = formatSAR(c.novaTotal);
     outSav.textContent = formatSAR(c.savings);
     outPct.textContent = c.savingsPct;
     drawChart(trucks, months, util);
