@@ -687,6 +687,93 @@
       .site-footer__top { flex-direction: column; }
       .footer-bottom-bar { flex-direction: column; align-items: flex-start; }
     }
+
+    /* ── Bento-2 grid ── */
+    .bnt2-sec { background: #090909; border-top: 1px solid rgba(255,255,255,0.05); }
+    .bnt2-wrap {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; gap: 14px; align-items: stretch;
+    }
+    .bnt2-col { display: flex; flex-direction: column; gap: 14px; }
+    .bnt2-col--l { flex: 1.2; }
+    .bnt2-col--r { flex: 1; }
+
+    .bnt2-card {
+      background: #1c1c1c; border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.07);
+      overflow: hidden;
+    }
+
+    /* Card 1: tall, text top + visual bottom */
+    .bnt2-c1 { display: flex; flex-direction: column; padding: clamp(24px,3vw,36px); flex: 1; min-height: 240px; }
+    .bnt2-c1__vis { margin-top: auto; padding-top: 28px; }
+    .bnt2-transform-svg { width: 100%; max-width: 300px; display: block; margin: 0 auto; overflow: visible; }
+    @keyframes bnt2-dot-slide {
+      0%   { transform: translateX(0);    opacity: 0; }
+      8%   { opacity: 1; }
+      88%  { opacity: 1; }
+      100% { transform: translateX(108px); opacity: 0; }
+    }
+    .bnt2-dot {
+      animation: bnt2-dot-slide 2.4s ease-in-out infinite;
+      transform-origin: 66px 45px;
+      will-change: transform, opacity;
+    }
+
+    /* Card 2: short, side-by-side */
+    .bnt2-c2 { display: flex; gap: 20px; padding: clamp(22px,3vw,32px); align-items: center; }
+    .bnt2-c2__globe { display: flex; flex-direction: column; align-items: center; gap: 10px; flex-shrink: 0; }
+    .bnt2-globe-svg { width: 96px; height: 96px; }
+    .bnt2-globe-pill {
+      background: rgba(202,149,61,0.14); border: 1px solid rgba(202,149,61,0.32);
+      color: #CA953D; font-size: 11px; font-weight: 600; font-family: Inter, sans-serif;
+      padding: 4px 11px; border-radius: 20px; white-space: nowrap;
+      transition: opacity 0.28s ease;
+    }
+    .bnt2-globe-pill.bnt2-fade { opacity: 0; }
+    .bnt2-c2__text { flex: 1; }
+
+    /* Card 3: short, side-by-side */
+    .bnt2-c3 { display: flex; gap: 20px; padding: clamp(22px,3vw,32px); align-items: center; }
+    .bnt2-c3__graph { flex-shrink: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .bnt2-graph { display: flex; align-items: flex-end; gap: 7px; height: 84px; width: 96px; }
+    .bnt2-bar {
+      flex: 1; border-radius: 4px 4px 0 0; min-height: 10px;
+      background: #333; transition: background 0.35s ease;
+    }
+    .bnt2-bar--active { background: linear-gradient(180deg, #E5B85A 0%, #B67C2A 100%); }
+    .bnt2-graph-label { font-size: 10px; color: var(--ink-dim); font-family: Inter, sans-serif; }
+    .bnt2-c3__text { flex: 1; }
+
+    /* Card 4: tall, visual top + text bottom */
+    .bnt2-c4 { display: flex; flex-direction: column; align-items: center; padding: clamp(24px,3vw,36px); flex: 1; min-height: 240px; }
+    .bnt2-c4__vis { margin-bottom: 20px; }
+    .bnt2-tools-svg { width: 150px; height: 134px; overflow: visible; }
+    .bnt2-c4__text { text-align: center; }
+    @keyframes bnt2-orbit { to { transform: rotate(360deg); } }
+    .bnt2-orbit1 { transform-origin: 75px 67px; animation: bnt2-orbit 9s linear infinite; }
+    .bnt2-orbit2 { transform-origin: 75px 67px; animation: bnt2-orbit 9s linear infinite; animation-delay: -4.5s; }
+
+    /* Shared text */
+    .bnt2-eyebrow {
+      font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em;
+      color: #CA953D; font-family: Inter, sans-serif; font-weight: 600; margin: 0 0 12px;
+    }
+    .bnt2-card-title {
+      font-family: BebasNeuePro, sans-serif; font-weight: 700;
+      font-size: clamp(20px,2.5vw,26px); color: var(--ink); margin: 0 0 10px; line-height: 1.12;
+    }
+    .bnt2-card-title--sm { font-size: clamp(17px,2vw,21px); }
+    .bnt2-card-desc { font-family: Inter, sans-serif; font-size: 13.5px; line-height: 1.65; color: var(--ink-dim); margin: 0; }
+
+    @media (max-width: 860px) {
+      .bnt2-wrap { flex-direction: column; }
+    }
+    @media (max-width: 560px) {
+      .bnt2-c2, .bnt2-c3 { flex-direction: column; align-items: flex-start; }
+      .bnt2-c4 { align-items: flex-start; }
+      .bnt2-c4__text { text-align: left; }
+    }
   </style>
 </head>
 <body>
@@ -1376,6 +1463,129 @@
     </div>
   </section>
 
+  <!-- Bento-2: Fleet showcase grid -->
+  <section class="bnt2-sec section-pad">
+    <div class="bnt2-wrap">
+
+      <!-- LEFT COLUMN -->
+      <div class="bnt2-col bnt2-col--l">
+
+        <!-- Card 1: intro + route animation -->
+        <div class="bnt2-card bnt2-c1 sr">
+          <p class="bnt2-eyebrow">The NOVA Terra Fleet</p>
+          <h3 class="bnt2-card-title">A Fleet Built<br>for Saudi Arabia</h3>
+          <p class="bnt2-card-desc">150+ heavy vehicles operating across 12 KSA regions — purpose-built for earthmoving, bulk haulage, and large-scale construction projects of any scale.</p>
+          <div class="bnt2-c1__vis" aria-hidden="true">
+            <svg class="bnt2-transform-svg" viewBox="0 0 270 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <filter id="bnt2glow" x="-80%" y="-80%" width="260%" height="260%">
+                  <feGaussianBlur stdDeviation="3.5" result="b"/>
+                  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+              </defs>
+              <!-- Origin node -->
+              <circle cx="38" cy="45" r="28" fill="#262626"/>
+              <rect x="20" y="38" width="22" height="13" rx="2" fill="#404040"/>
+              <rect x="38" y="35" width="11" height="10" rx="1" fill="#363636"/>
+              <circle cx="25" cy="51" r="3" fill="#181818" stroke="#CA953D" stroke-width="1.5"/>
+              <circle cx="36" cy="51" r="3" fill="#181818" stroke="#CA953D" stroke-width="1.5"/>
+              <!-- Dashed road -->
+              <line x1="68" y1="45" x2="200" y2="45" stroke="#323232" stroke-width="1.5" stroke-dasharray="6 5"/>
+              <!-- Animated gold dot -->
+              <circle class="bnt2-dot" cx="66" cy="45" r="5.5" fill="#CA953D" filter="url(#bnt2glow)"/>
+              <!-- Destination node -->
+              <circle cx="232" cy="45" r="28" fill="#262626"/>
+              <path d="M232 26 C223 26 216 33 216 41 C216 50 232 66 232 66 C232 66 248 50 248 41 C248 33 241 26 232 26Z" fill="#363636"/>
+              <circle cx="232" cy="41" r="6" fill="#181818" stroke="#CA953D" stroke-width="1.5"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Card 2: globe + KSA coverage -->
+        <div class="bnt2-card bnt2-c2 sr sr-d1">
+          <div class="bnt2-c2__globe" aria-hidden="true">
+            <svg class="bnt2-globe-svg" viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="55" cy="55" r="46" stroke="#333" stroke-width="1.5"/>
+              <ellipse cx="55" cy="55" rx="46" ry="16" stroke="#2e2e2e" stroke-width="1"/>
+              <ellipse cx="55" cy="55" rx="46" ry="32" stroke="#2a2a2a" stroke-width="1"/>
+              <ellipse cx="55" cy="55" rx="17" ry="46" stroke="#2e2e2e" stroke-width="1"/>
+              <ellipse cx="55" cy="55" rx="33" ry="46" stroke="#2a2a2a" stroke-width="1"/>
+              <line x1="9" y1="55" x2="101" y2="55" stroke="#2e2e2e" stroke-width="1"/>
+              <line x1="55" y1="9" x2="55" y2="101" stroke="#2e2e2e" stroke-width="1"/>
+              <!-- KSA location pulse -->
+              <circle cx="66" cy="47" r="5" fill="#CA953D" opacity="0.85"/>
+              <circle cx="66" cy="47" r="10" fill="#CA953D" opacity="0.18"/>
+            </svg>
+            <div class="bnt2-globe-pill" id="bnt2-globe-label">127 Active Trucks</div>
+          </div>
+          <div class="bnt2-c2__text">
+            <h3 class="bnt2-card-title bnt2-card-title--sm">KSA-Wide Network</h3>
+            <p class="bnt2-card-desc">Every region. Every project scope. Our fleet serves all 12 administrative regions of Saudi Arabia with consistent service quality and guaranteed response times.</p>
+          </div>
+        </div>
+
+      </div><!-- /left col -->
+
+      <!-- RIGHT COLUMN -->
+      <div class="bnt2-col bnt2-col--r">
+
+        <!-- Card 3: graph + analytics -->
+        <div class="bnt2-card bnt2-c3 sr sr-d2">
+          <div class="bnt2-c3__graph" aria-hidden="true">
+            <div class="bnt2-graph">
+              <div class="bnt2-bar" style="height:52%"></div>
+              <div class="bnt2-bar" style="height:74%"></div>
+              <div class="bnt2-bar" style="height:63%"></div>
+              <div class="bnt2-bar" style="height:91%"></div>
+              <div class="bnt2-bar" style="height:78%"></div>
+            </div>
+            <p class="bnt2-graph-label">Monthly Dispatches</p>
+          </div>
+          <div class="bnt2-c3__text">
+            <h3 class="bnt2-card-title bnt2-card-title--sm">Fleet Analytics</h3>
+            <p class="bnt2-card-desc">Monthly dispatch volumes, utilisation trends, and delivery KPIs — tracked in real time across every vehicle in the fleet.</p>
+          </div>
+        </div>
+
+        <!-- Card 4: tools SVG + management copy -->
+        <div class="bnt2-card bnt2-c4 sr sr-d3">
+          <div class="bnt2-c4__vis" aria-hidden="true">
+            <svg class="bnt2-tools-svg" viewBox="0 0 150 134" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Orbit path -->
+              <circle cx="75" cy="67" r="52" stroke="#2e2e2e" stroke-width="1" stroke-dasharray="4 7"/>
+              <!-- Central node: truck -->
+              <circle cx="75" cy="67" r="30" fill="#262626" stroke="#333" stroke-width="1.5"/>
+              <rect x="59" y="61" width="22" height="13" rx="2" fill="#404040"/>
+              <rect x="77" y="58" width="11" height="10" rx="1" fill="#363636"/>
+              <circle cx="64" cy="74" r="3" fill="#181818" stroke="#CA953D" stroke-width="1.5"/>
+              <circle cx="75" cy="74" r="3" fill="#181818" stroke="#CA953D" stroke-width="1.5"/>
+              <!-- Orbit icon 1: GPS crosshair (starts top) -->
+              <g class="bnt2-orbit1">
+                <circle cx="75" cy="15" r="12" fill="#262626" stroke="#333" stroke-width="1"/>
+                <circle cx="75" cy="15" r="5" stroke="#CA953D" stroke-width="1.5" fill="none"/>
+                <line x1="75" y1="8" x2="75" y2="22" stroke="#CA953D" stroke-width="1"/>
+                <line x1="68" y1="15" x2="82" y2="15" stroke="#CA953D" stroke-width="1"/>
+              </g>
+              <!-- Orbit icon 2: clock (starts bottom) -->
+              <g class="bnt2-orbit2">
+                <circle cx="75" cy="119" r="12" fill="#262626" stroke="#333" stroke-width="1"/>
+                <circle cx="75" cy="119" r="5.5" stroke="#CA953D" stroke-width="1.5" fill="none"/>
+                <line x1="75" y1="113.5" x2="75" y2="119" stroke="#CA953D" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="75" y1="119" x2="79" y2="119" stroke="#CA953D" stroke-width="1.5" stroke-linecap="round"/>
+              </g>
+            </svg>
+          </div>
+          <div class="bnt2-c4__text">
+            <h3 class="bnt2-card-title">Integrated Fleet<br>Management</h3>
+            <p class="bnt2-card-desc">GPS tracking, predictive maintenance, dispatch coordination, and client reporting — unified into a single operations platform that never sleeps.</p>
+          </div>
+        </div>
+
+      </div><!-- /right col -->
+
+    </div>
+  </section>
+
   <!-- CTA — rotating rings -->
   <section class="cta2-sec">
     <div class="cta2-sec__rings">
@@ -1724,6 +1934,36 @@
     srEls.forEach(function(el){ obs.observe(el); });
   } else {
     srEls.forEach(function(el){ el.classList.add('is-visible'); });
+  }
+})();
+</script>
+<script>
+/* Bento-2 animations */
+(function(){
+  /* Globe label cycling */
+  var lbl = document.getElementById('bnt2-globe-label');
+  if (lbl) {
+    var labels = ['127 Active Trucks', '12 KSA Regions', '24/7 Operations'];
+    var idx = 0;
+    setInterval(function(){
+      lbl.classList.add('bnt2-fade');
+      setTimeout(function(){
+        idx = (idx + 1) % labels.length;
+        lbl.textContent = labels[idx];
+        lbl.classList.remove('bnt2-fade');
+      }, 300);
+    }, 2400);
+  }
+  /* Graph bar cycling */
+  var bars = document.querySelectorAll('.bnt2-bar');
+  if (bars.length) {
+    var active = 3; /* start on the tallest bar */
+    bars[active].classList.add('bnt2-bar--active');
+    setInterval(function(){
+      bars[active].classList.remove('bnt2-bar--active');
+      active = (active + 1) % bars.length;
+      bars[active].classList.add('bnt2-bar--active');
+    }, 950);
   }
 })();
 </script>
