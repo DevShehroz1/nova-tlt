@@ -35,6 +35,40 @@
     .process-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;border:1px solid rgba(255,255,255,0.08);border-radius:20px;overflow:hidden;margin-top:40px;}.process-step{padding:28px;border-right:1px solid rgba(255,255,255,0.08);}.process-step:last-child{border-right:none;}.process-step__num{font-family:BebasNeuePro,sans-serif;font-size:40px;line-height:1;background:var(--gold-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px;}.process-step__title{font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:var(--ink);margin-bottom:6px;}.process-step__text{font-family:'Inter',sans-serif;font-size:12px;color:var(--ink-dim);line-height:1.6;}
     @media(max-width:768px){.process-steps{grid-template-columns:1fr;}.process-step{border-right:none;border-bottom:1px solid rgba(255,255,255,0.08);}.process-step:last-child{border-bottom:none;}}
     .general-apply{background:rgba(202,149,61,0.08);border:1px solid rgba(202,149,61,0.2);border-radius:20px;padding:36px;margin-top:24px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}.general-apply__title{font-family:BebasNeuePro,sans-serif;font-size:clamp(24px,2.5vw,36px);letter-spacing:0.04em;color:var(--ink);margin-bottom:8px;}.general-apply__text{font-family:'Inter',sans-serif;font-size:14px;color:var(--ink-dim);}
+    /* ── Career-1 component ── */
+    .career-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;}
+    .career-tab{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;border-radius:100px;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.45);cursor:pointer;transition:all 200ms ease;outline:none;}
+    .career-tab:hover{color:rgba(255,255,255,0.8);border-color:rgba(255,255,255,0.18);}
+    .career-tab.is-active{background:#fff;color:#0a0a0a;border-color:#fff;}
+    .career-tab__count{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;font-size:9px;font-weight:700;background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.45);}
+    .career-tab.is-active .career-tab__count{background:rgba(0,0,0,0.14);color:#0a0a0a;}
+    .career-list{border:1px solid rgba(255,255,255,0.08);border-radius:20px;overflow:hidden;}
+    .career-row{display:flex;align-items:center;gap:16px;padding:20px 24px;border-bottom:1px solid rgba(255,255,255,0.06);text-decoration:none;color:inherit;transition:background 150ms ease;}
+    .career-row:last-of-type{border-bottom:none;}
+    .career-row:hover{background:rgba(202,149,61,0.05);}
+    .career-row__body{flex:1;min-width:0;}
+    .career-row__title-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px;}
+    .career-row__title{font-family:BebasNeuePro,sans-serif;font-size:clamp(17px,1.8vw,22px);letter-spacing:0.04em;color:#fff;line-height:1;}
+    .career-row__hot{display:inline-flex;align-items:center;gap:3px;font-family:'Inter',sans-serif;font-size:9px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#D97706;background:rgba(251,191,36,0.12);border:1px solid rgba(251,191,36,0.22);border-radius:100px;padding:3px 8px;}
+    .career-row__desc{font-family:'Inter',sans-serif;font-size:13px;color:rgba(255,255,255,0.38);line-height:1.5;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    .career-row__badges{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+    .career-badge{display:inline-flex;align-items:center;gap:5px;font-family:'Inter',sans-serif;font-size:11px;font-weight:500;padding:5px 10px;border-radius:100px;border:1px solid;white-space:nowrap;}
+    .career-badge--loc{color:#CA953D;background:rgba(202,149,61,0.08);border-color:rgba(202,149,61,0.2);}
+    .career-badge--type{color:rgba(255,255,255,0.45);background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.08);}
+    .career-row__arrow{width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 200ms ease,border-color 200ms ease;}
+    .career-row:hover .career-row__arrow{background:#fff;border-color:#fff;}
+    .career-row:hover .career-row__arrow path{stroke:#0a0a0a;}
+    .career-empty{display:none;flex-direction:column;align-items:center;gap:12px;padding:56px 20px;text-align:center;}
+    .career-empty__icon{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;}
+    .career-empty__title{font-family:BebasNeuePro,sans-serif;font-size:22px;letter-spacing:0.04em;color:#fff;}
+    .career-empty__sub{font-family:'Inter',sans-serif;font-size:13px;color:rgba(255,255,255,0.3);max-width:260px;line-height:1.6;}
+    .career-cta-banner{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:18px 24px;margin-top:14px;}
+    .career-cta-banner__left{display:flex;align-items:center;gap:14px;}
+    .career-cta-banner__icon{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .career-cta-banner__text{font-family:'Inter',sans-serif;font-size:13px;color:rgba(255,255,255,0.5);}
+    .career-cta-banner__link{display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:#CA953D;text-decoration:none;white-space:nowrap;transition:color 200ms ease;}
+    .career-cta-banner__link:hover{color:#E5B85A;}
+    @media(max-width:640px){.career-row{flex-wrap:wrap;gap:12px;}.career-row__badges{order:3;}.career-row__arrow{order:2;margin-left:auto;align-self:flex-start;}.career-row__desc{white-space:normal;}}
     .site-footer{background:#0f0f0f;overflow:hidden;position:relative;}.site-footer__top{display:flex;align-items:flex-start;justify-content:space-between;gap:clamp(32px,5vw,64px);padding:clamp(48px,6vw,80px) clamp(24px,5vw,80px) clamp(32px,4vw,48px);max-width:1400px;margin:0 auto;}.footer-brand{max-width:280px;flex-shrink:0;}.footer-brand__logo{height:48px;width:auto;display:block;margin-bottom:18px;}.footer-brand__desc{font-family:'Inter',sans-serif;font-size:13.5px;line-height:1.65;color:rgba(255,255,255,0.38);margin-bottom:24px;}.footer-certs{display:flex;flex-wrap:wrap;gap:7px;}.footer-cert-badge{font-family:'Inter',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:rgba(255,255,255,0.45);background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);border-radius:4px;padding:4px 8px;}.footer-links-grid{display:flex;gap:clamp(32px,5vw,80px);flex-wrap:wrap;}.footer-links-col__title{font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:18px;}.footer-links-col__list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;}.footer-links-col__link{font-family:'Inter',sans-serif;font-size:14px;font-weight:500;color:rgba(255,255,255,0.52);text-decoration:none;display:inline-flex;align-items:center;gap:5px;transition:color 180ms ease;}.footer-links-col__link:hover{color:#fff;}.footer-link-arrow{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border:1px solid rgba(255,255,255,0.14);border-radius:4px;opacity:0;transform:translateX(-4px);transition:opacity 200ms ease,transform 200ms ease;flex-shrink:0;}.footer-links-col__link:hover .footer-link-arrow{opacity:1;transform:translateX(0);}.footer-canvas-wrap{position:relative;width:100%;height:clamp(260px,28vw,420px);margin-top:8px;overflow:hidden;}#ptypes-canvas{display:block;width:100%;height:100%;cursor:crosshair;}.footer-bottom-bar{border-top:1px solid rgba(255,255,255,0.06);padding:18px clamp(24px,5vw,80px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;max-width:1400px;margin:0 auto;}.footer-bottom-bar__copy{font-family:'Inter',sans-serif;font-size:12px;color:rgba(255,255,255,0.2);}.footer-bottom-bar__legal{display:flex;gap:20px;}.footer-bottom-bar__legal a{font-family:'Inter',sans-serif;font-size:12px;color:rgba(255,255,255,0.2);text-decoration:none;transition:color 160ms ease;}.footer-bottom-bar__legal a:hover{color:rgba(255,255,255,0.55);}
     @media(max-width:768px){.site-footer__top{flex-direction:column;}.footer-bottom-bar{flex-direction:column;align-items:flex-start;}}
 
@@ -68,7 +102,6 @@
       <a href="index.html" class="header__menu-item text-hover"><span class="text-hover__inner"><span class="text-hover__elem text-hover__elem-1">Home</span><span class="text-hover__elem text-hover__elem-2 _c-dark">Home</span></span></a>
       <div class="nav-drop header__menu-item" data-nav-drop>
         <button class="nav-drop__trigger text-hover" aria-expanded="false" aria-haspopup="true"><span class="text-hover__inner"><span class="text-hover__elem text-hover__elem-1">Company</span><span class="text-hover__elem text-hover__elem-2 _c-dark">Company</span></span><svg class="nav-drop__chevron" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="nav-drop__panel" role="menu"><a href="about.html" class="nav-drop__link" role="menuitem">About Us</a><a href="safety.html" class="nav-drop__link" role="menuitem">Safety &amp; Quality</a><a href="careers.html" class="nav-drop__link" role="menuitem">Careers</a></div>
       </div>
       <div class="nav-drop header__menu-item" data-nav-drop>
         <button class="nav-drop__trigger text-hover" aria-expanded="false" aria-haspopup="true"><span class="text-hover__inner"><span class="text-hover__elem text-hover__elem-1">What We Do</span><span class="text-hover__elem text-hover__elem-2 _c-dark">What We Do</span></span><svg class="nav-drop__chevron" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -112,13 +145,111 @@
     <p class="section-eyebrow">Open Positions</p>
     <h2 class="section-title">Current Openings.</h2>
     <p class="section-sub">We hire on merit, discipline, and a safety-first attitude. Saudi nationals and qualified expats are both welcome to apply.</p>
-    <div class="job-grid">
-      <div class="job-card"><span class="job-card__tag">Operations</span><h3 class="job-card__title">Operations Manager</h3><p class="job-card__text">Oversee fleet deployment, project scheduling, and dispatch coordination across multiple active sites. 5+ years heavy logistics experience required.</p><div class="job-card__meta"><span class="job-meta-item">📍 Riyadh</span><span class="job-meta-item">⏱ Full Time</span><span class="job-meta-item">🇸🇦 KSA/Expat</span></div></div>
-      <div class="job-card"><span class="job-card__tag">Operations</span><h3 class="job-card__title">Heavy Equipment Operator</h3><p class="job-card__text">Certified heavy vehicle operator for dump trucks and ADTs. Valid Saudi driving licence (Category 6/7) required. HSE experience preferred.</p><div class="job-card__meta"><span class="job-meta-item">📍 Multiple Sites</span><span class="job-meta-item">⏱ Full Time</span><span class="job-meta-item">🇸🇦 KSA/Expat</span></div></div>
-      <div class="job-card"><span class="job-card__tag">Logistics</span><h3 class="job-card__title">Fleet Dispatcher</h3><p class="job-card__text">Real-time coordination of fleet movements, GPS monitoring, and client reporting. Must handle high-pressure environments and multi-site logistics.</p><div class="job-card__meta"><span class="job-meta-item">📍 Riyadh</span><span class="job-meta-item">⏱ Full Time</span><span class="job-meta-item">🇸🇦 KSA/Expat</span></div></div>
-      <div class="job-card"><span class="job-card__tag">Logistics</span><h3 class="job-card__title">Logistics Coordinator</h3><p class="job-card__text">Support project managers with scheduling, vendor coordination, and documentation. Degree in logistics, supply chain, or equivalent experience.</p><div class="job-card__meta"><span class="job-meta-item">📍 Riyadh / Jeddah</span><span class="job-meta-item">⏱ Full Time</span><span class="job-meta-item">🇸🇦 KSA/Expat</span></div></div>
-      <div class="job-card"><span class="job-card__tag">HSE</span><h3 class="job-card__title">HSE Safety Officer</h3><p class="job-card__text">Site-based safety officer responsible for daily HSE inspections, incident reporting, and driver compliance monitoring. NEBOSH or equivalent required.</p><div class="job-card__meta"><span class="job-meta-item">📍 Site-Based</span><span class="job-meta-item">⏱ Full Time</span><span class="job-meta-item">🇸🇦 KSA/Expat</span></div></div>
-      <div class="job-card"><span class="job-card__tag">Workshop</span><h3 class="job-card__title">Heavy Vehicle Maintenance Tech</h3><p class="job-card__text">Preventive and corrective maintenance on heavy duty dump trucks and ADTs. Trade certification in HGV maintenance required.</p><div class="job-card__meta"><span class="job-meta-item">📍 Riyadh Workshop</span><span class="job-meta-item">⏱ Full Time</span><span class="job-meta-item">🇸🇦 KSA/Expat</span></div></div>
+
+    <!-- Filter tabs -->
+    <div class="career-tabs">
+      <button class="career-tab is-active" data-dept="all">All Roles</button>
+      <button class="career-tab" data-dept="Operations">Operations <span class="career-tab__count">2</span></button>
+      <button class="career-tab" data-dept="Logistics">Logistics <span class="career-tab__count">2</span></button>
+      <button class="career-tab" data-dept="HSE">HSE <span class="career-tab__count">1</span></button>
+      <button class="career-tab" data-dept="Workshop">Workshop <span class="career-tab__count">1</span></button>
+    </div>
+
+    <!-- Job rows -->
+    <div class="career-list">
+      <a href="mailto:careers@novaterra.sa?subject=Application%20%E2%80%94%20Operations%20Manager" class="career-row" data-dept="Operations">
+        <div class="career-row__body">
+          <div class="career-row__title-row">
+            <span class="career-row__title">Operations Manager</span>
+            <span class="career-row__hot">&#x1F525; Hot</span>
+          </div>
+          <p class="career-row__desc">Oversee fleet deployment, project scheduling, and dispatch coordination across multiple active sites. 5+ years heavy logistics experience required.</p>
+        </div>
+        <div class="career-row__badges">
+          <span class="career-badge career-badge--loc"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1C3.34 1 2 2.34 2 4c0 2.25 3 5 3 5s3-2.75 3-5c0-1.66-1.34-3-3-3zm0 4a1 1 0 110-2 1 1 0 010 2z" fill="currentColor"/></svg>Riyadh</span>
+          <span class="career-badge career-badge--type"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="3.5" stroke="currentColor" stroke-width="1.2"/><path d="M5 3v2l1.25 1.25" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>Full-time</span>
+        </div>
+        <div class="career-row__arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </a>
+
+      <a href="mailto:careers@novaterra.sa?subject=Application%20%E2%80%94%20Heavy%20Equipment%20Operator" class="career-row" data-dept="Operations">
+        <div class="career-row__body">
+          <div class="career-row__title-row"><span class="career-row__title">Heavy Equipment Operator</span></div>
+          <p class="career-row__desc">Certified operator for dump trucks and ADTs. Valid Saudi Cat. 6/7 driving licence + HSE experience preferred.</p>
+        </div>
+        <div class="career-row__badges">
+          <span class="career-badge career-badge--loc"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1C3.34 1 2 2.34 2 4c0 2.25 3 5 3 5s3-2.75 3-5c0-1.66-1.34-3-3-3zm0 4a1 1 0 110-2 1 1 0 010 2z" fill="currentColor"/></svg>Multiple Sites</span>
+          <span class="career-badge career-badge--type"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="3.5" stroke="currentColor" stroke-width="1.2"/><path d="M5 3v2l1.25 1.25" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>Full-time</span>
+        </div>
+        <div class="career-row__arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </a>
+
+      <a href="mailto:careers@novaterra.sa?subject=Application%20%E2%80%94%20Fleet%20Dispatcher" class="career-row" data-dept="Logistics">
+        <div class="career-row__body">
+          <div class="career-row__title-row">
+            <span class="career-row__title">Fleet Dispatcher</span>
+            <span class="career-row__hot">&#x1F525; Hot</span>
+          </div>
+          <p class="career-row__desc">Real-time coordination of fleet movements, GPS monitoring, and client reporting. Must handle high-pressure multi-site environments.</p>
+        </div>
+        <div class="career-row__badges">
+          <span class="career-badge career-badge--loc"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1C3.34 1 2 2.34 2 4c0 2.25 3 5 3 5s3-2.75 3-5c0-1.66-1.34-3-3-3zm0 4a1 1 0 110-2 1 1 0 010 2z" fill="currentColor"/></svg>Riyadh</span>
+          <span class="career-badge career-badge--type"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="3.5" stroke="currentColor" stroke-width="1.2"/><path d="M5 3v2l1.25 1.25" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>Full-time</span>
+        </div>
+        <div class="career-row__arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </a>
+
+      <a href="mailto:careers@novaterra.sa?subject=Application%20%E2%80%94%20Logistics%20Coordinator" class="career-row" data-dept="Logistics">
+        <div class="career-row__body">
+          <div class="career-row__title-row"><span class="career-row__title">Logistics Coordinator</span></div>
+          <p class="career-row__desc">Support project managers with scheduling, vendor coordination, and documentation. Degree in logistics or equivalent experience.</p>
+        </div>
+        <div class="career-row__badges">
+          <span class="career-badge career-badge--loc"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1C3.34 1 2 2.34 2 4c0 2.25 3 5 3 5s3-2.75 3-5c0-1.66-1.34-3-3-3zm0 4a1 1 0 110-2 1 1 0 010 2z" fill="currentColor"/></svg>Riyadh / Jeddah</span>
+          <span class="career-badge career-badge--type"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="3.5" stroke="currentColor" stroke-width="1.2"/><path d="M5 3v2l1.25 1.25" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>Full-time</span>
+        </div>
+        <div class="career-row__arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </a>
+
+      <a href="mailto:careers@novaterra.sa?subject=Application%20%E2%80%94%20HSE%20Safety%20Officer" class="career-row" data-dept="HSE">
+        <div class="career-row__body">
+          <div class="career-row__title-row"><span class="career-row__title">HSE Safety Officer</span></div>
+          <p class="career-row__desc">Site-based inspections, incident reporting, and driver compliance monitoring. NEBOSH or equivalent required.</p>
+        </div>
+        <div class="career-row__badges">
+          <span class="career-badge career-badge--loc"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1C3.34 1 2 2.34 2 4c0 2.25 3 5 3 5s3-2.75 3-5c0-1.66-1.34-3-3-3zm0 4a1 1 0 110-2 1 1 0 010 2z" fill="currentColor"/></svg>Site-Based</span>
+          <span class="career-badge career-badge--type"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="3.5" stroke="currentColor" stroke-width="1.2"/><path d="M5 3v2l1.25 1.25" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>Full-time</span>
+        </div>
+        <div class="career-row__arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </a>
+
+      <a href="mailto:careers@novaterra.sa?subject=Application%20%E2%80%94%20Heavy%20Vehicle%20Maintenance%20Tech" class="career-row" data-dept="Workshop">
+        <div class="career-row__body">
+          <div class="career-row__title-row"><span class="career-row__title">Heavy Vehicle Maintenance Tech</span></div>
+          <p class="career-row__desc">Preventive and corrective maintenance on heavy duty dump trucks and ADTs. HGV trade certification required.</p>
+        </div>
+        <div class="career-row__badges">
+          <span class="career-badge career-badge--loc"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1C3.34 1 2 2.34 2 4c0 2.25 3 5 3 5s3-2.75 3-5c0-1.66-1.34-3-3-3zm0 4a1 1 0 110-2 1 1 0 010 2z" fill="currentColor"/></svg>Riyadh Workshop</span>
+          <span class="career-badge career-badge--type"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="3.5" stroke="currentColor" stroke-width="1.2"/><path d="M5 3v2l1.25 1.25" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>Full-time</span>
+        </div>
+        <div class="career-row__arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </a>
+
+      <!-- Empty state (shown via JS when dept has no matches) -->
+      <div class="career-empty" id="career-empty">
+        <div class="career-empty__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 3a5 5 0 100 10A5 5 0 0010 3zm-1 7V6m2 4V6" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <p class="career-empty__title">No Openings Right Now</p>
+        <p class="career-empty__sub">No open roles in this department at the moment — check back soon or send an open application below.</p>
+      </div>
+    </div>
+
+    <!-- CTA banner -->
+    <div class="career-cta-banner">
+      <div class="career-cta-banner__left">
+        <div class="career-cta-banner__icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="4" width="12" height="9" rx="1.5" stroke="rgba(255,255,255,0.45)" stroke-width="1.3"/><path d="M2 7l6 4 6-4" stroke="rgba(255,255,255,0.45)" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+        <p class="career-cta-banner__text">Don't see a fit? We're always looking for great people — send an open application.</p>
+      </div>
+      <a href="mailto:careers@novaterra.sa" class="career-cta-banner__link">Send open application <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
   </section>
 
@@ -162,7 +293,6 @@
         <p class="footer-links-col__title">Company</p>
         <ul class="footer-links-col__list">
           <li><a href="about.html" class="footer-links-col__link">About Us <span class="footer-link-arrow"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5h6M4.5 1.5l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
-          <li><a href="safety.html" class="footer-links-col__link">Safety &amp; Quality <span class="footer-link-arrow"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5h6M4.5 1.5l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
           <li><a href="careers.html" class="footer-links-col__link">Careers <span class="footer-link-arrow"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5h6M4.5 1.5l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
           <li><a href="news.html" class="footer-links-col__link">News <span class="footer-link-arrow"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5h6M4.5 1.5l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
           <li><a href="contact.html" class="footer-links-col__link">Contact <span class="footer-link-arrow"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5h6M4.5 1.5l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
@@ -204,5 +334,26 @@
 <script src="assets/js/scroll-reveal.js"></script>
 <script src="assets/js/mobile-menu.js"></script>
 <script src="assets/js/page-transition.js"></script>
+<script>
+(function(){
+  var tabs = document.querySelectorAll('.career-tab');
+  var rows = document.querySelectorAll('.career-row');
+  var empty = document.getElementById('career-empty');
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      tabs.forEach(function(t){ t.classList.remove('is-active'); });
+      tab.classList.add('is-active');
+      var dept = tab.getAttribute('data-dept');
+      var visible = 0;
+      rows.forEach(function(row){
+        var show = dept === 'all' || row.getAttribute('data-dept') === dept;
+        row.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      if (empty) empty.style.display = visible === 0 ? 'flex' : 'none';
+    });
+  });
+})();
+</script>
 </body>
 </html>
