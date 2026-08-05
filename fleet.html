@@ -25,6 +25,7 @@
     }
     *, *::before, *::after { box-sizing: border-box; }
     body { background: var(--hero-bg); color: var(--ink); margin: 0; }
+    a { text-decoration: none; }
 
     @media (hover: hover) and (pointer: fine) {
       *, *::before, *::after { cursor: none !important; }
@@ -45,24 +46,24 @@
     }
     #cursor-ring.is-hover { width: 44px; height: 44px; border-color: #CA953D; }
 
-    .header__menu {
-      background-color: #141414 !important;
-      border: 1px solid rgba(255,255,255,0.1) !important;
-    }
-    .header__menu-item { color: rgba(255,255,255,0.82) !important; }
+    /* ── Header ── */
+    .header { position: fixed !important; transform: none !important; background: transparent !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; transition: background 0.35s ease, backdrop-filter 0.35s ease !important; }
+    .header.is-scrolled { background: rgba(10,10,10,0.90) !important; backdrop-filter: blur(14px) !important; -webkit-backdrop-filter: blur(14px) !important; }
+    .header__container { position: relative !important; }
+    .header__menu { position: absolute !important; left: 50% !important; transform: translateX(-50%) !important; background-color: #141414 !important; border: 1px solid rgba(255,255,255,0.1) !important; font-family: BebasNeuePro, sans-serif !important; font-weight: 700 !important; }
+    .header__menu-item, .header__menu-item .text-hover__elem { color: rgba(255,255,255,0.85) !important; }
     .header__menu-item:hover { color: #CA953D !important; }
-    .btn {
-      background-color: #141414 !important;
-      border-color: rgba(255,255,255,0.15) !important;
-      color: rgba(255,255,255,0.88) !important;
-    }
+    .header__logo { background: transparent !important; padding: 0 !important; height: auto !important; }
+    .header__logo-img { width: auto !important; height: 52px !important; object-fit: contain; }
+    @media (max-width: 1024px) { .header__logo-img { height: 40px !important; } }
+    .btn { background-color: #141414 !important; border-color: rgba(255,255,255,0.15) !important; color: rgba(255,255,255,0.88) !important; }
     .btn:hover { color: #fff !important; }
     .btn:after { background: linear-gradient(135deg, #B67C2A 0%, #CA953D 50%, #E5B85A 100%) !important; }
-    .btn._accent {
-      background: linear-gradient(135deg, #B67C2A 0%, #CA953D 50%, #E5B85A 100%) !important;
-      border-color: transparent !important; color: #fff !important;
-    }
+    .btn._accent { background: linear-gradient(135deg, #B67C2A 0%, #CA953D 50%, #E5B85A 100%) !important; border-color: transparent !important; color: #fff !important; }
+    .btn._accent:after { background-color: #141414 !important; }
+    .btn._accent:hover { color: #fff !important; filter: brightness(0.9); }
 
+    /* ── Nav dropdown ── */
     .nav-drop { position: relative; display: flex; align-items: center; }
     .nav-drop__trigger {
       display: flex; align-items: center; gap: 6px; cursor: pointer;
@@ -72,6 +73,7 @@
       white-space: nowrap;
     }
     .nav-drop__trigger .text-hover__elem { color: rgba(255,255,255,0.85); }
+    .nav-drop__trigger { color: rgba(255,255,255,0.85) !important; background: none !important; border: none !important; }
     .nav-drop__chevron { width: 10px; height: 6px; flex-shrink: 0; transition: transform 260ms cubic-bezier(0.23,1,0.32,1); }
     .nav-drop__chevron path { stroke: rgba(255,255,255,0.7) !important; }
     .nav-drop--open .nav-drop__chevron { transform: rotate(180deg); }
@@ -86,18 +88,13 @@
       transition: opacity 220ms ease, transform 220ms cubic-bezier(0.23,1,0.32,1);
       z-index: 200;
     }
-    .nav-drop--open .nav-drop__panel {
-      opacity: 1; pointer-events: auto;
-      transform: translateX(-50%) translateY(0);
-    }
+    .nav-drop--open .nav-drop__panel { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
     .nav-drop__panel::after {
       content: ''; position: absolute; top: -6px; left: 50%;
       transform: translateX(-50%); width: 12px; height: 6px;
       background: #0f0f0f; clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
     }
-    .nav-drop__panel::before {
-      content: ''; position: absolute; top: -16px; left: 0; right: 0; height: 16px;
-    }
+    .nav-drop__panel::before { content: ''; position: absolute; top: -16px; left: 0; right: 0; height: 16px; }
     .nav-drop__link {
       display: flex; align-items: center; gap: 10px; padding: 11px 16px;
       border-radius: 9px; color: rgba(255,255,255,0.75); text-decoration: none;
@@ -105,27 +102,20 @@
       text-transform: uppercase; white-space: nowrap;
       transition: background 160ms ease, color 160ms ease; position: relative;
     }
-    .nav-drop__link::before {
-      content: ''; display: block; width: 4px; height: 4px; border-radius: 50%;
-      background: #CA953D; opacity: 0; flex-shrink: 0; transition: opacity 160ms ease;
-    }
+    .nav-drop__link::before { content: ''; display: block; width: 4px; height: 4px; border-radius: 50%; background: #CA953D; opacity: 0; flex-shrink: 0; transition: opacity 160ms ease; }
     .nav-drop__link:hover { background: rgba(255,255,255,0.07); color: #fff; }
     .nav-drop__link:hover::before { opacity: 1; }
     @media (max-width: 1024px) {
       .nav-drop__trigger { color: #fff; }
       .nav-drop__trigger .text-hover__elem { color: #fff; }
       .nav-drop__chevron path { stroke: #fff; }
-      .nav-drop__panel {
-        position: static; transform: none !important; box-shadow: none;
-        border: none; border-radius: 8px; background: rgba(255,255,255,0.08);
-        padding: 6px 0 6px 16px; margin-top: 8px; opacity: 1;
-        pointer-events: auto; display: none;
-      }
+      .nav-drop__panel { position: static; transform: none !important; box-shadow: none; border: none; border-radius: 8px; background: rgba(255,255,255,0.08); padding: 6px 0 6px 16px; margin-top: 8px; opacity: 1; pointer-events: auto; display: none; }
       .nav-drop__panel::after, .nav-drop__panel::before { display: none; }
       .nav-drop--open .nav-drop__panel { display: block; }
       .nav-drop__link { color: rgba(255,255,255,0.8); font-size: 18px; padding: 8px 10px; letter-spacing: 0.05em; }
     }
 
+    /* ── Text hover ── */
     .text-hover { overflow: hidden; }
     .text-hover__inner { display: block; position: relative; clip-path: inset(0 -1em 0 -1em); }
     .text-hover__elem { display: block; }
@@ -136,90 +126,7 @@
     .text-hover:hover .text-hover__elem-1 .text-hover__char { transform: translateY(-115%); }
     .text-hover:hover .text-hover__elem-2 .text-hover__char { transform: translateY(0); }
 
-    .inner-hero {
-      padding-top: 120px;
-      padding-bottom: clamp(48px, 6vw, 80px);
-      padding-left: clamp(20px, 5vw, 80px);
-      padding-right: clamp(20px, 5vw, 80px);
-      max-width: 1400px; margin: 0 auto;
-    }
-    .inner-hero__eyebrow {
-      font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700;
-      letter-spacing: 0.18em; text-transform: uppercase; color: #CA953D; margin-bottom: 20px;
-    }
-    .inner-hero__title {
-      font-family: BebasNeuePro, sans-serif; font-weight: 700;
-      font-size: clamp(48px, 7vw, 100px); line-height: 1;
-      letter-spacing: 0.03em; text-transform: uppercase; color: var(--ink);
-      max-width: 900px;
-    }
-    .inner-hero__sub {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(15px, 1.2vw, 18px); color: var(--ink-dim);
-      line-height: 1.65; max-width: 600px; margin-top: 24px;
-    }
-
-    .section-inner {
-      max-width: 1400px; margin: 0 auto;
-      padding: clamp(48px, 6vw, 80px) clamp(20px, 5vw, 80px);
-    }
-    .section-eyebrow {
-      font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700;
-      letter-spacing: 0.18em; text-transform: uppercase; color: #CA953D; margin-bottom: 16px;
-    }
-    .section-title {
-      font-family: BebasNeuePro, sans-serif; font-weight: 700;
-      font-size: clamp(36px, 5vw, 72px); line-height: 1.05;
-      letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink); margin-bottom: 24px;
-    }
-    .section-sub {
-      font-family: 'Inter', sans-serif; font-size: clamp(14px, 1.1vw, 17px);
-      color: var(--ink-dim); line-height: 1.65; max-width: 640px; margin-bottom: 40px;
-    }
-
-    .card-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px; margin-top: 40px;
-    }
-    .card {
-      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 20px; padding: 32px; transition: border-color 200ms ease;
-    }
-    .card:hover { border-color: rgba(202,149,61,0.3); }
-    .card__icon { font-size: 28px; margin-bottom: 18px; }
-    .card__title {
-      font-family: BebasNeuePro, sans-serif; font-size: clamp(20px, 1.8vw, 26px);
-      letter-spacing: 0.04em; color: var(--ink); margin-bottom: 12px;
-    }
-    .card__text { font-family: 'Inter', sans-serif; font-size: 14px; color: var(--ink-dim); line-height: 1.7; }
-
-    .gold-rule { width: 48px; height: 2px; background: var(--gold-grad); margin: 20px 0; }
-
-    .stats-row {
-      display: flex; flex-wrap: wrap; gap: 0;
-      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin: 48px 0;
-    }
-    .stat-item { flex: 1 1 160px; padding: 32px 28px; border-right: 1px solid var(--line); }
-    .stat-item:last-child { border-right: none; }
-    .stat-num {
-      font-family: BebasNeuePro, sans-serif; font-size: clamp(40px, 5vw, 68px);
-      letter-spacing: 0.02em; line-height: 1;
-      background: var(--gold-grad); -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent; background-clip: text;
-    }
-    .stat-label { font-family: 'Inter', sans-serif; font-size: 13px; color: var(--ink-dim); margin-top: 6px; }
-
-    .inner-cta {
-      background: linear-gradient(135deg, rgba(182,124,42,0.12) 0%, rgba(202,149,61,0.08) 100%);
-      border: 1px solid rgba(202,149,61,0.2); border-radius: 24px;
-      padding: clamp(40px, 5vw, 64px) clamp(24px, 4vw, 56px);
-      text-align: center; margin: 48px 0;
-    }
-    .inner-cta__title {
-      font-family: BebasNeuePro, sans-serif; font-size: clamp(36px, 4.5vw, 64px);
-      letter-spacing: 0.04em; color: var(--ink); margin-bottom: 16px;
-    }
-    .inner-cta__sub { font-family: 'Inter', sans-serif; font-size: 16px; color: var(--ink-dim); margin-bottom: 32px; }
+    /* ── Buttons ── */
     .gold-btn {
       display: inline-flex; align-items: center; gap: 8px;
       padding: 16px 40px; border-radius: 100px;
@@ -243,92 +150,204 @@
     .ghost-btn:hover { border-color: #CA953D; color: #CA953D; }
     .btn-row { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
 
-    /* Fleet rows */
-    .fleet-list { margin-top: 56px; border-top: 1px solid rgba(255,255,255,0.1); }
-    .fleet-row {
-      display: grid;
-      grid-template-columns: 48px 1fr 1fr;
-      gap: 40px;
-      padding: 44px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      position: relative;
-      transition: background 0.35s;
+    /* ── Page layout ── */
+    .section-pad { padding: clamp(80px,10vw,140px) clamp(20px,5vw,80px); max-width: 1400px; margin: 0 auto; }
+    .eyebrow {
+      font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase; color: #CA953D;
+      display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
     }
-    .fleet-row::before {
-      content: '';
-      position: absolute;
-      left: -32px; top: 0; bottom: 0;
-      width: 2px;
-      background: var(--gold-grad);
-      transform: scaleY(0);
-      transform-origin: bottom;
-      transition: transform 0.4s cubic-bezier(0.76,0,0.24,1);
+    .eyebrow::before { content: ''; width: 28px; height: 1.5px; background: var(--gold-grad); flex-shrink: 0; }
+    .display-title {
+      font-family: BebasNeuePro, sans-serif; font-weight: 700;
+      font-size: clamp(44px,6vw,90px); line-height: 0.95;
+      letter-spacing: 0.02em; text-transform: uppercase; color: #fff;
     }
-    .fleet-row:hover { background: rgba(202,149,61,0.03); }
-    .fleet-row:hover::before { transform: scaleY(1); }
-    .fleet-row__num {
-      font-family: BebasNeuePro, sans-serif;
-      font-size: 13px;
-      letter-spacing: 0.08em;
-      color: rgba(255,255,255,0.2);
-      padding-top: 6px;
-    }
-    .fleet-row__left { display: flex; flex-direction: column; gap: 14px; }
-    .fleet-badge {
-      display: inline-flex; align-items: center;
-      font-family: 'Inter', sans-serif; font-size: 10px;
-      font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
-      padding: 4px 10px; border-radius: 4px;
-      background: rgba(202,149,61,0.12); color: #CA953D;
-      border: 1px solid rgba(202,149,61,0.22);
-      width: fit-content;
-    }
-    .fleet-row__name {
-      font-family: BebasNeuePro, sans-serif;
-      font-size: clamp(28px,3.2vw,52px);
-      letter-spacing: 0.03em;
-      color: #fff;
-      line-height: 1;
-      margin: 0;
-    }
-    .fleet-row__desc {
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      color: var(--ink-dim);
-      line-height: 1.65;
-      max-width: 420px;
-    }
-    .fleet-row__specs {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 28px 48px;
-      align-content: center;
-    }
-    .fleet-spec-item__key {
-      font-family: 'Inter', sans-serif;
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: rgba(255,255,255,0.35);
-      margin-bottom: 4px;
-    }
-    .fleet-spec-item__val {
-      font-family: BebasNeuePro, sans-serif;
-      font-size: clamp(22px,2vw,32px);
-      color: #fff;
-      letter-spacing: 0.03em;
-      line-height: 1;
-    }
-    @media (max-width: 860px) {
-      .fleet-row { grid-template-columns: 32px 1fr; gap: 20px; }
-      .fleet-row__specs { grid-column: 2; }
-    }
-    @media (max-width: 560px) {
-      .fleet-row { grid-template-columns: 1fr; gap: 16px; padding: 32px 0; }
-      .fleet-row__num { display: none; }
-    }
+    .display-title span { background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .body-text { font-family: 'Inter', sans-serif; font-size: clamp(14px,1.1vw,17px); color: var(--ink-dim); line-height: 1.7; }
 
-    /* ── Calculator redesign ── */
+    /* ── Hero ── */
+    .page-fullhero {
+      position: relative; min-height: 92vh;
+      display: flex; align-items: center; justify-content: center;
+      background-image: url('assets/img/fleet-hero.webp');
+      background-size: cover; background-position: center 40%;
+    }
+    .page-fullhero__overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.85) 100%);
+    }
+    .page-fullhero__content {
+      position: relative; z-index: 2; text-align: center;
+      padding: 0 clamp(20px,5vw,80px);
+    }
+    .page-fullhero__eyebrow {
+      font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase; color: #CA953D;
+      display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 24px;
+    }
+    .page-fullhero__eyebrow::before,
+    .page-fullhero__eyebrow::after { content: ''; width: 28px; height: 1.5px; background: var(--gold-grad); }
+    .page-fullhero__title {
+      font-family: BebasNeuePro, sans-serif; font-weight: 700;
+      font-size: clamp(36px,5vw,72px); line-height: 0.9;
+      letter-spacing: 0.03em; text-transform: uppercase; color: #fff;
+      margin-bottom: 20px; white-space: nowrap;
+    }
+    .page-fullhero__desc {
+      font-family: 'Inter', sans-serif; font-size: clamp(14px,1.1vw,17px);
+      color: rgba(255,255,255,0.65); line-height: 1.65; max-width: 580px; margin: 0 auto 36px;
+    }
+    .hero-scroll-hint {
+      position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      font-family: 'Inter', sans-serif; font-size: 10px; letter-spacing: 0.15em;
+      text-transform: uppercase; color: rgba(255,255,255,0.35); z-index: 2;
+    }
+    .hero-scroll-hint__line {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, rgba(202,149,61,0.6), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse { 0%,100% { opacity: 0.4; transform: scaleY(1); } 50% { opacity: 1; transform: scaleY(1.3); } }
+
+    /* ── Stats ticker ── */
+    .stats-ticker { overflow: hidden; border-top: 1px solid rgba(255,255,255,0.07); border-bottom: 1px solid rgba(255,255,255,0.07); background: #0a0a0a; padding: 0; }
+    .stats-ticker__track {
+      display: flex; width: max-content;
+      animation: tickerScroll 28s linear infinite;
+    }
+    .stats-ticker__track:hover { animation-play-state: paused; }
+    @keyframes tickerScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    .stats-ticker__item {
+      display: flex; align-items: center; gap: 20px;
+      padding: clamp(20px,3vw,32px) clamp(40px,5vw,72px);
+      border-right: 1px solid rgba(255,255,255,0.07); white-space: nowrap; flex-shrink: 0;
+    }
+    .stats-ticker__num {
+      font-family: BebasNeuePro, sans-serif; font-size: clamp(28px,3vw,44px);
+      letter-spacing: 0.03em; line-height: 1;
+      background: var(--gold-grad); -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .stats-ticker__label { font-family: 'Inter', sans-serif; font-size: 12px; color: rgba(255,255,255,0.35); letter-spacing: 0.08em; text-transform: uppercase; }
+    .stats-ticker__dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(202,149,61,0.4); flex-shrink: 0; }
+
+    /* ── Fleet showcase ── */
+    .fleet-showcase { background: #0a0a0a; }
+    .fleet-showcase__inner {
+      max-width: 1400px; margin: 0 auto;
+      padding: clamp(80px,10vw,140px) clamp(20px,5vw,80px);
+    }
+    .fleet-showcase__head { margin-bottom: 64px; }
+    .fleet-showcase__layout { display: grid; grid-template-columns: 380px 1fr; gap: 0; min-height: 560px; }
+    @media (max-width: 1024px) { .fleet-showcase__layout { grid-template-columns: 1fr; } }
+
+    /* Left nav */
+    .fleet-nav { border-right: 1px solid rgba(255,255,255,0.07); padding-right: 0; }
+    .fleet-nav__item {
+      display: flex; align-items: flex-start; gap: 20px;
+      padding: 28px 40px 28px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      cursor: pointer; position: relative;
+      transition: background 0.3s;
+    }
+    .fleet-nav__item::after {
+      content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 2px;
+      background: var(--gold-grad); transform: scaleY(0); transition: transform 0.4s cubic-bezier(0.76,0,0.24,1);
+    }
+    .fleet-nav__item.is-active::after,
+    .fleet-nav__item:hover::after { transform: scaleY(1); }
+    .fleet-nav__item.is-active { background: rgba(202,149,61,0.04); }
+    .fleet-nav__num {
+      font-family: BebasNeuePro, sans-serif; font-size: 12px;
+      letter-spacing: 0.1em; color: rgba(255,255,255,0.2);
+      padding-top: 4px; flex-shrink: 0; min-width: 28px;
+      transition: color 0.3s;
+    }
+    .fleet-nav__item.is-active .fleet-nav__num { color: #CA953D; }
+    .fleet-nav__info { display: flex; flex-direction: column; gap: 4px; }
+    .fleet-nav__badge {
+      font-family: 'Inter', sans-serif; font-size: 9px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(202,149,61,0.6); transition: color 0.3s;
+    }
+    .fleet-nav__item.is-active .fleet-nav__badge { color: #CA953D; }
+    .fleet-nav__name {
+      font-family: BebasNeuePro, sans-serif; font-size: clamp(20px,2vw,30px);
+      letter-spacing: 0.03em; color: rgba(255,255,255,0.45); line-height: 1; margin: 0;
+      transition: color 0.3s;
+    }
+    .fleet-nav__item.is-active .fleet-nav__name,
+    .fleet-nav__item:hover .fleet-nav__name { color: #fff; }
+
+    /* Right panel */
+    .fleet-panel { position: relative; padding-left: clamp(32px,4vw,64px); overflow: hidden; }
+    .fleet-panel__pane {
+      position: absolute; inset: 0; padding: clamp(32px,4vw,56px) clamp(32px,4vw,64px);
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.45s cubic-bezier(0.23,1,0.32,1), transform 0.45s cubic-bezier(0.23,1,0.32,1);
+      pointer-events: none;
+    }
+    .fleet-panel__pane.is-active {
+      opacity: 1; transform: translateY(0); pointer-events: auto;
+      position: relative;
+    }
+    .fleet-panel__title {
+      font-family: BebasNeuePro, sans-serif; font-size: clamp(40px,5vw,80px);
+      letter-spacing: 0.02em; color: #fff; line-height: 0.95; margin-bottom: 20px;
+    }
+    .fleet-panel__desc {
+      font-family: 'Inter', sans-serif; font-size: 15px; color: var(--ink-dim);
+      line-height: 1.7; max-width: 520px; margin-bottom: 44px;
+      border-left: 2px solid rgba(202,149,61,0.3); padding-left: 18px;
+    }
+    .fleet-specs-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+      background: rgba(255,255,255,0.05); border-radius: 16px; overflow: hidden;
+      margin-bottom: 36px;
+    }
+    @media (max-width: 640px) { .fleet-specs-grid { grid-template-columns: 1fr 1fr; } }
+    .fleet-spec-cell {
+      background: rgba(10,10,10,0.9); padding: 24px 20px;
+      transition: background 0.3s;
+    }
+    .fleet-spec-cell:hover { background: rgba(202,149,61,0.06); }
+    .fleet-spec-cell__key {
+      font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.3); margin-bottom: 8px;
+    }
+    .fleet-spec-cell__val {
+      font-family: BebasNeuePro, sans-serif; font-size: clamp(24px,2.2vw,36px);
+      letter-spacing: 0.03em; color: #fff; line-height: 1;
+    }
+    .fleet-spec-cell__val.is-gold {
+      background: var(--gold-grad); -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .fleet-panel__cta { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+    .fleet-panel__cta-text {
+      font-family: BebasNeuePro, sans-serif; font-size: 18px; letter-spacing: 0.08em;
+      text-transform: uppercase; color: rgba(255,255,255,0.5); transition: color 0.3s;
+    }
+    .fleet-panel__cta:hover .fleet-panel__cta-text { color: #CA953D; }
+    .fleet-panel__cta-arrow {
+      width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .fleet-panel__cta:hover .fleet-panel__cta-arrow { border-color: #CA953D; background: rgba(202,149,61,0.1); }
+
+    @media (max-width: 1024px) {
+      .fleet-nav { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); padding-right: 0; padding-bottom: 0; display: grid; grid-template-columns: 1fr 1fr; }
+      .fleet-panel { padding-left: 0; padding-top: 40px; }
+      .fleet-panel__pane { position: relative; padding: 0; }
+      .fleet-panel__pane:not(.is-active) { display: none; }
+    }
+    @media (max-width: 560px) { .fleet-nav { grid-template-columns: 1fr; } }
+
+    /* ── Calculator ── */
     .calc-wrap {
       border-radius: 5rem;
       background: rgba(255,255,255,0.03);
@@ -345,35 +364,24 @@
       .calc-wrap { border-radius: 24px; }
       .calc-inner { grid-template-columns: 1fr; }
     }
-    /* Left panel */
     .calc-left {
       padding: clamp(36px,4vw,56px);
       border-right: 1px solid rgba(255,255,255,0.06);
-      display: flex;
-      flex-direction: column;
-      gap: 0;
+      display: flex; flex-direction: column; gap: 0;
     }
     @media (max-width: 900px) { .calc-left { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); } }
     .calc-left__headline {
       font-family: BebasNeuePro, sans-serif;
-      font-size: clamp(32px,3.5vw,52px);
-      line-height: 1;
-      letter-spacing: 0.02em;
-      color: #fff;
-      margin-bottom: 16px;
+      font-size: clamp(32px,3.5vw,52px); line-height: 1;
+      letter-spacing: 0.02em; color: #fff; margin-bottom: 16px;
     }
     .calc-left__headline span {
-      background: var(--gold-grad);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      background: var(--gold-grad); -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; background-clip: text;
     }
     .calc-left__desc {
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      color: var(--ink-dim);
-      line-height: 1.65;
-      margin-bottom: 36px;
+      font-family: 'Inter', sans-serif; font-size: 13px;
+      color: var(--ink-dim); line-height: 1.65; margin-bottom: 36px;
     }
     .slider-group { margin-bottom: 26px; }
     .slider-label {
@@ -395,93 +403,121 @@
       background: linear-gradient(135deg, #B67C2A 0%, #CA953D 50%, #E5B85A 100%);
       cursor: pointer;
     }
-    /* Right panel */
     .calc-right {
       padding: clamp(32px,4vw,48px);
-      display: flex;
-      flex-direction: column;
-      gap: 0;
+      display: flex; flex-direction: column; gap: 0;
     }
     .calc-chart-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-      gap: 12px;
+      display: flex; align-items: flex-start; justify-content: space-between;
+      margin-bottom: 20px; flex-wrap: wrap; gap: 12px;
     }
     .calc-chart-title {
-      font-family: BebasNeuePro, sans-serif;
-      font-size: clamp(18px,2vw,28px);
-      letter-spacing: 0.03em;
-      color: var(--ink);
+      font-family: BebasNeuePro, sans-serif; font-size: clamp(18px,2vw,28px);
+      letter-spacing: 0.03em; color: var(--ink);
     }
-    .calc-savings-badge {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 2px;
-    }
+    .calc-savings-badge { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
     .calc-savings-badge__label {
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      color: var(--ink-dim);
-      letter-spacing: 0.05em;
+      font-family: 'Inter', sans-serif; font-size: 11px;
+      color: var(--ink-dim); letter-spacing: 0.05em;
     }
     .calc-savings-badge__num {
-      font-family: BebasNeuePro, sans-serif;
-      font-size: clamp(24px,3vw,40px);
+      font-family: BebasNeuePro, sans-serif; font-size: clamp(24px,3vw,40px);
       letter-spacing: 0.02em;
-      background: var(--gold-grad);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1;
+      background: var(--gold-grad); -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; background-clip: text; line-height: 1;
     }
-    .calc-legend {
-      display: flex;
-      gap: 20px;
-      margin-bottom: 16px;
-    }
+    .calc-legend { display: flex; gap: 20px; margin-bottom: 16px; }
     .calc-legend__item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      color: var(--ink-dim);
+      display: flex; align-items: center; gap: 8px;
+      font-family: 'Inter', sans-serif; font-size: 11px; color: var(--ink-dim);
     }
-    .calc-legend__swatch {
-      width: 28px;
-      height: 10px;
-      border-radius: 2px;
-      flex-shrink: 0;
-    }
-    #calc-canvas {
-      width: 100%;
-      flex: 1;
-      min-height: 260px;
-      display: block;
-    }
+    .calc-legend__swatch { width: 28px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+    #calc-canvas { width: 100%; flex: 1; min-height: 260px; display: block; }
     .calc-cta-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 24px;
-      padding-top: 20px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px; margin-top: 24px; padding-top: 20px;
       border-top: 1px solid rgba(255,255,255,0.06);
     }
     .calc-disclaimer {
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      color: rgba(255,255,255,0.25);
-      max-width: 380px;
-      line-height: 1.5;
+      font-family: 'Inter', sans-serif; font-size: 11px;
+      color: rgba(255,255,255,0.25); max-width: 380px; line-height: 1.5;
     }
 
-    /* Footer */
+    /* ── Maintenance section ── */
+    .maint-sec { background: #080808; }
+    .maint-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+      background: rgba(255,255,255,0.04); border-radius: 24px; overflow: hidden;
+      margin-top: 56px;
+    }
+    @media (max-width: 768px) { .maint-grid { grid-template-columns: 1fr; } }
+    .maint-item {
+      background: #0a0a0a; padding: clamp(32px,4vw,52px);
+      display: flex; gap: 24px;
+      transition: background 0.35s;
+      position: relative; overflow: hidden;
+    }
+    .maint-item::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(60% 60% at 20% 20%, rgba(202,149,61,0.07), transparent);
+      opacity: 0; transition: opacity 0.4s;
+    }
+    .maint-item:hover { background: rgba(202,149,61,0.03); }
+    .maint-item:hover::before { opacity: 1; }
+    .maint-icon {
+      width: 48px; height: 48px; border-radius: 12px; flex-shrink: 0;
+      background: rgba(202,149,61,0.1); border: 1px solid rgba(202,149,61,0.2);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .maint-icon svg { width: 22px; height: 22px; stroke: #CA953D; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .maint-title {
+      font-family: BebasNeuePro, sans-serif; font-size: clamp(18px,1.8vw,26px);
+      letter-spacing: 0.04em; color: #fff; margin-bottom: 10px; line-height: 1;
+    }
+    .maint-text { font-family: 'Inter', sans-serif; font-size: 13.5px; color: var(--ink-dim); line-height: 1.65; }
+
+    /* ── CTA rings ── */
+    .cta2-sec {
+      position: relative; overflow: hidden;
+      background: #0a0a0a; padding: clamp(80px,10vw,140px) clamp(20px,5vw,80px);
+    }
+    .cta2-sec__rings {
+      position: absolute; right: -120px; top: 50%; transform: translateY(-50%);
+      width: 600px; height: 600px; pointer-events: none;
+    }
+    .cta2-sec__ring {
+      position: absolute; border-radius: 50%;
+      border: 1px solid rgba(202,149,61,0.12);
+      top: 50%; left: 50%; transform: translate(-50%,-50%);
+    }
+    .cta2-sec__ring:nth-child(1) { width: 200px; height: 200px; animation: spinRing 18s linear infinite; }
+    .cta2-sec__ring:nth-child(2) { width: 340px; height: 340px; animation: spinRing 26s linear infinite reverse; border-color: rgba(202,149,61,0.08); }
+    .cta2-sec__ring:nth-child(3) { width: 480px; height: 480px; animation: spinRing 36s linear infinite; border-color: rgba(202,149,61,0.05); }
+    .cta2-sec__ring:nth-child(4) { width: 600px; height: 600px; border-color: rgba(202,149,61,0.03); }
+    @keyframes spinRing { to { transform: translate(-50%,-50%) rotate(360deg); } }
+    .cta2-sec__card {
+      position: relative; z-index: 2; max-width: 680px;
+      background: linear-gradient(135deg, rgba(182,124,42,0.18) 0%, rgba(202,149,61,0.08) 100%);
+      border: 1px solid rgba(202,149,61,0.25); border-radius: 24px;
+      padding: clamp(40px,5vw,64px) clamp(32px,4vw,56px);
+    }
+    .cta2-sec__eyebrow {
+      font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase; color: #CA953D; margin-bottom: 20px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .cta2-sec__eyebrow::before { content: ''; width: 20px; height: 1.5px; background: var(--gold-grad); }
+    .cta2-sec__title {
+      font-family: BebasNeuePro, sans-serif; font-size: clamp(36px,4.5vw,68px);
+      letter-spacing: 0.03em; color: #fff; line-height: 0.95; margin-bottom: 18px;
+    }
+    .cta2-sec__sub {
+      font-family: 'Inter', sans-serif; font-size: 15px; color: var(--ink-dim);
+      line-height: 1.65; margin-bottom: 36px; max-width: 460px;
+    }
+    .cta2-sec__btns { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    /* ── Footer ── */
     .site-footer { background: #0f0f0f; overflow: hidden; position: relative; }
     .site-footer__top {
       display: flex; align-items: flex-start; justify-content: space-between;
@@ -537,40 +573,19 @@
     }
     .footer-bottom-bar__legal a:hover { color: rgba(255,255,255,0.55); }
 
+    /* ── Scroll reveal ── */
+    .sr { opacity: 0; transform: translateY(32px); transition: opacity 0.7s cubic-bezier(0.23,1,0.32,1), transform 0.7s cubic-bezier(0.23,1,0.32,1); }
+    .sr.is-visible { opacity: 1; transform: translateY(0); }
+    .sr-d1 { transition-delay: 0.1s; }
+    .sr-d2 { transition-delay: 0.2s; }
+    .sr-d3 { transition-delay: 0.3s; }
+    .sr-d4 { transition-delay: 0.4s; }
+    .sr-d5 { transition-delay: 0.5s; }
+
     @media (max-width: 768px) {
       .site-footer__top { flex-direction: column; }
       .footer-bottom-bar { flex-direction: column; align-items: flex-start; }
-      .stats-row { flex-direction: column; }
-      .stat-item { border-right: none; border-bottom: 1px solid var(--line); }
-      .stat-item:last-child { border-bottom: none; }
     }
-
-    /* ── Header: matches homepage style ── */
-    .header { position: fixed !important; transform: none !important; background: transparent !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; transition: background 0.35s ease, backdrop-filter 0.35s ease !important; }
-    .header.is-scrolled { background: rgba(10,10,10,0.90) !important; backdrop-filter: blur(14px) !important; -webkit-backdrop-filter: blur(14px) !important; }
-    .page-fullhero { position: relative; min-height: 92vh; display: flex; align-items: center; justify-content: center; background-image: url('assets/img/fleet-hero.webp'); background-size: cover; background-position: center 40%; }
-    .page-fullhero__overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.45) 50%, rgba(0,0,0,0.75) 100%); }
-    .page-fullhero__content { position: relative; z-index: 1; text-align: center; padding: clamp(100px,14vh,140px) clamp(24px,6vw,80px) clamp(60px,8vh,100px); max-width: none; width: 100%; }
-    .page-fullhero__eyebrow { font-family: 'Inter',sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; color: #CA953D; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 12px; }
-    .page-fullhero__eyebrow::before, .page-fullhero__eyebrow::after { content: ''; width: 24px; height: 1.5px; background: linear-gradient(135deg,#B67C2A,#CA953D,#E5B85A); flex-shrink: 0; }
-    .page-fullhero__title { font-family: BebasNeuePro,sans-serif; font-weight: 700; font-size: clamp(36px,5vw,72px); line-height: 0.9; letter-spacing: 0.03em; text-transform: uppercase; color: #fff; margin-bottom: 28px; white-space: nowrap; }
-    .page-fullhero__desc { font-family: 'Inter',sans-serif; font-size: clamp(14px,1.1vw,17px); color: rgba(255,255,255,0.65); line-height: 1.72; max-width: 520px; margin: 0 auto; }
-    .header__container { position: relative !important; }
-    .header__menu { position: absolute !important; left: 50% !important; transform: translateX(-50%) !important; background-color: #141414 !important; border: 1px solid rgba(255,255,255,0.1) !important; font-family: BebasNeuePro, sans-serif !important; font-weight: 700 !important; }
-    .header__menu-item, .header__menu-item .text-hover__elem { color: rgba(255,255,255,0.85) !important; }
-    .header__menu-item:hover { color: #CA953D !important; }
-    .nav-drop__trigger { color: rgba(255,255,255,0.85) !important; background: none !important; border: none !important; }
-    .nav-drop__chevron path { stroke: rgba(255,255,255,0.7) !important; }
-    .nav-drop--open .nav-drop__chevron path { stroke: #CA953D !important; }
-    .btn { background-color: #141414 !important; border-color: rgba(255,255,255,0.15) !important; color: rgba(255,255,255,0.88) !important; }
-    .btn:hover { color: #fff !important; }
-    .btn:after { background: linear-gradient(135deg, #B67C2A 0%, #CA953D 50%, #E5B85A 100%) !important; }
-    .btn._accent { background: linear-gradient(135deg, #B67C2A 0%, #CA953D 50%, #E5B85A 100%) !important; border-color: transparent !important; color: #fff !important; }
-    .btn._accent:after { background-color: #141414 !important; }
-    .btn._accent:hover { color: #fff !important; filter: brightness(0.9); }
-    .header__logo { background: transparent !important; padding: 0 !important; height: auto !important; }
-    .header__logo-img { width: auto !important; height: 52px !important; object-fit: contain; }
-    @media (max-width: 1024px) { .header__logo-img { height: 40px !important; } }
   </style>
 </head>
 <body>
@@ -654,210 +669,381 @@
 </header>
 
 <main>
+  <!-- HERO -->
   <section class="page-fullhero">
     <div class="page-fullhero__overlay"></div>
     <div class="page-fullhero__content">
       <p class="page-fullhero__eyebrow">Our Fleet</p>
       <h1 class="page-fullhero__title">Modern Trucks. Zero Downtime.</h1>
       <p class="page-fullhero__desc">150+ heavy vehicles across 4 categories — maintained to the highest standard and available with or without certified operators across all 12 KSA regions.</p>
+      <a href="contact.html" class="gold-btn">Request Fleet Quote</a>
+    </div>
+    <div class="hero-scroll-hint">
+      <div class="hero-scroll-hint__line"></div>
+      <span>Scroll</span>
     </div>
   </section>
 
-
-  <!-- Fleet Categories -->
-  <section class="section-inner">
-    <p class="section-eyebrow">Fleet Categories</p>
-    <h2 class="section-title">Every Vehicle. Every Job.</h2>
-    <p class="section-sub">From standard dump trucks for city projects to articulated haulers for remote mining sites — NOVA Terra operates the right machine for your terrain.</p>
-
-    <div class="fleet-list">
-
-      <div class="fleet-row">
-        <span class="fleet-row__num">01</span>
-        <div class="fleet-row__left">
-          <span class="fleet-badge">Standard Series</span>
-          <h3 class="fleet-row__name">Standard Dump Trucks</h3>
-          <p class="fleet-row__desc">Workhorse fleet for urban construction, road projects, and general earthmoving across paved and graded terrain.</p>
-        </div>
-        <div class="fleet-row__specs">
-          <div><p class="fleet-spec-item__key">Payload Capacity</p><p class="fleet-spec-item__val">10 – 20 t</p></div>
-          <div><p class="fleet-spec-item__key">Body Volume</p><p class="fleet-spec-item__val">8 – 15 m³</p></div>
-          <div><p class="fleet-spec-item__key">Drive Config</p><p class="fleet-spec-item__val">6×4 / 6×6</p></div>
-          <div><p class="fleet-spec-item__key">Engine Output</p><p class="fleet-spec-item__val">350 – 450 hp</p></div>
-          <div><p class="fleet-spec-item__key">Fleet Size</p><p class="fleet-spec-item__val">60 units</p></div>
-        </div>
-      </div>
-
-      <div class="fleet-row">
-        <span class="fleet-row__num">02</span>
-        <div class="fleet-row__left">
-          <span class="fleet-badge">Heavy-Duty Series</span>
-          <h3 class="fleet-row__name">Heavy-Duty Haulers</h3>
-          <p class="fleet-row__desc">High-payload rigid trucks for quarry operations, mass excavation, and large-scale infrastructure development.</p>
-        </div>
-        <div class="fleet-row__specs">
-          <div><p class="fleet-spec-item__key">Payload Capacity</p><p class="fleet-spec-item__val">25 – 40 t</p></div>
-          <div><p class="fleet-spec-item__key">Body Volume</p><p class="fleet-spec-item__val">18 – 30 m³</p></div>
-          <div><p class="fleet-spec-item__key">Drive Config</p><p class="fleet-spec-item__val">8×4</p></div>
-          <div><p class="fleet-spec-item__key">Engine Output</p><p class="fleet-spec-item__val">500 – 600 hp</p></div>
-          <div><p class="fleet-spec-item__key">Fleet Size</p><p class="fleet-spec-item__val">45 units</p></div>
-        </div>
-      </div>
-
-      <div class="fleet-row">
-        <span class="fleet-row__num">03</span>
-        <div class="fleet-row__left">
-          <span class="fleet-badge">Off-Road Series</span>
-          <h3 class="fleet-row__name">Articulated ADTs</h3>
-          <p class="fleet-row__desc">Articulated dump trucks engineered for rough, off-road terrain — ideal for giga projects, NEOM sites, and remote desert operations.</p>
-        </div>
-        <div class="fleet-row__specs">
-          <div><p class="fleet-spec-item__key">Payload Capacity</p><p class="fleet-spec-item__val">30 – 60 t</p></div>
-          <div><p class="fleet-spec-item__key">Body Volume</p><p class="fleet-spec-item__val">20 – 42 m³</p></div>
-          <div><p class="fleet-spec-item__key">Drive Config</p><p class="fleet-spec-item__val">6×6 All-Wheel</p></div>
-          <div><p class="fleet-spec-item__key">Engine Output</p><p class="fleet-spec-item__val">520 – 700 hp</p></div>
-          <div><p class="fleet-spec-item__key">Fleet Size</p><p class="fleet-spec-item__val">30 units</p></div>
-        </div>
-      </div>
-
-      <div class="fleet-row">
-        <span class="fleet-row__num">04</span>
-        <div class="fleet-row__left">
-          <span class="fleet-badge">Long-Haul Series</span>
-          <h3 class="fleet-row__name">Tipper Semi-Trailers</h3>
-          <p class="fleet-row__desc">Long-haul tipper configurations for inter-regional bulk material transport — aggregate, sand, asphalt, and construction fill.</p>
-        </div>
-        <div class="fleet-row__specs">
-          <div><p class="fleet-spec-item__key">Payload Capacity</p><p class="fleet-spec-item__val">35 – 50 t</p></div>
-          <div><p class="fleet-spec-item__key">Body Volume</p><p class="fleet-spec-item__val">28 – 45 m³</p></div>
-          <div><p class="fleet-spec-item__key">Drive Config</p><p class="fleet-spec-item__val">6×4 Tractor</p></div>
-          <div><p class="fleet-spec-item__key">Engine Output</p><p class="fleet-spec-item__val">480 – 560 hp</p></div>
-          <div><p class="fleet-spec-item__key">Fleet Size</p><p class="fleet-spec-item__val">15 units</p></div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Cost Calculator -->
-  <section class="section-inner" style="padding-top:0;">
-    <p class="section-eyebrow">Cost Calculator</p>
-    <h2 class="section-title">See Your Savings</h2>
-    <p class="section-sub">Compare fixed ownership against NOVA Terra's flexible rental. Drag the sliders to match your project.</p>
-
-    <div class="calc-wrap">
-      <div class="calc-inner">
-
-        <!-- Left: controls -->
-        <div class="calc-left">
-          <h3 class="calc-left__headline">Stop Paying for <span>Idle Fleet.</span></h3>
-          <p class="calc-left__desc">Fixed truck ownership forces you to pay 100% of costs even when utilisation drops. Compare the real numbers against NOVA Terra's flexible model.</p>
-
-          <div class="slider-group">
-            <div class="slider-label">
-              <span>Number of Trucks</span>
-              <span class="slider-val" id="val-trucks">10</span>
-            </div>
-            <input type="range" id="sl-trucks" min="1" max="50" value="10" />
-          </div>
-
-          <div class="slider-group">
-            <div class="slider-label">
-              <span>Contract Duration</span>
-              <span class="slider-val" id="val-months">6 months</span>
-            </div>
-            <input type="range" id="sl-months" min="1" max="24" value="6" />
-          </div>
-
-          <div class="slider-group">
-            <div class="slider-label">
-              <span>Fleet Utilisation</span>
-              <span class="slider-val" id="val-util">70%</span>
-            </div>
-            <input type="range" id="sl-util" min="40" max="100" step="5" value="70" />
-          </div>
-        </div>
-
-        <!-- Right: chart -->
-        <div class="calc-right">
-          <div class="calc-chart-header">
-            <div>
-              <p class="calc-chart-title">Fixed vs. NOVA TLT Monthly Cost</p>
-            </div>
-            <div class="calc-savings-badge">
-              <span class="calc-savings-badge__label">Estimated Savings (<span id="out-pct">44</span>%)</span>
-              <span class="calc-savings-badge__num" id="out-savings">SAR 1,161,600</span>
-            </div>
-          </div>
-          <div class="calc-legend">
-            <div class="calc-legend__item">
-              <span class="calc-legend__swatch" style="background:rgba(255,255,255,0.2);"></span> Fixed Cost
-            </div>
-            <div class="calc-legend__item">
-              <span class="calc-legend__swatch" style="background:linear-gradient(90deg,#B67C2A,#E5B85A);"></span> NOVA TLT Cost
-            </div>
-          </div>
-          <canvas id="calc-canvas"></canvas>
-          <div class="calc-cta-row">
-            <p class="calc-disclaimer">*Estimates are illustrative and based on typical KSA fleet rates. Actual savings vary by project scope and contract terms.</p>
-            <a href="contact.html" class="gold-btn">Get a Formal Quote</a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Fleet Standards -->
-  <section class="section-inner">
-    <p class="section-eyebrow">Maintenance Standards</p>
-    <h2 class="section-title">Fleet Kept at Peak Condition</h2>
-    <p class="section-sub">Every NOVA Terra vehicle follows a rigorous preventive maintenance schedule — ensuring reliability, safety, and minimal downtime on your project.</p>
-    <div class="card-grid">
-      <div class="card">
-        <div class="card__icon">🔧</div>
-        <h3 class="card__title">Preventive Maintenance</h3>
-        <p class="card__text">All vehicles follow manufacturer-recommended service intervals, with full records maintained in our fleet management system.</p>
-      </div>
-      <div class="card">
-        <div class="card__icon">🛡️</div>
-        <h3 class="card__title">Daily Pre-Trip Inspections</h3>
-        <p class="card__text">Operators complete a structured 20-point inspection before every shift. Non-compliant units are pulled from service immediately.</p>
-      </div>
-      <div class="card">
-        <div class="card__icon">📡</div>
-        <h3 class="card__title">GPS &amp; Telematics</h3>
-        <p class="card__text">100% of fleet equipped with real-time GPS tracking and engine telematics for visibility, efficiency, and compliance reporting.</p>
-      </div>
-      <div class="card">
-        <div class="card__icon">⚙️</div>
-        <h3 class="card__title">On-Site Workshop Support</h3>
-        <p class="card__text">Mobile maintenance units and on-site mechanics available for large fleet contracts to minimise response times and keep operations moving.</p>
-      </div>
-      <div class="card">
-        <div class="card__icon">🔄</div>
-        <h3 class="card__title">Replacement Guarantee</h3>
-        <p class="card__text">If a unit goes down during your contract, a replacement is dispatched within 4 hours — no project delays, no exceptions.</p>
-      </div>
-      <div class="card">
-        <div class="card__icon">📋</div>
-        <h3 class="card__title">Compliance Documentation</h3>
-        <p class="card__text">Full registration, insurance, operator licensing, and inspection documentation available at all times for client and regulatory review.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <div class="section-inner" style="padding-top:0;">
-    <div class="inner-cta">
-      <h2 class="inner-cta__title">Ready to Deploy?</h2>
-      <p class="inner-cta__sub">Tell us your project scope and we will match you with the right fleet configuration — with or without operators.</p>
-      <div class="btn-row">
-        <a href="contact.html" class="gold-btn">Request Fleet Quote</a>
-        <a href="services.html" class="ghost-btn">View Services</a>
-      </div>
+  <!-- STATS TICKER -->
+  <div class="stats-ticker">
+    <div class="stats-ticker__track">
+      <div class="stats-ticker__item"><span class="stats-ticker__num">150+</span><span class="stats-ticker__label">Heavy Vehicles</span></div>
+      <div class="stats-ticker__item"><span class="stats-ticker__num">4</span><span class="stats-ticker__label">Fleet Categories</span></div>
+      <div class="stats-ticker__item"><span class="stats-ticker__num">60t</span><span class="stats-ticker__label">Max Payload</span></div>
+      <div class="stats-ticker__item"><span class="stats-ticker__num">12</span><span class="stats-ticker__label">KSA Regions</span></div>
+      <div class="stats-ticker__item"><span class="stats-ticker__num">24/7</span><span class="stats-ticker__label">Dispatch Available</span></div>
+      <div class="stats-ticker__item"><span class="stats-ticker__num">4hr</span><span class="stats-ticker__label">Replacement SLA</span></div>
+      <div class="stats-ticker__item"><span class="stats-ticker__num">500+</span><span class="stats-ticker__label">Projects Completed</span></div>
+      <div class="stats-ticker__item"><span class="stats-ticker__num">100%</span><span class="stats-ticker__label">GPS Tracked</span></div>
+      <div class="stats-ticker__item"><span class="stats-ticker__num">20yr</span><span class="stats-ticker__label">Industry Experience</span></div>
+      <div class="stats-ticker__item"><span class="stats-ticker__num">ISO</span><span class="stats-ticker__label">Certified Operations</span></div>
+      <!-- duplicates for seamless loop -->
+      <div class="stats-ticker__item"><span class="stats-ticker__num">150+</span><span class="stats-ticker__label">Heavy Vehicles</span></div>
+      <div class="stats-ticker__item"><span class="stats-ticker__num">4</span><span class="stats-ticker__label">Fleet Categories</span></div>
+      <div class="stats-ticker__item"><span class="stats-ticker__num">60t</span><span class="stats-ticker__label">Max Payload</span></div>
+      <div class="stats-ticker__item"><span class="stats-ticker__num">12</span><span class="stats-ticker__label">KSA Regions</span></div>
+      <div class="stats-ticker__item"><span class="stats-ticker__num">24/7</span><span class="stats-ticker__label">Dispatch Available</span></div>
+      <div class="stats-ticker__item"><span class="stats-ticker__num">4hr</span><span class="stats-ticker__label">Replacement SLA</span></div>
+      <div class="stats-ticker__item"><span class="stats-ticker__num">500+</span><span class="stats-ticker__label">Projects Completed</span></div>
+      <div class="stats-ticker__item"><span class="stats-ticker__num">100%</span><span class="stats-ticker__label">GPS Tracked</span></div>
+      <div class="stats-ticker__item"><span class="stats-ticker__num">20yr</span><span class="stats-ticker__label">Industry Experience</span></div>
+      <div class="stats-ticker__item"><span class="stats-ticker__num">ISO</span><span class="stats-ticker__label">Certified Operations</span></div>
     </div>
   </div>
+
+  <!-- FLEET SHOWCASE -->
+  <section class="fleet-showcase">
+    <div class="fleet-showcase__inner">
+      <div class="fleet-showcase__head sr">
+        <p class="eyebrow">Fleet Categories</p>
+        <h2 class="display-title">Every Vehicle.<br><span>Every Job.</span></h2>
+      </div>
+
+      <div class="fleet-showcase__layout">
+        <!-- Left nav -->
+        <nav class="fleet-nav" aria-label="Fleet categories">
+          <div class="fleet-nav__item is-active" data-fleet="0">
+            <span class="fleet-nav__num">01</span>
+            <div class="fleet-nav__info">
+              <span class="fleet-nav__badge">Standard Series</span>
+              <h3 class="fleet-nav__name">Standard Dump Trucks</h3>
+            </div>
+          </div>
+          <div class="fleet-nav__item" data-fleet="1">
+            <span class="fleet-nav__num">02</span>
+            <div class="fleet-nav__info">
+              <span class="fleet-nav__badge">Heavy-Duty Series</span>
+              <h3 class="fleet-nav__name">Heavy-Duty Haulers</h3>
+            </div>
+          </div>
+          <div class="fleet-nav__item" data-fleet="2">
+            <span class="fleet-nav__num">03</span>
+            <div class="fleet-nav__info">
+              <span class="fleet-nav__badge">Off-Road Series</span>
+              <h3 class="fleet-nav__name">Articulated ADTs</h3>
+            </div>
+          </div>
+          <div class="fleet-nav__item" data-fleet="3">
+            <span class="fleet-nav__num">04</span>
+            <div class="fleet-nav__info">
+              <span class="fleet-nav__badge">Long-Haul Series</span>
+              <h3 class="fleet-nav__name">Tipper Semi-Trailers</h3>
+            </div>
+          </div>
+        </nav>
+
+        <!-- Right panels -->
+        <div class="fleet-panel">
+          <!-- Panel 0 -->
+          <div class="fleet-panel__pane is-active" data-fleet="0">
+            <h2 class="fleet-panel__title">Standard<br>Dump Trucks</h2>
+            <p class="fleet-panel__desc">Workhorse fleet for urban construction, road projects, and general earthmoving across paved and graded terrain. The backbone of most KSA civil works contracts.</p>
+            <div class="fleet-specs-grid">
+              <div class="fleet-spec-cell">
+                <p class="fleet-spec-cell__key">Payload Capacity</p>
+                <p class="fleet-spec-cell__val is-gold">10 – 20 t</p>
+              </div>
+              <div class="fleet-spec-cell">
+                <p class="fleet-spec-cell__key">Body Volume</p>
+                <p class="fleet-spec-cell__val">8 – 15 m³</p>
+              </div>
+              <div class="fleet-spec-cell">
+                <p class="fleet-spec-cell__key">Drive Config</p>
+                <p class="fleet-spec-cell__val">6×4 / 6×6</p>
+              </div>
+              <div class="fleet-spec-cell">
+                <p class="fleet-spec-cell__key">Engine Output</p>
+                <p class="fleet-spec-cell__val">350 – 450 hp</p>
+              </div>
+              <div class="fleet-spec-cell">
+                <p class="fleet-spec-cell__key">Fleet Size</p>
+                <p class="fleet-spec-cell__val is-gold">60 units</p>
+              </div>
+              <div class="fleet-spec-cell">
+                <p class="fleet-spec-cell__key">Terrain</p>
+                <p class="fleet-spec-cell__val">Paved / Graded</p>
+              </div>
+            </div>
+            <a href="contact.html" class="fleet-panel__cta">
+              <span class="fleet-panel__cta-text">Enquire About This Category</span>
+              <span class="fleet-panel__cta-arrow">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#CA953D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </a>
+          </div>
+
+          <!-- Panel 1 -->
+          <div class="fleet-panel__pane" data-fleet="1">
+            <h2 class="fleet-panel__title">Heavy-Duty<br>Haulers</h2>
+            <p class="fleet-panel__desc">High-payload rigid trucks for quarry operations, mass excavation, and large-scale infrastructure development. Built for relentless daily cycles on demanding terrain.</p>
+            <div class="fleet-specs-grid">
+              <div class="fleet-spec-cell">
+                <p class="fleet-spec-cell__key">Payload Capacity</p>
+                <p class="fleet-spec-cell__val is-gold">25 – 40 t</p>
+              </div>
+              <div class="fleet-spec-cell">
+                <p class="fleet-spec-cell__key">Body Volume</p>
+                <p class="fleet-spec-cell__val">18 – 30 m³</p>
+              </div>
+              <div class="fleet-spec-cell">
+                <p class="fleet-spec-cell__key">Drive Config</p>
+                <p class="fleet-spec-cell__val">8×4</p>
+              </div>
+              <div class="fleet-spec-cell">
+                <p class="fleet-spec-cell__key">Engine Output</p>
+                <p class="fleet-spec-cell__val">500 – 600 hp</p>
+              </div>
+              <div class="fleet-spec-cell">
+                <p class="fleet-spec-cell__key">Fleet Size</p>
+                <p class="fleet-spec-cell__val is-gold">45 units</p>
+              </div>
+              <div class="fleet-spec-cell">
+                <p class="fleet-spec-cell__key">Best For</p>
+                <p class="fleet-spec-cell__val">Quarry / Mass Exc.</p>
+              </div>
+            </div>
+            <a href="contact.html" class="fleet-panel__cta">
+              <span class="fleet-panel__cta-text">Enquire About This Category</span>
+              <span class="fleet-panel__cta-arrow">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#CA953D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </a>
+          </div>
+
+          <!-- Panel 2 -->
+          <div class="fleet-panel__pane" data-fleet="2">
+            <h2 class="fleet-panel__title">Articulated<br>ADTs</h2>
+            <p class="fleet-panel__desc">Articulated dump trucks engineered for rough, off-road terrain — ideal for giga projects, NEOM sites, and remote desert operations where rigid trucks cannot operate.</p>
+            <div class="fleet-specs-grid">
+              <div class="fleet-spec-cell">
+                <p class="fleet-spec-cell__key">Payload Capacity</p>
+                <p class="fleet-spec-cell__val is-gold">30 – 60 t</p>
+              </div>
+              <div class="fleet-spec-cell">
+                <p class="fleet-spec-cell__key">Body Volume</p>
+                <p class="fleet-spec-cell__val">20 – 42 m³</p>
+              </div>
+              <div class="fleet-spec-cell">
+                <p class="fleet-spec-cell__key">Drive Config</p>
+                <p class="fleet-spec-cell__val">6×6 AWD</p>
+              </div>
+              <div class="fleet-spec-cell">
+                <p class="fleet-spec-cell__key">Engine Output</p>
+                <p class="fleet-spec-cell__val">520 – 700 hp</p>
+              </div>
+              <div class="fleet-spec-cell">
+                <p class="fleet-spec-cell__key">Fleet Size</p>
+                <p class="fleet-spec-cell__val is-gold">30 units</p>
+              </div>
+              <div class="fleet-spec-cell">
+                <p class="fleet-spec-cell__key">Terrain</p>
+                <p class="fleet-spec-cell__val">Off-Road / Desert</p>
+              </div>
+            </div>
+            <a href="contact.html" class="fleet-panel__cta">
+              <span class="fleet-panel__cta-text">Enquire About This Category</span>
+              <span class="fleet-panel__cta-arrow">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#CA953D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </a>
+          </div>
+
+          <!-- Panel 3 -->
+          <div class="fleet-panel__pane" data-fleet="3">
+            <h2 class="fleet-panel__title">Tipper<br>Semi-Trailers</h2>
+            <p class="fleet-panel__desc">Long-haul tipper configurations for inter-regional bulk material transport — aggregate, sand, asphalt, and construction fill across KSA's major highway corridors.</p>
+            <div class="fleet-specs-grid">
+              <div class="fleet-spec-cell">
+                <p class="fleet-spec-cell__key">Payload Capacity</p>
+                <p class="fleet-spec-cell__val is-gold">35 – 50 t</p>
+              </div>
+              <div class="fleet-spec-cell">
+                <p class="fleet-spec-cell__key">Body Volume</p>
+                <p class="fleet-spec-cell__val">28 – 45 m³</p>
+              </div>
+              <div class="fleet-spec-cell">
+                <p class="fleet-spec-cell__key">Drive Config</p>
+                <p class="fleet-spec-cell__val">6×4 Tractor</p>
+              </div>
+              <div class="fleet-spec-cell">
+                <p class="fleet-spec-cell__key">Engine Output</p>
+                <p class="fleet-spec-cell__val">480 – 560 hp</p>
+              </div>
+              <div class="fleet-spec-cell">
+                <p class="fleet-spec-cell__key">Fleet Size</p>
+                <p class="fleet-spec-cell__val is-gold">15 units</p>
+              </div>
+              <div class="fleet-spec-cell">
+                <p class="fleet-spec-cell__key">Best For</p>
+                <p class="fleet-spec-cell__val">Long-Haul Bulk</p>
+              </div>
+            </div>
+            <a href="contact.html" class="fleet-panel__cta">
+              <span class="fleet-panel__cta-text">Enquire About This Category</span>
+              <span class="fleet-panel__cta-arrow">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#CA953D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COST CALCULATOR -->
+  <div style="background:#0a0a0a;">
+    <section class="section-pad" style="max-width:1400px;margin:0 auto;">
+      <p class="eyebrow sr">Cost Calculator</p>
+      <h2 class="display-title sr sr-d1">See Your <span>Savings</span></h2>
+      <p class="body-text sr sr-d2" style="max-width:560px;margin-top:16px;margin-bottom:0;">Compare fixed ownership against NOVA Terra's flexible rental. Drag the sliders to match your project.</p>
+
+      <div class="calc-wrap">
+        <div class="calc-inner">
+          <div class="calc-left">
+            <h3 class="calc-left__headline">Stop Paying for <span>Idle Fleet.</span></h3>
+            <p class="calc-left__desc">Fixed truck ownership forces you to pay 100% of costs even when utilisation drops. Compare the real numbers against NOVA Terra's flexible model.</p>
+            <div class="slider-group">
+              <div class="slider-label"><span>Number of Trucks</span><span class="slider-val" id="val-trucks">10</span></div>
+              <input type="range" id="sl-trucks" min="1" max="50" value="10" />
+            </div>
+            <div class="slider-group">
+              <div class="slider-label"><span>Contract Duration</span><span class="slider-val" id="val-months">6 months</span></div>
+              <input type="range" id="sl-months" min="1" max="24" value="6" />
+            </div>
+            <div class="slider-group">
+              <div class="slider-label"><span>Fleet Utilisation</span><span class="slider-val" id="val-util">70%</span></div>
+              <input type="range" id="sl-util" min="40" max="100" step="5" value="70" />
+            </div>
+          </div>
+          <div class="calc-right">
+            <div class="calc-chart-header">
+              <div><p class="calc-chart-title">Fixed vs. NOVA TLT Monthly Cost</p></div>
+              <div class="calc-savings-badge">
+                <span class="calc-savings-badge__label">Estimated Savings (<span id="out-pct">44</span>%)</span>
+                <span class="calc-savings-badge__num" id="out-savings">SAR 1,161,600</span>
+              </div>
+            </div>
+            <div class="calc-legend">
+              <div class="calc-legend__item"><span class="calc-legend__swatch" style="background:rgba(255,255,255,0.2);"></span> Fixed Cost</div>
+              <div class="calc-legend__item"><span class="calc-legend__swatch" style="background:linear-gradient(90deg,#B67C2A,#E5B85A);"></span> NOVA TLT Cost</div>
+            </div>
+            <canvas id="calc-canvas"></canvas>
+            <div class="calc-cta-row">
+              <p class="calc-disclaimer">*Estimates are illustrative and based on typical KSA fleet rates. Actual savings vary by project scope and contract terms.</p>
+              <a href="contact.html" class="gold-btn">Get a Formal Quote</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- MAINTENANCE STANDARDS -->
+  <section class="maint-sec">
+    <div class="section-pad" style="max-width:1400px;margin:0 auto;">
+      <p class="eyebrow sr">Maintenance Standards</p>
+      <h2 class="display-title sr sr-d1">Fleet Kept at<br><span>Peak Condition</span></h2>
+      <p class="body-text sr sr-d2" style="max-width:560px;margin-top:16px;">Every NOVA Terra vehicle follows a rigorous preventive maintenance schedule — ensuring reliability, safety, and minimal downtime on your project.</p>
+
+      <div class="maint-grid">
+        <div class="maint-item sr sr-d1">
+          <div class="maint-icon">
+            <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <div class="maint-body">
+            <h3 class="maint-title">Preventive Maintenance</h3>
+            <p class="maint-text">All vehicles follow manufacturer-recommended service intervals, with full records maintained in our fleet management system.</p>
+          </div>
+        </div>
+        <div class="maint-item sr sr-d2">
+          <div class="maint-icon">
+            <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          </div>
+          <div class="maint-body">
+            <h3 class="maint-title">Daily Pre-Trip Inspections</h3>
+            <p class="maint-text">Operators complete a structured 20-point inspection before every shift. Non-compliant units are pulled from service immediately.</p>
+          </div>
+        </div>
+        <div class="maint-item sr sr-d3">
+          <div class="maint-icon">
+            <svg viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+          <div class="maint-body">
+            <h3 class="maint-title">GPS &amp; Telematics</h3>
+            <p class="maint-text">100% of fleet equipped with real-time GPS tracking and engine telematics for visibility, efficiency, and compliance reporting.</p>
+          </div>
+        </div>
+        <div class="maint-item sr sr-d4">
+          <div class="maint-icon">
+            <svg viewBox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+          </div>
+          <div class="maint-body">
+            <h3 class="maint-title">On-Site Workshop Support</h3>
+            <p class="maint-text">Mobile maintenance units and on-site mechanics available for large fleet contracts to minimise response times and keep operations moving.</p>
+          </div>
+        </div>
+        <div class="maint-item sr sr-d5">
+          <div class="maint-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          </div>
+          <div class="maint-body">
+            <h3 class="maint-title">4-Hour Replacement Guarantee</h3>
+            <p class="maint-text">If a unit goes down during your contract, a replacement is dispatched within 4 hours — no project delays, no exceptions.</p>
+          </div>
+        </div>
+        <div class="maint-item sr sr-d5">
+          <div class="maint-icon">
+            <svg viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          </div>
+          <div class="maint-body">
+            <h3 class="maint-title">Compliance Documentation</h3>
+            <p class="maint-text">Full registration, insurance, operator licensing, and inspection documentation available at all times for client and regulatory review.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA — rotating rings -->
+  <section class="cta2-sec">
+    <div class="cta2-sec__rings">
+      <div class="cta2-sec__ring"></div>
+      <div class="cta2-sec__ring"></div>
+      <div class="cta2-sec__ring"></div>
+      <div class="cta2-sec__ring"></div>
+    </div>
+    <div class="section-pad" style="max-width:1400px;margin:0 auto;position:relative;z-index:2;">
+      <div class="cta2-sec__card">
+        <p class="cta2-sec__eyebrow">Ready to Deploy</p>
+        <h2 class="cta2-sec__title">Let's Match<br>Your Fleet</h2>
+        <p class="cta2-sec__sub">Tell us your project scope and we'll match you with the right fleet configuration — with or without certified operators — across all 12 KSA regions.</p>
+        <div class="cta2-sec__btns">
+          <a href="contact.html" class="gold-btn">Request Fleet Quote</a>
+          <a href="services.html" class="ghost-btn">View Services</a>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer class="site-footer">
@@ -1022,7 +1208,6 @@
     var chartW = W - padL - padR;
     var chartH = H - padT - padB;
 
-    // Grid lines + y-axis labels
     var gridSteps = 5;
     ctx.font = '10px Inter, sans-serif';
     ctx.textBaseline = 'middle';
@@ -1038,7 +1223,6 @@
       ctx.fillText(label, padL - 6, gy);
     }
 
-    // Bars
     var pairW = chartW / maxBars;
     var barW  = Math.max(4, Math.min(20, pairW * 0.32));
     var gap   = Math.max(2, pairW * 0.06);
@@ -1049,13 +1233,11 @@
       var fixedH = (fixedPM / maxVal) * chartH;
       var novaH  = (novaPM  / maxVal) * chartH;
 
-      // Fixed bar
       ctx.fillStyle = 'rgba(255,255,255,0.15)';
       ctx.beginPath();
       ctx.roundRect(bx, padT + chartH - fixedH, barW, fixedH, [3,3,0,0]);
       ctx.fill();
 
-      // NOVA bar
       var grad = ctx.createLinearGradient(0, padT + chartH - novaH, 0, padT + chartH);
       grad.addColorStop(0, '#E5B85A');
       grad.addColorStop(0.5, '#CA953D');
@@ -1065,7 +1247,6 @@
       ctx.roundRect(bx + barW + gap, padT + chartH - novaH, barW, novaH, [3,3,0,0]);
       ctx.fill();
 
-      // X label
       ctx.fillStyle = 'rgba(255,255,255,0.3)';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'top';
@@ -1157,6 +1338,38 @@
   onScroll();
 })();
 </script>
-<script src="assets/js/page-transition.js"></script>
+
+<!-- Fleet showcase tab switching + scroll reveal -->
+<script>
+(function(){
+  // Fleet showcase tab switching
+  var navItems = document.querySelectorAll('.fleet-nav__item');
+  var panels   = document.querySelectorAll('.fleet-panel__pane');
+
+  function activateFleet(idx) {
+    navItems.forEach(function(el){ el.classList.remove('is-active'); });
+    panels.forEach(function(el){ el.classList.remove('is-active'); });
+    navItems[idx].classList.add('is-active');
+    panels[idx].classList.add('is-active');
+  }
+
+  navItems.forEach(function(item, i){
+    item.addEventListener('click', function(){ activateFleet(i); });
+  });
+
+  // Scroll reveal
+  var srEls = document.querySelectorAll('.sr');
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) { e.target.classList.add('is-visible'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    srEls.forEach(function(el){ obs.observe(el); });
+  } else {
+    srEls.forEach(function(el){ el.classList.add('is-visible'); });
+  }
+})();
+</script>
 </body>
 </html>
