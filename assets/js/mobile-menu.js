@@ -34,7 +34,6 @@
       '<div class="mob-sub-panel" id="mob-panel-company">' +
         '<div class="mob-sub-panel-title">Company</div>' +
         '<a href="about.html" class="mob-panel-link">About Us</a>' +
-        '<a href="safety.html" class="mob-panel-link">Safety &amp; Quality</a>' +
         '<a href="careers.html" class="mob-panel-link">Careers</a>' +
       '</div>' +
       '<div class="mob-sub-panel" id="mob-panel-whatwedo">' +
