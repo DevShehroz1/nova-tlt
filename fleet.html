@@ -567,9 +567,18 @@
     }
     .gcta-btn:hover { opacity: 0.9; transform: translateY(-1px); }
 
-    @media (max-width: 768px) {
-      .site-footer__top { flex-direction: column; }
-      .footer-bottom-bar { flex-direction: column; align-items: flex-start; }
+    @media(max-width:768px){
+      .site-footer__top{flex-direction:column;gap:32px;padding:40px 20px 28px;}
+      .footer-brand{max-width:100%;}
+      .footer-brand__logo{height:40px;margin-bottom:14px;}
+      .footer-brand__desc{font-size:13px;}
+      .footer-certs{gap:6px;}
+      .footer-links-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px 24px;width:100%;}
+      .footer-links-col:last-child{grid-column:1 / -1;}
+      .footer-links-col__title{margin-bottom:12px;}
+      .footer-links-col__list{gap:8px;}
+      .footer-bottom-bar{flex-direction:column;align-items:flex-start;gap:8px;padding:16px 20px;}
+      .footer-bottom-bar__legal{margin-top:4px;}
     }
 
     /* ── Bento-2 grid ── */
@@ -1395,335 +1404,6 @@
     </div>
   </section>
 
-  <!-- FEATURE-4: Fleet Stats Cards -->
-  <section style="background:#0a0a0a;border-top:1px solid rgba(255,255,255,0.06);">
-    <div class="section-pad" style="max-width:1400px;margin:0 auto;">
-      <div class="feat4-head sr">
-        <h2 class="feat4-title">Know Your Fleet.<br><span>Move Smarter.</span></h2>
-        <p class="feat4-desc">Full visibility on deployment rates, utilisation, and on-time delivery — so your project always stays ahead of schedule.</p>
-      </div>
-      <div class="feat4-grid">
-
-        <!-- Card 1: Active Deployments -->
-        <div class="feat4-card sr">
-          <div class="feat4-card__head">
-            <h3 class="feat4-card__title">Active Deployments</h3>
-            <p class="feat4-card__desc">Live vehicle count and monthly trend — see exactly how many trucks are on the ground at any moment.</p>
-          </div>
-          <div class="feat4-widget">
-            <div class="feat4-widget__header">
-              <span class="feat4-widget__label"><span class="feat4-widget__dot"></span>Live vehicles</span>
-              <span style="font-family:'Inter',sans-serif;font-size:11px;color:#CA953D;">● active</span>
-            </div>
-            <div style="display:flex;align-items:flex-end;justify-content:space-between;">
-              <span class="feat4-stat-big">127</span>
-              <span style="font-family:'Inter',sans-serif;font-size:13px;color:#CA953D;font-weight:600;">+18%</span>
-            </div>
-            <div class="feat4-bars">
-              <div class="feat4-bars__bar" style="height:42%;"></div>
-              <div class="feat4-bars__bar" style="height:60%;"></div>
-              <div class="feat4-bars__bar" style="height:38%;"></div>
-              <div class="feat4-bars__bar" style="height:75%;"></div>
-              <div class="feat4-bars__bar" style="height:54%;"></div>
-              <div class="feat4-bars__bar" style="height:85%;"></div>
-              <div class="feat4-bars__bar is-last" style="height:100%;"></div>
-            </div>
-            <div class="feat4-mini-grid">
-              <div class="feat4-mini-cell">
-                <p class="feat4-mini-cell__lbl">Avg Cycle</p>
-                <p class="feat4-mini-cell__val">3.2h</p>
-              </div>
-              <div class="feat4-mini-cell">
-                <p class="feat4-mini-cell__lbl">Downtime</p>
-                <p class="feat4-mini-cell__val is-gold">-1.4%</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 2: Fleet Utilisation -->
-        <div class="feat4-card sr sr-d1">
-          <div class="feat4-card__head">
-            <h3 class="feat4-card__title">Fleet Utilisation</h3>
-            <p class="feat4-card__desc">Utilisation rates by fleet category — identify which truck types deliver highest project efficiency.</p>
-          </div>
-          <div class="feat4-widget">
-            <div class="feat4-widget__header">
-              <span class="feat4-widget__label">Category breakdown</span>
-              <span style="font-family:'Inter',sans-serif;font-size:11px;color:rgba(255,255,255,0.3);">4 types</span>
-            </div>
-            <div class="feat4-donut">
-              <div style="position:relative;width:110px;height:110px;display:flex;align-items:center;justify-content:center;">
-                <svg viewBox="0 0 110 110" style="width:110px;height:110px;transform:rotate(-90deg);">
-                  <circle cx="55" cy="55" r="44" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="10"/>
-                  <circle cx="55" cy="55" r="44" fill="none" stroke="url(#dGold)" stroke-width="10" stroke-dasharray="234 276" stroke-linecap="round"/>
-                  <defs><linearGradient id="dGold" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#B67C2A"/><stop offset="100%" stop-color="#E5B85A"/></linearGradient></defs>
-                </svg>
-                <span style="position:absolute;font-family:BebasNeuePro,sans-serif;font-size:28px;letter-spacing:0.04em;color:#fff;line-height:1;">85%</span>
-              </div>
-            </div>
-            <div class="feat4-row-list">
-              <div class="feat4-row-item"><span>Standard Dump Trucks</span><span>84%</span></div>
-              <div class="feat4-row-item"><span>Heavy-Duty Haulers</span><span>91%</span></div>
-              <div class="feat4-row-item"><span>Articulated ADTs</span><span>76%</span></div>
-            </div>
-            <div style="display:flex;gap:5px;">
-              <div style="background:var(--gold-grad);height:5px;border-radius:3px;flex:85;"></div>
-              <div style="background:rgba(255,255,255,0.1);height:5px;border-radius:3px;flex:15;"></div>
-            </div>
-            <div class="feat4-bottom-bar">
-              <span>Overall average</span>
-              <span>Accelerating</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 3: Delivery Performance -->
-        <div class="feat4-card sr sr-d2">
-          <div class="feat4-card__head">
-            <h3 class="feat4-card__title">Delivery Performance</h3>
-            <p class="feat4-card__desc">On-time delivery, tonnage efficiency, and safety compliance — the KPIs that protect your project timeline.</p>
-          </div>
-          <div class="feat4-widget">
-            <div class="feat4-widget__header">
-              <span class="feat4-widget__label">Performance score</span>
-              <span class="feat4-widget__badge">+4.8%</span>
-            </div>
-            <div class="feat4-stat-big">96</div>
-            <div style="display:flex;flex-direction:column;gap:14px;">
-              <div>
-                <div style="display:flex;justify-content:space-between;font-family:'Inter',sans-serif;font-size:11px;color:rgba(255,255,255,0.32);margin-bottom:6px;"><span>On-Time Delivery</span><span>94%</span></div>
-                <div class="feat4-progress-bar"><div class="feat4-progress-bar__fill" style="width:94%;"></div></div>
-              </div>
-              <div>
-                <div style="display:flex;justify-content:space-between;font-family:'Inter',sans-serif;font-size:11px;color:rgba(255,255,255,0.32);margin-bottom:6px;"><span>Tonnage Target</span><span>108%</span></div>
-                <div class="feat4-progress-bar"><div class="feat4-progress-bar__fill" style="width:100%;"></div></div>
-              </div>
-              <div>
-                <div style="display:flex;justify-content:space-between;font-family:'Inter',sans-serif;font-size:11px;color:rgba(255,255,255,0.32);margin-bottom:6px;"><span>Safety Score</span><span>99%</span></div>
-                <div class="feat4-progress-bar"><div class="feat4-progress-bar__fill" style="width:99%;"></div></div>
-              </div>
-            </div>
-            <div class="feat4-bottom-bar">
-              <span style="display:flex;align-items:center;gap:6px;">
-                <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1l1.2 3.5H11L8.4 6.8l.9 3.5-2.8-2-2.8 2 .9-3.5L2 4.5h3.3z" stroke="#CA953D" stroke-width="1.2" stroke-linejoin="round"/></svg>
-                Overall trend
-              </span>
-              <span>Excellent</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- FEATURE-5: Fleet Intelligence -->
-  <section style="background:#080808;border-top:1px solid rgba(255,255,255,0.06);">
-    <div class="section-pad" style="max-width:1400px;margin:0 auto;">
-      <div class="feat5-grid">
-        <!-- Left: text + feature items -->
-        <div class="sr">
-          <div class="feat5-badge">Fleet Intelligence</div>
-          <h2 class="feat5-title">Every Vehicle Tracked.<br><span>Every Job Controlled.</span></h2>
-          <p class="feat5-desc">NOVA Terra's operations hub gives project managers complete visibility over fleet movements, job status, and delivery performance — 24 hours a day across all 12 KSA regions.</p>
-          <div class="feat5-items">
-            <div class="feat5-item">
-              <div class="feat5-item__icon">
-                <svg viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-              </div>
-              <div>
-                <p class="feat5-item__title">Fleet Visibility</p>
-                <p class="feat5-item__sub">Live GPS tracking across all 150+ vehicles — visible to authorised clients and project managers 24/7</p>
-              </div>
-            </div>
-            <div class="feat5-item">
-              <div class="feat5-item__icon">
-                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              </div>
-              <div>
-                <p class="feat5-item__title">Deployment Speed</p>
-                <p class="feat5-item__sub">Trucks confirmed and on-site within 4 hours of job commencement — backed by our replacement SLA guarantee</p>
-              </div>
-            </div>
-            <div class="feat5-item">
-              <div class="feat5-item__icon">
-                <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              </div>
-              <div>
-                <p class="feat5-item__title">Proactive Alerts</p>
-                <p class="feat5-item__sub">Predictive maintenance flags prevent equipment breakdowns before they delay your project timeline</p>
-              </div>
-            </div>
-          </div>
-          <a href="contact.html" class="gold-btn">Request Fleet Quote</a>
-        </div>
-
-        <!-- Right: floating stat cards -->
-        <div class="feat5-panel sr sr-d2">
-          <div class="feat5-card feat5-card--1">
-            <p class="feat5-card__label">Live Dispatch</p>
-            <p class="feat5-card__title">127 Active Trucks</p>
-            <div class="feat5-card__tags">
-              <span class="feat5-card__tag feat5-card__tag--gold">Live</span>
-              <span class="feat5-card__tag feat5-card__tag--dim">On-Route</span>
-            </div>
-            <div class="feat5-card__meta">
-              <div>Region: KSA-Wide (12 regions)</div>
-              <div>Fleet: All Categories</div>
-              <div>Status: Fully Operational</div>
-            </div>
-          </div>
-
-          <div class="feat5-card feat5-card--2">
-            <p class="feat5-card__label">Region Coverage</p>
-            <p class="feat5-card__title" style="font-size:16px;margin-bottom:12px;">Active Deployments</p>
-            <div class="feat5-bar"><div class="feat5-bar__fill" style="width:88%;"></div></div>
-            <div class="feat5-bar-row"><span>Riyadh</span><span>88%</span></div>
-            <div class="feat5-bar"><div class="feat5-bar__fill" style="width:72%;"></div></div>
-            <div class="feat5-bar-row" style="margin-bottom:0;"><span>Eastern Province</span><span>72%</span></div>
-          </div>
-
-          <div class="feat5-card feat5-card--3">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
-              <p class="feat5-card__label" style="margin-bottom:0;">Job Status</p>
-              <span class="feat5-card__label" style="margin-bottom:0;">Today</span>
-            </div>
-            <p class="feat5-card__title">Completed 94%</p>
-            <div class="feat5-card__tags">
-              <span class="feat5-card__tag feat5-card__tag--green">On-Track</span>
-              <span class="feat5-card__tag feat5-card__tag--purple">Synced</span>
-            </div>
-            <p class="feat5-card__meta">All completed jobs pushed to client reports automatically</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Bento-2: Fleet showcase grid -->
-  <section class="bnt2-sec section-pad">
-    <div class="bnt2-wrap">
-
-      <!-- LEFT COLUMN -->
-      <div class="bnt2-col bnt2-col--l">
-
-        <!-- Card 1: intro + route animation -->
-        <div class="bnt2-card bnt2-c1 sr">
-          <p class="bnt2-eyebrow">The NOVA Terra Fleet</p>
-          <h3 class="bnt2-card-title">A Fleet Built<br>for Saudi Arabia</h3>
-          <p class="bnt2-card-desc">150+ heavy vehicles operating across 12 KSA regions — purpose-built for earthmoving, bulk haulage, and large-scale construction projects of any scale.</p>
-          <div class="bnt2-c1__vis" aria-hidden="true">
-            <svg class="bnt2-transform-svg" viewBox="0 0 270 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <filter id="bnt2glow" x="-80%" y="-80%" width="260%" height="260%">
-                  <feGaussianBlur stdDeviation="3.5" result="b"/>
-                  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-                </filter>
-              </defs>
-              <!-- Origin node -->
-              <circle cx="38" cy="45" r="28" fill="#262626"/>
-              <rect x="20" y="38" width="22" height="13" rx="2" fill="#404040"/>
-              <rect x="38" y="35" width="11" height="10" rx="1" fill="#363636"/>
-              <circle cx="25" cy="51" r="3" fill="#181818" stroke="#CA953D" stroke-width="1.5"/>
-              <circle cx="36" cy="51" r="3" fill="#181818" stroke="#CA953D" stroke-width="1.5"/>
-              <!-- Dashed road -->
-              <line x1="68" y1="45" x2="200" y2="45" stroke="#323232" stroke-width="1.5" stroke-dasharray="6 5"/>
-              <!-- Animated gold dot -->
-              <circle class="bnt2-dot" cx="66" cy="45" r="5.5" fill="#CA953D" filter="url(#bnt2glow)"/>
-              <!-- Destination node -->
-              <circle cx="232" cy="45" r="28" fill="#262626"/>
-              <path d="M232 26 C223 26 216 33 216 41 C216 50 232 66 232 66 C232 66 248 50 248 41 C248 33 241 26 232 26Z" fill="#363636"/>
-              <circle cx="232" cy="41" r="6" fill="#181818" stroke="#CA953D" stroke-width="1.5"/>
-            </svg>
-          </div>
-        </div>
-
-        <!-- Card 2: globe + KSA coverage -->
-        <div class="bnt2-card bnt2-c2 sr sr-d1">
-          <div class="bnt2-c2__globe" aria-hidden="true">
-            <svg class="bnt2-globe-svg" viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="55" cy="55" r="46" stroke="#333" stroke-width="1.5"/>
-              <ellipse cx="55" cy="55" rx="46" ry="16" stroke="#2e2e2e" stroke-width="1"/>
-              <ellipse cx="55" cy="55" rx="46" ry="32" stroke="#2a2a2a" stroke-width="1"/>
-              <ellipse cx="55" cy="55" rx="17" ry="46" stroke="#2e2e2e" stroke-width="1"/>
-              <ellipse cx="55" cy="55" rx="33" ry="46" stroke="#2a2a2a" stroke-width="1"/>
-              <line x1="9" y1="55" x2="101" y2="55" stroke="#2e2e2e" stroke-width="1"/>
-              <line x1="55" y1="9" x2="55" y2="101" stroke="#2e2e2e" stroke-width="1"/>
-              <!-- KSA location pulse -->
-              <circle cx="66" cy="47" r="5" fill="#CA953D" opacity="0.85"/>
-              <circle cx="66" cy="47" r="10" fill="#CA953D" opacity="0.18"/>
-            </svg>
-            <div class="bnt2-globe-pill" id="bnt2-globe-label">127 Active Trucks</div>
-          </div>
-          <div class="bnt2-c2__text">
-            <h3 class="bnt2-card-title bnt2-card-title--sm">KSA-Wide Network</h3>
-            <p class="bnt2-card-desc">Every region. Every project scope. Our fleet serves all 12 administrative regions of Saudi Arabia with consistent service quality and guaranteed response times.</p>
-          </div>
-        </div>
-
-      </div><!-- /left col -->
-
-      <!-- RIGHT COLUMN -->
-      <div class="bnt2-col bnt2-col--r">
-
-        <!-- Card 3: graph + analytics -->
-        <div class="bnt2-card bnt2-c3 sr sr-d2">
-          <div class="bnt2-c3__graph" aria-hidden="true">
-            <div class="bnt2-graph">
-              <div class="bnt2-bar" style="height:52%"></div>
-              <div class="bnt2-bar" style="height:74%"></div>
-              <div class="bnt2-bar" style="height:63%"></div>
-              <div class="bnt2-bar" style="height:91%"></div>
-              <div class="bnt2-bar" style="height:78%"></div>
-            </div>
-            <p class="bnt2-graph-label">Monthly Dispatches</p>
-          </div>
-          <div class="bnt2-c3__text">
-            <h3 class="bnt2-card-title bnt2-card-title--sm">Fleet Analytics</h3>
-            <p class="bnt2-card-desc">Monthly dispatch volumes, utilisation trends, and delivery KPIs — tracked in real time across every vehicle in the fleet.</p>
-          </div>
-        </div>
-
-        <!-- Card 4: tools SVG + management copy -->
-        <div class="bnt2-card bnt2-c4 sr sr-d3">
-          <div class="bnt2-c4__vis" aria-hidden="true">
-            <svg class="bnt2-tools-svg" viewBox="0 0 150 134" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- Orbit path -->
-              <circle cx="75" cy="67" r="52" stroke="#2e2e2e" stroke-width="1" stroke-dasharray="4 7"/>
-              <!-- Central node: truck -->
-              <circle cx="75" cy="67" r="30" fill="#262626" stroke="#333" stroke-width="1.5"/>
-              <rect x="59" y="61" width="22" height="13" rx="2" fill="#404040"/>
-              <rect x="77" y="58" width="11" height="10" rx="1" fill="#363636"/>
-              <circle cx="64" cy="74" r="3" fill="#181818" stroke="#CA953D" stroke-width="1.5"/>
-              <circle cx="75" cy="74" r="3" fill="#181818" stroke="#CA953D" stroke-width="1.5"/>
-              <!-- Orbit icon 1: GPS crosshair (starts top) -->
-              <g class="bnt2-orbit1">
-                <circle cx="75" cy="15" r="12" fill="#262626" stroke="#333" stroke-width="1"/>
-                <circle cx="75" cy="15" r="5" stroke="#CA953D" stroke-width="1.5" fill="none"/>
-                <line x1="75" y1="8" x2="75" y2="22" stroke="#CA953D" stroke-width="1"/>
-                <line x1="68" y1="15" x2="82" y2="15" stroke="#CA953D" stroke-width="1"/>
-              </g>
-              <!-- Orbit icon 2: clock (starts bottom) -->
-              <g class="bnt2-orbit2">
-                <circle cx="75" cy="119" r="12" fill="#262626" stroke="#333" stroke-width="1"/>
-                <circle cx="75" cy="119" r="5.5" stroke="#CA953D" stroke-width="1.5" fill="none"/>
-                <line x1="75" y1="113.5" x2="75" y2="119" stroke="#CA953D" stroke-width="1.5" stroke-linecap="round"/>
-                <line x1="75" y1="119" x2="79" y2="119" stroke="#CA953D" stroke-width="1.5" stroke-linecap="round"/>
-              </g>
-            </svg>
-          </div>
-          <div class="bnt2-c4__text">
-            <h3 class="bnt2-card-title">Integrated Fleet<br>Management</h3>
-            <p class="bnt2-card-desc">GPS tracking, predictive maintenance, dispatch coordination, and client reporting — unified into a single operations platform that never sleeps.</p>
-          </div>
-        </div>
-
-      </div><!-- /right col -->
-
-    </div>
-  </section>
-
 </main>
 
 <footer class="site-footer">
@@ -1731,14 +1411,6 @@
     <div class="footer-brand">
       <img src="assets/img/logo.png" alt="NOVA TLT" class="footer-brand__logo">
       <p class="footer-brand__desc">Saudi Arabia's trusted partner for heavy haulage, earthmoving, and bulk material logistics across the Kingdom.</p>
-      <div class="footer-certs">
-        <span class="footer-cert-badge">ISO 9001:2015</span>
-        <span class="footer-cert-badge">ISO 45001</span>
-        <span class="footer-cert-badge">ISO 14001</span>
-        <span class="footer-cert-badge">MODON</span>
-        <span class="footer-cert-badge">GOSI</span>
-        <span class="footer-cert-badge">ZAKAT</span>
-      </div>
     </div>
     <div class="footer-links-grid">
       <div class="footer-links-col">
@@ -1777,13 +1449,9 @@
     <canvas id="ptypes-canvas"></canvas>
   </div>
   <div style="max-width:1400px;margin:0 auto;">
-    <div class="footer-bottom-bar">
+    <div class="footer-bottom-bar" style="justify-content:center;flex-direction:column;align-items:center;text-align:center;gap:6px;">
       <span class="footer-bottom-bar__copy">© 2025 NOVA Terra Logistics &amp; Transport. All rights reserved.</span>
       <span class="footer-bottom-bar__copy">Developed &amp; Designed by Tech Venchure</span>
-      <div class="footer-bottom-bar__legal">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-      </div>
     </div>
   </div>
 </footer>
@@ -1854,7 +1522,7 @@
   };
   Particle.prototype.draw=function(){ctx.beginPath();ctx.arc(this.x,this.y,PARTICLE_SIZE,0,Math.PI*2);ctx.fill();};
   function getLabel(){ return (window.innerWidth<=768?'NOVA TLT':'NOVA TERRA').toUpperCase(); }
-  function getFontSize(){ return Math.min(200, W*0.30); }
+  function getFontSize(){ return window.innerWidth<=768?Math.min(120,W*0.19):Math.min(200,W*0.30); }
   function init(){
     dpr=window.devicePixelRatio||1; W=wrap.clientWidth; H=wrap.clientHeight;
     if(!W||!H) return;

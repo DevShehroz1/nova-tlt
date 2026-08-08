@@ -118,7 +118,20 @@
     .footer-bottom-bar__legal { display: flex; gap: 20px; }
     .footer-bottom-bar__legal a { font-family: 'Inter',sans-serif; font-size: 12px; color: rgba(255,255,255,0.2); text-decoration: none; transition: color 160ms ease; }
     .footer-bottom-bar__legal a:hover { color: rgba(255,255,255,0.55); }
-    @media (max-width: 768px) { .site-footer__top { flex-direction: column; } .footer-bottom-bar { flex-direction: column; align-items: flex-start; } .stats-row { flex-direction: column; } .stat { border-right: none; border-bottom: 1px solid var(--line); } .stat:last-child { border-bottom: none; } .cta-band { flex-direction: column; } }
+    @media(max-width:768px){
+      .site-footer__top{flex-direction:column;gap:32px;padding:40px 20px 28px;}
+      .footer-brand{max-width:100%;}
+      .footer-brand__logo{height:40px;margin-bottom:14px;}
+      .footer-brand__desc{font-size:13px;}
+      .footer-certs{gap:6px;}
+      .footer-links-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px 24px;width:100%;}
+      .footer-links-col:last-child{grid-column:1 / -1;}
+      .footer-links-col__title{margin-bottom:12px;}
+      .footer-links-col__list{gap:8px;}
+      .footer-bottom-bar{flex-direction:column;align-items:flex-start;gap:8px;padding:16px 20px;}
+      .footer-bottom-bar__legal{margin-top:4px;}
+      .stats-row { flex-direction: column; } .stat { border-right: none; border-bottom: 1px solid var(--line); } .stat:last-child { border-bottom: none; } .cta-band { flex-direction: column; }
+    }
     @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
 
     /* Services-specific */
@@ -419,7 +432,6 @@
     <div class="footer-brand">
       <img src="assets/img/logo.png" alt="NOVA TLT" class="footer-brand__logo">
       <p class="footer-brand__desc">Saudi Arabia's trusted partner for heavy haulage, earthmoving, and bulk material logistics across the Kingdom.</p>
-      <div class="footer-certs"><span class="footer-cert-badge">ISO 9001:2015</span><span class="footer-cert-badge">ISO 45001</span><span class="footer-cert-badge">ISO 14001</span><span class="footer-cert-badge">MODON</span><span class="footer-cert-badge">GOSI</span><span class="footer-cert-badge">ZAKAT</span></div>
     </div>
     <div class="footer-links-grid">
       <div class="footer-links-col">
@@ -456,10 +468,9 @@
   </div>
   <div class="footer-canvas-wrap"><canvas id="ptypes-canvas"></canvas></div>
   <div style="max-width:1400px;margin:0 auto;">
-    <div class="footer-bottom-bar">
+    <div class="footer-bottom-bar" style="justify-content:center;flex-direction:column;align-items:center;text-align:center;gap:6px;">
       <span class="footer-bottom-bar__copy">© 2025 NOVA Terra Logistics &amp; Transport. All rights reserved.</span>
       <span class="footer-bottom-bar__copy">Developed &amp; Designed by Tech Venchure</span>
-      <div class="footer-bottom-bar__legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
     </div>
   </div>
 </footer>
@@ -471,7 +482,7 @@
 (function(){var dot=document.getElementById('cursor-dot'),ring=document.getElementById('cursor-ring');if(!dot||!ring)return;var mx=-100,my=-100,rx=-100,ry=-100;document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;});document.querySelectorAll('a,button').forEach(function(el){el.addEventListener('mouseenter',function(){ring.classList.add('is-hover');});el.addEventListener('mouseleave',function(){ring.classList.remove('is-hover');});});function loop(){dot.style.left=mx+'px';dot.style.top=my+'px';rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);}loop();})();
 </script>
 <script>
-(function(){var canvas=document.getElementById('ptypes-canvas');if(!canvas)return;var wrap=canvas.parentElement,ctx=canvas.getContext('2d',{willReadFrequently:true});if(!ctx)return;var FONT='BebasNeuePro, sans-serif',SZ=1.5,DENS=6,DISP=15,RET=0.08,COL='#CA953D';var mx=-1000,my=-1000,parts=[],W=0,H=0,dpr=1,aId;function P(x,y){this.x=x+(Math.random()-.5)*10;this.y=y+(Math.random()-.5)*10;this.ox=x;this.oy=y;this.vx=(Math.random()-.5)*5;this.vy=(Math.random()-.5)*5;}P.prototype.update=function(){var dx=mx-this.x,dy=my-this.y,d=Math.sqrt(dx*dx+dy*dy);if(d<120&&mx!==-1000){var f=(120-d)/120;this.vx-=(dx/d)*f*DISP;this.vy-=(dy/d)*f*DISP;}this.vx+=(this.ox-this.x)*RET;this.vy+=(this.oy-this.y)*RET;this.vx*=0.85;this.vy*=0.85;this.x+=this.vx;this.y+=this.vy;};P.prototype.draw=function(){ctx.beginPath();ctx.arc(this.x,this.y,SZ,0,Math.PI*2);ctx.fill();};function label(){return(window.innerWidth<=768?'NOVA TLT':'NOVA TERRA').toUpperCase();}function fs(){return Math.min(200,W*0.30);}function init(){dpr=window.devicePixelRatio||1;W=wrap.clientWidth;H=wrap.clientHeight;if(!W||!H)return;canvas.width=Math.round(W*dpr);canvas.height=Math.round(H*dpr);canvas.style.width=W+'px';canvas.style.height=H+'px';ctx.setTransform(1,0,0,1,0,0);ctx.scale(dpr,dpr);ctx.clearRect(0,0,W,H);ctx.fillStyle=COL;ctx.font='bold '+fs()+'px '+FONT;ctx.letterSpacing='0.12em';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(label(),W/2,H/2);var img=ctx.getImageData(0,0,canvas.width,canvas.height),step=Math.max(1,Math.floor(DENS*dpr));parts=[];for(var y=0;y<img.height;y+=step)for(var x=0;x<img.width;x+=step)if((img.data[(y*img.width+x)*4+3]||0)>128)parts.push(new P(x/dpr,y/dpr));}function animate(){ctx.clearRect(0,0,W,H);ctx.fillStyle=COL;for(var i=0;i<parts.length;i++){parts[i].update();parts[i].draw();}aId=requestAnimationFrame(animate);}canvas.addEventListener('mousemove',function(e){var r=canvas.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top;});canvas.addEventListener('mouseleave',function(){mx=-1000;my=-1000;});var rt;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){if(aId)cancelAnimationFrame(aId);init();aId=requestAnimationFrame(animate);},150);});function start(){setTimeout(function(){init();aId=requestAnimationFrame(animate);},120);}if(document.fonts&&document.fonts.load){document.fonts.load('bold 140px BebasNeuePro').then(start)['catch'](start);}else{start();}})();
+(function(){var canvas=document.getElementById('ptypes-canvas');if(!canvas)return;var wrap=canvas.parentElement,ctx=canvas.getContext('2d',{willReadFrequently:true});if(!ctx)return;var FONT='BebasNeuePro, sans-serif',SZ=1.5,DENS=6,DISP=15,RET=0.08,COL='#CA953D';var mx=-1000,my=-1000,parts=[],W=0,H=0,dpr=1,aId;function P(x,y){this.x=x+(Math.random()-.5)*10;this.y=y+(Math.random()-.5)*10;this.ox=x;this.oy=y;this.vx=(Math.random()-.5)*5;this.vy=(Math.random()-.5)*5;}P.prototype.update=function(){var dx=mx-this.x,dy=my-this.y,d=Math.sqrt(dx*dx+dy*dy);if(d<120&&mx!==-1000){var f=(120-d)/120;this.vx-=(dx/d)*f*DISP;this.vy-=(dy/d)*f*DISP;}this.vx+=(this.ox-this.x)*RET;this.vy+=(this.oy-this.y)*RET;this.vx*=0.85;this.vy*=0.85;this.x+=this.vx;this.y+=this.vy;};P.prototype.draw=function(){ctx.beginPath();ctx.arc(this.x,this.y,SZ,0,Math.PI*2);ctx.fill();};function label(){return(window.innerWidth<=768?'NOVA TLT':'NOVA TERRA').toUpperCase();}function fs(){return window.innerWidth<=768?Math.min(120,W*0.19):Math.min(200,W*0.30);}function init(){dpr=window.devicePixelRatio||1;W=wrap.clientWidth;H=wrap.clientHeight;if(!W||!H)return;canvas.width=Math.round(W*dpr);canvas.height=Math.round(H*dpr);canvas.style.width=W+'px';canvas.style.height=H+'px';ctx.setTransform(1,0,0,1,0,0);ctx.scale(dpr,dpr);ctx.clearRect(0,0,W,H);ctx.fillStyle=COL;ctx.font='bold '+fs()+'px '+FONT;ctx.letterSpacing='0.12em';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(label(),W/2,H/2);var img=ctx.getImageData(0,0,canvas.width,canvas.height),step=Math.max(1,Math.floor(DENS*dpr));parts=[];for(var y=0;y<img.height;y+=step)for(var x=0;x<img.width;x+=step)if((img.data[(y*img.width+x)*4+3]||0)>128)parts.push(new P(x/dpr,y/dpr));}function animate(){ctx.clearRect(0,0,W,H);ctx.fillStyle=COL;for(var i=0;i<parts.length;i++){parts[i].update();parts[i].draw();}aId=requestAnimationFrame(animate);}canvas.addEventListener('mousemove',function(e){var r=canvas.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top;});canvas.addEventListener('mouseleave',function(){mx=-1000;my=-1000;});var rt;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){if(aId)cancelAnimationFrame(aId);init();aId=requestAnimationFrame(animate);},150);});function start(){setTimeout(function(){init();aId=requestAnimationFrame(animate);},120);}if(document.fonts&&document.fonts.load){document.fonts.load('bold 140px BebasNeuePro').then(start)['catch'](start);}else{start();}})();
 </script>
 <script src="assets/js/scroll-reveal.js"></script>
 <script src="assets/js/mobile-menu.js"></script>
