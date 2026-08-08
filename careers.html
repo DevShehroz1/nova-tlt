@@ -124,19 +124,7 @@
     .site-footer{background:#0f0f0f;overflow:hidden;position:relative;}.site-footer__top{display:flex;align-items:flex-start;justify-content:space-between;gap:clamp(32px,5vw,64px);padding:clamp(48px,6vw,80px) clamp(24px,5vw,80px) clamp(32px,4vw,48px);max-width:1400px;margin:0 auto;}.footer-brand{max-width:280px;flex-shrink:0;}.footer-brand__logo{height:48px;width:auto;display:block;margin-bottom:18px;}.footer-brand__desc{font-family:'Inter',sans-serif;font-size:13.5px;line-height:1.65;color:rgba(255,255,255,0.38);margin-bottom:24px;}.footer-certs{display:flex;flex-wrap:wrap;gap:7px;}.footer-cert-badge{font-family:'Inter',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:rgba(255,255,255,0.45);background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);border-radius:4px;padding:4px 8px;}.footer-links-grid{display:flex;gap:clamp(32px,5vw,80px);flex-wrap:wrap;}.footer-links-col__title{font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:18px;}.footer-links-col__list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;}.footer-links-col__link{font-family:'Inter',sans-serif;font-size:14px;font-weight:500;color:rgba(255,255,255,0.52);text-decoration:none;display:inline-flex;align-items:center;gap:5px;transition:color 180ms ease;}.footer-links-col__link:hover{color:#fff;}.footer-link-arrow{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border:1px solid rgba(255,255,255,0.14);border-radius:4px;opacity:0;transform:translateX(-4px);transition:opacity 200ms ease,transform 200ms ease;flex-shrink:0;}.footer-links-col__link:hover .footer-link-arrow{opacity:1;transform:translateX(0);}.footer-canvas-wrap{position:relative;width:100%;height:clamp(260px,28vw,420px);margin-top:8px;overflow:hidden;}#ptypes-canvas{display:block;width:100%;height:100%;cursor:crosshair;}.footer-bottom-bar{border-top:1px solid rgba(255,255,255,0.06);padding:18px clamp(24px,5vw,80px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;max-width:1400px;margin:0 auto;}.footer-bottom-bar__copy{font-family:'Inter',sans-serif;font-size:12px;color:rgba(255,255,255,0.2);}.footer-bottom-bar__legal{display:flex;gap:20px;}.footer-bottom-bar__legal a{font-family:'Inter',sans-serif;font-size:12px;color:rgba(255,255,255,0.2);text-decoration:none;transition:color 160ms ease;}.footer-bottom-bar__legal a:hover{color:rgba(255,255,255,0.55);}
     @media(max-width:768px){.site-footer__top{flex-direction:column;}.footer-bottom-bar{flex-direction:column;align-items:flex-start;}}
 
-    /* ── Header: matches homepage style ── */
-    .header { position: fixed !important; transform: none !important; background: rgba(10,10,10,0.90) !important; backdrop-filter: blur(14px) !important; -webkit-backdrop-filter: blur(14px) !important; }
-    .header__container { position: relative !important; }
-    .header__menu { position: absolute !important; left: 50% !important; transform: translateX(-50%) !important; background-color: #141414 !important; border: 1px solid rgba(255,255,255,0.1) !important; font-family: BebasNeuePro, sans-serif !important; font-weight: 700 !important; }
-    .header__menu-item, .header__menu-item .text-hover__elem { color: rgba(255,255,255,0.85) !important; }
-    .header__menu-item:hover { color: #CA953D !important; }
-    .nav-drop__trigger { color: rgba(255,255,255,0.85) !important; background: none !important; border: none !important; }
-    .nav-drop__chevron path { stroke: rgba(255,255,255,0.7) !important; }
-    .nav-drop--open .nav-drop__chevron path { stroke: #CA953D !important; }
-    .btn { background-color: #141414 !important; border-color: rgba(255,255,255,0.15) !important; color: rgba(255,255,255,0.88) !important; }
-    .btn:hover { color: #fff !important; }
-    .btn:after { background: linear-gradient(135deg, #B67C2A 0%, #CA953D 50%, #E5B85A 100%) !important; }
-    .btn._accent { background: linear-gradient(135deg, #B67C2A 0%, #CA953D 50%, #E5B85A 100%) !important; border-color: transparent !important; color: #fff !important; }
+    /* ── Remove homepage-style dark header (transparent version above takes over) ── */
     .btn._accent:after { background-color: #141414 !important; }
     .btn._accent:hover { color: #fff !important; filter: brightness(0.9); }
     .header__logo { background: transparent !important; padding: 0 !important; height: auto !important; }
@@ -189,7 +177,7 @@
     </div>
   </section>
 
-  <section class="section-inner" style="padding-top:0;">
+  <section class="section-inner" style="padding-top:0;margin-top:60px;">
     <p class="section-eyebrow">Open Positions</p>
     <h2 class="section-title">Current Openings.</h2>
     <p class="section-sub">We hire on merit, discipline, and a safety-first attitude. Saudi nationals and qualified expats are both welcome to apply.</p>
