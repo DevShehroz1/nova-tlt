@@ -6,6 +6,8 @@
   <meta name="format-detection" content="telephone=no" />
   <title>Our Fleet — NOVA TLT</title>
   <link rel="preload" href="assets/fonts/BebasNeuePro-Bold.woff" as="font" type="font/woff" crossorigin />
+  <link rel="preload" href="assets/fonts/National2Condensed-Bold.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/HelveticaNowDisplay-Bold.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -14,6 +16,17 @@
   <link rel="stylesheet" href="assets/css/main.css" />
   <link rel="stylesheet" href="assets/css/cf7.css" />
   <style>
+    @font-face {
+      font-family: 'National2Condensed';
+      src: url('assets/fonts/National2Condensed-Bold.woff2') format('woff2'),
+           url('assets/fonts/National2Condensed-Bold.woff') format('woff');
+      font-weight: 700; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'HelveticaNowDisplay';
+      src: url('assets/fonts/HelveticaNowDisplay-Bold.woff2') format('woff2');
+      font-weight: 700; font-style: normal; font-display: swap;
+    }
     :root {
       --hero-bg: #0c0b0a;
       --ink: #efe9df;
@@ -189,13 +202,16 @@
     .page-fullhero__eyebrow::before,
     .page-fullhero__eyebrow::after { content: ''; width: 28px; height: 1.5px; background: var(--gold-grad); }
     .page-fullhero__title {
-      font-family: BebasNeuePro, sans-serif; font-weight: 700;
-      font-size: clamp(36px,5vw,72px); line-height: 0.9;
-      letter-spacing: 0.03em; text-transform: uppercase; color: #fff;
+      font-family: 'National2Condensed', BebasNeuePro, sans-serif; font-weight: 700;
+      font-size: clamp(48px,7vw,110px); line-height: 0.88;
+      letter-spacing: -0.01em; text-transform: uppercase; color: #fff;
       margin-bottom: 20px; white-space: nowrap;
     }
+    .page-fullhero__eyebrow {
+      font-family: 'HelveticaNowDisplay', sans-serif;
+    }
     .page-fullhero__desc {
-      font-family: 'Inter', sans-serif; font-size: clamp(14px,1.1vw,17px);
+      font-family: 'HelveticaNowDisplay', 'Inter', sans-serif; font-size: clamp(13px,1vw,16px);
       color: rgba(255,255,255,0.65); line-height: 1.65; max-width: 580px; margin: 0 auto 36px;
     }
     .hero-scroll-hint {
