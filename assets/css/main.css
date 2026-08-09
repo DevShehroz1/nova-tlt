@@ -269,28 +269,28 @@ a {
 	font-display: swap;
 }
 @font-face {
-	font-family: Inter;
+	font-family: ui-sans-serif, system-ui, sans-serif;
 	font-style: normal;
 	font-weight: 400;
 	src: url(../fonts/Inter-Regular.woff) format('woff');
 	font-display: swap;
 }
 @font-face {
-	font-family: Inter;
+	font-family: ui-sans-serif, system-ui, sans-serif;
 	font-style: normal;
 	font-weight: 500;
 	src: url(../fonts/Inter-Medium.woff) format('woff');
 	font-display: swap;
 }
 @font-face {
-	font-family: Inter;
+	font-family: ui-sans-serif, system-ui, sans-serif;
 	font-style: normal;
 	font-weight: 600;
 	src: url(../fonts/Inter-SemiBold.woff) format('woff');
 	font-display: swap;
 }
 @font-face {
-	font-family: Inter;
+	font-family: ui-sans-serif, system-ui, sans-serif;
 	font-style: normal;
 	font-weight: 700;
 	src: url(../fonts/Inter-Bold.woff) format('woff');
@@ -473,7 +473,7 @@ textarea {
 .input {
 	display: flex;
 	position: relative;
-	font-family: Inter;
+	font-family: ui-sans-serif, system-ui, sans-serif;
 }
 .input.focus .input__caption {
 	top: calc(50% - 23rem);
@@ -670,7 +670,7 @@ textarea {
 }
 .modal__text {
 	color: #CA953D;
-	font-family: Inter;
+	font-family: ui-sans-serif, system-ui, sans-serif;
 	font-weight: 500;
 	margin-bottom: 15rem;
 	letter-spacing: -0.01em;
@@ -820,7 +820,7 @@ textarea {
 	display: none;
 }
 .modal-services__text {
-	font-family: Inter;
+	font-family: ui-sans-serif, system-ui, sans-serif;
 	font-size: 18rem;
 	line-height: 1;
 	display: flex;
@@ -828,7 +828,7 @@ textarea {
 	gap: 20rem;
 }
 .modal-services__text-small {
-	font-family: Inter;
+	font-family: ui-sans-serif, system-ui, sans-serif;
 	font-size: 16rem;
 	font-weight: 400;
 }
@@ -1715,7 +1715,7 @@ textarea {
 	margin-bottom: 20rem;
 }
 .about__text {
-	font-family: Inter;
+	font-family: ui-sans-serif, system-ui, sans-serif;
 	max-width: 570rem;
 	font-weight: 400;
 	margin-bottom: 120rem;
@@ -1810,7 +1810,7 @@ textarea {
 }
 .advantages__item-text {
 	max-width: 240rem;
-	font-family: Inter;
+	font-family: ui-sans-serif, system-ui, sans-serif;
 	line-height: 1;
 }
 .advantages__key {
@@ -2028,7 +2028,7 @@ textarea {
 .services__item-text {
 	line-height: 1;
 	max-width: 250rem;
-	font-family: Inter;
+	font-family: ui-sans-serif, system-ui, sans-serif;
 }
 .services__item-btn {
 	position: absolute;
@@ -2364,7 +2364,7 @@ textarea {
 	text-transform: uppercase;
 }
 .hero-about__text {
-	font-family: Inter;
+	font-family: ui-sans-serif, system-ui, sans-serif;
 	font-weight: 600;
 }
 @media only screen and (max-width: 1024px) {
@@ -2517,7 +2517,7 @@ textarea {
 	line-height: 0.9;
 }
 .our-story__text {
-	font-family: Inter;
+	font-family: ui-sans-serif, system-ui, sans-serif;
 	font-weight: 400;
 	margin-bottom: 20rem;
 	font-size: 18rem;
@@ -2618,7 +2618,7 @@ textarea {
 	margin-bottom: 20rem;
 }
 .goals__item-text {
-	font-family: Inter;
+	font-family: ui-sans-serif, system-ui, sans-serif;
 	line-height: 1;
 }
 @media only screen and (max-width: 1024px) {
@@ -2882,7 +2882,7 @@ textarea {
 	gap: 30rem;
 }
 .hero-services__text {
-	font-family: Inter;
+	font-family: ui-sans-serif, system-ui, sans-serif;
 	font-weight: 500;
 	font-size: 16rem;
 	line-height: 1;
@@ -2894,7 +2894,7 @@ textarea {
 	margin-bottom: 15rem;
 }
 .hero-services__text-large {
-	font-family: Inter;
+	font-family: ui-sans-serif, system-ui, sans-serif;
 	font-size: 24rem;
 	font-weight: 500;
 	line-height: 1;
@@ -3492,7 +3492,7 @@ textarea {
 	display: flex;
 	flex-direction: column;
 	gap: 20rem;
-	font-family: Inter;
+	font-family: ui-sans-serif, system-ui, sans-serif;
 	line-height: 1;
 	font-size: 18rem;
 	font-weight: 500;
@@ -5382,7 +5382,7 @@ html.with-fancybox body.hide-scrollbar {
 #nova-mob-overlay .mob-back {
   display: none; align-items: center; gap: 6px;
   background: none; border: none; color: rgba(255,255,255,0.6);
-  font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
+  font-family: ui-sans-serif, system-ui, sans-serif; font-size: 13px; font-weight: 500;
   letter-spacing: 0.04em; cursor: pointer; padding: 0; transition: color 0.2s;
 }
 #nova-mob-overlay .mob-back:hover { color: #fff; }
@@ -5445,7 +5445,7 @@ html.with-fancybox body.hide-scrollbar {
 }
 #nova-mob-overlay .mob-panel-link {
   display: flex; align-items: center; justify-content: space-between;
-  font-family: 'Inter', sans-serif; font-size: 17px; font-weight: 500;
+  font-family: ui-sans-serif, system-ui, sans-serif; font-size: 17px; font-weight: 500;
   color: rgba(255,255,255,0.65); text-decoration: none;
   padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
   letter-spacing: 0.01em; transition: color 0.2s;
