@@ -5306,6 +5306,9 @@ html.with-fancybox body.hide-scrollbar {
 	) !important;
 }
 
+/* Mobile header CTA — hidden on desktop */
+.mob-header-cta { display: none; }
+
 /* ════════════════════════════════════════════
    GLOBAL MOBILE HEADER FIXES (≤1024px)
 ════════════════════════════════════════════ */
@@ -5337,6 +5340,23 @@ html.with-fancybox body.hide-scrollbar {
   .header__btn    { display: none !important; }
   .header__menu   { display: none !important; }
   .header__hamburger { display: none !important; }
+  .mob-header-cta {
+    display: inline-flex !important;
+    align-items: center !important;
+    padding: 8px 14px !important;
+    border-radius: 5rem !important;
+    border: 1px solid rgba(202,149,61,0.45) !important;
+    font-family: ui-sans-serif, system-ui, sans-serif !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    color: #CA953D !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+    z-index: 3 !important;
+    position: relative !important;
+  }
   .header__hamburger-btn.btn {
     display: flex !important;
     align-items: center !important;
