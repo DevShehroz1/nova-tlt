@@ -255,7 +255,9 @@
       max-width: 1400px; margin: 0 auto;
       padding: clamp(80px,10vw,140px) clamp(20px,5vw,80px);
     }
-    .fleet-showcase__head { margin-bottom: 64px; }
+    .fleet-showcase__head { margin-bottom: 64px; text-align: center; }
+    .fleet-showcase__head .eyebrow { justify-content: center; }
+    .fleet-showcase__head .eyebrow::before { display: none; }
     .fleet-showcase__layout { display: grid; grid-template-columns: 380px 1fr; gap: 0; min-height: 560px; }
     @media (max-width: 1024px) { .fleet-showcase__layout { grid-template-columns: 1fr; } }
 
@@ -1143,7 +1145,7 @@
     <div class="fleet-showcase__inner">
       <div class="fleet-showcase__head sr">
         <p class="eyebrow">Fleet Categories</p>
-        <h2 class="display-title">Every Vehicle.<br><span>Every Job.</span></h2>
+        <h2 class="display-title" style="white-space:nowrap;">Every Vehicle. <span>Every Job.</span></h2>
       </div>
 
       <div class="fleet-showcase__layout">
