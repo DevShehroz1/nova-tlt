@@ -5491,7 +5491,13 @@ html.with-fancybox body.hide-scrollbar {
 .header { transform: none !important; }
 
 /* ── Footer-7 (nova-footer) ─────────────────────────────── */
-.nova-footer { background: #0f0f0f; position: relative; overflow: hidden; }
+.nova-footer {
+  background:
+    radial-gradient(ellipse 75% 65% at 25% 100%, rgba(182,124,42,0.55) 0%, rgba(202,149,61,0.28) 30%, transparent 65%),
+    radial-gradient(ellipse 40% 40% at 70% 85%, rgba(229,184,90,0.12) 0%, transparent 60%),
+    #0a0a0a;
+  position: relative; overflow: hidden;
+}
 .nova-footer__inner { max-width: 1400px; margin: 0 auto; padding: clamp(40px,5vw,64px) clamp(24px,5vw,80px) 0; }
 
 /* Top row: badge + headline | email form */
