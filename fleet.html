@@ -370,18 +370,39 @@
 
     /* ── Maintenance section ── */
     .maint-sec { background: #080808; }
-    .maint-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
-      background: rgba(255,255,255,0.04); border-radius: 24px; overflow: hidden;
-      margin-top: 56px;
+    .maint-carousel { position: relative; margin-top: 56px; }
+    .maint-carousel-outer {
+      border-radius: 24px; overflow: hidden;
+      background: rgba(255,255,255,0.04);
     }
-    @media (max-width: 768px) { .maint-grid { grid-template-columns: 1fr; } }
+    .maint-track {
+      display: flex; gap: 2px;
+      overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth;
+      scrollbar-width: none;
+    }
+    .maint-track::-webkit-scrollbar { display: none; }
+    .maint-carousel-nav {
+      display: flex; align-items: center; justify-content: center;
+      gap: 20px; margin-top: 28px;
+    }
+    .maint-nav-btn {
+      width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(202,149,61,0.35);
+      background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      color: #CA953D; transition: background 0.25s, border-color 0.25s;
+    }
+    .maint-nav-btn:hover { background: rgba(202,149,61,0.1); border-color: rgba(202,149,61,0.7); }
+    .maint-nav-btn svg { width: 16px; height: 16px; }
+    .maint-dots { display: flex; gap: 8px; align-items: center; }
+    .maint-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.18); transition: background 0.25s, transform 0.25s; cursor: pointer; }
+    .maint-dot.is-active { background: #CA953D; transform: scale(1.4); }
     .maint-item {
+      flex: 0 0 calc(50% - 1px); scroll-snap-align: start;
       background: #0a0a0a; padding: clamp(32px,4vw,52px);
       display: flex; gap: 24px;
       transition: background 0.35s;
       position: relative; overflow: hidden;
     }
+    @media (max-width: 768px) { .maint-item { flex: 0 0 100%; } }
     .maint-item::before {
       content: ''; position: absolute; inset: 0;
       background: radial-gradient(60% 60% at 20% 20%, rgba(202,149,61,0.07), transparent);
@@ -1345,7 +1366,9 @@
       <h2 class="display-title sr sr-d1">Fleet Kept at<br><span>Peak Condition</span></h2>
       <p class="body-text sr sr-d2" style="max-width:560px;margin-top:16px;">Every NOVA Terra vehicle follows a rigorous preventive maintenance schedule — ensuring reliability, safety, and minimal downtime on your project.</p>
 
-      <div class="maint-grid">
+      <div class="maint-carousel">
+        <div class="maint-carousel-outer">
+          <div class="maint-track" id="maintTrack">
         <div class="maint-item sr sr-d1">
           <div class="maint-icon">
             <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
@@ -1400,7 +1423,22 @@
             <p class="maint-text">Full registration, insurance, operator licensing, and inspection documentation available at all times for client and regulatory review.</p>
           </div>
         </div>
-      </div>
+          </div><!-- /maint-track -->
+        </div><!-- /maint-carousel-outer -->
+        <div class="maint-carousel-nav">
+          <button class="maint-nav-btn" id="maintPrev" aria-label="Previous">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L5 8l5 5"/></svg>
+          </button>
+          <div class="maint-dots" id="maintDots">
+            <span class="maint-dot is-active"></span>
+            <span class="maint-dot"></span>
+            <span class="maint-dot"></span>
+          </div>
+          <button class="maint-nav-btn" id="maintNext" aria-label="Next">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3l5 5-5 5"/></svg>
+          </button>
+        </div>
+      </div><!-- /maint-carousel -->
     </div>
   </section>
 
@@ -1624,6 +1662,33 @@
       bars[active].classList.add('bnt2-bar--active');
     }, 950);
   }
+})();
+</script>
+<script>
+(function(){
+  const track = document.getElementById('maintTrack');
+  const dots  = document.querySelectorAll('#maintDots .maint-dot');
+  const pages = 3; // 6 items / 2 per view
+
+  function pageWidth() { return track.clientWidth; }
+
+  document.getElementById('maintPrev').addEventListener('click', function(){
+    track.scrollBy({ left: -pageWidth(), behavior: 'smooth' });
+  });
+  document.getElementById('maintNext').addEventListener('click', function(){
+    track.scrollBy({ left: pageWidth(), behavior: 'smooth' });
+  });
+
+  dots.forEach(function(dot, i){
+    dot.addEventListener('click', function(){
+      track.scrollTo({ left: pageWidth() * i, behavior: 'smooth' });
+    });
+  });
+
+  track.addEventListener('scroll', function(){
+    const page = Math.min(Math.round(track.scrollLeft / pageWidth()), pages - 1);
+    dots.forEach(function(d, i){ d.classList.toggle('is-active', i === page); });
+  }, { passive: true });
 })();
 </script>
 </body>
