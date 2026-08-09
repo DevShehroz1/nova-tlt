@@ -450,52 +450,75 @@
   </div>
 
   <!-- FOOTER -->
-  <footer>
-    <div class="footer-top">
-      <div class="footer-brand">
-        <div class="logo-main">Nova Terra</div>
-        <div class="logo-sub">Logistics &amp; Transport</div>
-        <p>Saudi-based heavy equipment and transport company. Strength in Every Load. Trust in Every Mile.</p>
+  <footer class="nova-footer">
+  <div class="nova-footer__inner">
+
+    <!-- TOP: badge + headline + newsletter -->
+    <div class="nf-top">
+      <div class="nf-headline-wrap">
+        <div class="nf-badge">
+          <span class="nf-badge__dot-wrap">
+            <span class="nf-badge__pulse"></span>
+            <span class="nf-badge__core"></span>
+          </span>
+          <span class="nf-badge__label">Available Across All 12 KSA Regions</span>
+        </div>
+        <h2 class="nf-headline">Get a custom fleet proposal matched to your project — within 24 hours.</h2>
       </div>
-      <div class="footer-col">
-        <h4>Company</h4>
-        <ul>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="fleet.html">Our Fleet</a></li>
-          <li><a href="projects.html">Projects</a></li>
-          <li><a href="careers.html">Careers</a></li>
-          <li><a href="news.html">News</a></li>
-        </ul>
+      <form class="nf-form" onsubmit="return false;">
+        <input type="email" class="nf-form__input" placeholder="Enter your email" />
+        <button type="submit" class="nf-form__btn">
+          Get Quote
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+        </button>
+      </form>
+    </div>
+
+    <!-- MID: brand + link groups -->
+    <div class="nf-mid">
+      <div class="nf-brand">
+        <img src="assets/img/logo.png" alt="NOVA TLT" class="nf-brand__logo" />
+        <p class="nf-brand__desc">Saudi Arabia's trusted partner for heavy haulage, earthmoving, and bulk material logistics across the Kingdom.</p>
       </div>
-      <div class="footer-col">
-        <h4>Services</h4>
-        <ul>
-          <li><a href="services.html#rental">Dump Truck Rental</a></li>
-          <li><a href="services.html#earthmoving">Earthmoving</a></li>
-          <li><a href="services.html#bulk">Bulk Material Transport</a></li>
-          <li><a href="services.html#logistics">Logistics Management</a></li>
-          <li><a href="services.html#contracts">Project Contracts</a></li>
-          <li><a href="industries.html">Industries Served</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <div class="footer-contact-item"><span class="label">Phone</span><span class="val">+966 XX XXX XXXX</span></div>
-        <div class="footer-contact-item"><span class="label">Email</span><span class="val">info@novaterra.sa</span></div>
-        <div class="footer-contact-item"><span class="label">WhatsApp</span><span class="val">+966 XX XXX XXXX</span></div>
-        <div class="footer-contact-item"><span class="label">Hours</span><span class="val">Sun–Thu, 8AM – 6PM</span></div>
-        <div class="footer-contact-item"><span class="label">Head Office</span><span class="val">Riyadh, Saudi Arabia</span></div>
+      <div class="nf-links-grid">
+        <div class="nf-links__col">
+          <p class="nf-links__title">Company</p>
+          <ul class="nf-links__list">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="careers.html">Careers</a></li>
+            <li><a href="news.html">News</a></li>
+          </ul>
+        </div>
+        <div class="nf-links__col">
+          <p class="nf-links__title">Services</p>
+          <ul class="nf-links__list">
+            <li><a href="services.html">Dump Truck Rental</a></li>
+            <li><a href="fleet.html">Our Fleet</a></li>
+            <li><a href="industries.html">Industries</a></li>
+          </ul>
+        </div>
+        <div class="nf-links__col">
+          <p class="nf-links__title">Contact</p>
+          <ul class="nf-links__list">
+            <li><a href="tel:+966500000000">+966 50 000 0000</a></li>
+            <li><a href="mailto:info@nova-tlt.com">info@nova-tlt.com</a></li>
+            <li><span>Riyadh, Saudi Arabia</span></li>
+            <li><span style="color:#CA953D;">Emergency: 24/7</span></li>
+          </ul>
+        </div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p>© 2026 NOVA Terra Logistics &amp; Transport. All rights reserved.</p>
-      <ul class="footer-bottom-links">
-        <li><a href="privacy.html">Privacy Policy</a></li>
-        <li><a href="terms.html">Terms of Service</a></li>
-        <li><a href="faq.html">FAQs</a></li>
-      </ul>
-    </div>
-  </footer>
+
+  </div>
+
+  <!-- Particle canvas: NOVA TLT in gold -->
+  <div class="footer-canvas-wrap"><canvas id="ptypes-canvas"></canvas></div>
+
+  <div class="nf-bottom-bar">
+    <span>&copy; 2025 NOVA Terra Logistics &amp; Transport. All rights reserved.</span>
+    <span>Developed &amp; Designed by Tech Venchure</span>
+  </div>
+</footer>
 
   <!-- WA FLOAT -->
   <a href="https://wa.me/966XXXXXXXXX" class="wa-float" target="_blank" aria-label="Chat on WhatsApp">
@@ -526,5 +549,6 @@
 <script src="assets/js/scroll-reveal.js"></script>
 <script src="assets/js/mobile-menu.js"></script>
 <script src="assets/js/page-transition.js"></script>
+<script>(function(){var canvas=document.getElementById('ptypes-canvas');if(!canvas)return;var wrap=canvas.parentElement;var ctx=canvas.getContext('2d',{willReadFrequently:true});if(!ctx)return;var FONT_FAMILY='BebasNeuePro, sans-serif';var PARTICLE_SIZE=1.5,DENSITY=6,DISPERSION=15,RETURN_SPEED=0.08,COLOR='#CA953D';var mouseX=-1000,mouseY=-1000,particles=[],W=0,H=0,dpr=1,animId;function Particle(x,y){this.x=x+(Math.random()-.5)*10;this.y=y+(Math.random()-.5)*10;this.ox=x;this.oy=y;this.vx=(Math.random()-.5)*5;this.vy=(Math.random()-.5)*5;}Particle.prototype.update=function(){var dx=mouseX-this.x,dy=mouseY-this.y,dist=Math.sqrt(dx*dx+dy*dy);if(dist<120&&mouseX!==-1000){var f=(120-dist)/120;this.vx-=(dx/dist)*f*DISPERSION;this.vy-=(dy/dist)*f*DISPERSION;}this.vx+=(this.ox-this.x)*RETURN_SPEED;this.vy+=(this.oy-this.y)*RETURN_SPEED;this.vx*=0.85;this.vy*=0.85;this.x+=this.vx;this.y+=this.vy;};Particle.prototype.draw=function(){ctx.beginPath();ctx.arc(this.x,this.y,PARTICLE_SIZE,0,Math.PI*2);ctx.fill();};function getLabel(){return'NOVA TLT';}function getFontSize(){return window.innerWidth<=768?Math.min(120,W*0.19):Math.min(200,W*0.30);}function init(){dpr=window.devicePixelRatio||1;W=wrap.clientWidth;H=wrap.clientHeight;if(!W||!H)return;canvas.width=Math.round(W*dpr);canvas.height=Math.round(H*dpr);canvas.style.width=W+'px';canvas.style.height=H+'px';ctx.setTransform(1,0,0,1,0,0);ctx.scale(dpr,dpr);ctx.clearRect(0,0,W,H);ctx.fillStyle=COLOR;ctx.font='bold '+getFontSize()+'px '+FONT_FAMILY;ctx.letterSpacing='0.12em';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(getLabel(),W/2,H/2);var img=ctx.getImageData(0,0,canvas.width,canvas.height);var step=Math.max(1,Math.floor(DENSITY*dpr));particles=[];for(var y=0;y<img.height;y+=step){for(var x=0;x<img.width;x+=step){if((img.data[(y*img.width+x)*4+3]||0)>128){particles.push(new Particle(x/dpr,y/dpr));}}}}function animate(){ctx.clearRect(0,0,W,H);ctx.fillStyle=COLOR;for(var i=0;i<particles.length;i++){particles[i].update();particles[i].draw();}animId=requestAnimationFrame(animate);}canvas.addEventListener('mousemove',function(e){var r=canvas.getBoundingClientRect();mouseX=e.clientX-r.left;mouseY=e.clientY-r.top;});canvas.addEventListener('mouseleave',function(){mouseX=-1000;mouseY=-1000;});var rt;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){if(animId)cancelAnimationFrame(animId);init();animId=requestAnimationFrame(animate);},150);});function start(){setTimeout(function(){init();animId=requestAnimationFrame(animate);},120);}if(document.fonts&&document.fonts.load){document.fonts.load('bold 140px BebasNeuePro').then(start)['catch'](start);}else{start();}})();</script>
 </body>
 </html>

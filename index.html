@@ -3741,78 +3741,75 @@
 	<!-- ════════════════════════════════════════════
 	     FOOTER
 	════════════════════════════════════════════ -->
-	<footer class="site-footer">
+	<footer class="nova-footer">
+  <div class="nova-footer__inner">
 
-		<div class="site-footer__top">
+    <!-- TOP: badge + headline + newsletter -->
+    <div class="nf-top">
+      <div class="nf-headline-wrap">
+        <div class="nf-badge">
+          <span class="nf-badge__dot-wrap">
+            <span class="nf-badge__pulse"></span>
+            <span class="nf-badge__core"></span>
+          </span>
+          <span class="nf-badge__label">Available Across All 12 KSA Regions</span>
+        </div>
+        <h2 class="nf-headline">Get a custom fleet proposal matched to your project — within 24 hours.</h2>
+      </div>
+      <form class="nf-form" onsubmit="return false;">
+        <input type="email" class="nf-form__input" placeholder="Enter your email" />
+        <button type="submit" class="nf-form__btn">
+          Get Quote
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+        </button>
+      </form>
+    </div>
 
-			<!-- Brand -->
-			<div class="footer-brand">
-				<img src="assets/img/logo.png" alt="NOVA TLT" class="footer-brand__logo">
-				<p class="footer-brand__desc">Saudi Arabia's trusted partner for heavy haulage, earthmoving, and bulk material logistics across the Kingdom.</p>
-				<div class="footer-certs">
-					<span class="footer-cert-badge">ISO 9001:2015</span>
-					<span class="footer-cert-badge">ISO 45001</span>
-					<span class="footer-cert-badge">ISO 14001</span>
-					<span class="footer-cert-badge">MODON</span>
-					<span class="footer-cert-badge">GOSI</span>
-					<span class="footer-cert-badge">ZAKAT</span>
-				</div>
-			</div>
+    <!-- MID: brand + link groups -->
+    <div class="nf-mid">
+      <div class="nf-brand">
+        <img src="assets/img/logo.png" alt="NOVA TLT" class="nf-brand__logo" />
+        <p class="nf-brand__desc">Saudi Arabia's trusted partner for heavy haulage, earthmoving, and bulk material logistics across the Kingdom.</p>
+      </div>
+      <div class="nf-links-grid">
+        <div class="nf-links__col">
+          <p class="nf-links__title">Company</p>
+          <ul class="nf-links__list">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="careers.html">Careers</a></li>
+            <li><a href="news.html">News</a></li>
+          </ul>
+        </div>
+        <div class="nf-links__col">
+          <p class="nf-links__title">Services</p>
+          <ul class="nf-links__list">
+            <li><a href="services.html">Dump Truck Rental</a></li>
+            <li><a href="fleet.html">Our Fleet</a></li>
+            <li><a href="industries.html">Industries</a></li>
+          </ul>
+        </div>
+        <div class="nf-links__col">
+          <p class="nf-links__title">Contact</p>
+          <ul class="nf-links__list">
+            <li><a href="tel:+966500000000">+966 50 000 0000</a></li>
+            <li><a href="mailto:info@nova-tlt.com">info@nova-tlt.com</a></li>
+            <li><span>Riyadh, Saudi Arabia</span></li>
+            <li><span style="color:#CA953D;">Emergency: 24/7</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
 
-			<!-- Link columns -->
-			<div class="footer-links-grid">
+  </div>
 
-				<div class="footer-links-col">
-					<p class="footer-links-col__title">Company</p>
-					<ul class="footer-links-col__list">
-						<li><a href="about.html" class="footer-links-col__link">About Us <span class="footer-link-arrow"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5h6M4.5 1.5l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
-						<li><a href="projects.html" class="footer-links-col__link">Projects <span class="footer-link-arrow"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5h6M4.5 1.5l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
-						<li><a href="careers.html" class="footer-links-col__link">Careers <span class="footer-link-arrow"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5h6M4.5 1.5l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
-						<li><a href="news.html" class="footer-links-col__link">News <span class="footer-link-arrow"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5h6M4.5 1.5l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
-						<li><a href="contact.html" class="footer-links-col__link">Contact <span class="footer-link-arrow"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5h6M4.5 1.5l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
-					</ul>
-				</div>
+  <!-- Particle canvas: NOVA TLT in gold -->
+  <div class="footer-canvas-wrap"><canvas id="ptypes-canvas"></canvas></div>
 
-				<div class="footer-links-col">
-					<p class="footer-links-col__title">Services</p>
-					<ul class="footer-links-col__list">
-						<li><a href="services.html" class="footer-links-col__link">Dump Truck Rental <span class="footer-link-arrow"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5h6M4.5 1.5l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
-						<li><a href="services.html" class="footer-links-col__link">Earthmoving <span class="footer-link-arrow"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5h6M4.5 1.5l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
-						<li><a href="services.html" class="footer-links-col__link">Bulk Transport <span class="footer-link-arrow"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5h6M4.5 1.5l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
-						<li><a href="services.html" class="footer-links-col__link">Fleet Management <span class="footer-link-arrow"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5h6M4.5 1.5l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
-						<li><a href="fleet.html" class="footer-links-col__link">Our Fleet <span class="footer-link-arrow"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5h6M4.5 1.5l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
-						<li><a href="industries.html" class="footer-links-col__link">Industries <span class="footer-link-arrow"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5h6M4.5 1.5l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
-					</ul>
-				</div>
-
-				<div class="footer-links-col">
-					<p class="footer-links-col__title">Contact</p>
-					<ul class="footer-links-col__list">
-						<li><a href="tel:+966500000000" class="footer-links-col__link">+966 50 000 0000 <span class="footer-link-arrow"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5h6M4.5 1.5l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
-						<li><a href="mailto:info@nova-tlt.com" class="footer-links-col__link">info@nova-tlt.com <span class="footer-link-arrow"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5h6M4.5 1.5l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
-						<li><span class="footer-links-col__link" style="cursor:default;pointer-events:none;">Riyadh, Saudi Arabia</span></li>
-						<li><span class="footer-links-col__link" style="cursor:default;pointer-events:none;color:rgba(255,255,255,0.28);">Sun–Thu: 7AM–6PM</span></li>
-						<li><span class="footer-links-col__link" style="cursor:default;pointer-events:none;color:#CA953D;">Emergency: 24/7</span></li>
-					</ul>
-				</div>
-
-			</div>
-		</div>
-
-		<!-- Particle typography band -->
-		<div class="footer-canvas-wrap">
-			<canvas id="ptypes-canvas"></canvas>
-		</div>
-
-		<!-- Bottom bar -->
-		<div style="max-width:1400px;margin:0 auto;">
-			<div class="footer-bottom-bar">
-				<span class="footer-bottom-bar__copy">© 2025 NOVA Terra Logistics &amp; Transport. All rights reserved.</span>
-				<span class="footer-bottom-bar__copy">Developed &amp; Designed by <span style="background:linear-gradient(20deg,#B67C2A 0%,#CA953D 50%,#E5B85A 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Tech Venchure</span></span>
-				</div>
-		</div>
-
-	</footer>
+  <div class="nf-bottom-bar">
+    <span>&copy; 2025 NOVA Terra Logistics &amp; Transport. All rights reserved.</span>
+    <span>Developed &amp; Designed by Tech Venchure</span>
+  </div>
+</footer>
 	<script>
 	(function () {
 		var drops = document.querySelectorAll('[data-nav-drop]');
@@ -3914,7 +3911,7 @@
 			ctx.fill();
 		};
 
-		function getLabel()    { return (window.innerWidth <= 768 ? 'NOVA TLT' : 'NOVA TERRA').toUpperCase(); }
+		function getLabel()    { return 'NOVA TLT'; }
 		function getFontSize() { return Math.min(200, W * (window.innerWidth <= 768 ? 0.20 : 0.30)); }
 
 		function init() {
