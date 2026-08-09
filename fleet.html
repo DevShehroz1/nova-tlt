@@ -168,7 +168,7 @@
       letter-spacing: 0.2em; text-transform: uppercase; color: #CA953D;
       display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
     }
-    .eyebrow::before { content: ''; width: 28px; height: 1.5px; background: var(--gold-grad); flex-shrink: 0; }
+    .eyebrow::before { display: none; }
     .display-title {
       font-family: BebasNeuePro, sans-serif; font-weight: 700;
       font-size: clamp(36px,4vw,64px); line-height: 0.95;
@@ -366,6 +366,7 @@
       .fleet-panel__pane { padding: 0; }
     }
     @media (max-width: 560px) { .fleet-nav { grid-template-columns: 1fr; } }
+    @media (max-width: 768px) { .fleet-nav { display: none; } }
 
     /* ── Maintenance section ── */
     .maint-sec { background: #080808; }
