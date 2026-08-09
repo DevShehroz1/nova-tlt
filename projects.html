@@ -84,39 +84,39 @@
     .breakdown-bar-track{flex:1;height:6px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;}
     .breakdown-bar-fill{height:100%;border-radius:3px;background:var(--gold-grad);}
     .breakdown-pct{font-family:ui-sans-serif,system-ui,sans-serif,sans-serif;font-size:13px;font-weight:700;color:#CA953D;min-width:36px;text-align:right;}
-    .site-footer{background:#0f0f0f;overflow:hidden;position:relative;}
-    .site-footer__top{display:flex;align-items:flex-start;justify-content:space-between;gap:clamp(32px,5vw,64px);padding:clamp(48px,6vw,80px) clamp(24px,5vw,80px) clamp(32px,4vw,48px);max-width:1400px;margin:0 auto;}
-    .footer-brand{max-width:280px;flex-shrink:0;}
-    .footer-brand__logo{height:48px;width:auto;display:block;margin-bottom:18px;}
-    .footer-brand__desc{font-family:ui-sans-serif,system-ui,sans-serif,sans-serif;font-size:13.5px;line-height:1.65;color:rgba(255,255,255,0.38);margin-bottom:24px;}
-    .footer-certs{display:flex;flex-wrap:wrap;gap:7px;}
-    .footer-cert-badge{font-family:ui-sans-serif,system-ui,sans-serif,sans-serif;font-size:9.5px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:rgba(255,255,255,0.45);background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);border-radius:4px;padding:4px 8px;}
-    .footer-links-grid{display:flex;gap:clamp(32px,5vw,80px);flex-wrap:wrap;}
-    .footer-links-col__title{font-family:ui-sans-serif,system-ui,sans-serif,sans-serif;font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:18px;}
-    .footer-links-col__list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;}
-    .footer-links-col__link{font-family:ui-sans-serif,system-ui,sans-serif,sans-serif;font-size:14px;font-weight:500;color:rgba(255,255,255,0.52);text-decoration:none;display:inline-flex;align-items:center;gap:5px;transition:color 180ms ease;}
-    .footer-links-col__link:hover{color:#fff;}
-    .footer-link-arrow{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border:1px solid rgba(255,255,255,0.14);border-radius:4px;opacity:0;transform:translateX(-4px);transition:opacity 200ms ease,transform 200ms ease;flex-shrink:0;}
-    .footer-links-col__link:hover .footer-link-arrow{opacity:1;transform:translateX(0);}
-    .footer-canvas-wrap{position:relative;width:100%;height:clamp(260px,28vw,420px);margin-top:8px;overflow:hidden;}
-    #ptypes-canvas{display:block;width:100%;height:100%;cursor:crosshair;}
-    .footer-bottom-bar{border-top:1px solid rgba(255,255,255,0.06);padding:18px clamp(24px,5vw,80px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;max-width:1400px;margin:0 auto;}
-    .footer-bottom-bar__copy{font-family:ui-sans-serif,system-ui,sans-serif,sans-serif;font-size:12px;color:rgba(255,255,255,0.2);}
-    .footer-bottom-bar__legal{display:flex;gap:20px;}
-    .footer-bottom-bar__legal a{font-family:ui-sans-serif,system-ui,sans-serif,sans-serif;font-size:12px;color:rgba(255,255,255,0.2);text-decoration:none;transition:color 160ms ease;}
-    .footer-bottom-bar__legal a:hover{color:rgba(255,255,255,0.55);}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    .footer-links-col__link:hover 
+    
+    
+    
+    
+    
+    
+    
     @media(max-width:768px){
-      .site-footer__top{flex-direction:column;gap:32px;padding:40px 20px 28px;}
-      .footer-brand{max-width:100%;}
-      .footer-brand__logo{height:40px;margin-bottom:14px;}
-      .footer-brand__desc{font-size:13px;}
-      .footer-certs{gap:6px;}
-      .footer-links-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px 24px;width:100%;}
+      
+      
+      
+      
+      
+      
       .footer-links-col:last-child{grid-column:1 / -1;}
-      .footer-links-col__title{margin-bottom:12px;}
-      .footer-links-col__list{gap:8px;}
-      .footer-bottom-bar{flex-direction:column;align-items:flex-start;gap:8px;padding:16px 20px;}
-      .footer-bottom-bar__legal{margin-top:4px;}
+      
+      
+      
+      
       .stats-row{flex-direction:column;}.stat-item{border-right:none;border-bottom:1px solid var(--line);}.stat-item:last-child{border-bottom:none;}
     }
 
@@ -138,7 +138,40 @@
     .header__logo { background: transparent !important; padding: 0 !important; height: auto !important; }
     .header__logo-img { width: auto !important; height: 52px !important; object-fit: contain; }
     @media (max-width: 1024px) { .header__logo-img { height: 40px !important; } }
-  </style>
+  .nova-footer { position: relative; width: 100%; overflow: hidden; background: radial-gradient(ellipse 180% 140% at 10% 110%, rgba(202,149,61,0.85) 0%, rgba(160,110,20,0.45) 38%, #0c0b0a 65%), #0c0b0a; }
+    .nf-bg-img { pointer-events: none; position: absolute; inset: 0; height: 100%; width: 100%; object-fit: cover; user-select: none; }
+    .nf-content { position: relative; z-index: 10; width: 100%; }
+    .nf-inner-wrap { width: 100%; margin: 0 auto; max-width: 1280px; padding: 0 clamp(24px,4vw,48px); }
+    .nf-top { display: flex; flex-direction: column; gap: 32px; padding-top: 24px; padding-bottom: 40px; }
+    .nf-headline-wrap { display: flex; flex-direction: column; gap: 20px; max-width: 576px; }
+    .nf-badge { display: flex; align-items: center; gap: 10px; }
+    .nf-badge__dot-wrap { position: relative; display: flex; width: 8px; height: 8px; flex-shrink: 0; }
+    .nf-badge__pulse { position: absolute; inset: 0; border-radius: 50%; background: #CA953D; opacity: 0.75; animation: nf-ping 1.2s cubic-bezier(0,0,0.2,1) infinite; }
+    .nf-badge__core { position: relative; width: 8px; height: 8px; border-radius: 50%; background: #CA953D; }
+    @keyframes nf-ping { 0% { transform: scale(1); opacity: 0.75; } 75%, 100% { transform: scale(2.2); opacity: 0; } }
+    .nf-badge__label { font-size: 14px; font-weight: 500; color: #fff; }
+    .nf-headline { color: #fff; font-size: clamp(30px,4vw,48px); line-height: 1.25; font-weight: 300; letter-spacing: -0.02em; margin: 0; }
+    .nf-form { display: flex; width: 100%; max-width: 384px; flex-shrink: 0; align-items: center; gap: 8px; }
+    .nf-form__input { flex: 1; height: 48px; min-height: 48px; padding: 0 16px; font-size: 14px; color: #fff; background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.05); border-radius: 0; outline: none; transition: border-color 180ms ease, box-shadow 180ms ease; }
+    .nf-form__input::placeholder { color: rgba(255,255,255,0.70); }
+    .nf-form__input:focus { border-color: rgba(202,149,61,0.50); box-shadow: 0 0 0 3px rgba(202,149,61,0.30); }
+    .nf-form__btn { display: flex; align-items: center; gap: 8px; height: 48px; flex-shrink: 0; cursor: pointer; padding: 0 20px; font-size: 14px; font-weight: 600; color: #fff; background: #CA953D; border: none; border-radius: 0; box-shadow: inset 0 0 8px 0.5px rgba(255,255,255,0.30); transition: all 180ms ease; }
+    .nf-form__btn-icon { display: flex; width: 16px; height: 16px; align-items: center; justify-content: center; transition: transform 300ms ease; }
+    .nf-form__btn-icon svg { width: 100%; height: 100%; }
+    .nf-form__btn:hover .nf-form__btn-icon { transform: translateX(2px); }
+    .nf-mid { display: flex; flex-direction: column; gap: 40px; padding-bottom: 24px; }
+    .nf-brand { display: flex; flex: 1; align-items: center; gap: 12px; } .nf-brand__logo { height: 52px; width: auto; display: block; }
+    .nf-brand__name { font-size: 16px; font-weight: 500; letter-spacing: -0.02em; color: #fff; }
+    .nf-links-grid { display: grid; grid-template-columns: repeat(2, auto); gap: 32px 48px; }
+    .nf-links__title { font-size: 14px; font-weight: 500; letter-spacing: 0.05em; color: rgba(255,255,255,0.90); text-transform: uppercase; display: block; margin-bottom: 16px; }
+    .nf-links__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+    .nf-links__list a { font-size: 14px; color: rgba(255,255,255,0.70); text-decoration: none; transition: color 180ms ease; }
+    .nf-links__list a:hover { color: #fff; }
+    .nf-watermark { display: flex; width: 100%; align-items: center; justify-content: center; }
+    .nf-watermark__svg { height: auto; width: 100%; user-select: none; }
+    @media (min-width: 640px) { .nf-links-grid { grid-template-columns: repeat(3, auto); } }
+    @media (min-width: 1024px) { .nf-top { flex-direction: row; align-items: flex-end; justify-content: space-between; padding-top: 40px; padding-bottom: 56px; } .nf-headline-wrap { flex: 1; } .nf-mid { flex-direction: row; align-items: flex-start; gap: 32px; } .nf-links-grid { gap: 32px 64px; } }
+    </style>
 </head>
 <body>
 <div id="cursor-dot"></div>
@@ -339,75 +372,70 @@
 </main>
 
 <footer class="nova-footer">
-  <div class="nova-footer__inner">
-
-    <div class="nf-top">
-      <div class="nf-headline-wrap">
-        <div class="nf-badge">
-          <span class="nf-badge__dot-wrap">
-            <span class="nf-badge__pulse"></span>
-            <span class="nf-badge__core"></span>
-          </span>
-          <span class="nf-badge__label">Available Across All 12 KSA Regions</span>
+  <div class="nf-content">
+    <div class="nf-inner-wrap">
+      <div class="nf-top">
+        <div class="nf-headline-wrap">
+          <div class="nf-badge">
+            <span class="nf-badge__dot-wrap">
+              <span class="nf-badge__pulse"></span>
+              <span class="nf-badge__core"></span>
+            </span>
+            <span class="nf-badge__label">Available Across All 12 KSA Regions</span>
+          </div>
+          <h2 class="nf-headline">Get a custom fleet proposal matched to your project — within 24 hours.</h2>
         </div>
-        <h2 class="nf-headline">Get a custom fleet proposal matched to your project — within 24 hours.</h2>
+        <form class="nf-form" onsubmit="return false;">
+          <input type="email" class="nf-form__input" placeholder="Enter your email" />
+          <button type="submit" class="nf-form__btn">
+            <span>Get Quote</span>
+            <span class="nf-form__btn-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
+          </button>
+        </form>
       </div>
-      <form class="nf-form" onsubmit="return false;">
-        <input type="email" class="nf-form__input" placeholder="Enter your email" />
-        <button type="submit" class="nf-form__btn">
-          Get Quote
-          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
-        </button>
-      </form>
-    </div>
-
-    <div class="nf-mid">
-      <div class="nf-brand">
-        <img src="assets/img/logo.png" alt="NOVA TLT" class="nf-brand__logo" />
-        <span class="nf-brand__name">NOVA TLT</span>
-      </div>
-      <div class="nf-links-grid">
-        <div class="nf-links__col">
-          <p class="nf-links__title">Company</p>
-          <ul class="nf-links__list">
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="careers.html">Careers</a></li>
-            <li><a href="news.html">News</a></li>
-          </ul>
+      <div class="nf-mid">
+        <div class="nf-brand">
+          <img src="assets/img/logo.png" alt="NOVA TLT" class="nf-brand__logo" />
         </div>
-        <div class="nf-links__col">
-          <p class="nf-links__title">Services</p>
-          <ul class="nf-links__list">
-            <li><a href="services.html">Dump Truck Rental</a></li>
-            <li><a href="fleet.html">Our Fleet</a></li>
-            <li><a href="industries.html">Industries</a></li>
-          </ul>
-        </div>
-        <div class="nf-links__col">
-          <p class="nf-links__title">Contact</p>
-          <ul class="nf-links__list">
-            <li><a href="tel:+966500000000">+966 50 000 0000</a></li>
-            <li><a href="mailto:info@nova-tlt.com">info@nova-tlt.com</a></li>
-            <li><span>Riyadh, Saudi Arabia</span></li>
-            <li><span style="color:#E5B85A;">Emergency: 24/7</span></li>
-          </ul>
+        <div class="nf-links-grid">
+          <div class="nf-links__col">
+            <span class="nf-links__title">COMPANY</span>
+            <ul class="nf-links__list">
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="careers.html">Careers</a></li>
+              <li><a href="news.html">News</a></li>
+            </ul>
+          </div>
+          <div class="nf-links__col">
+            <span class="nf-links__title">SERVICES</span>
+            <ul class="nf-links__list">
+              <li><a href="services.html">Dump Truck Rental</a></li>
+              <li><a href="fleet.html">Our Fleet</a></li>
+              <li><a href="industries.html">Industries</a></li>
+            </ul>
+          </div>
+          <div class="nf-links__col">
+            <span class="nf-links__title">CONTACT</span>
+            <ul class="nf-links__list">
+              <li><a href="tel:+966500000000">+966 50 000 0000</a></li>
+              <li><a href="mailto:info@nova-tlt.com">info@nova-tlt.com</a></li>
+              <li><a href="contact.html">Riyadh, Saudi Arabia</a></li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
-
-  </div>
-
-  <div class="footer-canvas-wrap"><canvas id="ptypes-canvas"></canvas></div>
-
-  <div class="nf-bottom-bar">
-    <span>&copy; 2025 NOVA Terra Logistics &amp; Transport. All rights reserved.</span>
-    <span>Developed &amp; Designed by Tech Venchure</span>
+    <div class="nf-watermark">
+      <svg class="nf-watermark__svg" viewBox="0 0 720 110" preserveAspectRatio="xMidYMid meet" aria-label="NOVA TLT">
+        <text x="50%" y="105" dominant-baseline="alphabetic" text-anchor="middle" textLength="90%" lengthAdjust="spacing" font-size="160" font-weight="700" fill="rgba(255,255,255,0.30)" font-family="ui-sans-serif,system-ui,sans-serif" letter-spacing="-0.05em">NOVA TLT</text>
+      </svg>
+    </div>
   </div>
 </footer>
 
 <script>(function(){var drops=document.querySelectorAll('[data-nav-drop]');function openDrop(d){d.classList.add('nav-drop--open');d.querySelector('.nav-drop__trigger').setAttribute('aria-expanded','true');}function closeDrop(d){d.classList.remove('nav-drop--open');d.querySelector('.nav-drop__trigger').setAttribute('aria-expanded','false');}function closeAll(){drops.forEach(closeDrop);}drops.forEach(function(drop){var trigger=drop.querySelector('.nav-drop__trigger');var isMobile=function(){return window.innerWidth<=1024;};drop.addEventListener('mouseenter',function(){if(!isMobile())openDrop(drop);});drop.addEventListener('mouseleave',function(){if(!isMobile())closeDrop(drop);});trigger.addEventListener('click',function(e){e.stopPropagation();var isOpen=drop.classList.contains('nav-drop--open');closeAll();if(!isOpen)openDrop(drop);});});document.addEventListener('click',closeAll);document.addEventListener('keydown',function(e){if(e.key==='Escape')closeAll();});})();</script>
 <script>(function(){var dot=document.getElementById('cursor-dot');var ring=document.getElementById('cursor-ring');if(!dot||!ring)return;var mx=-100,my=-100,rx=-100,ry=-100;document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;});document.querySelectorAll('a,button,[data-hover]').forEach(function(el){el.addEventListener('mouseenter',function(){ring.classList.add('is-hover');});el.addEventListener('mouseleave',function(){ring.classList.remove('is-hover');});});function loop(){dot.style.left=mx+'px';dot.style.top=my+'px';rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);}loop();})();</script>
-<script>(function(){var canvas=document.getElementById('ptypes-canvas');if(!canvas)return;var wrap=canvas.parentElement;var ctx=canvas.getContext('2d',{willReadFrequently:true});if(!ctx)return;var FONT_FAMILY='BebasNeuePro, sans-serif';var PARTICLE_SIZE=1.5,DENSITY=6,DISPERSION=15,RETURN_SPEED=0.08,COLOR='#CA953D';var mouseX=-1000,mouseY=-1000,particles=[],W=0,H=0,dpr=1,animId;function Particle(x,y){this.x=x+(Math.random()-.5)*10;this.y=y+(Math.random()-.5)*10;this.ox=x;this.oy=y;this.vx=(Math.random()-.5)*5;this.vy=(Math.random()-.5)*5;}Particle.prototype.update=function(){var dx=mouseX-this.x,dy=mouseY-this.y,dist=Math.sqrt(dx*dx+dy*dy);if(dist<120&&mouseX!==-1000){var f=(120-dist)/120;this.vx-=(dx/dist)*f*DISPERSION;this.vy-=(dy/dist)*f*DISPERSION;}this.vx+=(this.ox-this.x)*RETURN_SPEED;this.vy+=(this.oy-this.y)*RETURN_SPEED;this.vx*=0.85;this.vy*=0.85;this.x+=this.vx;this.y+=this.vy;};Particle.prototype.draw=function(){ctx.beginPath();ctx.arc(this.x,this.y,PARTICLE_SIZE,0,Math.PI*2);ctx.fill();};function getLabel(){return'NOVA TLT';}function getFontSize(){return window.innerWidth<=768?Math.min(120,W*0.19):Math.min(200,W*0.30);}function init(){dpr=window.devicePixelRatio||1;W=wrap.clientWidth;H=wrap.clientHeight;if(!W||!H)return;canvas.width=Math.round(W*dpr);canvas.height=Math.round(H*dpr);canvas.style.width=W+'px';canvas.style.height=H+'px';ctx.setTransform(1,0,0,1,0,0);ctx.scale(dpr,dpr);ctx.clearRect(0,0,W,H);ctx.fillStyle=COLOR;ctx.font='bold '+getFontSize()+'px '+FONT_FAMILY;ctx.letterSpacing='0.12em';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(getLabel(),W/2,H/2);var img=ctx.getImageData(0,0,canvas.width,canvas.height);var step=Math.max(1,Math.floor(DENSITY*dpr));particles=[];for(var y=0;y<img.height;y+=step){for(var x=0;x<img.width;x+=step){if((img.data[(y*img.width+x)*4+3]||0)>128){particles.push(new Particle(x/dpr,y/dpr));}}}}function animate(){ctx.clearRect(0,0,W,H);ctx.fillStyle=COLOR;for(var i=0;i<particles.length;i++){particles[i].update();particles[i].draw();}animId=requestAnimationFrame(animate);}canvas.addEventListener('mousemove',function(e){var r=canvas.getBoundingClientRect();mouseX=e.clientX-r.left;mouseY=e.clientY-r.top;});canvas.addEventListener('mouseleave',function(){mouseX=-1000;mouseY=-1000;});var rt;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){if(animId)cancelAnimationFrame(animId);init();animId=requestAnimationFrame(animate);},150);});function start(){setTimeout(function(){init();animId=requestAnimationFrame(animate);},120);}if(document.fonts&&document.fonts.load){document.fonts.load('bold 140px BebasNeuePro').then(start)['catch'](start);}else{start();}})();</script>
+<script></script>
 <script src="assets/js/scroll-reveal.js"></script>
 <script src="assets/js/mobile-menu.js"></script>
 <script src="assets/js/page-transition.js"></script>
