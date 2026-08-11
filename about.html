@@ -7,7 +7,7 @@
   <link rel="preload" href="assets/fonts/BebasNeuePro-Bold.woff" as="font" type="font/woff" crossorigin />
   <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
   <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
-  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/main.css?v=1786426554" />
   <link rel="stylesheet" href="assets/css/cf7.css" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -149,6 +149,8 @@
     .tm-card { flex-shrink: 0; width: 230px; border-radius: 16px; overflow: hidden; position: relative; }
     .tm-card img { width: 100%; height: 320px; object-fit: cover; object-position: top center; display: block; filter: grayscale(1); transition: filter 0.4s ease; }
     .tm-card:hover img { filter: grayscale(0); }
+    .tm-card__no-img { width: 100%; height: 320px; display: flex; align-items: center; justify-content: center; background: linear-gradient(160deg,#111,#1a1a1a); }
+    .tm-card__initials { font-family: BebasNeuePro, sans-serif; font-size: 64px; letter-spacing: 0.06em; background: linear-gradient(135deg,#B67C2A,#E5B85A); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .tm-caption { position: absolute; bottom: 0; left: 0; right: 0; padding: 14px 16px; background: rgba(10,10,10,0.80); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
     .tm-caption__name { font-family: BebasNeuePro,sans-serif; font-size: 18px; letter-spacing: 0.04em; color: #fff; }
     .tm-caption__role { font-family: ui-sans-serif, system-ui, sans-serif,sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #CA953D; margin-top: 2px; }
@@ -635,53 +637,45 @@
       <div class="tm-track">
         <!-- set 1 -->
         <div class="tm-card">
-          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=460&h=640&fit=crop&crop=face" alt="Khalid Al-Amer" loading="lazy">
-          <div class="tm-caption"><p class="tm-caption__name">Khalid Al-Amer</p><p class="tm-caption__role">CEO &amp; Founder</p></div>
+          <img src="assets/img/team-sabeek.jpg?v=1786426554" alt="Sabeek Khan" loading="lazy">
+          <div class="tm-caption"><p class="tm-caption__name">Sabeek Khan</p><p class="tm-caption__role">CEO &amp; Founder</p></div>
         </div>
         <div class="tm-card">
-          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=460&h=640&fit=crop&crop=face" alt="Rania Mahmoud" loading="lazy">
-          <div class="tm-caption"><p class="tm-caption__name">Rania Mahmoud</p><p class="tm-caption__role">Finance Director</p></div>
+          <img src="assets/img/team-ram.jpg?v=1786426554" alt="Ram Veluswame" loading="lazy">
+          <div class="tm-caption"><p class="tm-caption__name">Ram Veluswame</p><p class="tm-caption__role">COO &amp; Founder</p></div>
         </div>
         <div class="tm-card">
-          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=460&h=640&fit=crop&crop=face" alt="Saad Al-Rashidi" loading="lazy">
-          <div class="tm-caption"><p class="tm-caption__name">Saad Al-Rashidi</p><p class="tm-caption__role">Chief Operating Officer</p></div>
+          <img src="assets/img/team-faisal.jpg?v=1786426554" alt="Faisal Taj" loading="lazy">
+          <div class="tm-caption"><p class="tm-caption__name">Faisal Taj</p><p class="tm-caption__role">Marketing Director</p></div>
         </div>
         <div class="tm-card">
-          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=460&h=640&fit=crop&crop=face" alt="Lina Al-Qahtani" loading="lazy">
-          <div class="tm-caption"><p class="tm-caption__name">Lina Al-Qahtani</p><p class="tm-caption__role">HSE Director</p></div>
+          <div class="tm-card__no-img"><span class="tm-card__initials">A</span></div>
+          <div class="tm-caption"><p class="tm-caption__name">Alasmi</p><p class="tm-caption__role">CFO</p></div>
         </div>
         <div class="tm-card">
-          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=460&h=640&fit=crop&crop=face" alt="Fahad Al-Mutairi" loading="lazy">
-          <div class="tm-caption"><p class="tm-caption__name">Fahad Al-Mutairi</p><p class="tm-caption__role">Head of Fleet</p></div>
-        </div>
-        <div class="tm-card">
-          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=460&h=640&fit=crop&crop=face" alt="Sara Al-Ghamdi" loading="lazy">
-          <div class="tm-caption"><p class="tm-caption__name">Sara Al-Ghamdi</p><p class="tm-caption__role">Business Development</p></div>
+          <div class="tm-card__no-img"><span class="tm-card__initials">SB</span></div>
+          <div class="tm-caption"><p class="tm-caption__name">Sikkander Basha</p><p class="tm-caption__role">Chairman</p></div>
         </div>
         <!-- set 2 (duplicate for seamless loop) -->
         <div class="tm-card">
-          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=460&h=640&fit=crop&crop=face" alt="Khalid Al-Amer" loading="lazy">
-          <div class="tm-caption"><p class="tm-caption__name">Khalid Al-Amer</p><p class="tm-caption__role">CEO &amp; Founder</p></div>
+          <img src="assets/img/team-sabeek.jpg?v=1786426554" alt="Sabeek Khan" loading="lazy">
+          <div class="tm-caption"><p class="tm-caption__name">Sabeek Khan</p><p class="tm-caption__role">CEO &amp; Founder</p></div>
         </div>
         <div class="tm-card">
-          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=460&h=640&fit=crop&crop=face" alt="Rania Mahmoud" loading="lazy">
-          <div class="tm-caption"><p class="tm-caption__name">Rania Mahmoud</p><p class="tm-caption__role">Finance Director</p></div>
+          <img src="assets/img/team-ram.jpg?v=1786426554" alt="Ram Veluswame" loading="lazy">
+          <div class="tm-caption"><p class="tm-caption__name">Ram Veluswame</p><p class="tm-caption__role">COO &amp; Founder</p></div>
         </div>
         <div class="tm-card">
-          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=460&h=640&fit=crop&crop=face" alt="Saad Al-Rashidi" loading="lazy">
-          <div class="tm-caption"><p class="tm-caption__name">Saad Al-Rashidi</p><p class="tm-caption__role">Chief Operating Officer</p></div>
+          <img src="assets/img/team-faisal.jpg?v=1786426554" alt="Faisal Taj" loading="lazy">
+          <div class="tm-caption"><p class="tm-caption__name">Faisal Taj</p><p class="tm-caption__role">Marketing Director</p></div>
         </div>
         <div class="tm-card">
-          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=460&h=640&fit=crop&crop=face" alt="Lina Al-Qahtani" loading="lazy">
-          <div class="tm-caption"><p class="tm-caption__name">Lina Al-Qahtani</p><p class="tm-caption__role">HSE Director</p></div>
+          <div class="tm-card__no-img"><span class="tm-card__initials">A</span></div>
+          <div class="tm-caption"><p class="tm-caption__name">Alasmi</p><p class="tm-caption__role">CFO</p></div>
         </div>
         <div class="tm-card">
-          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=460&h=640&fit=crop&crop=face" alt="Fahad Al-Mutairi" loading="lazy">
-          <div class="tm-caption"><p class="tm-caption__name">Fahad Al-Mutairi</p><p class="tm-caption__role">Head of Fleet</p></div>
-        </div>
-        <div class="tm-card">
-          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=460&h=640&fit=crop&crop=face" alt="Sara Al-Ghamdi" loading="lazy">
-          <div class="tm-caption"><p class="tm-caption__name">Sara Al-Ghamdi</p><p class="tm-caption__role">Business Development</p></div>
+          <div class="tm-card__no-img"><span class="tm-card__initials">SB</span></div>
+          <div class="tm-caption"><p class="tm-caption__name">Sikkander Basha</p><p class="tm-caption__role">Chairman</p></div>
         </div>
       </div>
     </div>

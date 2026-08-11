@@ -376,14 +376,27 @@
       background: rgba(255,255,255,0.04);
     }
     .maint-track {
-      display: flex; gap: 2px;
-      overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth;
-      scrollbar-width: none;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
     }
-    .maint-track::-webkit-scrollbar { display: none; }
-    .maint-carousel-nav {
-      display: flex; align-items: center; justify-content: center;
-      gap: 20px; margin-top: 28px;
+    .maint-carousel-nav { display: none; }
+    .maint-item {
+      background: #0a0a0a; padding: clamp(32px,4vw,52px);
+      display: flex; gap: 24px;
+      transition: background 0.35s;
+      position: relative; overflow: hidden;
+    }
+    @media (max-width: 768px) {
+      .maint-track {
+        display: flex; grid-template-columns: unset;
+        overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth;
+        scrollbar-width: none;
+      }
+      .maint-track::-webkit-scrollbar { display: none; }
+      .maint-carousel-nav {
+        display: flex; align-items: center; justify-content: center;
+        gap: 20px; margin-top: 28px;
+      }
+      .maint-item { flex: 0 0 100%; scroll-snap-align: start; }
     }
     .maint-nav-btn {
       width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(202,149,61,0.35);
@@ -395,14 +408,6 @@
     .maint-dots { display: flex; gap: 8px; align-items: center; }
     .maint-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.18); transition: background 0.25s, transform 0.25s; cursor: pointer; }
     .maint-dot.is-active { background: #CA953D; transform: scale(1.4); }
-    .maint-item {
-      flex: 0 0 calc(50% - 1px); scroll-snap-align: start;
-      background: #0a0a0a; padding: clamp(32px,4vw,52px);
-      display: flex; gap: 24px;
-      transition: background 0.35s;
-      position: relative; overflow: hidden;
-    }
-    @media (max-width: 768px) { .maint-item { flex: 0 0 100%; } }
     .maint-item::before {
       content: ''; position: absolute; inset: 0;
       background: radial-gradient(60% 60% at 20% 20%, rgba(202,149,61,0.07), transparent);
