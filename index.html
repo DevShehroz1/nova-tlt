@@ -3043,7 +3043,7 @@
 	  const ctx = canvas.getContext('2d');
 	  const D2R = Math.PI / 180;
 
-	  // Saudi Arabia border polygon [lat, lon] — clockwise from Gulf of Aqaba
+	  // Saudi Arabia border [lat, lon] clockwise
 	  const SA_BORDER_LL = [
 	    [29.50,35.00],[29.60,35.50],[29.90,36.50],[30.20,37.50],
 	    [30.50,38.00],[31.00,38.50],[31.20,39.00],[31.20,40.00],
@@ -3065,217 +3065,223 @@
 	    [28.70,34.96],[29.50,35.00]
 	  ];
 
-	  // City hubs [name, lat, lon]
-	  const HUBS_LL = [
-	    ["Riyadh",   24.71, 46.68],
-	    ["Jeddah",   21.49, 39.19],
-	    ["Mecca",    21.39, 39.86],
-	    ["Medina",   24.52, 39.57],
-	    ["Dammam",   26.43, 50.10],
-	    ["Jubail",   27.00, 49.66],
-	    ["Hofuf",    25.38, 49.59],
-	    ["Buraydah", 26.33, 43.97],
-	    ["Hail",     27.51, 41.69],
-	    ["Tabuk",    28.38, 36.57],
-	    ["Abha",     18.22, 42.51],
-	    ["Jizan",    16.89, 42.55],
-	    ["Najran",   17.49, 44.13],
-	    ["Yanbu",    24.09, 38.06],
-	    ["Taif",     21.27, 40.42],
-	    ["Sakaka",   29.97, 40.20],
-	  ];
-
-	  // Bounding box
-	  const LAT_MIN = 15.5, LAT_MAX = 33.0;
-	  const LON_MIN = 33.5, LON_MAX = 57.5;
-	  const MID_LAT = (LAT_MIN + LAT_MAX) / 2;
-	  const LON_SCALE = Math.cos(MID_LAT * D2R);
-	  const LL_W = (LON_MAX - LON_MIN) * LON_SCALE;
-	  const LL_H = LAT_MAX - LAT_MIN;
-	  const LL_ASPECT = LL_W / LL_H;
-
-	  let W, H, DPR, mapX, mapY, mapW, mapH;
-
-	  function resize() {
-	    DPR = Math.min(2, window.devicePixelRatio || 1);
-	    const rect = canvas.parentElement.getBoundingClientRect();
-	    W = rect.width; H = rect.height;
-	    canvas.width = W * DPR; canvas.height = H * DPR;
-	    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-	    const padX = W * 0.10, padY = H * 0.06;
-	    const aW = W - padX * 2, aH = H - padY * 2;
-	    const canvasAspect = aW / aH;
-	    if (LL_ASPECT > canvasAspect) { mapW = aW; mapH = aW / LL_ASPECT; }
-	    else { mapH = aH; mapW = aH * LL_ASPECT; }
-	    mapX = (W - mapW) / 2;
-	    mapY = (H - mapH) / 2;
-	  }
-
-	  function ll2xy(lat, lon) {
-	    const nx = ((lon - LON_MIN) * LON_SCALE) / LL_W;
-	    const ny = 1 - (lat - LAT_MIN) / LL_H;
-	    return { x: mapX + nx * mapW, y: mapY + ny * mapH };
-	  }
-
-	  // Point-in-polygon (lat/lon space)
+	  // Point-in-polygon in lat/lon space
 	  function inSA(lat, lon) {
 	    let inside = false;
-	    const poly = SA_BORDER_LL;
-	    for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
-	      const [yi, xi] = poly[i], [yj, xj] = poly[j];
-	      if ((yi > lat) !== (yj > lat) && lon < (xj - xi) * (lat - yi) / (yj - yi) + xi)
-	        inside = !inside;
+	    for (let i = 0, j = SA_BORDER_LL.length - 1; i < SA_BORDER_LL.length; j = i++) {
+	      const [yi,xi] = SA_BORDER_LL[i], [yj,xj] = SA_BORDER_LL[j];
+	      if ((yi>lat)!==(yj>lat) && lon<(xj-xi)*(lat-yi)/(yj-yi)+xi) inside=!inside;
 	    }
 	    return inside;
 	  }
 
-	  resize();
-	  window.addEventListener('resize', () => { resize(); buildBase(); });
-
-	  // Build dot grid
-	  const FILL_DOTS = [], BORDER_DOTS = [];
-	  const STEP = 0.28;
-	  for (let lat = LAT_MIN; lat <= LAT_MAX; lat += STEP)
-	    for (let lon = LON_MIN; lon <= LON_MAX; lon += STEP)
-	      if (inSA(lat, lon)) FILL_DOTS.push([lat, lon]);
-
-	  // Interpolate border dots
-	  for (let i = 0; i < SA_BORDER_LL.length - 1; i++) {
-	    const [la, lo] = SA_BORDER_LL[i], [lb, lob] = SA_BORDER_LL[i + 1];
-	    const steps = Math.max(1, Math.ceil(Math.hypot((lb - la), (lob - lo)) / 0.18));
-	    for (let s = 0; s <= steps; s++)
-	      BORDER_DOTS.push([la + (lb - la) * s / steps, lo + (lob - lo) * s / steps]);
+	  // Convert lat/lon to unit sphere xyz
+	  function ll2xyz(lat,lon) {
+	    const phi=lat*D2R, theta=lon*D2R;
+	    return { x:Math.cos(phi)*Math.sin(theta), y:Math.sin(phi), z:Math.cos(phi)*Math.cos(theta) };
 	  }
 
-	  // Hub objects
-	  const HUBS = HUBS_LL.map(([name, lat, lon]) => ({ name, lat, lon }));
+	  // Build SA interior fill dots
+	  const SA_FILL = [];
+	  for (let lat=16.0; lat<=32.5; lat+=0.35)
+	    for (let lon=34.0; lon<=56.5; lon+=0.35)
+	      if (inSA(lat,lon)) SA_FILL.push(ll2xyz(lat,lon));
+
+	  // Build SA border dots (interpolated)
+	  const SA_BORDER = [];
+	  for (let i=0; i<SA_BORDER_LL.length-1; i++) {
+	    const [la,lo]=SA_BORDER_LL[i],[lb,lob]=SA_BORDER_LL[i+1];
+	    const steps=Math.max(1,Math.ceil(Math.hypot(lb-la,lob-lo)/0.15));
+	    for (let s=0; s<=steps; s++)
+	      SA_BORDER.push(ll2xyz(la+(lb-la)*s/steps, lo+(lob-lo)*s/steps));
+	  }
+
+	  // City hubs
+	  const HUBS = [
+	    ["Riyadh",   24.71,46.68],["Jeddah",   21.49,39.19],["Mecca",    21.39,39.86],
+	    ["Medina",   24.52,39.57],["Dammam",   26.43,50.10],["Jubail",   27.00,49.66],
+	    ["Hofuf",    25.38,49.59],["Buraydah", 26.33,43.97],["Hail",     27.51,41.69],
+	    ["Tabuk",    28.38,36.57],["Abha",     18.22,42.51],["Jizan",    16.89,42.55],
+	    ["Najran",   17.49,44.13],["Yanbu",    24.09,38.06],["Taif",     21.27,40.42],
+	    ["Sakaka",   29.97,40.20],
+	  ].map(([name,lat,lon]) => Object.assign(ll2xyz(lat,lon),{name}));
+
 	  HUBS.forEach(h => {
-	    h.near = HUBS.filter(o => o !== h).sort((a, b) =>
-	      ((a.lat - h.lat) ** 2 + (a.lon - h.lon) ** 2) - ((b.lat - h.lat) ** 2 + (b.lon - h.lon) ** 2)
-	    );
+	    h.near = HUBS.filter(o=>o!==h).sort((a,b)=>
+	      ((a.x-h.x)**2+(a.y-h.y)**2+(a.z-h.z)**2)-((b.x-h.x)**2+(b.y-h.y)**2+(b.z-h.z)**2));
 	  });
 
-	  // Static base
+	  // Canvas / projection state
+	  const wrapEl = document.querySelector('.globe-wrap');
+	  let W,H,DPR,R,CX,CY;
+
+	  function resize() {
+	    DPR = Math.min(2, window.devicePixelRatio||1);
+	    const rect = canvas.parentElement.getBoundingClientRect();
+	    W=rect.width; H=rect.height;
+	    canvas.width=W*DPR; canvas.height=H*DPR;
+	    ctx.setTransform(DPR,0,0,DPR,0,0);
+	    R = Math.min(W*1.4, 1900);
+	    if (W<640) R=W*2.0;
+	    CX=W/2;
+	    const topOfSphere = wrapEl.offsetTop - R*0.04;
+	    CY = topOfSphere + R;
+	  }
+	  resize();
+
+	  const TILT=-0.65, cT=Math.cos(TILT), sT=Math.sin(TILT);
+	  // Rotate so Saudi Arabia (lon ~45°E) faces forward
+	  const rot = { c:Math.cos(-0.785), s:Math.sin(-0.785) };
+	  const tmp={}, tmpA={}, tmpB={};
+
+	  function project(p,out) {
+	    const cS=rot.c, sS=rot.s;
+	    const x1=p.x*cS+p.z*sS, z1=-p.x*sS+p.z*cS, y1=p.y;
+	    const y2=y1*cT-z1*sT, z2=y1*sT+z1*cT;
+	    out.sx=CX+x1*R; out.sy=CY-y2*R; out.z=z2;
+	    return out;
+	  }
+
+	  // Static base (sphere body + SA dots)
 	  const base = document.createElement('canvas');
 	  function buildBase() {
-	    base.width = W * DPR; base.height = H * DPR;
-	    const b = base.getContext('2d');
-	    b.setTransform(DPR, 0, 0, DPR, 0, 0);
-	    b.clearRect(0, 0, W, H);
+	    base.width=W*DPR; base.height=H*DPR;
+	    const b=base.getContext('2d');
+	    b.setTransform(DPR,0,0,DPR,0,0);
 
-	    const dotR = Math.max(1.2, mapW / 160);
+	    // Sphere glow
+	    const glow=b.createRadialGradient(CX,CY,R*0.55,CX,CY,R*1.25);
+	    glow.addColorStop(0,'rgba(120,140,190,0.10)');
+	    glow.addColorStop(0.75,'rgba(90,110,160,0.045)');
+	    glow.addColorStop(1,'rgba(0,0,0,0)');
+	    b.fillStyle=glow; b.beginPath(); b.arc(CX,CY,R*1.25,0,7); b.fill();
 
-	    // Interior fill dots
-	    for (const [lat, lon] of FILL_DOTS) {
-	      const { x, y } = ll2xy(lat, lon);
-	      b.fillStyle = 'rgba(160,130,80,0.22)';
-	      b.beginPath(); b.arc(x, y, dotR, 0, 6.283); b.fill();
+	    // Sphere body
+	    const body=b.createRadialGradient(CX-R*0.3,CY-R*0.35,R*0.1,CX,CY,R);
+	    body.addColorStop(0,'#191a1d'); body.addColorStop(0.7,'#101113'); body.addColorStop(1,'#0a0b0c');
+	    b.fillStyle=body; b.beginPath(); b.arc(CX,CY,R,0,7); b.fill();
+
+	    // SA interior fill dots
+	    for (let i=0; i<SA_FILL.length; i++) {
+	      project(SA_FILL[i],tmp);
+	      if (tmp.z<=0.02) continue;
+	      const a=0.12+tmp.z*0.28;
+	      const s=(1.0+tmp.z*0.8)*(R/560);
+	      b.fillStyle=`rgba(180,140,70,${a.toFixed(3)})`;
+	      b.fillRect(tmp.sx-s/2,tmp.sy-s/2,s,s);
 	    }
 
-	    // Border dots — bright gold
-	    for (const [lat, lon] of BORDER_DOTS) {
-	      const { x, y } = ll2xy(lat, lon);
-	      const g2 = b.createRadialGradient(x, y, 0, x, y, dotR * 3.5);
-	      g2.addColorStop(0, 'rgba(202,149,61,0.95)');
-	      g2.addColorStop(0.45, 'rgba(202,149,61,0.30)');
-	      g2.addColorStop(1, 'rgba(202,149,61,0)');
-	      b.fillStyle = g2;
-	      b.beginPath(); b.arc(x, y, dotR * 3.5, 0, 6.283); b.fill();
-	      b.fillStyle = 'rgba(255,225,160,0.9)';
-	      b.beginPath(); b.arc(x, y, dotR * 0.7, 0, 6.283); b.fill();
+	    // SA border dots — bright gold glow
+	    for (let i=0; i<SA_BORDER.length; i++) {
+	      project(SA_BORDER[i],tmp);
+	      if (tmp.z<=0.02) continue;
+	      const a=0.6+tmp.z*0.4;
+	      const r0=(1.6+tmp.z*1.2)*(R/560);
+	      const g2=b.createRadialGradient(tmp.sx,tmp.sy,0,tmp.sx,tmp.sy,r0*4);
+	      g2.addColorStop(0,`rgba(255,210,100,${a})`);
+	      g2.addColorStop(0.35,`rgba(202,149,61,${a*0.45})`);
+	      g2.addColorStop(1,'rgba(202,149,61,0)');
+	      b.fillStyle=g2; b.beginPath(); b.arc(tmp.sx,tmp.sy,r0*4,0,7); b.fill();
+	      b.fillStyle=`rgba(255,235,180,${a})`;
+	      b.beginPath(); b.arc(tmp.sx,tmp.sy,r0*0.65,0,7); b.fill();
 	    }
+
+	    // Sphere outline
+	    b.strokeStyle='rgba(150,170,215,0.14)'; b.lineWidth=1.2;
+	    b.beginPath(); b.arc(CX,CY,R,0,7); b.stroke();
 	  }
 	  buildBase();
+	  window.addEventListener('resize',()=>{ resize(); buildBase(); });
 
 	  // Arc animation
-	  const arcs = [], pulses = [];
-	  const MAX_ARCS = 20;
-
-	  function bezierPt(ax, ay, bx, by, t) {
-	    const mx = (ax + bx) / 2, my = (ay + by) / 2;
-	    const lift = Math.hypot(bx - ax, by - ay) * 0.38;
-	    const cx = mx, cy = my - lift;
-	    const u = 1 - t;
-	    return { x: u*u*ax + 2*u*t*cx + t*t*bx, y: u*u*ay + 2*u*t*cy + t*t*by };
+	  const ARC_LIFT=0.06;
+	  function slerpLift(a,b,t,out) {
+	    let dot=a.x*b.x+a.y*b.y+a.z*b.z;
+	    dot=Math.min(1,Math.max(-1,dot));
+	    const om=Math.acos(dot), so=Math.sin(om)||1e-6;
+	    const wa=Math.sin((1-t)*om)/so, wb=Math.sin(t*om)/so;
+	    const lift=1+ARC_LIFT*Math.sin(Math.PI*t)*(om/Math.PI+0.35);
+	    out.x=(a.x*wa+b.x*wb)*lift; out.y=(a.y*wa+b.y*wb)*lift; out.z=(a.z*wa+b.z*wb)*lift;
+	    return out;
 	  }
+
+	  const arcs=[],pulses=[],MAX_ARCS=32;
 
 	  function spawnBurst() {
-	    const src = HUBS[(Math.random() * HUBS.length) | 0];
-	    const pool = src.near.slice(0, 7);
-	    for (let i = pool.length - 1; i > 0; i--) {
-	      const j = (Math.random() * (i + 1)) | 0;
-	      [pool[i], pool[j]] = [pool[j], pool[i]];
-	    }
-	    const targets = pool.slice(0, 3 + ((Math.random() * 3) | 0));
-	    pulses.push({ hub: src, t: 0 });
-	    targets.forEach((dst, k) => arcs.push({
-	      a: src, b: dst, t: 0, delay: k * 0.25,
-	      grow: 1.2 + Math.random() * 0.8, hold: 1.2 + Math.random() * 1.2, fade: 1.0, phase: 0
+	    const src=HUBS[(Math.random()*HUBS.length)|0];
+	    const pool=src.near.slice(0,8);
+	    for (let i=pool.length-1;i>0;i--){const j=(Math.random()*(i+1))|0;[pool[i],pool[j]]=[pool[j],pool[i]];}
+	    pool.slice(0,4+((Math.random()*3)|0)).forEach((dst,k)=>arcs.push({
+	      a:src,b:dst,t:0,delay:k*0.2,grow:1.3+Math.random()*0.8,
+	      hold:1.4+Math.random()*1.2,fade:1.3,phase:0
 	    }));
+	    pulses.push({hub:src,t:0});
 	  }
-
 	  spawnBurst();
-	  let burstTimer = 0.9, last = performance.now();
-	  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	  let burstTimer=0.9, last=performance.now();
+	  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 	  function frame(now) {
-	    const dt = Math.min(0.05, (now - last) / 1000);
-	    last = now;
-	    ctx.clearRect(0, 0, W, H);
-	    ctx.drawImage(base, 0, 0, W, H);
+	    const dt=Math.min(0.05,(now-last)/1000); last=now;
+	    ctx.clearRect(0,0,W,H);
+	    ctx.drawImage(base,0,0,W,H);
 
-	    for (let i = arcs.length - 1; i >= 0; i--) {
-	      const arc = arcs[i];
-	      if (arc.delay > 0) { arc.delay -= dt; continue; }
-	      arc.t += dt;
-	      const pa = ll2xy(arc.a.lat, arc.a.lon);
-	      const pb = ll2xy(arc.b.lat, arc.b.lon);
-	      let head = 1, alpha = 1;
-	      if (arc.phase === 0) {
-	        head = 1 - Math.pow(1 - Math.min(1, arc.t / arc.grow), 3);
-	        if (arc.t >= arc.grow) { arc.phase = 1; arc.t = 0; pulses.push({ hub: arc.b, t: 0 }); }
-	      } else if (arc.phase === 1) {
-	        if (arc.t >= arc.hold) { arc.phase = 2; arc.t = 0; }
+	    for (let i=arcs.length-1;i>=0;i--) {
+	      const arc=arcs[i];
+	      if (arc.delay>0){arc.delay-=dt;continue;}
+	      arc.t+=dt;
+	      let head=1,alpha=1;
+	      if (arc.phase===0){
+	        head=1-Math.pow(1-Math.min(1,arc.t/arc.grow),3);
+	        if (arc.t>=arc.grow){arc.phase=1;arc.t=0;pulses.push({hub:arc.b,t:0});}
+	      } else if (arc.phase===1){
+	        if (arc.t>=arc.hold){arc.phase=2;arc.t=0;}
 	      } else {
-	        alpha = Math.max(0, 1 - arc.t / arc.fade);
-	        if (arc.t >= arc.fade) { arcs.splice(i, 1); continue; }
+	        alpha=Math.max(0,1-arc.t/arc.fade);
+	        if (arc.t>=arc.fade){arcs.splice(i,1);continue;}
 	      }
-	      ctx.beginPath();
-	      let started = false;
-	      for (let s = 0; s <= 48 * head; s++) {
-	        const p = bezierPt(pa.x, pa.y, pb.x, pb.y, s / 48);
-	        if (!started) { ctx.moveTo(p.x, p.y); started = true; }
-	        else ctx.lineTo(p.x, p.y);
+	      const SEG=64; ctx.lineWidth=Math.max(1,R/700); ctx.lineCap='round';
+	      let started=false; ctx.beginPath();
+	      for (let s=0;s<=SEG*head;s++){
+	        slerpLift(arc.a,arc.b,s/SEG,tmpA); project(tmpA,tmpB);
+	        if (tmpB.z>-0.05){
+	          if (!started){ctx.moveTo(tmpB.sx,tmpB.sy);started=true;}
+	          else ctx.lineTo(tmpB.sx,tmpB.sy);
+	        } else if (started){
+	          ctx.strokeStyle=`rgba(242,169,92,${(0.55*alpha).toFixed(3)})`; ctx.stroke(); ctx.beginPath(); started=false;
+	        }
 	      }
-	      ctx.strokeStyle = `rgba(242,169,92,${(0.6 * alpha).toFixed(3)})`;
-	      ctx.lineWidth = 1.5; ctx.lineCap = 'round'; ctx.stroke();
-	      if (arc.phase === 0 && head < 1) {
-	        const p = bezierPt(pa.x, pa.y, pb.x, pb.y, head);
-	        const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, 8);
-	        g.addColorStop(0, 'rgba(255,214,160,0.95)'); g.addColorStop(1, 'rgba(255,214,160,0)');
-	        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(p.x, p.y, 8, 0, 6.283); ctx.fill();
+	      if (started){ctx.strokeStyle=`rgba(242,169,92,${(0.55*alpha).toFixed(3)})`; ctx.stroke();}
+
+	      if (arc.phase===0&&head<1){
+	        slerpLift(arc.a,arc.b,head,tmpA); project(tmpA,tmpB);
+	        if (tmpB.z>0){
+	          const g=ctx.createRadialGradient(tmpB.sx,tmpB.sy,0,tmpB.sx,tmpB.sy,7);
+	          g.addColorStop(0,'rgba(255,214,160,0.95)'); g.addColorStop(1,'rgba(255,214,160,0)');
+	          ctx.fillStyle=g; ctx.beginPath(); ctx.arc(tmpB.sx,tmpB.sy,7,0,7); ctx.fill();
+	        }
 	      }
 	    }
 
-	    burstTimer -= dt;
-	    if (!reduced && burstTimer <= 0 && arcs.length < MAX_ARCS) { spawnBurst(); burstTimer = 1.5 + Math.random() * 2.0; }
+	    burstTimer-=dt;
+	    if (!reduced&&burstTimer<=0&&arcs.length<MAX_ARCS){spawnBurst();burstTimer=1.3+Math.random()*1.6;}
 
 	    for (const h of HUBS) {
-	      const { x, y } = ll2xy(h.lat, h.lon);
-	      const g = ctx.createRadialGradient(x, y, 0, x, y, 12);
-	      g.addColorStop(0, 'rgba(255,196,128,0.9)'); g.addColorStop(0.4, 'rgba(242,169,92,0.35)'); g.addColorStop(1, 'rgba(242,169,92,0)');
-	      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, 12, 0, 6.283); ctx.fill();
-	      ctx.fillStyle = 'rgba(255,232,200,0.95)'; ctx.beginPath(); ctx.arc(x, y, 2, 0, 6.283); ctx.fill();
+	      project(h,tmp); if (tmp.z<=0.02) continue;
+	      const a=0.35+tmp.z*0.65, r0=(1.9+tmp.z*1.1)*(R/720);
+	      const g=ctx.createRadialGradient(tmp.sx,tmp.sy,0,tmp.sx,tmp.sy,r0*3.2);
+	      g.addColorStop(0,`rgba(255,196,128,${a})`); g.addColorStop(0.35,`rgba(242,169,92,${a*0.5})`); g.addColorStop(1,'rgba(242,169,92,0)');
+	      ctx.fillStyle=g; ctx.beginPath(); ctx.arc(tmp.sx,tmp.sy,r0*3.2,0,7); ctx.fill();
+	      ctx.fillStyle=`rgba(255,232,205,${a})`; ctx.beginPath(); ctx.arc(tmp.sx,tmp.sy,r0*0.55,0,7); ctx.fill();
 	    }
 
-	    for (let i = pulses.length - 1; i >= 0; i--) {
-	      const p = pulses[i]; p.t += dt;
-	      if (p.t >= 1.0) { pulses.splice(i, 1); continue; }
-	      const { x, y } = ll2xy(p.hub.lat, p.hub.lon);
-	      const k = p.t;
-	      ctx.strokeStyle = `rgba(242,169,92,${(0.65 * (1 - k)).toFixed(3)})`;
-	      ctx.lineWidth = 1.5 * (1 - k);
-	      ctx.beginPath(); ctx.arc(x, y, 3 + k * 18, 0, 6.283); ctx.stroke();
+	    for (let i=pulses.length-1;i>=0;i--) {
+	      const p=pulses[i]; p.t+=dt;
+	      if (p.t>=1.1){pulses.splice(i,1);continue;}
+	      project(p.hub,tmp); if (tmp.z<=0) continue;
+	      const k=p.t/1.1, rr=(2.5+k*14)*(R/720);
+	      ctx.strokeStyle=`rgba(242,169,92,${(0.55*(1-k)).toFixed(3)})`; ctx.lineWidth=Math.max(1,1.6*(1-k));
+	      ctx.beginPath(); ctx.arc(tmp.sx,tmp.sy,rr,0,7); ctx.stroke();
 	    }
 
 	    if (!reduced) requestAnimationFrame(frame);
