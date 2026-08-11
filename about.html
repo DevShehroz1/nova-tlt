@@ -140,9 +140,18 @@
     .tm-head__title span { background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .tm-head__desc { font-family: ui-sans-serif, system-ui, sans-serif,sans-serif; font-size: clamp(14px,1.05vw,16px); color: var(--ink-dim); line-height: 1.7; }
     .tm-viewport { max-width: 1400px; margin: 0 auto; }
-    .tm-track { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
-    @media (max-width: 900px) { .tm-track { grid-template-columns: repeat(3, 1fr); } }
-    @media (max-width: 560px) { .tm-track { grid-template-columns: repeat(2, 1fr); } }
+    .tm-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 32px; }
+    @media (max-width: 700px) { .tm-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 460px) { .tm-grid { grid-template-columns: 1fr; } }
+    .tm-carousel-wrap { position: relative; display: flex; align-items: center; gap: 16px; }
+    .tm-carousel-outer { flex: 1; overflow: hidden; border-radius: 16px; }
+    .tm-carousel-track { display: flex; transition: transform 0.4s ease; }
+    .tm-carousel-track .tm-card { flex: 0 0 100%; min-width: 0; }
+    .tm-carousel-btn { width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(202,149,61,0.4); background: rgba(202,149,61,0.08); color: #CA953D; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.2s; }
+    .tm-carousel-btn:hover { background: rgba(202,149,61,0.20); }
+    .tm-carousel-dots { display: flex; justify-content: center; gap: 8px; margin-top: 16px; }
+    .tm-carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(202,149,61,0.25); border: none; cursor: pointer; padding: 0; transition: background 0.2s; }
+    .tm-carousel-dot.active { background: #CA953D; }
     .tm-card { border-radius: 16px; overflow: hidden; position: relative; }
     .tm-card img { width: 100%; height: 320px; object-fit: cover; object-position: top center; display: block; filter: grayscale(1); transition: filter 0.4s ease; }
     .tm-card:hover img { filter: grayscale(0); }
@@ -629,7 +638,7 @@
       <p class="tm-head__desc">Two decades of collective expertise in Saudi logistics, fleet operations, HSE, and Vision 2030 infrastructure — driven by one shared mission.</p>
     </div>
     <div class="tm-viewport">
-      <div class="tm-track">
+      <div class="tm-grid">
         <div class="tm-card">
           <img src="assets/img/team-sabeek.jpg" alt="Sabeek Khan" loading="lazy">
           <div class="tm-caption"><p class="tm-caption__name">Sabeek Khan</p><p class="tm-caption__role">CEO &amp; Founder</p></div>
@@ -642,16 +651,39 @@
           <img src="assets/img/team-faisal.jpg" alt="Faisal Taj" loading="lazy">
           <div class="tm-caption"><p class="tm-caption__name">Faisal Taj</p><p class="tm-caption__role">Marketing Director</p></div>
         </div>
-        <div class="tm-card">
-          <div class="tm-card__no-img"><span class="tm-card__initials">A</span></div>
-          <div class="tm-caption"><p class="tm-caption__name">Alasmi</p><p class="tm-caption__role">CFO</p></div>
+      </div>
+      <div class="tm-carousel-wrap">
+        <button class="tm-carousel-btn tm-carousel-prev" aria-label="Previous">&#8592;</button>
+        <div class="tm-carousel-outer">
+          <div class="tm-carousel-track" id="tmCarouselTrack">
+            <div class="tm-card">
+              <div class="tm-card__no-img"><span class="tm-card__initials">A</span></div>
+              <div class="tm-caption"><p class="tm-caption__name">Alasmi</p><p class="tm-caption__role">CFO</p></div>
+            </div>
+            <div class="tm-card">
+              <div class="tm-card__no-img"><span class="tm-card__initials">SB</span></div>
+              <div class="tm-caption"><p class="tm-caption__name">Sikkander Basha</p><p class="tm-caption__role">Chairman</p></div>
+            </div>
+          </div>
         </div>
-        <div class="tm-card">
-          <div class="tm-card__no-img"><span class="tm-card__initials">SB</span></div>
-          <div class="tm-caption"><p class="tm-caption__name">Sikkander Basha</p><p class="tm-caption__role">Chairman</p></div>
-        </div>
+        <button class="tm-carousel-btn tm-carousel-next" aria-label="Next">&#8594;</button>
+      </div>
+      <div class="tm-carousel-dots">
+        <button class="tm-carousel-dot active" data-idx="0"></button>
+        <button class="tm-carousel-dot" data-idx="1"></button>
       </div>
     </div>
+    <script>
+    (function(){
+      var track=document.getElementById('tmCarouselTrack');
+      var dots=document.querySelectorAll('.tm-carousel-dot');
+      var idx=0,total=2;
+      function go(n){idx=(n+total)%total;track.style.transform='translateX(-'+idx*100+'%)';dots.forEach(function(d,i){d.classList.toggle('active',i===idx);});}
+      document.querySelector('.tm-carousel-prev').addEventListener('click',function(){go(idx-1);});
+      document.querySelector('.tm-carousel-next').addEventListener('click',function(){go(idx+1);});
+      dots.forEach(function(d){d.addEventListener('click',function(){go(parseInt(d.dataset.idx));});});
+    })();
+    </script>
     <div class="tm-quote">
       <p class="tm-quote__text">"NOVA Terra's team delivered our most complex earthmoving contract on time and within budget. Their professionalism and safety record set a benchmark we now require from all our subcontractors."</p>
       <div class="tm-quote__author">
