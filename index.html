@@ -2992,241 +2992,253 @@
 	  const canvas = document.getElementById('globe');
 	  if (!canvas) return;
 	  const ctx = canvas.getContext('2d');
+	  const D2R = Math.PI / 180;
 
-	  // SA border polygon [lat, lon]
-	  const SA_POLY = [
-	    [29.18,34.97],[29.60,35.20],[30.00,35.50],[30.40,35.80],[30.80,36.10],
-	    [31.00,36.50],[31.20,37.00],[31.50,37.50],[31.80,38.00],[31.70,38.60],
-	    [31.60,39.20],[31.50,39.80],[31.40,40.40],[31.20,41.00],[30.90,41.60],
-	    [30.60,42.20],[30.20,43.00],[29.80,43.80],[29.50,44.60],[29.20,45.40],
-	    [28.90,46.20],[28.60,47.00],[28.30,47.80],[28.00,48.60],[27.70,49.40],
-	    [27.20,49.80],[26.70,50.20],[26.30,50.50],[25.90,50.70],[25.50,50.80],
-	    [25.10,50.90],[24.70,51.10],[24.30,51.40],[23.90,51.60],[23.50,51.80],
-	    [23.10,52.00],[22.70,52.20],[22.50,52.60],[22.30,53.20],[22.10,53.80],
-	    [21.90,54.40],[21.70,55.00],[21.50,55.60],[21.20,55.90],[20.90,56.20],
-	    [20.60,56.40],[20.00,56.60],[19.50,56.70],[19.00,56.60],[18.50,56.30],
-	    [18.00,55.90],[17.60,55.40],[17.30,54.80],[17.00,54.20],[16.80,53.50],
-	    [16.50,52.80],[16.20,52.00],[15.90,51.20],[15.60,50.40],[15.30,49.60],
-	    [15.10,48.80],[14.90,48.00],[14.80,47.20],[14.70,46.40],[14.60,45.50],
-	    [14.50,44.60],[14.40,43.70],[14.30,42.80],[14.20,42.00],[14.10,41.20],
-	    [14.00,40.40],[14.10,39.60],[14.20,38.80],[14.30,38.00],[14.50,37.20],
-	    [14.80,36.60],[15.10,36.20],[15.50,35.90],[16.00,35.70],[16.50,35.50],
-	    [17.00,35.50],[17.50,35.70],[18.00,36.20],[18.50,37.00],[19.00,37.80],
-	    [19.50,38.40],[20.00,38.70],[20.50,38.80],[20.90,38.70],[21.20,38.50],
-	    [21.50,38.20],[21.70,37.80],[21.80,37.30],[21.80,36.80],[21.70,36.30],
-	    [21.60,35.80],[21.60,35.30],[21.70,34.90],[22.00,34.70],[22.40,34.60],
-	    [22.80,34.70],[23.20,34.90],[23.70,35.10],[24.20,35.10],[24.70,35.00],
-	    [25.20,35.00],[25.70,35.10],[26.20,35.20],[26.70,35.10],[27.20,34.90],
-	    [27.70,34.80],[28.20,34.90],[28.70,35.10],[29.18,34.97]
-	  ];
-
-	  function inSA(lat, lon) {
-	    let inside = false;
-	    const n = SA_POLY.length;
-	    for (let i = 0, j = n - 1; i < n; j = i++) {
-	      const xi = SA_POLY[i][1], yi = SA_POLY[i][0];
-	      const xj = SA_POLY[j][1], yj = SA_POLY[j][0];
-	      if (((yi > lat) !== (yj > lat)) && (lon < (xj - xi) * (lat - yi) / (yj - yi) + xi))
-	        inside = !inside;
+	  // ── World land approximation (rectangular regions + exclusions) ──
+	  function isLand(lat, lon) {
+	    while (lon > 180) lon -= 360;
+	    while (lon < -180) lon += 360;
+	    // North America
+	    if (lat >= 15 && lat <= 72 && lon >= -168 && lon <= -52) {
+	      if (lat >= 52 && lat <= 65 && lon >= -95 && lon <= -78) return false; // Hudson Bay
+	      return true;
 	    }
-	    return inside;
+	    if (lat >= 60 && lat <= 84 && lon >= -60 && lon <= -17) return true; // Greenland
+	    if (lat >= -55 && lat <= 13 && lon >= -82 && lon <= -34) return true; // South America
+	    if (lat >= 35 && lat <= 72 && lon >= -10 && lon <= 40) return true;   // Europe
+	    if (lat >= -35 && lat <= 38 && lon >= -18 && lon <= 52) return true;  // Africa
+	    if (lat >= 12 && lat <= 38 && lon >= 34 && lon <= 62) return true;    // Arabia
+	    if (lat >= 0  && lat <= 75 && lon >= 60  && lon <= 148) return true;  // Asia
+	    if (lat >= 50 && lat <= 75 && lon >= 38  && lon <= 62) return true;   // Central Asia N
+	    if (lat >= -8 && lat <= 28 && lon >= 95  && lon <= 141) return true;  // SE Asia
+	    if (lat >= 30 && lat <= 46 && lon >= 129 && lon <= 146) return true;  // Japan
+	    if (lat >= -44 && lat <= -10 && lon >= 114 && lon <= 154) return true;// Australia
+	    if (lat >= 8  && lat <= 22  && lon >= 68  && lon <= 80) return true;  // India
+	    return false;
 	  }
 
-	  // SA bounding box + padding
-	  const LAT_MIN = 14.0, LAT_MAX = 32.0;
-	  const LON_MIN = 33.0, LON_MAX = 57.0;
-
-	  // Cities: [label, lat, lon]
-	  const CITIES = [
-	    ['Riyadh',    24.71, 46.68],
-	    ['Jeddah',    21.49, 39.19],
-	    ['Dammam',    26.43, 50.10],
-	    ['Medina',    24.47, 39.61],
-	    ['Tabuk',     28.38, 36.57],
-	    ['NEOM',      27.50, 35.60],
-	    ['Khamis',    18.31, 42.73],
-	    ['Jubail',    27.00, 49.66],
+	  // SA hub cities [label, lat, lon]
+	  const HUBS_LL = [
+	    ['Riyadh',  24.71, 46.68],
+	    ['Jeddah',  21.49, 39.19],
+	    ['Dammam',  26.43, 50.10],
+	    ['Medina',  24.47, 39.61],
+	    ['Tabuk',   28.38, 36.57],
+	    ['Khamis',  18.31, 42.73],
+	    ['Jubail',  27.00, 49.66],
 	  ];
+	  const ARC_PAIRS = [[0,1],[0,2],[0,3],[0,4],[0,5],[1,4],[2,6]];
 
-	  // Connection lines: [from, to] by CITIES index
-	  const ARCS = [
-	    [0, 1], // Riyadh → Jeddah
-	    [0, 2], // Riyadh → Dammam
-	    [0, 4], // Riyadh → Tabuk
-	    [0, 6], // Riyadh → Khamis
-	    [1, 5], // Jeddah → NEOM
-	    [2, 7], // Dammam → Jubail
-	  ];
-
-	  let W = 0, H = 0, dpr = 1;
-	  let DOTS = [];
-	  let arcProgress = [];
-	  let last = performance.now();
-
-	  function project(lat, lon) {
-	    const x = (lon - LON_MIN) / (LON_MAX - LON_MIN) * W;
-	    const y = (LAT_MAX - lat) / (LAT_MAX - LAT_MIN) * H;
-	    return { x, y };
+	  function ll2xyz(lat, lon) {
+	    const phi = lat * D2R, th = lon * D2R;
+	    return { x: Math.cos(phi)*Math.sin(th), y: Math.sin(phi), z: Math.cos(phi)*Math.cos(th) };
 	  }
 
-	  function buildDots() {
-	    DOTS = [];
-	    const step = 0.45;
-	    for (let lat = LAT_MIN; lat <= LAT_MAX; lat += step) {
-	      for (let lon = LON_MIN; lon <= LON_MAX; lon += step) {
-	        if (inSA(lat, lon)) {
-	          const p = project(lat, lon);
-	          DOTS.push(p);
+	  // Rotation: SA (lon≈45°E) faces forward → rotate Y by -45°
+	  const ROT_Y = -45 * D2R;
+	  const TILT  = -0.18; // slight axial tilt
+	  const cY = Math.cos(ROT_Y), sY = Math.sin(ROT_Y);
+	  const cT = Math.cos(TILT),  sT = Math.sin(TILT);
+
+	  function rotatePoint(p) {
+	    // Rotate around Y then X (tilt)
+	    const x1 =  p.x * cY + p.z * sY;
+	    const z1 = -p.x * sY + p.z * cY;
+	    const y2 =  p.y * cT - z1  * sT;
+	    const z2 =  p.y * sT + z1  * cT;
+	    return { x: x1, y: y2, z: z2 };
+	  }
+
+	  let W, H, cx, cy, R;
+	  let LAND_PTS = [];  // pre-rotated {x,y,z}
+	  let HUBS = [];      // pre-rotated + ll2xyz
+	  let arcs = [], last = performance.now();
+	  let spinAngle = 0;
+
+	  function buildGeo() {
+	    LAND_PTS = [];
+	    const step = 1.4;
+	    for (let lat = -85; lat <= 85; lat += step) {
+	      for (let lon = -179; lon < 180; lon += step) {
+	        if (isLand(lat, lon)) {
+	          LAND_PTS.push(ll2xyz(lat, lon));
 	        }
 	      }
 	    }
+	    HUBS = HUBS_LL.map(h => ({ ...ll2xyz(h[1], h[2]), label: h[0] }));
 	  }
 
 	  function resize() {
-	    dpr = Math.min(window.devicePixelRatio || 1, 2);
-	    W = canvas.parentElement ? canvas.parentElement.clientWidth : window.innerWidth;
-	    H = canvas.parentElement ? canvas.parentElement.clientHeight : window.innerHeight;
-	    canvas.width = W * dpr;
+	    W = canvas.offsetWidth || window.innerWidth;
+	    H = canvas.offsetHeight || window.innerHeight;
+	    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+	    canvas.width  = W * dpr;
 	    canvas.height = H * dpr;
-	    canvas.style.width = W + 'px';
-	    canvas.style.height = H + 'px';
 	    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-	    buildDots();
-	    // Reset arc progress
-	    arcProgress = ARCS.map((_, i) => ({ t: -(i * 0.7), done: false }));
+	    cx = W * 0.72; cy = H * 0.5;
+	    R  = Math.min(W * 0.38, H * 0.48);
 	  }
 
-	  function drawRoundedRect(x, y, w, h, r) {
-	    ctx.beginPath();
-	    ctx.moveTo(x + r, y);
-	    ctx.lineTo(x + w - r, y);
-	    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
-	    ctx.lineTo(x + w, y + h - r);
-	    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
-	    ctx.lineTo(x + r, y + h);
-	    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
-	    ctx.lineTo(x, y + r);
-	    ctx.quadraticCurveTo(x, y, x + r, y);
-	    ctx.closePath();
+	  function project(p, angle) {
+	    // Spin around Y axis
+	    const ca = Math.cos(angle), sa = Math.sin(angle);
+	    const x1 =  p.x * ca + p.z * sa;
+	    const z1 = -p.x * sa + p.z * ca;
+	    const rp = rotatePoint({ x: x1, y: p.y, z: z1 });
+	    return { sx: cx + rp.x * R, sy: cy - rp.y * R, z: rp.z };
 	  }
 
-	  function quadPoint(ax, ay, bx, by, t) {
-	    // Curved path: mid point lifted
-	    const mx = (ax + bx) / 2;
-	    const my = Math.min(ay, by) - Math.min(W, H) * 0.15;
-	    const ix = (1-t)*(1-t)*ax + 2*(1-t)*t*mx + t*t*bx;
-	    const iy = (1-t)*(1-t)*ay + 2*(1-t)*t*my + t*t*by;
-	    return { x: ix, y: iy };
+	  // Slerp for arc paths
+	  function slerp(a, b, t, lift) {
+	    let dot = a.x*b.x + a.y*b.y + a.z*b.z;
+	    dot = Math.min(1, Math.max(-1, dot));
+	    const om = Math.acos(dot), so = Math.sin(om) || 1e-9;
+	    const wa = Math.sin((1-t)*om)/so, wb = Math.sin(t*om)/so;
+	    const lf = 1 + lift * Math.sin(Math.PI * t);
+	    return {
+	      x: (a.x*wa + b.x*wb)*lf,
+	      y: (a.y*wa + b.y*wb)*lf,
+	      z: (a.z*wa + b.z*wb)*lf
+	    };
+	  }
+
+	  function spawnArc() {
+	    const [ai, bi] = ARC_PAIRS[(Math.random()*ARC_PAIRS.length)|0];
+	    arcs.push({ a: HUBS[ai], b: HUBS[bi], t: 0, grow: 1.4, hold: 1.2, fade: 1.0, phase: 0, delay: Math.random()*0.5 });
 	  }
 
 	  function frame(now) {
 	    const dt = Math.min(0.05, (now - last) / 1000); last = now;
+	    spinAngle += dt * 0.12;
 	    ctx.clearRect(0, 0, W, H);
 
-	    // Draw SA dots
-	    const dotR = Math.max(1.2, Math.min(W, H) * 0.0028);
-	    ctx.fillStyle = 'rgba(202,149,61,0.22)';
-	    for (let i = 0; i < DOTS.length; i++) {
+	    // ── Sphere body: metallic gold gradient ──
+	    const hlx = cx - R * 0.3, hly = cy - R * 0.3;
+	    const bodyGrad = ctx.createRadialGradient(hlx, hly, 0, cx, cy, R);
+	    bodyGrad.addColorStop(0,    '#3a2600');
+	    bodyGrad.addColorStop(0.35, '#1e1500');
+	    bodyGrad.addColorStop(0.7,  '#0e0a00');
+	    bodyGrad.addColorStop(1,    '#050400');
+	    ctx.beginPath();
+	    ctx.arc(cx, cy, R, 0, Math.PI*2);
+	    ctx.fillStyle = bodyGrad;
+	    ctx.fill();
+
+	    // Gold rim glow
+	    const rimGrad = ctx.createRadialGradient(cx, cy, R * 0.78, cx, cy, R);
+	    rimGrad.addColorStop(0,   'rgba(202,149,61,0)');
+	    rimGrad.addColorStop(0.6, 'rgba(202,149,61,0.18)');
+	    rimGrad.addColorStop(1,   'rgba(229,184,90,0.55)');
+	    ctx.beginPath();
+	    ctx.arc(cx, cy, R, 0, Math.PI*2);
+	    ctx.fillStyle = rimGrad;
+	    ctx.fill();
+
+	    // Clip all dots/arcs to sphere
+	    ctx.save();
+	    ctx.beginPath();
+	    ctx.arc(cx, cy, R - 1, 0, Math.PI*2);
+	    ctx.clip();
+
+	    // ── Land dots: neon yellow-white ──
+	    const dotR = Math.max(1, R * 0.012);
+	    for (let i = 0; i < LAND_PTS.length; i++) {
+	      const p = project(LAND_PTS[i], spinAngle);
+	      if (p.z <= 0) continue; // back face cull
+	      const bright = 0.4 + p.z * 0.6;
+	      ctx.fillStyle = `rgba(255,228,60,${(bright * 0.9).toFixed(2)})`;
 	      ctx.beginPath();
-	      ctx.arc(DOTS[i].x, DOTS[i].y, dotR, 0, 6.283);
+	      ctx.arc(p.sx, p.sy, dotR * (0.5 + p.z * 0.5), 0, Math.PI*2);
 	      ctx.fill();
 	    }
 
-	    // Draw arcs
-	    for (let i = 0; i < ARCS.length; i++) {
-	      const ap = arcProgress[i];
-	      ap.t += dt * 0.45;
-	      const raw = ap.t % 2.8; // cycle
-	      const prog = Math.max(0, Math.min(1, raw));
-	      if (prog <= 0) continue;
-
-	      const [ai, bi] = ARCS[i];
-	      const a = project(CITIES[ai][1], CITIES[ai][2]);
-	      const b = project(CITIES[bi][1], CITIES[bi][2]);
-
-	      // Draw arc trail
-	      const SEG = 40;
-	      const headT = Math.min(1, prog);
-	      const tailT = Math.max(0, headT - 0.4);
-	      ctx.lineWidth = Math.max(1, W * 0.0012);
-	      ctx.lineCap = 'round';
-
-	      // Gradient-style: fade tail, bright head
-	      for (let s = 0; s < SEG; s++) {
-	        const t0 = tailT + (headT - tailT) * (s / SEG);
-	        const t1 = tailT + (headT - tailT) * ((s + 1) / SEG);
-	        if (t1 > 1 || t0 < 0) continue;
-	        const frac = s / SEG;
-	        const alpha = 0.15 + frac * 0.75;
-	        ctx.strokeStyle = `rgba(229,184,90,${alpha.toFixed(2)})`;
-	        const p0 = quadPoint(a.x, a.y, b.x, b.y, t0);
-	        const p1 = quadPoint(a.x, a.y, b.x, b.y, t1);
-	        ctx.beginPath();
-	        ctx.moveTo(p0.x, p0.y);
-	        ctx.lineTo(p1.x, p1.y);
-	        ctx.stroke();
+	    // ── Arcs ──
+	    for (let i = arcs.length - 1; i >= 0; i--) {
+	      const arc = arcs[i];
+	      if (arc.delay > 0) { arc.delay -= dt; continue; }
+	      arc.t += dt;
+	      let head = 1, alpha = 1;
+	      if (arc.phase === 0) {
+	        head = Math.min(1, arc.t / arc.grow);
+	        if (arc.t >= arc.grow) { arc.phase = 1; arc.t = 0; }
+	      } else if (arc.phase === 1) {
+	        if (arc.t >= arc.hold) { arc.phase = 2; arc.t = 0; }
+	      } else {
+	        alpha = Math.max(0, 1 - arc.t / arc.fade);
+	        if (arc.t >= arc.fade) { arcs.splice(i, 1); continue; }
 	      }
+	      const SEG = 48;
+	      ctx.lineWidth = Math.max(1, R * 0.012);
+	      ctx.lineCap = 'round';
+	      let started = false;
+	      ctx.beginPath();
+	      for (let s = 0; s <= SEG * head; s++) {
+	        const mp = slerp(arc.a, arc.b, s / SEG, 0.22);
+	        const pp = project(mp, spinAngle);
+	        if (pp.z > 0.05) {
+	          if (!started) { ctx.moveTo(pp.sx, pp.sy); started = true; }
+	          else ctx.lineTo(pp.sx, pp.sy);
+	        } else { started = false; }
+	      }
+	      ctx.strokeStyle = `rgba(255,240,100,${(alpha * 0.9).toFixed(2)})`;
+	      ctx.stroke();
 
 	      // Traveling dot at head
-	      if (headT < 1) {
-	        const hp = quadPoint(a.x, a.y, b.x, b.y, headT);
-	        ctx.fillStyle = '#E5B85A';
-	        ctx.beginPath();
-	        ctx.arc(hp.x, hp.y, Math.max(2.5, W * 0.003), 0, 6.283);
-	        ctx.fill();
+	      if (arc.phase === 0 && head < 1) {
+	        const hp = slerp(arc.a, arc.b, head, 0.22);
+	        const hpp = project(hp, spinAngle);
+	        if (hpp.z > 0) {
+	          ctx.fillStyle = `rgba(255,255,255,${alpha.toFixed(2)})`;
+	          ctx.beginPath();
+	          ctx.arc(hpp.sx, hpp.sy, R * 0.022, 0, Math.PI*2);
+	          ctx.fill();
+	        }
 	      }
 	    }
 
-	    // Draw city markers and labels
-	    const fs = Math.max(10, Math.min(13, W * 0.013));
+	    // ── City markers ──
+	    const fs = Math.max(9, R * 0.045);
 	    ctx.font = `600 ${fs}px ui-sans-serif,system-ui,sans-serif`;
-	    for (let i = 0; i < CITIES.length; i++) {
-	      const [label, lat, lon] = CITIES[i];
-	      const p = project(lat, lon);
-	      const r = Math.max(3, W * 0.004);
-
+	    for (let i = 0; i < HUBS.length; i++) {
+	      const pp = project(HUBS[i], spinAngle);
+	      if (pp.z <= 0.1) continue;
+	      const r = Math.max(3, R * 0.018);
 	      // Pulse ring
-	      const pulse = (now * 0.001 + i * 0.4) % 1;
-	      ctx.strokeStyle = `rgba(229,184,90,${(0.5 * (1 - pulse)).toFixed(2)})`;
+	      const pulse = ((now * 0.001 + i * 0.45) % 1);
+	      ctx.strokeStyle = `rgba(255,228,60,${(0.55*(1-pulse)).toFixed(2)})`;
 	      ctx.lineWidth = 1;
 	      ctx.beginPath();
-	      ctx.arc(p.x, p.y, r + pulse * r * 3, 0, 6.283);
+	      ctx.arc(pp.sx, pp.sy, r + pulse * r * 2.5, 0, Math.PI*2);
 	      ctx.stroke();
-
 	      // Dot
-	      ctx.fillStyle = '#E5B85A';
+	      ctx.fillStyle = '#fff';
 	      ctx.beginPath();
-	      ctx.arc(p.x, p.y, r, 0, 6.283);
+	      ctx.arc(pp.sx, pp.sy, r, 0, Math.PI*2);
 	      ctx.fill();
-
-	      // Label chip
-	      const tw = ctx.measureText(label).width;
-	      const pw = tw + 14, ph = fs + 8;
-	      let lx = p.x - pw / 2, ly = p.y - r - ph - 6;
-	      // Nudge labels for overlap avoidance
-	      if (i === 1) lx -= 10; // Jeddah left
-	      if (i === 3) { lx += 12; ly = p.y - r - ph - 6; } // Medina right
-	      if (i === 5) { ly = p.y + r + 6; } // NEOM below
-	      if (i === 6) { lx += 10; } // Khamis
-
-	      ctx.fillStyle = 'rgba(10,10,10,0.82)';
-	      ctx.strokeStyle = 'rgba(202,149,61,0.35)';
-	      ctx.lineWidth = 1;
-	      drawRoundedRect(lx, ly, pw, ph, 6);
-	      ctx.fill();
-	      ctx.stroke();
-
-	      ctx.fillStyle = '#efe9df';
-	      ctx.textAlign = 'center';
-	      ctx.textBaseline = 'middle';
-	      ctx.fillText(label, lx + pw / 2, ly + ph / 2);
 	    }
+
+	    ctx.restore();
+
+	    // ── Outer edge highlight ──
+	    const edgeGrad = ctx.createRadialGradient(hlx, hly, R * 0.7, cx, cy, R);
+	    edgeGrad.addColorStop(0, 'rgba(229,184,90,0)');
+	    edgeGrad.addColorStop(1, 'rgba(229,184,90,0.12)');
+	    ctx.beginPath();
+	    ctx.arc(cx, cy, R, 0, Math.PI*2);
+	    ctx.strokeStyle = 'rgba(202,149,61,0.55)';
+	    ctx.lineWidth = Math.max(1.5, R * 0.012);
+	    ctx.stroke();
+
+	    // Spawn new arcs
+	    if (arcs.length < 5 && Math.random() < 0.03) spawnArc();
 
 	    requestAnimationFrame(frame);
 	  }
 
-	  window.addEventListener('resize', resize);
+	  buildGeo();
 	  resize();
+	  window.addEventListener('resize', resize);
+	  for (let i = 0; i < 3; i++) spawnArc();
 	  requestAnimationFrame(frame);
 	})();
 	</script>
