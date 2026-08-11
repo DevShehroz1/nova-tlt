@@ -139,11 +139,33 @@
     .tm-head__title { font-family: BebasNeuePro,sans-serif; font-size: clamp(38px,5vw,68px); letter-spacing: 0.03em; color: var(--ink); margin-bottom: 14px; line-height: 1; }
     .tm-head__title span { background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .tm-head__desc { font-family: ui-sans-serif, system-ui, sans-serif,sans-serif; font-size: clamp(14px,1.05vw,16px); color: var(--ink-dim); line-height: 1.7; }
-    .tm-viewport { max-width: 1400px; margin: 0 auto; }
-    .tm-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
-    @media (max-width: 900px) { .tm-grid { grid-template-columns: repeat(3, 1fr); } }
-    @media (max-width: 560px) { .tm-grid { grid-template-columns: repeat(2, 1fr); } }
-    .tm-card { border-radius: 16px; overflow: hidden; position: relative; }
+    .tm-viewport { max-width: 1400px; margin: 0 auto; position: relative; }
+    .tm-slider-outer { overflow: hidden; }
+    .tm-grid {
+      display: flex;
+      gap: 20px;
+      transition: transform 0.45s cubic-bezier(0.4,0,0.2,1);
+    }
+    .tm-card {
+      border-radius: 16px; overflow: hidden; position: relative;
+      flex: 0 0 calc((100% - 40px) / 3);
+    }
+    @media (max-width: 900px) { .tm-card { flex: 0 0 calc((100% - 20px) / 2); } }
+    @media (max-width: 560px) { .tm-card { flex: 0 0 calc(100%); } }
+    .tm-nav { display: flex; justify-content: center; gap: 12px; margin-top: 28px; }
+    .tm-nav__btn {
+      width: 44px; height: 44px; border-radius: 50%;
+      border: 1px solid rgba(202,149,61,0.4);
+      background: rgba(202,149,61,0.08);
+      color: #CA953D; font-size: 18px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .tm-nav__btn:hover { background: rgba(202,149,61,0.22); }
+    .tm-nav__btn:disabled { opacity: 0.3; cursor: default; }
+    .tm-dots { display: flex; justify-content: center; gap: 8px; margin-top: 16px; }
+    .tm-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(202,149,61,0.25); border: none; cursor: pointer; padding: 0; transition: background 0.2s; }
+    .tm-dot.active { background: #CA953D; }
     .tm-card img { width: 100%; height: 320px; object-fit: cover; object-position: top center; display: block; filter: grayscale(1); transition: filter 0.4s ease; }
     .tm-card:hover img { filter: grayscale(0); }
     .tm-card__no-img { width: 100%; height: 320px; display: flex; align-items: center; justify-content: center; background: linear-gradient(160deg,#111,#1a1a1a); }
@@ -629,29 +651,92 @@
       <p class="tm-head__desc">Five years of collective expertise in Saudi logistics, fleet operations, HSE, and Vision 2030 infrastructure — driven by one shared mission.</p>
     </div>
     <div class="tm-viewport">
-      <div class="tm-grid">
-        <div class="tm-card">
-          <img src="assets/img/team-sabeek.jpg" alt="Sabeek Khan" loading="lazy">
-          <div class="tm-caption"><p class="tm-caption__name">Sabeek Khan</p><p class="tm-caption__role">CEO &amp; Founder</p></div>
-        </div>
-        <div class="tm-card">
-          <img src="assets/img/team-ram.jpg" alt="Ram Veluswame" loading="lazy">
-          <div class="tm-caption"><p class="tm-caption__name">Ram Veluswame</p><p class="tm-caption__role">COO &amp; Founder</p></div>
-        </div>
-        <div class="tm-card">
-          <img src="assets/img/team-faisal.jpg" alt="Faisal Taj" loading="lazy">
-          <div class="tm-caption"><p class="tm-caption__name">Faisal Taj</p><p class="tm-caption__role">Marketing Director</p></div>
-        </div>
-        <div class="tm-card">
-          <div class="tm-card__no-img"><span class="tm-card__initials">A</span></div>
-          <div class="tm-caption"><p class="tm-caption__name">Alasmi</p><p class="tm-caption__role">CFO</p></div>
-        </div>
-        <div class="tm-card">
-          <div class="tm-card__no-img"><span class="tm-card__initials">SB</span></div>
-          <div class="tm-caption"><p class="tm-caption__name">Sikkander Basha</p><p class="tm-caption__role">Chairman</p></div>
+      <div class="tm-slider-outer">
+        <div class="tm-grid" id="tmSliderTrack">
+          <div class="tm-card">
+            <img src="assets/img/team-sabeek.jpg" alt="Sabeek Khan" loading="lazy">
+            <div class="tm-caption"><p class="tm-caption__name">Sabeek Khan</p><p class="tm-caption__role">CEO &amp; Founder</p></div>
+          </div>
+          <div class="tm-card">
+            <img src="assets/img/team-ram.jpg" alt="Ram Veluswame" loading="lazy">
+            <div class="tm-caption"><p class="tm-caption__name">Ram Veluswame</p><p class="tm-caption__role">COO &amp; Founder</p></div>
+          </div>
+          <div class="tm-card">
+            <img src="assets/img/team-faisal.jpg" alt="Faisal Taj" loading="lazy">
+            <div class="tm-caption"><p class="tm-caption__name">Faisal Taj</p><p class="tm-caption__role">Marketing Director</p></div>
+          </div>
+          <div class="tm-card">
+            <div class="tm-card__no-img"><span class="tm-card__initials">A</span></div>
+            <div class="tm-caption"><p class="tm-caption__name">Alasmi</p><p class="tm-caption__role">CFO</p></div>
+          </div>
+          <div class="tm-card">
+            <div class="tm-card__no-img"><span class="tm-card__initials">SB</span></div>
+            <div class="tm-caption"><p class="tm-caption__name">Sikkander Basha</p><p class="tm-caption__role">Chairman</p></div>
+          </div>
         </div>
       </div>
+      <div class="tm-nav">
+        <button class="tm-nav__btn" id="tmPrev" aria-label="Previous">&#8592;</button>
+        <button class="tm-nav__btn" id="tmNext" aria-label="Next">&#8594;</button>
+      </div>
+      <div class="tm-dots" id="tmDots"></div>
     </div>
+    <script>
+    (function(){
+      var track = document.getElementById('tmSliderTrack');
+      var prevBtn = document.getElementById('tmPrev');
+      var nextBtn = document.getElementById('tmNext');
+      var dotsEl  = document.getElementById('tmDots');
+      var cards = track.children.length; // 5
+      var perPage = 3;
+      var idx = 0;
+
+      function getPerPage() {
+        var w = track.parentElement.clientWidth;
+        if (w <= 560) return 1;
+        if (w <= 900) return 2;
+        return 3;
+      }
+
+      function maxIdx() { return Math.max(0, cards - getPerPage()); }
+
+      function buildDots() {
+        dotsEl.innerHTML = '';
+        var steps = maxIdx() + 1;
+        for (var i = 0; i < steps; i++) {
+          var d = document.createElement('button');
+          d.className = 'tm-dot' + (i === idx ? ' active' : '');
+          d.dataset.i = i;
+          d.addEventListener('click', function(){ go(+this.dataset.i); });
+          dotsEl.appendChild(d);
+        }
+      }
+
+      function go(n) {
+        idx = Math.max(0, Math.min(n, maxIdx()));
+        var pp = getPerPage();
+        var gap = 20;
+        var cardW = (track.parentElement.clientWidth - gap * (pp - 1)) / pp;
+        track.style.transform = 'translateX(-' + idx * (cardW + gap) + 'px)';
+        prevBtn.disabled = idx === 0;
+        nextBtn.disabled = idx >= maxIdx();
+        var dots = dotsEl.querySelectorAll('.tm-dot');
+        dots.forEach(function(d, i){ d.classList.toggle('active', i === idx); });
+      }
+
+      prevBtn.addEventListener('click', function(){ go(idx - 1); });
+      nextBtn.addEventListener('click', function(){ go(idx + 1); });
+
+      window.addEventListener('resize', function(){
+        idx = Math.min(idx, maxIdx());
+        buildDots();
+        go(idx);
+      });
+
+      buildDots();
+      go(0);
+    })();
+    </script>
   </section>
 
   <section class="cta2-sec">
