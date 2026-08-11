@@ -1459,7 +1459,7 @@
 		.nf-links__list a { font-size: 14px; color: rgba(255,255,255,0.70); text-decoration: none; transition: color 180ms ease; }
 		.nf-links__list a:hover { color: #fff; }
 		.nf-watermark { display: flex; width: 100%; align-items: center; justify-content: center; }
-		.nf-watermark__svg { height: auto; width: 100%; user-select: none; }
+		.nf-watermark__canvas { display: block; width: 100%; height: 140px; cursor: none; }
 		@media (min-width: 640px) { .nf-links-grid { grid-template-columns: repeat(3, auto); } }
 		@media (min-width: 1024px) { .nf-top { flex-direction: row; align-items: flex-end; justify-content: space-between; padding-top: 40px; padding-bottom: 56px; } .nf-headline-wrap { flex: 1; } .nf-mid { flex-direction: row; align-items: flex-start; gap: 32px; } .nf-links-grid { gap: 32px 64px; } }
 
@@ -3642,10 +3642,95 @@
       </div>
     </div>
     <div class="nf-watermark">
-      <svg class="nf-watermark__svg" viewBox="0 0 720 110" preserveAspectRatio="xMidYMid meet" aria-label="NOVA TLT">
-        <text x="50%" y="105" dominant-baseline="alphabetic" text-anchor="middle" textLength="90%" lengthAdjust="spacing" font-size="160" font-weight="700" fill="rgba(255,255,255,0.30)" font-family="ui-sans-serif,system-ui,sans-serif" letter-spacing="-0.05em">NOVA TLT</text>
-      </svg>
+      <canvas id="nfParticleCanvas" class="nf-watermark__canvas" aria-label="NOVA TLT"></canvas>
     </div>
+    <script>
+    (function(){
+      var canvas=document.getElementById('nfParticleCanvas');
+      if(!canvas)return;
+      var ctx=canvas.getContext('2d',{willReadFrequently:true});
+      var particles=[];
+      var mouseX=-9999,mouseY=-9999;
+      var W=0,H=0,dpr=1;
+
+      function Particle(ox,oy){
+        this.x=ox+(Math.random()-0.5)*8;
+        this.y=oy+(Math.random()-0.5)*8;
+        this.ox=ox;this.oy=oy;
+        this.vx=(Math.random()-0.5)*4;
+        this.vy=(Math.random()-0.5)*4;
+      }
+      Particle.prototype.update=function(){
+        var dx=mouseX-this.x,dy=mouseY-this.y;
+        var dist=Math.sqrt(dx*dx+dy*dy);
+        var r=130;
+        if(dist<r&&mouseX>-999){
+          var f=(r-dist)/r;
+          this.vx-=(dx/dist)*f*18;
+          this.vy-=(dy/dist)*f*18;
+        }
+        this.vx+=(this.ox-this.x)*0.07;
+        this.vy+=(this.oy-this.y)*0.07;
+        this.vx*=0.85;this.vy*=0.85;
+        this.x+=this.vx;this.y+=this.vy;
+      };
+      Particle.prototype.draw=function(){
+        ctx.fillRect(this.x,this.y,1.5,1.5);
+      };
+
+      function build(){
+        dpr=window.devicePixelRatio||1;
+        W=canvas.parentElement.clientWidth||window.innerWidth;
+        H=140;
+        canvas.width=W*dpr;
+        canvas.height=H*dpr;
+        canvas.style.width=W+'px';
+        canvas.style.height=H+'px';
+        ctx.setTransform(1,0,0,1,0,0);
+        ctx.scale(dpr,dpr);
+
+        ctx.clearRect(0,0,W,H);
+        var fs=Math.min(120,W*0.165);
+        ctx.font='700 '+fs+'px BebasNeuePro,ui-sans-serif,sans-serif';
+        ctx.textAlign='center';
+        ctx.textBaseline='middle';
+        ctx.fillStyle='rgba(255,255,255,0.28)';
+        ctx.fillText('NOVA TLT',W/2,H/2);
+
+        var imgd=ctx.getImageData(0,0,canvas.width,canvas.height);
+        particles=[];
+        var step=Math.max(1,Math.round(5*dpr));
+        for(var y=0;y<imgd.height;y+=step){
+          for(var x=0;x<imgd.width;x+=step){
+            if(imgd.data[(y*imgd.width+x)*4+3]>100){
+              particles.push(new Particle(x/dpr,y/dpr));
+            }
+          }
+        }
+      }
+
+      function loop(){
+        ctx.clearRect(0,0,W,H);
+        ctx.fillStyle='rgba(255,255,255,0.28)';
+        for(var i=0;i<particles.length;i++){
+          particles[i].update();
+          particles[i].draw();
+        }
+        requestAnimationFrame(loop);
+      }
+
+      canvas.addEventListener('mousemove',function(e){
+        var r=canvas.getBoundingClientRect();
+        mouseX=e.clientX-r.left;mouseY=e.clientY-r.top;
+      });
+      canvas.addEventListener('mouseleave',function(){mouseX=-9999;mouseY=-9999;});
+
+      var ro=new ResizeObserver(function(){build();});
+      ro.observe(canvas.parentElement);
+
+      setTimeout(function(){build();loop();},80);
+    })();
+    </script>
   </div>
 </footer>
 	<script>
