@@ -133,20 +133,17 @@
     .cert-tile__badge { display: inline-block; font-family: ui-sans-serif, system-ui, sans-serif,sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 5px 12px; border-radius: 5px; background: rgba(202,149,61,0.12); color: #CA953D; border: 1px solid rgba(202,149,61,0.22); margin-bottom: 16px; }
     .cert-tile__title { font-family: BebasNeuePro,sans-serif; font-size: 22px; letter-spacing: 0.04em; color: var(--ink); margin-bottom: 8px; }
     .cert-tile__desc { font-family: ui-sans-serif, system-ui, sans-serif,sans-serif; font-size: 13px; color: var(--ink-dim); line-height: 1.65; }
-    @keyframes nt-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-    .tm-sec { padding: clamp(64px,9vw,110px) 0; background: #0a0a0a; overflow: hidden; }
-    .tm-head { max-width: 680px; margin: 0 auto clamp(48px,6vw,72px); padding: 0 clamp(24px,5vw,80px); text-align: center; }
+    .tm-sec { padding: clamp(64px,9vw,110px) clamp(20px,5vw,60px); background: #0a0a0a; }
+    .tm-head { max-width: 680px; margin: 0 auto clamp(48px,6vw,72px); text-align: center; }
     .tm-head__icon { width: 56px; height: 56px; border-radius: 12px; background: rgba(202,149,61,0.12); border: 1px solid rgba(202,149,61,0.30); display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; }
     .tm-head__title { font-family: BebasNeuePro,sans-serif; font-size: clamp(38px,5vw,68px); letter-spacing: 0.03em; color: var(--ink); margin-bottom: 14px; line-height: 1; }
     .tm-head__title span { background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .tm-head__desc { font-family: ui-sans-serif, system-ui, sans-serif,sans-serif; font-size: clamp(14px,1.05vw,16px); color: var(--ink-dim); line-height: 1.7; }
-    .tm-viewport { position: relative; }
-    .tm-fade { position: absolute; top: 0; z-index: 2; width: clamp(80px,10vw,160px); height: 100%; pointer-events: none; }
-    .tm-fade--l { left: 0; background: linear-gradient(to right, #0a0a0a 0%, transparent 100%); }
-    .tm-fade--r { right: 0; background: linear-gradient(to left, #0a0a0a 0%, transparent 100%); }
-    .tm-track { display: flex; gap: 20px; width: max-content; animation: nt-marquee 36s linear infinite; }
-    .tm-viewport:hover .tm-track { animation-play-state: paused; }
-    .tm-card { flex-shrink: 0; width: 230px; border-radius: 16px; overflow: hidden; position: relative; }
+    .tm-viewport { max-width: 1400px; margin: 0 auto; }
+    .tm-track { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+    @media (max-width: 900px) { .tm-track { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 560px) { .tm-track { grid-template-columns: repeat(2, 1fr); } }
+    .tm-card { border-radius: 16px; overflow: hidden; position: relative; }
     .tm-card img { width: 100%; height: 320px; object-fit: cover; object-position: top center; display: block; filter: grayscale(1); transition: filter 0.4s ease; }
     .tm-card:hover img { filter: grayscale(0); }
     .tm-card__no-img { width: 100%; height: 320px; display: flex; align-items: center; justify-content: center; background: linear-gradient(160deg,#111,#1a1a1a); }
@@ -632,41 +629,17 @@
       <p class="tm-head__desc">Two decades of collective expertise in Saudi logistics, fleet operations, HSE, and Vision 2030 infrastructure — driven by one shared mission.</p>
     </div>
     <div class="tm-viewport">
-      <div class="tm-fade tm-fade--l"></div>
-      <div class="tm-fade tm-fade--r"></div>
       <div class="tm-track">
-        <!-- set 1 -->
         <div class="tm-card">
-          <img src="assets/img/team-sabeek.jpg?v=1786426554" alt="Sabeek Khan" loading="lazy">
+          <img src="assets/img/team-sabeek.jpg" alt="Sabeek Khan" loading="lazy">
           <div class="tm-caption"><p class="tm-caption__name">Sabeek Khan</p><p class="tm-caption__role">CEO &amp; Founder</p></div>
         </div>
         <div class="tm-card">
-          <img src="assets/img/team-ram.jpg?v=1786426554" alt="Ram Veluswame" loading="lazy">
+          <img src="assets/img/team-ram.jpg" alt="Ram Veluswame" loading="lazy">
           <div class="tm-caption"><p class="tm-caption__name">Ram Veluswame</p><p class="tm-caption__role">COO &amp; Founder</p></div>
         </div>
         <div class="tm-card">
-          <img src="assets/img/team-faisal.jpg?v=1786426554" alt="Faisal Taj" loading="lazy">
-          <div class="tm-caption"><p class="tm-caption__name">Faisal Taj</p><p class="tm-caption__role">Marketing Director</p></div>
-        </div>
-        <div class="tm-card">
-          <div class="tm-card__no-img"><span class="tm-card__initials">A</span></div>
-          <div class="tm-caption"><p class="tm-caption__name">Alasmi</p><p class="tm-caption__role">CFO</p></div>
-        </div>
-        <div class="tm-card">
-          <div class="tm-card__no-img"><span class="tm-card__initials">SB</span></div>
-          <div class="tm-caption"><p class="tm-caption__name">Sikkander Basha</p><p class="tm-caption__role">Chairman</p></div>
-        </div>
-        <!-- set 2 (duplicate for seamless loop) -->
-        <div class="tm-card">
-          <img src="assets/img/team-sabeek.jpg?v=1786426554" alt="Sabeek Khan" loading="lazy">
-          <div class="tm-caption"><p class="tm-caption__name">Sabeek Khan</p><p class="tm-caption__role">CEO &amp; Founder</p></div>
-        </div>
-        <div class="tm-card">
-          <img src="assets/img/team-ram.jpg?v=1786426554" alt="Ram Veluswame" loading="lazy">
-          <div class="tm-caption"><p class="tm-caption__name">Ram Veluswame</p><p class="tm-caption__role">COO &amp; Founder</p></div>
-        </div>
-        <div class="tm-card">
-          <img src="assets/img/team-faisal.jpg?v=1786426554" alt="Faisal Taj" loading="lazy">
+          <img src="assets/img/team-faisal.jpg" alt="Faisal Taj" loading="lazy">
           <div class="tm-caption"><p class="tm-caption__name">Faisal Taj</p><p class="tm-caption__role">Marketing Director</p></div>
         </div>
         <div class="tm-card">
