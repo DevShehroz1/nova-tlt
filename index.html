@@ -2386,11 +2386,11 @@
 						<p class="stats-split__intro">NOVA Terra Logistics &amp; Transport is a Saudi-based heavy equipment and transport company delivering reliable dump truck rental, earthmoving, and logistics services to the Kingdom's most demanding sectors. Built on discipline, precision, and Vision 2030-aligned growth, we move the materials that build the nation.</p>
 						<div class="stats-split__rows">
 							<div class="stats-split__row">
-								<span class="stats-split__num" data-count="150" data-suffix="+">150+</span>
+								<span class="stats-split__num" data-count="50" data-suffix="+">50+</span>
 								<span class="stats-split__label">Fleet vehicles deployed across the Kingdom's most active construction and logistics corridors.</span>
 							</div>
 							<div class="stats-split__row">
-								<span class="stats-split__num" data-count="500" data-suffix="+">500+</span>
+								<span class="stats-split__num" data-count="7" data-suffix="+">7+</span>
 								<span class="stats-split__label">Projects completed for government, infrastructure, and private sector clients across KSA.</span>
 							</div>
 							<div class="stats-split__row">
@@ -3017,18 +3017,18 @@
 		<p class="modal__title">Thank you for contacting us!</p>
 		<p class="modal__text">We will get back to you as soon as possible. If your matter is urgent, please call us directly at the following numbers:</p>
 		<div class="modal__contact">
-			<a href="tel:+48789177655" class="modal__contact-item">
+			<a href="tel:+966503065248" class="modal__contact-item">
 				<img src="assets/img/team/modal-photo-1.png" alt="Photo" class="modal__contact-img" />
 				<span class="modal__contact-wrapper">
 					<span class="modal__contact-heading">Pavlo Vykhodtsev</span>
 					<span class="modal__contact-text">+48 789 177&nbsp;655</span>
 				</span>
 			</a>
-			<a href="tel:+48571293123" class="modal__contact-item">
+			<a href="tel:+966503065248" class="modal__contact-item">
 				<img src="assets/img/team/modal-photo-2.png" alt="Photo" class="modal__contact-img" />
 				<span class="modal__contact-wrapper">
 					<span class="modal__contact-heading">Bohdan Popov</span>
-					<span class="modal__contact-text">+48 571 293 123</span>
+					<span class="modal__contact-text">+966 503065248</span>
 				</span>
 			</a>
 		</div>
@@ -3041,252 +3041,242 @@
 	  const canvas = document.getElementById('globe');
 	  if (!canvas) return;
 	  const ctx = canvas.getContext('2d');
-	  const D2R = Math.PI / 180;
 
-	  // Saudi Arabia border [lat, lon] clockwise
-	  const SA_BORDER_LL = [
-	    [29.50,35.00],[29.60,35.50],[29.90,36.50],[30.20,37.50],
-	    [30.50,38.00],[31.00,38.50],[31.20,39.00],[31.20,40.00],
-	    [31.00,41.00],[30.50,42.00],[30.10,43.00],[30.10,44.00],
-	    [30.10,45.00],[30.10,46.00],[30.00,46.50],[29.80,47.00],
-	    [29.50,47.50],[29.20,47.60],[28.50,48.00],[28.00,48.50],
-	    [27.50,48.70],[27.00,49.50],[26.50,50.00],[26.00,50.30],
-	    [25.50,50.50],[25.00,50.80],[24.70,51.00],[24.20,51.50],
-	    [23.50,55.00],[23.00,55.20],[22.50,55.50],[22.00,55.60],
-	    [21.00,55.00],[20.50,52.50],[19.80,52.00],[19.00,51.00],
-	    [18.50,50.00],[18.00,49.00],[17.70,48.00],[17.50,47.00],
-	    [17.50,46.00],[17.20,44.80],[17.00,44.00],[16.90,43.50],
-	    [16.90,43.20],[17.10,43.00],[17.50,42.80],[18.00,42.50],
-	    [18.50,42.30],[19.00,42.00],[19.50,41.60],[20.00,41.00],
-	    [20.50,40.50],[21.00,39.80],[21.50,39.30],[22.00,39.00],
-	    [22.50,38.50],[23.00,38.00],[23.50,37.80],[24.00,37.55],
-	    [24.50,37.50],[25.00,37.20],[25.50,37.00],[26.00,36.80],
-	    [26.50,36.60],[27.00,36.10],[27.60,35.70],[28.00,35.30],
-	    [28.70,34.96],[29.50,35.00]
+	  // SA border polygon [lat, lon]
+	  const SA_POLY = [
+	    [29.18,34.97],[29.60,35.20],[30.00,35.50],[30.40,35.80],[30.80,36.10],
+	    [31.00,36.50],[31.20,37.00],[31.50,37.50],[31.80,38.00],[31.70,38.60],
+	    [31.60,39.20],[31.50,39.80],[31.40,40.40],[31.20,41.00],[30.90,41.60],
+	    [30.60,42.20],[30.20,43.00],[29.80,43.80],[29.50,44.60],[29.20,45.40],
+	    [28.90,46.20],[28.60,47.00],[28.30,47.80],[28.00,48.60],[27.70,49.40],
+	    [27.20,49.80],[26.70,50.20],[26.30,50.50],[25.90,50.70],[25.50,50.80],
+	    [25.10,50.90],[24.70,51.10],[24.30,51.40],[23.90,51.60],[23.50,51.80],
+	    [23.10,52.00],[22.70,52.20],[22.50,52.60],[22.30,53.20],[22.10,53.80],
+	    [21.90,54.40],[21.70,55.00],[21.50,55.60],[21.20,55.90],[20.90,56.20],
+	    [20.60,56.40],[20.00,56.60],[19.50,56.70],[19.00,56.60],[18.50,56.30],
+	    [18.00,55.90],[17.60,55.40],[17.30,54.80],[17.00,54.20],[16.80,53.50],
+	    [16.50,52.80],[16.20,52.00],[15.90,51.20],[15.60,50.40],[15.30,49.60],
+	    [15.10,48.80],[14.90,48.00],[14.80,47.20],[14.70,46.40],[14.60,45.50],
+	    [14.50,44.60],[14.40,43.70],[14.30,42.80],[14.20,42.00],[14.10,41.20],
+	    [14.00,40.40],[14.10,39.60],[14.20,38.80],[14.30,38.00],[14.50,37.20],
+	    [14.80,36.60],[15.10,36.20],[15.50,35.90],[16.00,35.70],[16.50,35.50],
+	    [17.00,35.50],[17.50,35.70],[18.00,36.20],[18.50,37.00],[19.00,37.80],
+	    [19.50,38.40],[20.00,38.70],[20.50,38.80],[20.90,38.70],[21.20,38.50],
+	    [21.50,38.20],[21.70,37.80],[21.80,37.30],[21.80,36.80],[21.70,36.30],
+	    [21.60,35.80],[21.60,35.30],[21.70,34.90],[22.00,34.70],[22.40,34.60],
+	    [22.80,34.70],[23.20,34.90],[23.70,35.10],[24.20,35.10],[24.70,35.00],
+	    [25.20,35.00],[25.70,35.10],[26.20,35.20],[26.70,35.10],[27.20,34.90],
+	    [27.70,34.80],[28.20,34.90],[28.70,35.10],[29.18,34.97]
 	  ];
 
-	  // Point-in-polygon in lat/lon space
 	  function inSA(lat, lon) {
 	    let inside = false;
-	    for (let i = 0, j = SA_BORDER_LL.length - 1; i < SA_BORDER_LL.length; j = i++) {
-	      const [yi,xi] = SA_BORDER_LL[i], [yj,xj] = SA_BORDER_LL[j];
-	      if ((yi>lat)!==(yj>lat) && lon<(xj-xi)*(lat-yi)/(yj-yi)+xi) inside=!inside;
+	    const n = SA_POLY.length;
+	    for (let i = 0, j = n - 1; i < n; j = i++) {
+	      const xi = SA_POLY[i][1], yi = SA_POLY[i][0];
+	      const xj = SA_POLY[j][1], yj = SA_POLY[j][0];
+	      if (((yi > lat) !== (yj > lat)) && (lon < (xj - xi) * (lat - yi) / (yj - yi) + xi))
+	        inside = !inside;
 	    }
 	    return inside;
 	  }
 
-	  // Convert lat/lon to unit sphere xyz
-	  function ll2xyz(lat,lon) {
-	    const phi=lat*D2R, theta=lon*D2R;
-	    return { x:Math.cos(phi)*Math.sin(theta), y:Math.sin(phi), z:Math.cos(phi)*Math.cos(theta) };
+	  // SA bounding box + padding
+	  const LAT_MIN = 14.0, LAT_MAX = 32.0;
+	  const LON_MIN = 33.0, LON_MAX = 57.0;
+
+	  // Cities: [label, lat, lon]
+	  const CITIES = [
+	    ['Riyadh',    24.71, 46.68],
+	    ['Jeddah',    21.49, 39.19],
+	    ['Dammam',    26.43, 50.10],
+	    ['Medina',    24.47, 39.61],
+	    ['Tabuk',     28.38, 36.57],
+	    ['NEOM',      27.50, 35.60],
+	    ['Khamis',    18.31, 42.73],
+	    ['Jubail',    27.00, 49.66],
+	  ];
+
+	  // Connection lines: [from, to] by CITIES index
+	  const ARCS = [
+	    [0, 1], // Riyadh → Jeddah
+	    [0, 2], // Riyadh → Dammam
+	    [0, 4], // Riyadh → Tabuk
+	    [0, 6], // Riyadh → Khamis
+	    [1, 5], // Jeddah → NEOM
+	    [2, 7], // Dammam → Jubail
+	  ];
+
+	  let W = 0, H = 0, dpr = 1;
+	  let DOTS = [];
+	  let arcProgress = [];
+	  let last = performance.now();
+
+	  function project(lat, lon) {
+	    const x = (lon - LON_MIN) / (LON_MAX - LON_MIN) * W;
+	    const y = (LAT_MAX - lat) / (LAT_MAX - LAT_MIN) * H;
+	    return { x, y };
 	  }
 
-	  // Build SA interior fill dots
-	  const SA_FILL = [];
-	  for (let lat=16.0; lat<=32.5; lat+=0.35)
-	    for (let lon=34.0; lon<=56.5; lon+=0.35)
-	      if (inSA(lat,lon)) SA_FILL.push(ll2xyz(lat,lon));
-
-	  // Build SA border dots (interpolated)
-	  const SA_BORDER = [];
-	  for (let i=0; i<SA_BORDER_LL.length-1; i++) {
-	    const [la,lo]=SA_BORDER_LL[i],[lb,lob]=SA_BORDER_LL[i+1];
-	    const steps=Math.max(1,Math.ceil(Math.hypot(lb-la,lob-lo)/0.15));
-	    for (let s=0; s<=steps; s++)
-	      SA_BORDER.push(ll2xyz(la+(lb-la)*s/steps, lo+(lob-lo)*s/steps));
+	  function buildDots() {
+	    DOTS = [];
+	    const step = 0.45;
+	    for (let lat = LAT_MIN; lat <= LAT_MAX; lat += step) {
+	      for (let lon = LON_MIN; lon <= LON_MAX; lon += step) {
+	        if (inSA(lat, lon)) {
+	          const p = project(lat, lon);
+	          DOTS.push(p);
+	        }
+	      }
+	    }
 	  }
-
-	  // City hubs
-	  const HUBS = [
-	    ["Riyadh",   24.71,46.68],["Jeddah",   21.49,39.19],["Mecca",    21.39,39.86],
-	    ["Medina",   24.52,39.57],["Dammam",   26.43,50.10],["Jubail",   27.00,49.66],
-	    ["Hofuf",    25.38,49.59],["Buraydah", 26.33,43.97],["Hail",     27.51,41.69],
-	    ["Tabuk",    28.38,36.57],["Abha",     18.22,42.51],["Jizan",    16.89,42.55],
-	    ["Najran",   17.49,44.13],["Yanbu",    24.09,38.06],["Taif",     21.27,40.42],
-	    ["Sakaka",   29.97,40.20],
-	  ].map(([name,lat,lon]) => Object.assign(ll2xyz(lat,lon),{name}));
-
-	  HUBS.forEach(h => {
-	    h.near = HUBS.filter(o=>o!==h).sort((a,b)=>
-	      ((a.x-h.x)**2+(a.y-h.y)**2+(a.z-h.z)**2)-((b.x-h.x)**2+(b.y-h.y)**2+(b.z-h.z)**2));
-	  });
-
-	  // Canvas / projection state
-	  const wrapEl = document.querySelector('.globe-wrap');
-	  let W,H,DPR,R,CX,CY;
 
 	  function resize() {
-	    DPR = Math.min(2, window.devicePixelRatio||1);
-	    const rect = canvas.parentElement.getBoundingClientRect();
-	    W=rect.width; H=rect.height;
-	    canvas.width=W*DPR; canvas.height=H*DPR;
-	    ctx.setTransform(DPR,0,0,DPR,0,0);
-	    R = Math.min(W*1.4, 1900);
-	    if (W<640) R=W*2.0;
-	    CX=W/2;
-	    const topOfSphere = wrapEl.offsetTop - R*0.04;
-	    CY = topOfSphere + R;
-	  }
-	  resize();
-
-	  const TILT=-0.65, cT=Math.cos(TILT), sT=Math.sin(TILT);
-	  // Rotate so Saudi Arabia (lon ~45°E) faces forward
-	  const rot = { c:Math.cos(-0.785), s:Math.sin(-0.785) };
-	  const tmp={}, tmpA={}, tmpB={};
-
-	  function project(p,out) {
-	    const cS=rot.c, sS=rot.s;
-	    const x1=p.x*cS+p.z*sS, z1=-p.x*sS+p.z*cS, y1=p.y;
-	    const y2=y1*cT-z1*sT, z2=y1*sT+z1*cT;
-	    out.sx=CX+x1*R; out.sy=CY-y2*R; out.z=z2;
-	    return out;
+	    dpr = Math.min(window.devicePixelRatio || 1, 2);
+	    W = canvas.parentElement ? canvas.parentElement.clientWidth : window.innerWidth;
+	    H = canvas.parentElement ? canvas.parentElement.clientHeight : window.innerHeight;
+	    canvas.width = W * dpr;
+	    canvas.height = H * dpr;
+	    canvas.style.width = W + 'px';
+	    canvas.style.height = H + 'px';
+	    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+	    buildDots();
+	    // Reset arc progress
+	    arcProgress = ARCS.map((_, i) => ({ t: -(i * 0.7), done: false }));
 	  }
 
-	  // Static base (sphere body + SA dots)
-	  const base = document.createElement('canvas');
-	  function buildBase() {
-	    base.width=W*DPR; base.height=H*DPR;
-	    const b=base.getContext('2d');
-	    b.setTransform(DPR,0,0,DPR,0,0);
-
-	    // Sphere glow
-	    const glow=b.createRadialGradient(CX,CY,R*0.55,CX,CY,R*1.25);
-	    glow.addColorStop(0,'rgba(120,140,190,0.10)');
-	    glow.addColorStop(0.75,'rgba(90,110,160,0.045)');
-	    glow.addColorStop(1,'rgba(0,0,0,0)');
-	    b.fillStyle=glow; b.beginPath(); b.arc(CX,CY,R*1.25,0,7); b.fill();
-
-	    // Sphere body
-	    const body=b.createRadialGradient(CX-R*0.3,CY-R*0.35,R*0.1,CX,CY,R);
-	    body.addColorStop(0,'#191a1d'); body.addColorStop(0.7,'#101113'); body.addColorStop(1,'#0a0b0c');
-	    b.fillStyle=body; b.beginPath(); b.arc(CX,CY,R,0,7); b.fill();
-
-	    // SA interior fill dots
-	    for (let i=0; i<SA_FILL.length; i++) {
-	      project(SA_FILL[i],tmp);
-	      if (tmp.z<=0.02) continue;
-	      const a=0.12+tmp.z*0.28;
-	      const s=(1.0+tmp.z*0.8)*(R/560);
-	      b.fillStyle=`rgba(180,140,70,${a.toFixed(3)})`;
-	      b.fillRect(tmp.sx-s/2,tmp.sy-s/2,s,s);
-	    }
-
-	    // SA border dots — bright gold glow
-	    for (let i=0; i<SA_BORDER.length; i++) {
-	      project(SA_BORDER[i],tmp);
-	      if (tmp.z<=0.02) continue;
-	      const a=0.6+tmp.z*0.4;
-	      const r0=(1.6+tmp.z*1.2)*(R/560);
-	      const g2=b.createRadialGradient(tmp.sx,tmp.sy,0,tmp.sx,tmp.sy,r0*4);
-	      g2.addColorStop(0,`rgba(255,210,100,${a})`);
-	      g2.addColorStop(0.35,`rgba(202,149,61,${a*0.45})`);
-	      g2.addColorStop(1,'rgba(202,149,61,0)');
-	      b.fillStyle=g2; b.beginPath(); b.arc(tmp.sx,tmp.sy,r0*4,0,7); b.fill();
-	      b.fillStyle=`rgba(255,235,180,${a})`;
-	      b.beginPath(); b.arc(tmp.sx,tmp.sy,r0*0.65,0,7); b.fill();
-	    }
-
-	    // Sphere outline
-	    b.strokeStyle='rgba(150,170,215,0.14)'; b.lineWidth=1.2;
-	    b.beginPath(); b.arc(CX,CY,R,0,7); b.stroke();
-	  }
-	  buildBase();
-	  window.addEventListener('resize',()=>{ resize(); buildBase(); });
-
-	  // Arc animation
-	  const ARC_LIFT=0.06;
-	  function slerpLift(a,b,t,out) {
-	    let dot=a.x*b.x+a.y*b.y+a.z*b.z;
-	    dot=Math.min(1,Math.max(-1,dot));
-	    const om=Math.acos(dot), so=Math.sin(om)||1e-6;
-	    const wa=Math.sin((1-t)*om)/so, wb=Math.sin(t*om)/so;
-	    const lift=1+ARC_LIFT*Math.sin(Math.PI*t)*(om/Math.PI+0.35);
-	    out.x=(a.x*wa+b.x*wb)*lift; out.y=(a.y*wa+b.y*wb)*lift; out.z=(a.z*wa+b.z*wb)*lift;
-	    return out;
+	  function drawRoundedRect(x, y, w, h, r) {
+	    ctx.beginPath();
+	    ctx.moveTo(x + r, y);
+	    ctx.lineTo(x + w - r, y);
+	    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+	    ctx.lineTo(x + w, y + h - r);
+	    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+	    ctx.lineTo(x + r, y + h);
+	    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+	    ctx.lineTo(x, y + r);
+	    ctx.quadraticCurveTo(x, y, x + r, y);
+	    ctx.closePath();
 	  }
 
-	  const arcs=[],pulses=[],MAX_ARCS=32;
-
-	  function spawnBurst() {
-	    const src=HUBS[(Math.random()*HUBS.length)|0];
-	    const pool=src.near.slice(0,8);
-	    for (let i=pool.length-1;i>0;i--){const j=(Math.random()*(i+1))|0;[pool[i],pool[j]]=[pool[j],pool[i]];}
-	    pool.slice(0,4+((Math.random()*3)|0)).forEach((dst,k)=>arcs.push({
-	      a:src,b:dst,t:0,delay:k*0.2,grow:1.3+Math.random()*0.8,
-	      hold:1.4+Math.random()*1.2,fade:1.3,phase:0
-	    }));
-	    pulses.push({hub:src,t:0});
+	  function quadPoint(ax, ay, bx, by, t) {
+	    // Curved path: mid point lifted
+	    const mx = (ax + bx) / 2;
+	    const my = Math.min(ay, by) - Math.min(W, H) * 0.15;
+	    const ix = (1-t)*(1-t)*ax + 2*(1-t)*t*mx + t*t*bx;
+	    const iy = (1-t)*(1-t)*ay + 2*(1-t)*t*my + t*t*by;
+	    return { x: ix, y: iy };
 	  }
-	  spawnBurst();
-	  let burstTimer=0.9, last=performance.now();
-	  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 	  function frame(now) {
-	    const dt=Math.min(0.05,(now-last)/1000); last=now;
-	    ctx.clearRect(0,0,W,H);
-	    ctx.drawImage(base,0,0,W,H);
+	    const dt = Math.min(0.05, (now - last) / 1000); last = now;
+	    ctx.clearRect(0, 0, W, H);
 
-	    for (let i=arcs.length-1;i>=0;i--) {
-	      const arc=arcs[i];
-	      if (arc.delay>0){arc.delay-=dt;continue;}
-	      arc.t+=dt;
-	      let head=1,alpha=1;
-	      if (arc.phase===0){
-	        head=1-Math.pow(1-Math.min(1,arc.t/arc.grow),3);
-	        if (arc.t>=arc.grow){arc.phase=1;arc.t=0;pulses.push({hub:arc.b,t:0});}
-	      } else if (arc.phase===1){
-	        if (arc.t>=arc.hold){arc.phase=2;arc.t=0;}
-	      } else {
-	        alpha=Math.max(0,1-arc.t/arc.fade);
-	        if (arc.t>=arc.fade){arcs.splice(i,1);continue;}
-	      }
-	      const SEG=64; ctx.lineWidth=Math.max(1,R/700); ctx.lineCap='round';
-	      let started=false; ctx.beginPath();
-	      for (let s=0;s<=SEG*head;s++){
-	        slerpLift(arc.a,arc.b,s/SEG,tmpA); project(tmpA,tmpB);
-	        if (tmpB.z>-0.05){
-	          if (!started){ctx.moveTo(tmpB.sx,tmpB.sy);started=true;}
-	          else ctx.lineTo(tmpB.sx,tmpB.sy);
-	        } else if (started){
-	          ctx.strokeStyle=`rgba(242,169,92,${(0.55*alpha).toFixed(3)})`; ctx.stroke(); ctx.beginPath(); started=false;
-	        }
-	      }
-	      if (started){ctx.strokeStyle=`rgba(242,169,92,${(0.55*alpha).toFixed(3)})`; ctx.stroke();}
+	    // Draw SA dots
+	    const dotR = Math.max(1.2, Math.min(W, H) * 0.0028);
+	    ctx.fillStyle = 'rgba(202,149,61,0.22)';
+	    for (let i = 0; i < DOTS.length; i++) {
+	      ctx.beginPath();
+	      ctx.arc(DOTS[i].x, DOTS[i].y, dotR, 0, 6.283);
+	      ctx.fill();
+	    }
 
-	      if (arc.phase===0&&head<1){
-	        slerpLift(arc.a,arc.b,head,tmpA); project(tmpA,tmpB);
-	        if (tmpB.z>0){
-	          const g=ctx.createRadialGradient(tmpB.sx,tmpB.sy,0,tmpB.sx,tmpB.sy,7);
-	          g.addColorStop(0,'rgba(255,214,160,0.95)'); g.addColorStop(1,'rgba(255,214,160,0)');
-	          ctx.fillStyle=g; ctx.beginPath(); ctx.arc(tmpB.sx,tmpB.sy,7,0,7); ctx.fill();
-	        }
+	    // Draw arcs
+	    for (let i = 0; i < ARCS.length; i++) {
+	      const ap = arcProgress[i];
+	      ap.t += dt * 0.45;
+	      const raw = ap.t % 2.8; // cycle
+	      const prog = Math.max(0, Math.min(1, raw));
+	      if (prog <= 0) continue;
+
+	      const [ai, bi] = ARCS[i];
+	      const a = project(CITIES[ai][1], CITIES[ai][2]);
+	      const b = project(CITIES[bi][1], CITIES[bi][2]);
+
+	      // Draw arc trail
+	      const SEG = 40;
+	      const headT = Math.min(1, prog);
+	      const tailT = Math.max(0, headT - 0.4);
+	      ctx.lineWidth = Math.max(1, W * 0.0012);
+	      ctx.lineCap = 'round';
+
+	      // Gradient-style: fade tail, bright head
+	      for (let s = 0; s < SEG; s++) {
+	        const t0 = tailT + (headT - tailT) * (s / SEG);
+	        const t1 = tailT + (headT - tailT) * ((s + 1) / SEG);
+	        if (t1 > 1 || t0 < 0) continue;
+	        const frac = s / SEG;
+	        const alpha = 0.15 + frac * 0.75;
+	        ctx.strokeStyle = `rgba(229,184,90,${alpha.toFixed(2)})`;
+	        const p0 = quadPoint(a.x, a.y, b.x, b.y, t0);
+	        const p1 = quadPoint(a.x, a.y, b.x, b.y, t1);
+	        ctx.beginPath();
+	        ctx.moveTo(p0.x, p0.y);
+	        ctx.lineTo(p1.x, p1.y);
+	        ctx.stroke();
+	      }
+
+	      // Traveling dot at head
+	      if (headT < 1) {
+	        const hp = quadPoint(a.x, a.y, b.x, b.y, headT);
+	        ctx.fillStyle = '#E5B85A';
+	        ctx.beginPath();
+	        ctx.arc(hp.x, hp.y, Math.max(2.5, W * 0.003), 0, 6.283);
+	        ctx.fill();
 	      }
 	    }
 
-	    burstTimer-=dt;
-	    if (!reduced&&burstTimer<=0&&arcs.length<MAX_ARCS){spawnBurst();burstTimer=1.3+Math.random()*1.6;}
+	    // Draw city markers and labels
+	    const fs = Math.max(10, Math.min(13, W * 0.013));
+	    ctx.font = `600 ${fs}px ui-sans-serif,system-ui,sans-serif`;
+	    for (let i = 0; i < CITIES.length; i++) {
+	      const [label, lat, lon] = CITIES[i];
+	      const p = project(lat, lon);
+	      const r = Math.max(3, W * 0.004);
 
-	    for (const h of HUBS) {
-	      project(h,tmp); if (tmp.z<=0.02) continue;
-	      const a=0.35+tmp.z*0.65, r0=(1.9+tmp.z*1.1)*(R/720);
-	      const g=ctx.createRadialGradient(tmp.sx,tmp.sy,0,tmp.sx,tmp.sy,r0*3.2);
-	      g.addColorStop(0,`rgba(255,196,128,${a})`); g.addColorStop(0.35,`rgba(242,169,92,${a*0.5})`); g.addColorStop(1,'rgba(242,169,92,0)');
-	      ctx.fillStyle=g; ctx.beginPath(); ctx.arc(tmp.sx,tmp.sy,r0*3.2,0,7); ctx.fill();
-	      ctx.fillStyle=`rgba(255,232,205,${a})`; ctx.beginPath(); ctx.arc(tmp.sx,tmp.sy,r0*0.55,0,7); ctx.fill();
+	      // Pulse ring
+	      const pulse = (now * 0.001 + i * 0.4) % 1;
+	      ctx.strokeStyle = `rgba(229,184,90,${(0.5 * (1 - pulse)).toFixed(2)})`;
+	      ctx.lineWidth = 1;
+	      ctx.beginPath();
+	      ctx.arc(p.x, p.y, r + pulse * r * 3, 0, 6.283);
+	      ctx.stroke();
+
+	      // Dot
+	      ctx.fillStyle = '#E5B85A';
+	      ctx.beginPath();
+	      ctx.arc(p.x, p.y, r, 0, 6.283);
+	      ctx.fill();
+
+	      // Label chip
+	      const tw = ctx.measureText(label).width;
+	      const pw = tw + 14, ph = fs + 8;
+	      let lx = p.x - pw / 2, ly = p.y - r - ph - 6;
+	      // Nudge labels for overlap avoidance
+	      if (i === 1) lx -= 10; // Jeddah left
+	      if (i === 3) { lx += 12; ly = p.y - r - ph - 6; } // Medina right
+	      if (i === 5) { ly = p.y + r + 6; } // NEOM below
+	      if (i === 6) { lx += 10; } // Khamis
+
+	      ctx.fillStyle = 'rgba(10,10,10,0.82)';
+	      ctx.strokeStyle = 'rgba(202,149,61,0.35)';
+	      ctx.lineWidth = 1;
+	      drawRoundedRect(lx, ly, pw, ph, 6);
+	      ctx.fill();
+	      ctx.stroke();
+
+	      ctx.fillStyle = '#efe9df';
+	      ctx.textAlign = 'center';
+	      ctx.textBaseline = 'middle';
+	      ctx.fillText(label, lx + pw / 2, ly + ph / 2);
 	    }
 
-	    for (let i=pulses.length-1;i>=0;i--) {
-	      const p=pulses[i]; p.t+=dt;
-	      if (p.t>=1.1){pulses.splice(i,1);continue;}
-	      project(p.hub,tmp); if (tmp.z<=0) continue;
-	      const k=p.t/1.1, rr=(2.5+k*14)*(R/720);
-	      ctx.strokeStyle=`rgba(242,169,92,${(0.55*(1-k)).toFixed(3)})`; ctx.lineWidth=Math.max(1,1.6*(1-k));
-	      ctx.beginPath(); ctx.arc(tmp.sx,tmp.sy,rr,0,7); ctx.stroke();
-	    }
-
-	    if (!reduced) requestAnimationFrame(frame);
+	    requestAnimationFrame(frame);
 	  }
-	  if (reduced) frame(performance.now()); else requestAnimationFrame(frame);
+
+	  window.addEventListener('resize', resize);
+	  resize();
+	  requestAnimationFrame(frame);
 	})();
 	</script>
 
@@ -3633,9 +3623,9 @@
           <div class="nf-links__col">
             <span class="nf-links__title">CONTACT</span>
             <ul class="nf-links__list">
-              <li><a href="tel:+966500000000">+966 50 000 0000</a></li>
-              <li><a href="mailto:info@nova-tlt.com">info@nova-tlt.com</a></li>
-              <li><a href="contact.html">Riyadh, Saudi Arabia</a></li>
+              <li><a href="tel:+966503065248">+966 503065248</a></li>
+              <li><a href="mailto:info@novatlt.com">info@novatlt.com</a></li>
+              <li><a href="contact.html">Jeddah, Saudi Arabia</a></li>
             </ul>
           </div>
         </div>
@@ -3782,7 +3772,7 @@
 
 
 	<!-- WhatsApp floating button -->
-	<a href="https://wa.me/966500000000" target="_blank" rel="noopener" aria-label="Chat on WhatsApp" style="
+	<a href="https://wa.me/966503065248" target="_blank" rel="noopener" aria-label="Chat on WhatsApp" style="
 		position: fixed;
 		bottom: 32px;
 		right: 28px;
