@@ -1,10 +1,10 @@
-/* Google Translate + RTL + Arabic-Indic numerals */
+/* Google Translate + RTL + Arabic-Indic numerals for Nova TLT */
 (function () {
-  var COOKIE  = 'googtrans';
-  var AR_VAL  = '/en/ar';
+  var COOKIE    = 'googtrans';
+  var AR_VAL    = '/en/ar';
   var AR_DIGITS = '٠١٢٣٤٥٦٧٨٩';
 
-  /* ── cookie helpers ── */
+  /* ── cookies ── */
   function getCookie(name) {
     var m = document.cookie.match('(?:^|;)\\s*' + name + '=([^;]*)');
     return m ? decodeURIComponent(m[1]) : '';
@@ -27,25 +27,24 @@
     return c === AR_VAL || c === '/ar/ar';
   }
 
-  /* ── direction ── */
+  /* ── direction + lang ── */
   function applyDir(ar) {
     document.documentElement.setAttribute('dir', ar ? 'rtl' : 'ltr');
     document.documentElement.setAttribute('lang', ar ? 'ar-SA' : 'en');
   }
 
-  /* ── label: show CURRENT language ── */
+  /* ── label shows CURRENT language ── */
   function updateLabel(ar) {
     document.querySelectorAll('.nt-lang-label').forEach(function (el) {
       el.textContent = ar ? 'عربي' : 'ENG';
     });
-    /* dim the active option in the dropdown */
     document.querySelectorAll('.nt-lang-option').forEach(function (el) {
       var isAr = el.getAttribute('data-lang') === 'ar';
       el.classList.toggle('is-active', ar ? isAr : !isAr);
     });
   }
 
-  /* ── dropdown open / close ── */
+  /* ── dropdown open/close ── */
   function initDropdown() {
     var btn  = document.getElementById('nt-lang-btn');
     var menu = document.getElementById('nt-lang-menu');
@@ -56,7 +55,6 @@
       menu.classList.toggle('is-open');
     });
 
-    /* option clicks */
     menu.querySelectorAll('.nt-lang-option').forEach(function (opt) {
       opt.addEventListener('click', function (e) {
         e.preventDefault();
@@ -66,15 +64,32 @@
       });
     });
 
-    /* close on outside click */
     document.addEventListener('click', function () {
       menu.classList.remove('is-open');
     });
   }
 
-  /* ── Arabic-Indic numeral conversion ── */
+  /* ── Arabic-Indic numeral conversion ──
+     Skip: phone links, ltr elements, preloader, scripts             */
   function toArabicDigits(str) {
     return str.replace(/[0-9]/g, function (d) { return AR_DIGITS[+d]; });
+  }
+
+  function shouldSkipNode(node) {
+    var el = node.parentNode;
+    if (!el) return true;
+    var tag = el.tagName;
+    if (tag === 'SCRIPT' || tag === 'STYLE' || tag === 'NOSCRIPT') return true;
+    /* skip phone/email anchors */
+    if (tag === 'A') {
+      var href = el.getAttribute('href') || '';
+      if (href.indexOf('tel:') === 0 || href.indexOf('mailto:') === 0) return true;
+    }
+    /* skip elements with explicit ltr direction */
+    if (el.getAttribute('dir') === 'ltr') return true;
+    /* skip preloader */
+    if (el.closest && el.closest('#arc-preloader')) return true;
+    return false;
   }
 
   function convertDigits(root) {
@@ -83,8 +98,7 @@
     );
     var node;
     while ((node = walker.nextNode())) {
-      var tag = node.parentNode && node.parentNode.tagName;
-      if (tag === 'SCRIPT' || tag === 'STYLE' || tag === 'NOSCRIPT') continue;
+      if (shouldSkipNode(node)) continue;
       if (/[0-9]/.test(node.textContent)) {
         node.textContent = toArabicDigits(node.textContent);
       }
@@ -95,30 +109,21 @@
     if (!window.MutationObserver) return;
     var obs = new MutationObserver(function (mutations) {
       mutations.forEach(function (m) {
-        /* text content changed in place (counter animations) */
         if (m.type === 'characterData') {
-          if (/[0-9]/.test(m.target.textContent)) {
+          if (!shouldSkipNode(m.target) && /[0-9]/.test(m.target.textContent)) {
             m.target.textContent = toArabicDigits(m.target.textContent);
           }
           return;
         }
-        /* new nodes added (Google Translate replacements) */
         m.addedNodes.forEach(function (n) {
           if (n.nodeType === 1) convertDigits(n);
-          if (n.nodeType === 3 && /[0-9]/.test(n.textContent)) {
-            var tag = n.parentNode && n.parentNode.tagName;
-            if (tag !== 'SCRIPT' && tag !== 'STYLE') {
-              n.textContent = toArabicDigits(n.textContent);
-            }
+          if (n.nodeType === 3 && !shouldSkipNode(n) && /[0-9]/.test(n.textContent)) {
+            n.textContent = toArabicDigits(n.textContent);
           }
         });
       });
     });
-    obs.observe(document.body, {
-      childList: true,
-      subtree: true,
-      characterData: true   /* catches counter animation textContent changes */
-    });
+    obs.observe(document.body, { childList: true, subtree: true, characterData: true });
   }
 
   /* ── Google Translate init ── */
@@ -138,7 +143,6 @@
 
     if (ar) {
       convertDigits(document.body);
-      /* re-run after Google Translate finishes (~1.5 s) */
       setTimeout(function () { convertDigits(document.body); }, 1600);
       watchForDigits();
     }
