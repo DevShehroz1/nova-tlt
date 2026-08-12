@@ -2,63 +2,57 @@
 (function () {
   var COOKIE = 'googtrans';
   var AR_VAL  = '/en/ar';
-  var EN_VAL  = '/en/en';
 
-  /* ── cookie helpers ── */
   function getCookie(name) {
     var m = document.cookie.match('(?:^|;)\\s*' + name + '=([^;]*)');
     return m ? decodeURIComponent(m[1]) : '';
   }
   function setCookie(name, val) {
-    var host = location.hostname;
-    var domain = host === 'localhost' || host === '127.0.0.1' ? '' : '; domain=.' + host;
-    var expire = '; expires=' + new Date(Date.now() + 365 * 864e5).toUTCString();
-    document.cookie = name + '=' + encodeURIComponent(val) + expire + domain + '; path=/';
-    /* also set for root domain */
-    document.cookie = name + '=' + encodeURIComponent(val) + expire + '; path=/';
+    var exp = '; expires=' + new Date(Date.now() + 365 * 864e5).toUTCString();
+    document.cookie = name + '=' + encodeURIComponent(val) + exp + '; path=/';
+    if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+      document.cookie = name + '=' + encodeURIComponent(val) + exp + '; domain=.' + location.hostname + '; path=/';
+    }
   }
   function deleteCookie(name) {
-    document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
-    document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=.' + location.hostname + '; path=/';
+    var past = '; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
+    document.cookie = name + '=' + past;
+    document.cookie = name + '=; domain=.' + location.hostname + past;
   }
 
-  /* ── detect current lang ── */
   function isArabic() {
     var c = getCookie(COOKIE);
     return c === AR_VAL || c === '/ar/ar';
   }
 
-  /* ── apply RTL / LTR ── */
   function applyDir(ar) {
     document.documentElement.setAttribute('dir', ar ? 'rtl' : 'ltr');
     document.documentElement.setAttribute('lang', ar ? 'ar' : 'en');
   }
 
-  /* ── update button label ── */
   function updateLabel(ar) {
     document.querySelectorAll('.nt-lang-btn-label').forEach(function (el) {
-      el.textContent = ar ? 'عربي' : 'Eng';
-    });
-    document.querySelectorAll('.nt-lang-en').forEach(function (el) {
-      el.style.display = ar ? 'none' : '';
-    });
-    document.querySelectorAll('.nt-lang-ar').forEach(function (el) {
-      el.style.display = ar ? '' : 'none';
+      /* show what clicking WILL switch TO */
+      el.textContent = ar ? 'Eng' : 'عربي';
     });
   }
 
-  /* ── switch language ── */
-  window.ntSwitchLang = function (toAr) {
-    if (toAr) {
-      setCookie(COOKIE, AR_VAL);
-    } else {
+  /* public: called by onclick on every page */
+  window.ntToggleLang = function () {
+    if (isArabic()) {
       deleteCookie(COOKIE);
-      setCookie(COOKIE, EN_VAL);
+    } else {
+      setCookie(COOKIE, AR_VAL);
     }
     location.reload();
   };
 
-  /* ── Google Translate init callback ── */
+  /* kept for any legacy onclick="ntSwitchLang(...)" calls */
+  window.ntSwitchLang = function (toAr) {
+    if (toAr) { setCookie(COOKIE, AR_VAL); } else { deleteCookie(COOKIE); }
+    location.reload();
+  };
+
   window.googleTranslateElementInit = function () {
     new google.translate.TranslateElement(
       { pageLanguage: 'en', includedLanguages: 'ar,en', autoDisplay: false },
@@ -66,7 +60,6 @@
     );
   };
 
-  /* ── run on DOM ready ── */
   function init() {
     var ar = isArabic();
     applyDir(ar);
