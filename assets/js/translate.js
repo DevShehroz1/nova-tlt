@@ -134,6 +134,17 @@
     );
   };
 
+  /* ── sync elem-2 hover spans from elem-1 after GT translation ── */
+  function syncHoverSpans() {
+    document.querySelectorAll('.text-hover__inner').forEach(function (wrap) {
+      var e1 = wrap.querySelector('.text-hover__elem-1');
+      var e2 = wrap.querySelector('.text-hover__elem-2');
+      if (e1 && e2 && e1.textContent !== e2.textContent) {
+        e2.textContent = e1.textContent;
+      }
+    });
+  }
+
   /* ── boot ── */
   function init() {
     var ar = isArabic();
@@ -143,7 +154,11 @@
 
     if (ar) {
       convertDigits(document.body);
-      setTimeout(function () { convertDigits(document.body); }, 1600);
+      /* after GT finishes translating (~1.5s): sync hover spans + re-convert digits */
+      setTimeout(function () {
+        syncHoverSpans();
+        convertDigits(document.body);
+      }, 1600);
       watchForDigits();
     }
   }
