@@ -1,0 +1,62 @@
+/* ── Hide Google Translate toolbar ── */
+.goog-te-banner-frame,
+.goog-te-balloon-frame,
+#goog-gt-tt,
+.goog-te-menu-frame {
+  display: none !important;
+}
+body { top: 0 !important; }
+.skiptranslate { display: none !important; }
+
+/* ── RTL overrides ── */
+[dir="rtl"] {
+  text-align: right;
+}
+[dir="rtl"] .header__container,
+[dir="rtl"] .header__actions,
+[dir="rtl"] .header__menu {
+  flex-direction: row-reverse;
+}
+[dir="rtl"] .header__menu-item {
+  margin-left: 0;
+  margin-right: 0;
+}
+[dir="rtl"] .nav-drop__list {
+  left: auto;
+  right: 0;
+}
+[dir="rtl"] .header__lang-dropdown {
+  left: auto;
+  right: 0;
+}
+[dir="rtl"] .footer__inner,
+[dir="rtl"] .footer__cols {
+  flex-direction: row-reverse;
+}
+[dir="rtl"] .s-hero__content,
+[dir="rtl"] .s-hero__info {
+  text-align: right;
+}
+/* flex rows that should reverse */
+[dir="rtl"] .stats-split__inner,
+[dir="rtl"] .gfeat__inner,
+[dir="rtl"] .ctab__tabs,
+[dir="rtl"] .testi-columns-wrap {
+  flex-direction: row-reverse;
+}
+/* icon + text pairs */
+[dir="rtl"] .contact-info__item,
+[dir="rtl"] .footer__contact-item {
+  flex-direction: row-reverse;
+}
+/* list items */
+[dir="rtl"] li {
+  text-align: right;
+}
+/* inputs */
+[dir="rtl"] input,
+[dir="rtl"] textarea,
+[dir="rtl"] select {
+  text-align: right;
+  direction: rtl;
+}
