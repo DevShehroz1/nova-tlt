@@ -464,26 +464,28 @@
     .feat5-item__icon svg { width: 18px; height: 18px; stroke: #CA953D; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
     .feat5-item__title { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 3px; }
     .feat5-item__sub { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 12px; color: rgba(255,255,255,0.38); line-height: 1.5; }
-    .feat5-panel { position: relative; min-height: 420px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07); border-radius: 24px; padding: 28px; }
-    .feat5-card { position: absolute; background: rgba(16,16,16,0.97); border: 1px solid rgba(255,255,255,0.09); border-radius: 16px; padding: 22px 26px; box-shadow: 0 16px 48px rgba(0,0,0,0.4); }
-    .feat5-card--1 { top: 0; left: 0; width: 58%; }
-    .feat5-card--2 { top: 28%; right: 0; width: 56%; z-index: 2; }
-    .feat5-card--3 { bottom: 0; left: 4%; width: 60%; }
-    .feat5-card__label { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 10px; color: rgba(255,255,255,0.3); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
-    .feat5-card__title { font-family: BebasNeuePro, sans-serif; font-size: clamp(16px,1.8vw,22px); letter-spacing: 0.04em; color: #fff; line-height: 1; margin-bottom: 10px; }
+    .feat5-panel { position: relative; min-height: 460px; background: #f1f2f4; border-radius: 16px; padding: 32px; box-shadow: inset 0 2px 8px rgba(0,0,0,0.07); }
+    .feat5-panel-inner { position: relative; height: 380px; width: 100%; max-width: 420px; margin: 0 auto; }
+    .feat5-card { position: absolute; background: rgba(255,255,255,0.96); border: 1px solid #e5e7eb; border-radius: 10px; padding: 16px 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.09); backdrop-filter: blur(4px); }
+    .feat5-card--1 { top: 0; left: 0; width: 260px; }
+    .feat5-card--2 { top: 112px; right: 0; width: 240px; z-index: 2; }
+    .feat5-card--3 { bottom: 32px; left: 40px; width: 260px; }
+    .feat5-card__label { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 10px; color: #9ca3af; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
+    .feat5-card__title { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 15px; font-weight: 600; color: #111827; line-height: 1.2; margin-bottom: 10px; }
     .feat5-card__tags { display: flex; gap: 6px; margin-bottom: 10px; }
-    .feat5-card__tag { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 8px; border-radius: 6px; }
-    .feat5-card__tag--gold { background: rgba(202,149,61,0.15); color: #CA953D; }
-    .feat5-card__tag--dim { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.4); }
-    .feat5-card__tag--green { background: rgba(52,211,153,0.12); color: #34D399; }
-    .feat5-card__tag--purple { background: rgba(167,139,250,0.12); color: #A78BFA; }
-    .feat5-card__meta { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 11px; color: rgba(255,255,255,0.3); line-height: 1.7; }
-    .feat5-bar { height: 4px; border-radius: 2px; background: rgba(255,255,255,0.07); margin-bottom: 4px; }
+    .feat5-card__tag { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 9px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; padding: 3px 8px; border-radius: 5px; }
+    .feat5-card__tag--gold { background: rgba(202,149,61,0.12); color: #a07428; }
+    .feat5-card__tag--dim { background: rgba(0,0,0,0.06); color: #6b7280; }
+    .feat5-card__tag--green { background: rgba(34,197,94,0.10); color: #16a34a; }
+    .feat5-card__tag--purple { background: rgba(168,85,247,0.10); color: #9333ea; }
+    .feat5-card__meta { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 11px; color: #6b7280; line-height: 1.7; }
+    .feat5-bar { height: 4px; border-radius: 2px; background: #e5e7eb; margin-bottom: 4px; }
     .feat5-bar__fill { height: 100%; border-radius: 2px; background: var(--gold-grad); }
-    .feat5-bar-row { display: flex; justify-content: space-between; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 9px; color: rgba(255,255,255,0.28); margin-bottom: 8px; }
+    .feat5-bar-row { display: flex; justify-content: space-between; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 9px; color: #9ca3af; margin-bottom: 8px; }
     @media(max-width:960px) {
-      .feat5-panel { min-height: auto; display: flex; flex-direction: column; gap: 16px; padding: 20px; }
-      .feat5-card { position: static; width: 100%; padding: 20px 22px; }
+      .feat5-panel { min-height: auto; padding: 20px; }
+      .feat5-panel-inner { height: auto; display: flex; flex-direction: column; gap: 14px; }
+      .feat5-card { position: static; width: 100% !important; }
     }
 
     /* ── Feature-4: Fleet Stats Cards ── */
@@ -1014,6 +1016,7 @@
 
         <!-- Right: floating stat cards -->
         <div class="feat5-panel sr sr-d2">
+          <div class="feat5-panel-inner">
           <div class="feat5-card feat5-card--1">
             <p class="feat5-card__label">Live Dispatch</p>
             <p class="feat5-card__title">47 Active Trucks</p>
@@ -1030,7 +1033,7 @@
 
           <div class="feat5-card feat5-card--2">
             <p class="feat5-card__label">Region Coverage</p>
-            <p class="feat5-card__title" style="font-size:16px;margin-bottom:12px;">Active Deployments</p>
+            <p class="feat5-card__title">Active Deployments</p>
             <div class="feat5-bar"><div class="feat5-bar__fill" style="width:88%;"></div></div>
             <div class="feat5-bar-row"><span>Riyadh</span><span>88%</span></div>
             <div class="feat5-bar"><div class="feat5-bar__fill" style="width:72%;"></div></div>
@@ -1049,6 +1052,7 @@
             </div>
             <p class="feat5-card__meta">All completed jobs pushed to client reports automatically</p>
           </div>
+          </div><!-- /feat5-panel-inner -->
         </div>
       </div>
     </div>
