@@ -1,59 +1,101 @@
-/* ── Hide Google Translate toolbar ── */
+/* ── Hide Google Translate toolbar + floating widget ── */
 .goog-te-banner-frame,
 .goog-te-balloon-frame,
+.goog-te-menu-frame,
 #goog-gt-tt,
-.goog-te-menu-frame {
+.goog-tooltip,
+.goog-tooltip:hover,
+.goog-te-gadget,
+.goog-te-gadget *,
+.goog-te-combo,
+iframe.skiptranslate,
+div.skiptranslate {
   display: none !important;
+  visibility: hidden !important;
 }
 body { top: 0 !important; }
-.skiptranslate { display: none !important; }
+#google_translate_element { display: none !important; }
 
-/* ── RTL overrides ── */
+/* ── Language dropdown ── */
+.nt-lang-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.nt-lang-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: #141414;
+  border: 1px solid rgba(202,149,61,0.35);
+  border-radius: 8px;
+  min-width: 120px;
+  z-index: 9999;
+  padding: 4px 0;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
+.nt-lang-menu.is-open { display: block; }
+.nt-lang-option {
+  display: block;
+  padding: 9px 16px;
+  color: rgba(255,255,255,0.8);
+  font-size: 13px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s;
+  font-family: inherit;
+}
+.nt-lang-option:hover,
+.nt-lang-option.is-active { color: #CA953D; }
+
+/* ── RTL global ── */
 [dir="rtl"] {
   text-align: right;
 }
-[dir="rtl"] .header__container,
-[dir="rtl"] .header__actions,
+
+/* ── Header RTL ── */
+[dir="rtl"] .header__container {
+  flex-direction: row-reverse;
+}
+/* Actions group stays internally LTR — it just moves as a whole to the left */
+[dir="rtl"] .header__actions {
+  flex-direction: row;
+}
+/* Nav items: don't reverse internally, just right-align text */
 [dir="rtl"] .header__menu {
   flex-direction: row-reverse;
 }
-[dir="rtl"] .header__menu-item {
-  margin-left: 0;
-  margin-right: 0;
-}
-[dir="rtl"] .nav-drop__list {
+[dir="rtl"] .nav-drop__panel {
   left: auto;
   right: 0;
 }
-[dir="rtl"] .header__lang-dropdown {
-  left: auto;
-  right: 0;
+[dir="rtl"] .nt-lang-menu {
+  right: auto;
+  left: 0;
 }
+
+/* ── Footer RTL ── */
 [dir="rtl"] .footer__inner,
 [dir="rtl"] .footer__cols {
   flex-direction: row-reverse;
 }
-[dir="rtl"] .s-hero__content,
-[dir="rtl"] .s-hero__info {
-  text-align: right;
-}
-/* flex rows that should reverse */
+
+/* ── Section flex rows ── */
 [dir="rtl"] .stats-split__inner,
 [dir="rtl"] .gfeat__inner,
-[dir="rtl"] .ctab__tabs,
-[dir="rtl"] .testi-columns-wrap {
+[dir="rtl"] .ctab__tabs {
   flex-direction: row-reverse;
 }
-/* icon + text pairs */
+
+/* ── Icon + text pairs ── */
 [dir="rtl"] .contact-info__item,
 [dir="rtl"] .footer__contact-item {
   flex-direction: row-reverse;
 }
-/* list items */
-[dir="rtl"] li {
-  text-align: right;
-}
-/* inputs */
+
+/* ── Text alignment ── */
+[dir="rtl"] li { text-align: right; }
 [dir="rtl"] input,
 [dir="rtl"] textarea,
 [dir="rtl"] select {
