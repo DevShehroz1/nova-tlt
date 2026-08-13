@@ -22,8 +22,8 @@
     setTimeout(function () { window.location.href = href; }, 560);
   }
 
-  /* ── On page load: curtain covers screen then slides off ── */
-  window.addEventListener('DOMContentLoaded', function () {
+  function revealPage() {
+    curtain.style.pointerEvents = 'none';
     curtain.style.transition = 'none';
     curtain.style.transform = 'translateY(0)';
     requestAnimationFrame(function () {
@@ -32,6 +32,14 @@
         curtain.style.transform = 'translateY(-100%)';
       });
     });
+  }
+
+  /* ── On page load: curtain covers screen then slides off ── */
+  window.addEventListener('DOMContentLoaded', revealPage);
+
+  /* ── On bfcache restore (browser back/forward): replay reveal ── */
+  window.addEventListener('pageshow', function (e) {
+    if (e.persisted) revealPage();
   });
 
   /* ── Intercept all internal link clicks ── */
