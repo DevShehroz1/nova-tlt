@@ -18,37 +18,44 @@
   ].join(';');
   document.body.appendChild(curtain);
 
+  /* ── Load Inter from Google Fonts ── */
+  var interLink = document.createElement('link');
+  interLink.rel = 'stylesheet';
+  interLink.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap';
+  document.head.appendChild(interLink);
+
   /* ── Contact-choice modal ── */
   var ccStyles = [
     '#cc-overlay{position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,0.72);',
     'display:flex;align-items:center;justify-content:center;',
     'opacity:0;pointer-events:none;transition:opacity 0.25s ease;cursor:auto!important}',
     '#cc-overlay.is-open{opacity:1;pointer-events:all}',
-    '#cc-overlay *,#cc-overlay *::before,#cc-overlay *::after{cursor:auto!important}',
+    '#cc-overlay *,#cc-overlay *::before,#cc-overlay *::after{cursor:auto!important;font-family:"Inter",ui-sans-serif,system-ui,sans-serif!important}',
     '#cc-overlay a,#cc-overlay button,#cc-overlay .cc-opt{cursor:pointer!important}',
     '#cc-card{position:relative;background:#111;border:1px solid rgba(202,149,61,0.25);',
-    'border-radius:16px;padding:40px 36px 32px;max-width:400px;width:calc(100% - 40px);',
+    'border-radius:16px;padding:40px 36px 32px;max-width:420px;width:calc(100% - 40px);',
     'transform:translateY(12px);transition:transform 0.25s ease}',
     '#cc-overlay.is-open #cc-card{transform:translateY(0)}',
     '#cc-close{position:absolute;top:14px;right:16px;background:none;border:none;',
     'color:rgba(255,255,255,0.45);font-size:22px;cursor:pointer!important;line-height:1;padding:4px 8px}',
     '#cc-close:hover{color:#fff}',
-    '#cc-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;',
-    'color:#CA953D;margin:0 0 10px}',
-    '#cc-title{font-size:clamp(20px,2.5vw,26px);font-weight:700;color:#fff;margin:0 0 6px;',
-    'font-family:inherit}',
-    '#cc-sub{font-size:14px;color:rgba(255,255,255,0.45);margin:0 0 28px;line-height:1.5}',
+    '#cc-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;',
+    'color:#CA953D;margin:0 0 12px;font-family:"Inter",sans-serif!important}',
+    '#cc-title{font-size:clamp(28px,3vw,36px);font-weight:400;color:#fff;margin:0 0 8px;',
+    'letter-spacing:0.02em;line-height:1.1;font-family:BebasNeuePro,sans-serif!important}',
+    '#cc-sub{font-size:14px;color:rgba(255,255,255,0.5);margin:0 0 28px;line-height:1.6;',
+    'font-family:"Inter",sans-serif!important}',
     '.cc-opt{display:flex;align-items:center;gap:16px;padding:16px 18px;border-radius:10px;',
     'border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);',
     'text-decoration:none;margin-bottom:12px;transition:border-color 0.2s,background 0.2s}',
     '.cc-opt:last-child{margin-bottom:0}',
     '.cc-opt:hover{border-color:rgba(202,149,61,0.5);background:rgba(202,149,61,0.06)}',
-    '.cc-opt__icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;',
+    '.cc-opt__icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;',
     'justify-content:center;flex-shrink:0}',
     '.cc-opt--wa .cc-opt__icon{background:rgba(37,211,102,0.12)}',
     '.cc-opt--em .cc-opt__icon{background:rgba(202,149,61,0.12)}',
-    '.cc-opt__label{font-size:13px;color:rgba(255,255,255,0.45);margin:0 0 2px}',
-    '.cc-opt__val{font-size:15px;font-weight:600;color:#fff;margin:0}'
+    '.cc-opt__label{font-size:12px;color:rgba(255,255,255,0.45);margin:0 0 3px;letter-spacing:0.01em}',
+    '.cc-opt__val{font-size:16px;font-weight:600;color:#fff;margin:0;letter-spacing:0.01em}'
   ].join('');
 
   var styleEl = document.createElement('style');
