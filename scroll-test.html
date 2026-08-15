@@ -138,7 +138,6 @@
   var TOTAL = 150;
   var PATH  = 'assets/frames/ezgif-frame-';
   var EXT   = '.jpg';
-  var BATCH = 10;
 
   var canvas  = document.getElementById('scrub-canvas');
   var ctx     = canvas.getContext('2d');
@@ -260,8 +259,7 @@
   }
 
   function loadBatch(start){
-    var end = Math.min(start+BATCH, TOTAL);
-    for(var i=start; i<end; i++){
+    for(var i=0; i<TOTAL; i++){
       (function(idx){
         var img=new Image();
         img.onload=img.onerror=function(){
@@ -269,7 +267,7 @@
           fill.style.width=(loaded/TOTAL*100)+'%';
           if(loaded===TOTAL){
             ready=true;
-            setTimeout(function(){ corner.classList.add('done'); },500);
+            setTimeout(function(){ corner.classList.add('done'); },300);
             drawFrame(curFrame);
           }
         };
@@ -277,7 +275,6 @@
         images[idx]=img;
       })(i);
     }
-    if(end<TOTAL) setTimeout(function(){ loadBatch(end); },50);
   }
 
   window.addEventListener('scroll', onScroll, {passive:true});
