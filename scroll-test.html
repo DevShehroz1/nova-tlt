@@ -62,6 +62,7 @@
   var loaded   = 0;
   var ready    = false;
   var curFrame = -1;
+  var PRELOAD  = 30; /* start scrubbing after first 30 frames */
 
   var W = window.innerWidth, H = window.innerHeight;
 
@@ -102,11 +103,13 @@
       img.onload = img.onerror = function(){
         loaded++;
         fill.style.width = (loaded/TOTAL*100)+'%';
-        if(loaded === TOTAL){
+        if(loaded === PRELOAD && !ready){
           ready = true;
-          setTimeout(function(){ corner.classList.add('done'); },300);
           curFrame = -1;
           tick();
+        }
+        if(loaded === TOTAL){
+          setTimeout(function(){ corner.classList.add('done'); },300);
         }
       };
       img.src = PATH + pad(idx+1) + EXT;
