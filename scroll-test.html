@@ -167,43 +167,37 @@
   }
 
   function tick(){
-    var sy = window.scrollY;
+    /* getBoundingClientRect is always accurate regardless of sticky/fixed layouts */
+    var s1Rect = sec1.getBoundingClientRect();
+    var s2Rect = sec2.getBoundingClientRect();
 
-    /* ── Section 1 progress (0→1) ── */
+    /* Section 1: top goes from 0 → -(offsetHeight-H) as you scroll through */
     var s1Room = sec1.offsetHeight - H;
-    var s1p    = clamp(sy / s1Room);
+    var s1p    = clamp(-s1Rect.top / s1Room);
 
-    /* Heading size: big when s1p=0, small when s1p=1 */
+    /* Section 2: top goes from H → -(offsetHeight-H) */
+    var s2Room = sec2.offsetHeight - H;
+    var s2p    = clamp(-s2Rect.top / s2Room);
+
+    /* ── Heading ── */
     var bigSz  = isMob ? 56 : 150;
     var smallSz= isMob ? 20 : 28;
-    var sz     = lerp(bigSz, smallSz, smoothstep(0.6, 1.0, s1p));
-    heading.style.fontSize = sz + 'px';
+    var hT     = smoothstep(0.6, 1.0, s1p);
+    heading.style.fontSize = lerp(bigSz, smallSz, hT) + 'px';
+    heading.style.left = lerp(W*(isMob?0.05:0.07), 40, hT) + 'px';
+    heading.style.top  = lerp(H*(isMob?0.10:0.14), 44, hT) + 'px';
 
-    /* Heading position: center-left → top-left corner */
-    var leftBig  = W * (isMob ? 0.05 : 0.07);
-    var topBig   = H * (isMob ? 0.10 : 0.14);
-    var leftSmall= 40;
-    var topSmall = 44;
-    var hT = smoothstep(0.6, 1.0, s1p);
-    heading.style.left = lerp(leftBig, leftSmall, hT) + 'px';
-    heading.style.top  = lerp(topBig,  topSmall,  hT) + 'px';
-
-    /* Para-0: plain bg — show from 30% through sec1 */
-    togglePara(0, s1p >= 0.30 && s1p < 1.0, false);
-
-    /* ── Section 2 progress (0→1) ── */
-    var s2Start = sec2.offsetTop;
-    var s2Room  = sec2.offsetHeight - H;
-    var s2p     = clamp((sy - s2Start) / s2Room);
-
-    /* Para 1-3 on video, evenly split */
+    /* ── Paragraphs ── */
+    /* Para-0 on plain bg */
+    togglePara(0, s1p >= 0.30 && s2Rect.top > 0, false);
+    /* Para 1-3 spread evenly across video */
     togglePara(1, s2p >= 0.00 && s2p < 0.34, true);
     togglePara(2, s2p >= 0.32 && s2p < 0.67, true);
     togglePara(3, s2p >= 0.65,                true);
 
     /* ── Frame scrub ── */
     if(!ready) return;
-    var frame = Math.min(Math.floor(s2p*(TOTAL-1)), TOTAL-1);
+    var frame = Math.min(Math.floor(s2p * (TOTAL - 1)), TOTAL - 1);
     if(frame !== curFrame){
       curFrame = frame;
       drawFrame(frame);
