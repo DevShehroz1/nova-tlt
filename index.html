@@ -2185,9 +2185,46 @@
 				</a>
 
 				<!-- Company dropdown -->
+				<div class="nav-drop header__menu-item" data-nav-drop>
+					<button class="nav-drop__trigger text-hover" aria-expanded="false" aria-haspopup="true">
+						<span class="text-hover__inner">
+							<span class="text-hover__elem text-hover__elem-1">Company</span>
+							<span class="text-hover__elem text-hover__elem-2 _c-dark" translate="no">Company</span>
+						</span>
+						<svg class="nav-drop__chevron" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M1 1L5 5L9 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+						</svg>
+					</button>
+					<div class="nav-drop__panel" role="menu">
+						<a href="about.html" class="nav-drop__link" role="menuitem">About Us</a>
+						<a href="careers.html" class="nav-drop__link" role="menuitem">Careers</a>
+					</div>
+				</div>
+
+				<!-- What We Do dropdown -->
+				<div class="nav-drop header__menu-item" data-nav-drop>
+					<button class="nav-drop__trigger text-hover" aria-expanded="false" aria-haspopup="true">
+						<span class="text-hover__inner">
+							<span class="text-hover__elem text-hover__elem-1">What We Do</span>
+							<span class="text-hover__elem text-hover__elem-2 _c-dark" translate="no">What We Do</span>
+						</span>
+						<svg class="nav-drop__chevron" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M1 1L5 5L9 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+						</svg>
+					</button>
+					<div class="nav-drop__panel" role="menu">
+						<a href="services.html" class="nav-drop__link" role="menuitem">Services</a>
+						<a href="fleet.html" class="nav-drop__link" role="menuitem">Fleet</a>
+						<a href="industries.html" class="nav-drop__link" role="menuitem">Industries We Serve</a>
+					</div>
+				</div>
+
 				<a href="projects.html" class="header__menu-item text-hover">
-          <span class="text-hover__inner"><span class="text-hover__elem text-hover__elem-1">Projects</span><span class="text-hover__elem text-hover__elem-2 _c-dark" translate="no">Projects</span></span>
-        </a>
+					<span class="text-hover__inner">
+						<span class="text-hover__elem text-hover__elem-1">Projects</span>
+						<span class="text-hover__elem text-hover__elem-2 _c-dark" translate="no">Projects</span>
+					</span>
+				</a>
 
 				<a href="news.html" class="header__menu-item text-hover">
 					<span class="text-hover__inner">
@@ -3777,15 +3814,17 @@
 						.pointsData(saudiCities)
 						.pointLat('lat').pointLng('lng')
 						.pointColor(function() { return '#CA953D'; })
-						.pointAltitude(0.01)
+						.pointAltitude(0.02)
 						.pointRadius('size')
 						.labelsData(saudiCities)
 						.labelLat('lat').labelLng('lng')
 						.labelText('name')
-						.labelSize(1.2)
-						.labelColor(function() { return 'rgba(255,255,255,0.92)'; })
-						.labelDotRadius(0.4)
-						.labelAltitude(0.01);
+						.labelSize(1.8)
+						.labelColor(function() { return '#ffffff'; })
+						.labelDotRadius(0.5)
+						.labelDotOrientation(function() { return 'bottom'; })
+						.labelAltitude(0.02)
+						.labelResolution(6);
 
 				var mat = globe.globeMaterial();
 				mat.color.set('#062056');

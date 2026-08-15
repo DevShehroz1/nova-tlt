@@ -175,7 +175,42 @@
     <a href="index.html" class="header__logo"><img src="assets/img/logo.png" alt="NOVA TLT" class="header__logo-img" /></a>
     <nav class="header__menu" data-da=".header__hamburger, 1024, 0">
       <a href="index.html" class="header__menu-item text-hover"><span class="text-hover__inner"><span class="text-hover__elem text-hover__elem-1">Home</span><span class="text-hover__elem text-hover__elem-2 _c-dark">Home</span></span></a>
-      <a href="projects.html" class="header__menu-item text-hover">
+      				<!-- Company dropdown -->
+				<div class="nav-drop header__menu-item" data-nav-drop>
+					<button class="nav-drop__trigger text-hover" aria-expanded="false" aria-haspopup="true">
+						<span class="text-hover__inner">
+							<span class="text-hover__elem text-hover__elem-1">Company</span>
+							<span class="text-hover__elem text-hover__elem-2 _c-dark" translate="no">Company</span>
+						</span>
+						<svg class="nav-drop__chevron" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M1 1L5 5L9 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+						</svg>
+					</button>
+					<div class="nav-drop__panel" role="menu">
+						<a href="about.html" class="nav-drop__link" role="menuitem">About Us</a>
+						<a href="careers.html" class="nav-drop__link" role="menuitem">Careers</a>
+					</div>
+				</div>
+
+				<!-- What We Do dropdown -->
+				<div class="nav-drop header__menu-item" data-nav-drop>
+					<button class="nav-drop__trigger text-hover" aria-expanded="false" aria-haspopup="true">
+						<span class="text-hover__inner">
+							<span class="text-hover__elem text-hover__elem-1">What We Do</span>
+							<span class="text-hover__elem text-hover__elem-2 _c-dark" translate="no">What We Do</span>
+						</span>
+						<svg class="nav-drop__chevron" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M1 1L5 5L9 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+						</svg>
+					</button>
+					<div class="nav-drop__panel" role="menu">
+						<a href="services.html" class="nav-drop__link" role="menuitem">Services</a>
+						<a href="fleet.html" class="nav-drop__link" role="menuitem">Fleet</a>
+						<a href="industries.html" class="nav-drop__link" role="menuitem">Industries We Serve</a>
+					</div>
+				</div>
+
+<a href="projects.html" class="header__menu-item text-hover">
           <span class="text-hover__inner"><span class="text-hover__elem text-hover__elem-1">Projects</span><span class="text-hover__elem text-hover__elem-2 _c-dark" translate="no">Projects</span></span>
         </a>
       <a href="news.html" class="header__menu-item text-hover"><span class="text-hover__inner"><span class="text-hover__elem text-hover__elem-1">News</span><span class="text-hover__elem text-hover__elem-2 _c-dark">News</span></span></a>
