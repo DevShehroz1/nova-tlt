@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scroll Test — NOVA TLT</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #000; }
+
+  #preload-bar {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    transition: opacity 0.5s ease;
+  }
+  #preload-bar.done { opacity: 0; pointer-events: none; }
+  #preload-label {
+    color: rgba(255,255,255,0.5);
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  #preload-track {
+    width: 200px;
+    height: 2px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  #preload-fill {
+    height: 100%;
+    width: 0%;
+    background: #CA953D;
+    border-radius: 2px;
+    transition: width 0.1s linear;
+  }
+
+  /* Sticky scroll container — height controls scrub length */
+  #scrub-outer {
+    position: relative;
+    height: 600vh; /* 6× viewport = scroll distance */
+  }
+  #scrub-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+  }
+  #scrub-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Optional: text overlay that fades in mid-scroll */
+  #scrub-caption {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    padding: 60px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  #scrub-caption.visible { opacity: 1; }
+  #scrub-caption-inner {
+    font-family: BebasNeuePro, 'Bebas Neue', ui-sans-serif, sans-serif;
+    font-size: clamp(40px, 5vw, 72px);
+    color: #fff;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.6);
+  }
+
+  /* Below section — so you can scroll past */
+  #after {
+    height: 100vh;
+    background: #0a0a0a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.3);
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<!-- Preloader -->
+<div id="preload-bar">
+  <span id="preload-label">Loading</span>
+  <div id="preload-track"><div id="preload-fill"></div></div>
+</div>
+
+<!-- Scroll scrub section -->
+<div id="scrub-outer">
+  <div id="scrub-sticky">
+    <canvas id="scrub-canvas"></canvas>
+    <div id="scrub-caption">
+      <div id="scrub-caption-inner">Saudi Arabia's Smartest<br>Logistics Network</div>
+    </div>
+  </div>
+</div>
+
+<!-- Content below -->
+<div id="after">Continue scrolling for full page ↓</div>
+
+<script>
+(function () {
+  var FRAME_COUNT = 150;
+  var FRAME_PATH  = 'assets/frames/ezgif-4b5b4b4401720a90-jpg/ezgif-frame-';
+  var FRAME_EXT   = '.jpg';
+
+  var canvas   = document.getElementById('scrub-canvas');
+  var ctx      = canvas.getContext('2d');
+  var outer    = document.getElementById('scrub-outer');
+  var caption  = document.getElementById('scrub-caption');
+  var bar      = document.getElementById('preload-bar');
+  var fill     = document.getElementById('preload-fill');
+
+  var images   = new Array(FRAME_COUNT);
+  var loaded   = 0;
+  var ready    = false;
+  var currentFrame = 0;
+
+  function pad(n) {
+    return String(n).padStart(3, '0');
+  }
+
+  function drawFrame(index) {
+    var img = images[index];
+    if (!img || !img.complete) return;
+    canvas.width  = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+    var cw = canvas.width, ch = canvas.height;
+    var iw = img.naturalWidth, ih = img.naturalHeight;
+    var scale = Math.max(cw / iw, ch / ih);
+    var dw = iw * scale, dh = ih * scale;
+    var dx = (cw - dw) / 2, dy = (ch - dh) / 2;
+    ctx.drawImage(img, dx, dy, dw, dh);
+  }
+
+  function onScroll() {
+    if (!ready) return;
+    var rect    = outer.getBoundingClientRect();
+    var total   = outer.offsetHeight - window.innerHeight;
+    var scrolled = -rect.top;
+    var progress = Math.min(Math.max(scrolled / total, 0), 1);
+    var frame   = Math.min(Math.floor(progress * (FRAME_COUNT - 1)), FRAME_COUNT - 1);
+
+    if (frame !== currentFrame) {
+      currentFrame = frame;
+      drawFrame(frame);
+    }
+
+    // Fade caption in from 40% scroll onward
+    if (progress > 0.4) {
+      caption.classList.add('visible');
+    } else {
+      caption.classList.remove('visible');
+    }
+  }
+
+  function preload() {
+    for (var i = 1; i <= FRAME_COUNT; i++) {
+      (function (idx) {
+        var img = new Image();
+        img.onload = function () {
+          loaded++;
+          fill.style.width = (loaded / FRAME_COUNT * 100) + '%';
+          if (loaded === FRAME_COUNT) {
+            ready = true;
+            bar.classList.add('done');
+            drawFrame(0);
+            window.addEventListener('scroll', onScroll, { passive: true });
+            window.addEventListener('resize', function () { drawFrame(currentFrame); });
+          }
+        };
+        img.onerror = function () {
+          loaded++; // don't hang on missing frames
+          fill.style.width = (loaded / FRAME_COUNT * 100) + '%';
+        };
+        img.src = FRAME_PATH + pad(idx) + FRAME_EXT;
+        images[idx - 1] = img;
+      })(i);
+    }
+  }
+
+  preload();
+})();
+</script>
+</body>
+</html>
