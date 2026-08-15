@@ -10,47 +10,44 @@
   html { scroll-behavior: auto; }
   body { background: #0a0a0a; overflow-x: hidden; }
 
-  /* ── Preloader ── */
-  #preload-bar {
-    position: fixed; inset: 0; z-index: 999;
-    background: #0a0a0a;
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px;
-    transition: opacity 0.6s ease;
+  /* ── Tiny corner progress (non-blocking) ── */
+  #load-corner {
+    position: fixed;
+    bottom: 28px; right: 28px;
+    z-index: 90;
+    display: flex; align-items: center; gap: 10px;
+    opacity: 1; transition: opacity 0.5s ease;
   }
-  #preload-bar.done { opacity: 0; pointer-events: none; }
-  #preload-label {
-    color: rgba(255,255,255,0.4);
+  #load-corner.done { opacity: 0; pointer-events: none; }
+  #load-corner-label {
     font-family: ui-sans-serif, system-ui, sans-serif;
-    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
   }
-  #preload-track { width: 180px; height: 1px; background: rgba(255,255,255,0.1); }
-  #preload-fill  { height: 100%; width: 0%; background: #CA953D; transition: width 0.08s linear; }
+  #load-track { width: 80px; height: 1px; background: rgba(255,255,255,0.1); }
+  #load-fill  { height: 100%; width: 0%; background: #CA953D; transition: width 0.08s linear; }
 
   /* ════════════════════════════════════
-     PHASE 1 — sticky heading + paragraphs
+     PHASE 1 — heading + paragraphs
   ════════════════════════════════════ */
   #phase-heading { position: relative; height: 500vh; }
 
   #phase-heading-sticky {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    background: #0a0a0a;
-    overflow: hidden;
+    position: sticky; top: 0; height: 100vh;
+    background: #0a0a0a; overflow: hidden;
   }
 
-  /* Heading: JS drives font-size + transform */
   #main-heading {
     position: absolute;
     left: clamp(24px, 7vw, 110px);
-    top: clamp(60px, 12vh, 130px);
+    top: clamp(60px, 13vh, 140px);
     font-family: BebasNeuePro, sans-serif;
     font-weight: 700;
-    font-size: 110px; /* JS overrides this */
+    font-size: 110px;
     line-height: 0.92;
     color: #f5f0e8;
     letter-spacing: 0.01em;
-    max-width: 12ch;
+    max-width: 11ch;
     transform-origin: top left;
     opacity: 0;
     transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1);
@@ -58,102 +55,105 @@
   }
   #main-heading.visible { opacity: 1; }
 
-  /* Description column — bottom right, paragraphs swap on scroll */
+  /* Description — bottom right */
   #desc-col {
     position: absolute;
-    bottom: clamp(48px, 7vh, 90px);
+    bottom: clamp(52px, 7vh, 95px);
     right: clamp(24px, 7vw, 110px);
-    width: min(460px, 42vw);
+    width: min(460px, 44vw);
   }
 
   .desc-para {
-    position: absolute;
-    bottom: 0; right: 0;
-    width: 100%;
+    position: absolute; bottom: 0; right: 0; width: 100%;
     font-family: ui-sans-serif, system-ui, sans-serif;
-    font-size: clamp(15px, 1.35vw, 18px);
-    line-height: 1.7;
-    color: rgba(255,255,255,0.58);
-    opacity: 0;
-    transform: translateY(28px);
-    transition: opacity 0.55s cubic-bezier(0.22,1,0.36,1), transform 0.55s cubic-bezier(0.22,1,0.36,1);
+    font-size: clamp(14px, 1.3vw, 17px);
+    line-height: 1.72; color: rgba(255,255,255,0.55);
+    opacity: 0; transform: translateY(28px);
+    transition: opacity 0.55s cubic-bezier(0.22,1,0.36,1),
+                transform 0.55s cubic-bezier(0.22,1,0.36,1);
     pointer-events: none;
   }
-  .desc-para.active {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
+  .desc-para.active { opacity: 1; transform: translateY(0); pointer-events: auto; }
 
-  /* CTA only shows with last paragraph */
   #desc-cta {
-    position: absolute;
-    bottom: -56px; right: 0;
-    opacity: 0;
-    transform: translateY(16px);
-    transition: opacity 0.5s ease 0.15s, transform 0.5s cubic-bezier(0.22,1,0.36,1) 0.15s;
+    position: absolute; bottom: -58px; right: 0;
+    opacity: 0; transform: translateY(14px);
+    transition: opacity 0.5s ease 0.12s, transform 0.5s cubic-bezier(0.22,1,0.36,1) 0.12s;
     pointer-events: none;
   }
   #desc-cta.active { opacity: 1; transform: translateY(0); pointer-events: auto; }
 
   .cta-btn {
-    display: inline-flex; align-items: center; gap: 10px;
-    padding: 14px 32px; border-radius: 9999px;
+    display: inline-flex; align-items: center;
+    padding: 13px 30px; border-radius: 9999px;
     font-family: ui-sans-serif, system-ui, sans-serif;
     font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
     text-decoration: none; cursor: pointer;
-    background: linear-gradient(135deg, #B67C2A 0%, #CA953D 50%, #E5B85A 100%);
-    color: #fff; border: none;
-    transition: opacity 0.2s;
+    background: linear-gradient(135deg,#B67C2A 0%,#CA953D 50%,#E5B85A 100%);
+    color: #fff; border: none; transition: opacity 0.2s;
   }
-  .cta-btn:hover { opacity: 0.85; }
+  .cta-btn:hover { opacity: 0.82; }
 
   /* ════════════════════════════════════
      PHASE 2 — frame scrub
   ════════════════════════════════════ */
   #phase-scrub { position: relative; height: 600vh; }
   #scrub-sticky {
-    position: sticky; top: 0;
-    height: 100vh; width: 100%;
-    overflow: hidden; background: #000;
+    position: sticky; top: 0; height: 100vh;
+    width: 100%; overflow: hidden; background: #000;
   }
   #scrub-canvas { display: block; width: 100%; height: 100%; }
+
+  /* "Loading video…" shown on canvas until frames ready */
+  #scrub-msg {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(255,255,255,0.2);
+    pointer-events: none;
+  }
+  #scrub-msg.hidden { display: none; }
 
   #after {
     height: 100vh; background: #0a0a0a;
     display: flex; align-items: center; justify-content: center;
-    color: rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.18);
     font-family: ui-sans-serif, system-ui, sans-serif;
-    font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase;
+    font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
   }
 </style>
 </head>
 <body>
 
-<!-- Preloader -->
-<div id="preload-bar">
-  <span id="preload-label">Loading</span>
-  <div id="preload-track"><div id="preload-fill"></div></div>
+<!-- Non-blocking corner loader -->
+<div id="load-corner">
+  <span id="load-corner-label">Loading video</span>
+  <div id="load-track"><div id="load-fill"></div></div>
 </div>
 
-<!-- ── Phase 1: Heading + Paragraphs ── -->
+<!-- ── Phase 1 ── -->
 <div id="phase-heading">
   <div id="phase-heading-sticky">
 
     <h1 id="main-heading">5+ Years of Trusted Logistics</h1>
 
     <div id="desc-col">
+      <!-- Para 1: Who we are -->
       <p class="desc-para" id="para-0">
-        Connecting Riyadh, Jeddah, Dammam and every region of the Kingdom through a single, seamless logistics platform — built for the pace of Vision 2030.
+        NOVA Terra Logistics &amp; Transport is a Saudi-based heavy equipment and transport company delivering reliable dump truck rental, earthmoving, and logistics services to the Kingdom's most demanding sectors.
       </p>
+      <!-- Para 2: Fleet + stats -->
       <p class="desc-para" id="para-1">
-        Same-day dispatch across Saudi Arabia's most demanding construction and industrial sites. On time, on spec, and accountable from first call to final delivery.
+        50+ fleet vehicles deployed across the Kingdom's most active construction corridors — with a 98% on-time delivery rate powered by disciplined dispatch and real-time fleet tracking.
       </p>
+      <!-- Para 3: Services coverage -->
       <p class="desc-para" id="para-2">
-        A GPS-tracked fleet of 150+ heavy vehicles, operated by HSE-certified professionals. Live visibility into every load, every route, every region.
+        From dump truck rental and bulk material transport to full logistics &amp; fleet management — covering Riyadh, Jeddah, Dammam and 20+ cities across Saudi Arabia, 24/7.
       </p>
+      <!-- Para 4: Vision / CTA hook -->
       <p class="desc-para" id="para-3">
-        No long-term commitments. No hidden fees. Just reliable heavy logistics — deployed when you need it, at the scale your project demands.
+        Built on discipline, precision, and Vision 2030-aligned growth. No long-term commitments. No hidden fees. Just reliable heavy logistics, deployed when your project demands it.
       </p>
       <div id="desc-cta">
         <a href="contact.html" class="cta-btn">Get a Quote</a>
@@ -163,10 +163,11 @@
   </div>
 </div>
 
-<!-- ── Phase 2: Frame scrub ── -->
+<!-- ── Phase 2 ── -->
 <div id="phase-scrub">
   <div id="scrub-sticky">
     <canvas id="scrub-canvas"></canvas>
+    <div id="scrub-msg">Preparing video&hellip;</div>
   </div>
 </div>
 
@@ -174,134 +175,116 @@
 
 <script>
 (function () {
-  var FRAME_COUNT = 150;
-  var FRAME_PATH  = 'assets/frames/ezgif-frame-';
-  var FRAME_EXT   = '.jpg';
+  var TOTAL   = 150;
+  var PATH    = 'assets/frames/ezgif-frame-';
+  var EXT     = '.jpg';
+  var BATCH   = 10; /* load N frames at a time */
 
-  /* DOM refs */
-  var canvas    = document.getElementById('scrub-canvas');
-  var ctx       = canvas.getContext('2d');
-  var scrubEl   = document.getElementById('phase-scrub');
-  var headEl    = document.getElementById('phase-heading');
-  var heading   = document.getElementById('main-heading');
-  var paras     = document.querySelectorAll('.desc-para');
-  var cta       = document.getElementById('desc-cta');
-  var bar       = document.getElementById('preload-bar');
-  var fill      = document.getElementById('preload-fill');
+  var canvas  = document.getElementById('scrub-canvas');
+  var ctx     = canvas.getContext('2d');
+  var scrubEl = document.getElementById('phase-scrub');
+  var headEl  = document.getElementById('phase-heading');
+  var heading = document.getElementById('main-heading');
+  var paras   = document.querySelectorAll('.desc-para');
+  var cta     = document.getElementById('desc-cta');
+  var corner  = document.getElementById('load-corner');
+  var fill    = document.getElementById('load-fill');
+  var msg     = document.getElementById('scrub-msg');
 
-  var images    = new Array(FRAME_COUNT);
-  var loaded    = 0;
-  var ready     = false;
-  var currentFrame = 0;
+  var images  = new Array(TOTAL);
+  var loaded  = 0;
+  var ready   = false;
+  var curFrame = 0;
 
-  /* Heading interpolation bounds */
-  var SIZE_START = window.innerWidth < 768 ? 52 : 110;   /* px */
-  var SIZE_END   = window.innerWidth < 768 ? 22 : 28;
+  var SIZE_BIG  = window.innerWidth < 768 ? 54 : 110;
+  var SIZE_SMALL = window.innerWidth < 768 ? 22 : 28;
 
-  function lerp(a, b, t) { return a + (b - a) * t; }
-  function clamp01(v)     { return Math.min(Math.max(v, 0), 1); }
-  function ease(t)        { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
+  function lerp(a,b,t){ return a+(b-a)*t; }
+  function clamp(v,lo,hi){ return Math.min(Math.max(v,lo),hi); }
+  function ease(t){ return t<0.5?2*t*t:-1+(4-2*t)*t; }
+  function pad(n){ return String(n).padStart(3,'0'); }
 
-  function pad(n) { return String(n).padStart(3, '0'); }
-
-  /* ── Draw canvas frame ── */
-  function drawFrame(idx) {
+  function drawFrame(idx){
     var img = images[idx];
-    if (!img || !img.naturalWidth) return;
+    if(!img||!img.naturalWidth) return;
     var cw = canvas.width  = canvas.offsetWidth;
     var ch = canvas.height = canvas.offsetHeight;
-    var scale = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
-    var dw = img.naturalWidth  * scale;
-    var dh = img.naturalHeight * scale;
-    ctx.drawImage(img, (cw - dw) / 2, (ch - dh) / 2, dw, dh);
+    var s  = Math.max(cw/img.naturalWidth, ch/img.naturalHeight);
+    ctx.drawImage(img,(cw-img.naturalWidth*s)/2,(ch-img.naturalHeight*s)/2,img.naturalWidth*s,img.naturalHeight*s);
   }
 
-  /* ── Scroll handler ── */
-  var lastRaf = null;
-  function onScroll() {
-    if (lastRaf) return;
-    lastRaf = requestAnimationFrame(function() {
-      lastRaf = null;
-      tick();
+  /* Scroll-driven updates (rAF throttled) */
+  var rafPending = false;
+  function onScroll(){
+    if(rafPending) return;
+    rafPending = true;
+    requestAnimationFrame(function(){ rafPending=false; tick(); });
+  }
+
+  function tick(){
+    var sy = window.scrollY;
+
+    /* Phase 1 */
+    var hRoom = headEl.offsetHeight - window.innerHeight;
+    var hp    = clamp(sy/hRoom,0,1);
+
+    /* Heading: shrink + float up */
+    var sz = lerp(SIZE_BIG, SIZE_SMALL, ease(hp));
+    var ty = lerp(0, -50, ease(hp));
+    heading.style.fontSize  = sz+'px';
+    heading.style.transform = 'translateY('+ty+'px)';
+
+    /* Paragraphs: 4 windows */
+    var wins = [[0,0.30],[0.25,0.55],[0.50,0.76],[0.72,1.00]];
+    paras.forEach(function(p,i){
+      var w=wins[i];
+      hp>=w[0]&&hp<w[1] ? p.classList.add('active') : p.classList.remove('active');
     });
+    hp>=0.72 ? cta.classList.add('active') : cta.classList.remove('active');
+
+    /* Phase 2 */
+    if(!ready) return;
+    var sTop  = scrubEl.offsetTop;
+    var sRoom = scrubEl.offsetHeight - window.innerHeight;
+    var sp    = clamp((sy-sTop)/sRoom,0,1);
+    var frame = Math.min(Math.floor(sp*(TOTAL-1)), TOTAL-1);
+    if(frame!==curFrame){ curFrame=frame; drawFrame(frame); }
   }
 
-  function tick() {
-    var scrollY = window.scrollY;
-
-    /* ── Phase 1: heading shrink + paragraph swap ── */
-    var headScrollRoom = headEl.offsetHeight - window.innerHeight;
-    var hp = clamp01(scrollY / headScrollRoom); /* 0→1 across phase 1 */
-
-    /* Heading: font-size interpolates big→small, slight upward translateY */
-    var sz   = lerp(SIZE_START, SIZE_END, ease(hp));
-    var tyRaw = lerp(0, -clamp01(hp * 1.4) * 55, 1); /* float up a little */
-    heading.style.fontSize  = sz + 'px';
-    heading.style.transform = 'translateY(' + tyRaw + 'px)';
-
-    /* Paragraphs: 4 equal windows across 0→1
-       window 0: 0.00–0.30  (first appears early)
-       window 1: 0.25–0.55
-       window 2: 0.50–0.75
-       window 3: 0.72–1.00  */
-    var windows = [
-      [0.00, 0.30],
-      [0.25, 0.55],
-      [0.50, 0.75],
-      [0.72, 1.00]
-    ];
-    paras.forEach(function(p, i) {
-      var w = windows[i];
-      var active = hp >= w[0] && hp < w[1];
-      if (active) p.classList.add('active'); else p.classList.remove('active');
-    });
-
-    /* CTA with last paragraph */
-    if (hp >= 0.72) cta.classList.add('active'); else cta.classList.remove('active');
-
-    /* ── Phase 2: frame scrub ── */
-    if (!ready) return;
-    var scrubTop    = scrubEl.offsetTop;
-    var scrubRoom   = scrubEl.offsetHeight - window.innerHeight;
-    var sp          = clamp01((scrollY - scrubTop) / scrubRoom);
-    var frame       = Math.min(Math.floor(sp * (FRAME_COUNT - 1)), FRAME_COUNT - 1);
-    if (frame !== currentFrame) {
-      currentFrame = frame;
-      drawFrame(frame);
-    }
-  }
-
-  /* ── Preload ── */
-  function preload() {
-    requestAnimationFrame(function() { heading.classList.add('visible'); });
-
-    for (var i = 1; i <= FRAME_COUNT; i++) {
-      (function(idx) {
-        var img = new Image();
-        img.onload = img.onerror = function() {
+  /* Batched preload — keeps browser responsive */
+  function loadBatch(start){
+    var end = Math.min(start+BATCH, TOTAL);
+    for(var i=start; i<end; i++){
+      (function(idx){
+        var img=new Image();
+        img.onload=img.onerror=function(){
           loaded++;
-          fill.style.width = (loaded / FRAME_COUNT * 100) + '%';
-          if (loaded === FRAME_COUNT) {
-            ready = true;
-            setTimeout(function() { bar.classList.add('done'); }, 200);
-            drawFrame(0);
+          fill.style.width=(loaded/TOTAL*100)+'%';
+          if(loaded===TOTAL){
+            ready=true;
+            msg.classList.add('hidden');
+            setTimeout(function(){ corner.classList.add('done'); },400);
+            drawFrame(curFrame);
           }
         };
-        img.src = FRAME_PATH + pad(idx) + FRAME_EXT;
-        images[idx - 1] = img;
+        img.src=PATH+pad(idx+1)+EXT;
+        images[idx]=img;
       })(i);
+    }
+    if(end<TOTAL){
+      setTimeout(function(){ loadBatch(end); },60);
     }
   }
 
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', function() {
-    SIZE_START = window.innerWidth < 768 ? 52 : 110;
-    SIZE_END   = window.innerWidth < 768 ? 22 : 28;
-    drawFrame(currentFrame);
-    tick();
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', function(){
+    SIZE_BIG  = window.innerWidth<768?54:110;
+    SIZE_SMALL= window.innerWidth<768?22:28;
+    drawFrame(curFrame); tick();
   });
 
-  preload();
+  requestAnimationFrame(function(){ heading.classList.add('visible'); });
+  loadBatch(0);
   tick();
 })();
 </script>
