@@ -98,9 +98,17 @@
 
   function openCC() {
     ccOverlay.classList.add('is-open');
+    var d = document.getElementById('cursor-dot');
+    var r = document.getElementById('cursor-ring');
+    if (d) d.style.opacity = '0';
+    if (r) r.style.opacity = '0';
   }
   function closeCC() {
     ccOverlay.classList.remove('is-open');
+    var d = document.getElementById('cursor-dot');
+    var r = document.getElementById('cursor-ring');
+    if (d) d.style.opacity = '';
+    if (r) r.style.opacity = '';
   }
 
   document.getElementById('cc-close').addEventListener('click', closeCC);

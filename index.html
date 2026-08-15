@@ -2185,56 +2185,9 @@
 				</a>
 
 				<!-- Company dropdown -->
-				<div class="nav-drop header__menu-item" data-nav-drop>
-					<button class="nav-drop__trigger text-hover" aria-expanded="false" aria-haspopup="true">
-						<span class="text-hover__inner">
-							<span class="text-hover__elem text-hover__elem-1">Company</span>
-							<span class="text-hover__elem text-hover__elem-2 _c-dark" translate="no">Company</span>
-						</span>
-						<svg class="nav-drop__chevron" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<path d="M1 1L5 5L9 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-						</svg>
-					</button>
-					<div class="nav-drop__panel" role="menu">
-						<a href="about.html" class="nav-drop__link" role="menuitem">About Us</a>
-						<a href="careers.html" class="nav-drop__link" role="menuitem">Careers</a>
-					</div>
-				</div>
-
-				<!-- What We Do dropdown -->
-				<div class="nav-drop header__menu-item" data-nav-drop>
-					<button class="nav-drop__trigger text-hover" aria-expanded="false" aria-haspopup="true">
-						<span class="text-hover__inner">
-							<span class="text-hover__elem text-hover__elem-1">What We Do</span>
-							<span class="text-hover__elem text-hover__elem-2 _c-dark" translate="no">What We Do</span>
-						</span>
-						<svg class="nav-drop__chevron" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<path d="M1 1L5 5L9 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-						</svg>
-					</button>
-					<div class="nav-drop__panel" role="menu">
-						<a href="services.html" class="nav-drop__link" role="menuitem">Services</a>
-						<a href="fleet.html" class="nav-drop__link" role="menuitem">Fleet</a>
-						<a href="industries.html" class="nav-drop__link" role="menuitem">Industries We Serve</a>
-					</div>
-				</div>
-
-				<!-- Work dropdown -->
-				<div class="nav-drop header__menu-item" data-nav-drop>
-					<button class="nav-drop__trigger text-hover" aria-expanded="false" aria-haspopup="true">
-						<span class="text-hover__inner">
-							<span class="text-hover__elem text-hover__elem-1">Work</span>
-							<span class="text-hover__elem text-hover__elem-2 _c-dark" translate="no">Work</span>
-						</span>
-						<svg class="nav-drop__chevron" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<path d="M1 1L5 5L9 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-						</svg>
-					</button>
-					<div class="nav-drop__panel" role="menu">
-						<a href="projects.html" class="nav-drop__link" role="menuitem">Projects</a>
-						
-					</div>
-				</div>
+				<a href="projects.html" class="header__menu-item text-hover">
+          <span class="text-hover__inner"><span class="text-hover__elem text-hover__elem-1">Projects</span><span class="text-hover__elem text-hover__elem-2 _c-dark" translate="no">Projects</span></span>
+        </a>
 
 				<a href="news.html" class="header__menu-item text-hover">
 					<span class="text-hover__inner">
@@ -3806,6 +3759,33 @@
 					.arcDashGap(2)
 					.arcDashInitialGap(function () { return Math.random() * 5; })
 					.arcDashAnimateTime(1000);
+
+				var saudiCities = [
+						{ lat: 24.7136, lng: 46.6753, name: 'Riyadh',  size: 0.6 },
+						{ lat: 21.5433, lng: 39.1728, name: 'Jeddah',  size: 0.5 },
+						{ lat: 26.3927, lng: 49.9777, name: 'Dammam',  size: 0.45 },
+						{ lat: 24.5247, lng: 39.5692, name: 'Madinah', size: 0.4 },
+						{ lat: 21.3891, lng: 39.8579, name: 'Makkah',  size: 0.4 },
+						{ lat: 27.0174, lng: 49.6581, name: 'Jubail',  size: 0.35 },
+						{ lat: 28.3998, lng: 36.5776, name: 'Tabuk',   size: 0.35 },
+						{ lat: 18.2169, lng: 42.5053, name: 'Abha',    size: 0.35 },
+						{ lat: 24.0895, lng: 38.0618, name: 'Yanbu',   size: 0.3 },
+						{ lat: 27.5114, lng: 41.7208, name: 'Hail',    size: 0.3 },
+					];
+
+					globe
+						.pointsData(saudiCities)
+						.pointLat('lat').pointLng('lng')
+						.pointColor(function() { return '#CA953D'; })
+						.pointAltitude(0.01)
+						.pointRadius('size')
+						.labelsData(saudiCities)
+						.labelLat('lat').labelLng('lng')
+						.labelText('name')
+						.labelSize(1.2)
+						.labelColor(function() { return 'rgba(255,255,255,0.92)'; })
+						.labelDotRadius(0.4)
+						.labelAltitude(0.01);
 
 				var mat = globe.globeMaterial();
 				mat.color.set('#062056');
