@@ -26,108 +26,101 @@
   #preload-track { width: 180px; height: 1px; background: rgba(255,255,255,0.1); }
   #preload-fill  { height: 100%; width: 0%; background: #CA953D; transition: width 0.08s linear; }
 
-  /* ════════════════════════════════════════
-     PHASE 1 — Heading (sticky, 200vh scroll room)
-  ════════════════════════════════════════ */
-  #phase-heading {
-    position: relative;
-    height: 250vh;
-  }
+  /* ════════════════════════════════════
+     PHASE 1 — sticky heading + paragraphs
+  ════════════════════════════════════ */
+  #phase-heading { position: relative; height: 500vh; }
+
   #phase-heading-sticky {
     position: sticky;
     top: 0;
     height: 100vh;
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding: clamp(40px, 8vw, 100px) clamp(24px, 8vw, 120px);
     background: #0a0a0a;
     overflow: hidden;
   }
 
+  /* Heading: JS drives font-size + transform */
   #main-heading {
+    position: absolute;
+    left: clamp(24px, 7vw, 110px);
+    top: clamp(60px, 12vh, 130px);
     font-family: BebasNeuePro, sans-serif;
     font-weight: 700;
-    font-size: clamp(52px, 8vw, 120px);
-    line-height: 0.95;
+    font-size: 110px; /* JS overrides this */
+    line-height: 0.92;
     color: #f5f0e8;
     letter-spacing: 0.01em;
-    max-width: 14ch;
-    /* Animate in on load */
+    max-width: 12ch;
+    transform-origin: top left;
     opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1);
+    transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1);
+    will-change: font-size, transform;
   }
-  #main-heading.visible { opacity: 1; transform: translateY(0); }
+  #main-heading.visible { opacity: 1; }
 
-  /* Description block — slides up over heading as you scroll */
-  #desc-block {
+  /* Description column — bottom right, paragraphs swap on scroll */
+  #desc-col {
     position: absolute;
-    bottom: clamp(40px, 6vw, 80px);
-    right: clamp(24px, 8vw, 120px);
-    max-width: 480px;
+    bottom: clamp(48px, 7vh, 90px);
+    right: clamp(24px, 7vw, 110px);
+    width: min(460px, 42vw);
+  }
+
+  .desc-para {
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 100%;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(15px, 1.35vw, 18px);
+    line-height: 1.7;
+    color: rgba(255,255,255,0.58);
     opacity: 0;
-    transform: translateY(60px);
-    transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
+    transform: translateY(28px);
+    transition: opacity 0.55s cubic-bezier(0.22,1,0.36,1), transform 0.55s cubic-bezier(0.22,1,0.36,1);
     pointer-events: none;
   }
-  #desc-block.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
-
-  #desc-text {
-    font-family: ui-sans-serif, system-ui, sans-serif;
-    font-size: clamp(15px, 1.4vw, 18px);
-    line-height: 1.65;
-    color: rgba(255,255,255,0.6);
-    margin-bottom: 32px;
+  .desc-para.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
   }
+
+  /* CTA only shows with last paragraph */
+  #desc-cta {
+    position: absolute;
+    bottom: -56px; right: 0;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.5s ease 0.15s, transform 0.5s cubic-bezier(0.22,1,0.36,1) 0.15s;
+    pointer-events: none;
+  }
+  #desc-cta.active { opacity: 1; transform: translateY(0); pointer-events: auto; }
 
   .cta-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 32px;
-    border-radius: 9999px;
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 32px; border-radius: 9999px;
     font-family: ui-sans-serif, system-ui, sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    text-decoration: none;
-    cursor: pointer;
-    transition: background 0.2s, color 0.2s, border-color 0.2s;
-  }
-  .cta-btn--solid {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    text-decoration: none; cursor: pointer;
     background: linear-gradient(135deg, #B67C2A 0%, #CA953D 50%, #E5B85A 100%);
-    color: #fff;
-    border: none;
+    color: #fff; border: none;
+    transition: opacity 0.2s;
   }
-  .cta-btn--solid:hover { background: linear-gradient(135deg, #a06a20 0%, #b5832e 50%, #d4a440 100%); }
+  .cta-btn:hover { opacity: 0.85; }
 
-  /* ════════════════════════════════════════
-     PHASE 2 — Frame scrub (sticky, 600vh scroll room)
-  ════════════════════════════════════════ */
-  #phase-scrub {
-    position: relative;
-    height: 600vh;
-  }
+  /* ════════════════════════════════════
+     PHASE 2 — frame scrub
+  ════════════════════════════════════ */
+  #phase-scrub { position: relative; height: 600vh; }
   #scrub-sticky {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    width: 100%;
-    overflow: hidden;
-    background: #000;
+    position: sticky; top: 0;
+    height: 100vh; width: 100%;
+    overflow: hidden; background: #000;
   }
-  #scrub-canvas {
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
+  #scrub-canvas { display: block; width: 100%; height: 100%; }
 
-  /* After section */
   #after {
-    height: 100vh;
-    background: #0a0a0a;
+    height: 100vh; background: #0a0a0a;
     display: flex; align-items: center; justify-content: center;
     color: rgba(255,255,255,0.2);
     font-family: ui-sans-serif, system-ui, sans-serif;
@@ -143,15 +136,28 @@
   <div id="preload-track"><div id="preload-fill"></div></div>
 </div>
 
-<!-- ── Phase 1: Heading + Description ── -->
+<!-- ── Phase 1: Heading + Paragraphs ── -->
 <div id="phase-heading">
   <div id="phase-heading-sticky">
 
-    <h1 id="main-heading">For over 5 years, Nova&nbsp;TLT has delivered reliable logistics solutions</h1>
+    <h1 id="main-heading">5+ Years of Trusted Logistics</h1>
 
-    <div id="desc-block">
-      <p id="desc-text">Connecting Riyadh, Jeddah, Dammam and every region of the Kingdom through a single, seamless platform. Same-day dispatch, live tracking, and no long-term commitments required.</p>
-      <a href="contact.html" class="cta-btn cta-btn--solid">Get a Quote</a>
+    <div id="desc-col">
+      <p class="desc-para" id="para-0">
+        Connecting Riyadh, Jeddah, Dammam and every region of the Kingdom through a single, seamless logistics platform — built for the pace of Vision 2030.
+      </p>
+      <p class="desc-para" id="para-1">
+        Same-day dispatch across Saudi Arabia's most demanding construction and industrial sites. On time, on spec, and accountable from first call to final delivery.
+      </p>
+      <p class="desc-para" id="para-2">
+        A GPS-tracked fleet of 150+ heavy vehicles, operated by HSE-certified professionals. Live visibility into every load, every route, every region.
+      </p>
+      <p class="desc-para" id="para-3">
+        No long-term commitments. No hidden fees. Just reliable heavy logistics — deployed when you need it, at the scale your project demands.
+      </p>
+      <div id="desc-cta">
+        <a href="contact.html" class="cta-btn">Get a Quote</a>
+      </div>
     </div>
 
   </div>
@@ -164,7 +170,6 @@
   </div>
 </div>
 
-<!-- Content below -->
 <div id="after">Continue ↓</div>
 
 <script>
@@ -173,67 +178,107 @@
   var FRAME_PATH  = 'assets/frames/ezgif-frame-';
   var FRAME_EXT   = '.jpg';
 
-  var canvas  = document.getElementById('scrub-canvas');
-  var ctx     = canvas.getContext('2d');
-  var scrubEl = document.getElementById('phase-scrub');
-  var headEl  = document.getElementById('phase-heading');
-  var heading = document.getElementById('main-heading');
-  var descBlock = document.getElementById('desc-block');
-  var bar     = document.getElementById('preload-bar');
-  var fill    = document.getElementById('preload-fill');
+  /* DOM refs */
+  var canvas    = document.getElementById('scrub-canvas');
+  var ctx       = canvas.getContext('2d');
+  var scrubEl   = document.getElementById('phase-scrub');
+  var headEl    = document.getElementById('phase-heading');
+  var heading   = document.getElementById('main-heading');
+  var paras     = document.querySelectorAll('.desc-para');
+  var cta       = document.getElementById('desc-cta');
+  var bar       = document.getElementById('preload-bar');
+  var fill      = document.getElementById('preload-fill');
 
-  var images  = new Array(FRAME_COUNT);
-  var loaded  = 0;
-  var ready   = false;
+  var images    = new Array(FRAME_COUNT);
+  var loaded    = 0;
+  var ready     = false;
   var currentFrame = 0;
+
+  /* Heading interpolation bounds */
+  var SIZE_START = window.innerWidth < 768 ? 52 : 110;   /* px */
+  var SIZE_END   = window.innerWidth < 768 ? 22 : 28;
+
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function clamp01(v)     { return Math.min(Math.max(v, 0), 1); }
+  function ease(t)        { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
 
   function pad(n) { return String(n).padStart(3, '0'); }
 
+  /* ── Draw canvas frame ── */
   function drawFrame(idx) {
     var img = images[idx];
     if (!img || !img.naturalWidth) return;
     var cw = canvas.width  = canvas.offsetWidth;
     var ch = canvas.height = canvas.offsetHeight;
     var scale = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
-    var dw = img.naturalWidth * scale, dh = img.naturalHeight * scale;
+    var dw = img.naturalWidth  * scale;
+    var dh = img.naturalHeight * scale;
     ctx.drawImage(img, (cw - dw) / 2, (ch - dh) / 2, dw, dh);
   }
 
+  /* ── Scroll handler ── */
+  var lastRaf = null;
   function onScroll() {
+    if (lastRaf) return;
+    lastRaf = requestAnimationFrame(function() {
+      lastRaf = null;
+      tick();
+    });
+  }
+
+  function tick() {
     var scrollY = window.scrollY;
 
-    /* ── Phase 1 scroll: show description when 35% through heading section ── */
-    var headHeight = headEl.offsetHeight - window.innerHeight;
-    var headProgress = Math.min(Math.max(scrollY / headHeight, 0), 1);
-    if (headProgress > 0.35) {
-      descBlock.classList.add('visible');
-    } else {
-      descBlock.classList.remove('visible');
-    }
+    /* ── Phase 1: heading shrink + paragraph swap ── */
+    var headScrollRoom = headEl.offsetHeight - window.innerHeight;
+    var hp = clamp01(scrollY / headScrollRoom); /* 0→1 across phase 1 */
 
-    /* ── Phase 2 scroll: scrub frames ── */
+    /* Heading: font-size interpolates big→small, slight upward translateY */
+    var sz   = lerp(SIZE_START, SIZE_END, ease(hp));
+    var tyRaw = lerp(0, -clamp01(hp * 1.4) * 55, 1); /* float up a little */
+    heading.style.fontSize  = sz + 'px';
+    heading.style.transform = 'translateY(' + tyRaw + 'px)';
+
+    /* Paragraphs: 4 equal windows across 0→1
+       window 0: 0.00–0.30  (first appears early)
+       window 1: 0.25–0.55
+       window 2: 0.50–0.75
+       window 3: 0.72–1.00  */
+    var windows = [
+      [0.00, 0.30],
+      [0.25, 0.55],
+      [0.50, 0.75],
+      [0.72, 1.00]
+    ];
+    paras.forEach(function(p, i) {
+      var w = windows[i];
+      var active = hp >= w[0] && hp < w[1];
+      if (active) p.classList.add('active'); else p.classList.remove('active');
+    });
+
+    /* CTA with last paragraph */
+    if (hp >= 0.72) cta.classList.add('active'); else cta.classList.remove('active');
+
+    /* ── Phase 2: frame scrub ── */
     if (!ready) return;
-    var scrubTop  = scrubEl.offsetTop;
-    var scrubHeight = scrubEl.offsetHeight - window.innerHeight;
-    var scrubScrolled = scrollY - scrubTop;
-    var progress = Math.min(Math.max(scrubScrolled / scrubHeight, 0), 1);
-    var frame = Math.min(Math.floor(progress * (FRAME_COUNT - 1)), FRAME_COUNT - 1);
+    var scrubTop    = scrubEl.offsetTop;
+    var scrubRoom   = scrubEl.offsetHeight - window.innerHeight;
+    var sp          = clamp01((scrollY - scrubTop) / scrubRoom);
+    var frame       = Math.min(Math.floor(sp * (FRAME_COUNT - 1)), FRAME_COUNT - 1);
     if (frame !== currentFrame) {
       currentFrame = frame;
       drawFrame(frame);
     }
   }
 
+  /* ── Preload ── */
   function preload() {
-    /* Trigger heading entrance */
-    requestAnimationFrame(function() {
-      heading.classList.add('visible');
-    });
+    requestAnimationFrame(function() { heading.classList.add('visible'); });
 
     for (var i = 1; i <= FRAME_COUNT; i++) {
-      (function (idx) {
+      (function(idx) {
         var img = new Image();
-        img.onload = img.onerror = function () {
+        img.onload = img.onerror = function() {
           loaded++;
           fill.style.width = (loaded / FRAME_COUNT * 100) + '%';
           if (loaded === FRAME_COUNT) {
@@ -249,8 +294,15 @@
   }
 
   window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', function() { drawFrame(currentFrame); });
+  window.addEventListener('resize', function() {
+    SIZE_START = window.innerWidth < 768 ? 52 : 110;
+    SIZE_END   = window.innerWidth < 768 ? 22 : 28;
+    drawFrame(currentFrame);
+    tick();
+  });
+
   preload();
+  tick();
 })();
 </script>
 </body>
