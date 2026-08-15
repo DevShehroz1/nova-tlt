@@ -9,66 +9,56 @@
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; cursor: auto; }
   html, body { background: #0a0a0a; overflow-x: hidden; scroll-behavior: auto; }
 
-  /* ── Corner loader (non-blocking) ── */
+  /* ── Corner loader ── */
   #load-corner {
-    position: fixed; bottom: 24px; right: 24px; z-index: 200;
+    position: fixed; bottom: 24px; right: 24px; z-index: 500;
     display: flex; align-items: center; gap: 10px;
     transition: opacity 0.5s ease;
   }
   #load-corner.done { opacity: 0; pointer-events: none; }
-  #load-label {
-    font-family: ui-sans-serif,system-ui,sans-serif;
-    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
-    color: rgba(255,255,255,0.28);
-  }
+  #load-label { font-family: ui-sans-serif,system-ui,sans-serif; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.28); }
   #load-track { width: 72px; height: 1px; background: rgba(255,255,255,0.1); }
   #load-fill  { height: 100%; width: 0%; background: #CA953D; transition: width 0.06s linear; }
 
-  /* ══════════════════════════════════════
-     SCENE — single sticky container
-     Total height = 1100vh → scroll room = 1000vh
-  ══════════════════════════════════════ */
-  #scene         { position: relative; height: 1100vh; }
-  #scene-sticky  {
-    position: sticky; top: 0; height: 100vh;
-    width: 100%; overflow: hidden; background: #0a0a0a;
-  }
-
-  /* Canvas — full viewport, fades in when video phase begins */
-  #scrub-canvas {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    opacity: 0;
-    will-change: opacity;
-  }
-
-  /* Heading — JS drives font-size, left, top */
+  /* ── Fixed heading — always in viewport, JS drives size + position ── */
   #main-heading {
-    position: absolute;
+    position: fixed;
     font-family: BebasNeuePro, sans-serif;
     font-weight: 700;
     color: #f5f0e8;
     line-height: 0.9;
     letter-spacing: 0.01em;
-    /* initial values (JS overrides continuously) */
-    font-size: 150px;
-    left: 7vw;
-    top: 15vh;
-    max-width: 9ch;
+    z-index: 20;
+    pointer-events: none;
     opacity: 0;
-    transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1);
+    transition: opacity 0.8s ease;
     will-change: font-size, left, top;
-    z-index: 10;
   }
   #main-heading.visible { opacity: 1; }
 
-  /* Description column — bottom-right, overlaid on video too */
+  /* ── Section 1: plain bg, description ── */
+  #sec1 { position: relative; height: 300vh; }
+  #sec1-sticky {
+    position: sticky; top: 0; height: 100vh;
+    background: #0a0a0a; overflow: hidden;
+  }
+
+  /* ── Section 2: video scrub ── */
+  #sec2 { position: relative; height: 700vh; }
+  #sec2-sticky {
+    position: sticky; top: 0; height: 100vh;
+    background: #000; overflow: hidden;
+  }
+  #scrub-canvas { display: block; width: 100%; height: 100%; }
+
+  /* ── Description (fixed, overlays both sections) ── */
   #desc-col {
-    position: absolute;
+    position: fixed;
     bottom: clamp(48px, 7vh, 90px);
     right: clamp(24px, 6vw, 100px);
     width: min(440px, 42vw);
-    z-index: 10;
+    z-index: 20;
+    pointer-events: none;
   }
   .desc-para {
     position: absolute; bottom: 0; right: 0; width: 100%;
@@ -76,22 +66,17 @@
     font-size: clamp(14px,1.25vw,17px);
     line-height: 1.72;
     color: rgba(255,255,255,0.6);
-    opacity: 0; transform: translateY(30px);
+    opacity: 0; transform: translateY(28px);
     transition: opacity 0.6s cubic-bezier(0.22,1,0.36,1),
                 transform 0.6s cubic-bezier(0.22,1,0.36,1);
-    pointer-events: none;
   }
-  .desc-para.active {
-    opacity: 1; transform: translateY(0); pointer-events: auto;
-  }
-  /* On video, text needs to be legible over frames */
-  .desc-para.on-video { color: rgba(255,255,255,0.82); }
+  .desc-para.active { opacity: 1; transform: translateY(0); }
+  .desc-para.on-video { color: rgba(255,255,255,0.85); }
 
-  /* After */
   #after {
-    height: 100vh; background: #0a0a0a;
+    height: 60vh; background: #0a0a0a;
     display: flex; align-items: center; justify-content: center;
-    color: rgba(255,255,255,0.18);
+    color: rgba(255,255,255,0.15);
     font-family: ui-sans-serif,system-ui,sans-serif;
     font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
   }
@@ -104,30 +89,32 @@
   <div id="load-track"><div id="load-fill"></div></div>
 </div>
 
-<div id="scene">
-  <div id="scene-sticky">
+<!-- Fixed heading rendered above everything -->
+<h1 id="main-heading">5+ Years of<br>Trusted Logistics</h1>
 
+<!-- Fixed description col -->
+<div id="desc-col">
+  <p class="desc-para" id="para-0">
+    NOVA Terra Logistics &amp; Transport is a Saudi-based heavy equipment and transport company delivering reliable dump truck rental, earthmoving, and logistics services to the Kingdom's most demanding sectors.
+  </p>
+  <p class="desc-para" id="para-1">
+    50+ fleet vehicles deployed across the Kingdom's most active construction corridors — with a 98% on-time delivery rate powered by disciplined dispatch and real-time fleet tracking.
+  </p>
+  <p class="desc-para" id="para-2">
+    From dump truck rental and bulk material transport to full logistics &amp; fleet management — covering Riyadh, Jeddah, Dammam and 20+ cities across Saudi Arabia, 24/7.
+  </p>
+  <p class="desc-para" id="para-3">
+    Built on discipline, precision, and Vision 2030-aligned growth — moving the materials that build the nation, on time, every time.
+  </p>
+</div>
+
+<!-- Section 1: plain bg -->
+<div id="sec1"><div id="sec1-sticky"></div></div>
+
+<!-- Section 2: video -->
+<div id="sec2">
+  <div id="sec2-sticky">
     <canvas id="scrub-canvas"></canvas>
-
-    <h1 id="main-heading">5+ Years of Trusted Logistics</h1>
-
-    <div id="desc-col">
-      <!-- Para 0: who we are — slides in on plain bg -->
-      <p class="desc-para" id="para-0">
-        NOVA Terra Logistics &amp; Transport is a Saudi-based heavy equipment and transport company delivering reliable dump truck rental, earthmoving, and logistics services to the Kingdom's most demanding sectors.
-      </p>
-      <!-- Para 1-3: on video -->
-      <p class="desc-para" id="para-1">
-        50+ fleet vehicles deployed across the Kingdom's most active construction corridors — with a 98% on-time delivery rate powered by disciplined dispatch and real-time fleet tracking.
-      </p>
-      <p class="desc-para" id="para-2">
-        From dump truck rental and bulk material transport to full logistics &amp; fleet management — covering Riyadh, Jeddah, Dammam and 20+ cities across Saudi Arabia, 24/7.
-      </p>
-      <p class="desc-para" id="para-3">
-        Built on discipline, precision, and Vision 2030-aligned growth — moving the materials that build the nation, on time, every time.
-      </p>
-    </div>
-
   </div>
 </div>
 
@@ -139,61 +126,37 @@
   var PATH  = 'assets/frames/ezgif-frame-';
   var EXT   = '.jpg';
 
-  var canvas  = document.getElementById('scrub-canvas');
-  var ctx     = canvas.getContext('2d');
-  var scene   = document.getElementById('scene');
-  var heading = document.getElementById('main-heading');
-  var paras   = document.querySelectorAll('.desc-para');
-  var corner  = document.getElementById('load-corner');
-  var fill    = document.getElementById('load-fill');
+  var canvas   = document.getElementById('scrub-canvas');
+  var ctx      = canvas.getContext('2d');
+  var sec1     = document.getElementById('sec1');
+  var sec2     = document.getElementById('sec2');
+  var heading  = document.getElementById('main-heading');
+  var paras    = document.querySelectorAll('.desc-para');
+  var corner   = document.getElementById('load-corner');
+  var fill     = document.getElementById('load-fill');
 
-  var images  = new Array(TOTAL);
-  var loaded  = 0;
-  var ready   = false;
-  var curFrame = 0;
-
-  /* ── Scroll thresholds (as fraction 0→1 of total scroll room) ──
-     Total scroll room = scene.offsetHeight - window.innerHeight ≈ 1000vh
-
-     0.00 – 0.08  : heading appears, plain bg
-     0.08 – 0.16  : description (para-0) slides up, plain bg
-     0.16 – 0.24  : canvas fades in, heading shrinks + moves top-left
-     0.24 – 1.00  : video plays (0.76 of scroll room = ~760vh)
-       Para-1 : video 0–33%   → progress 0.24–0.49
-       Para-2 : video 33–66%  → progress 0.49–0.74
-       Para-3 : video 66–100% → progress 0.74–1.00
-  */
-  var T = {
-    descIn    : 0.08,
-    videoStart: 0.16,
-    videoFull : 0.24,
-    p1s: 0.24, p1e: 0.49,
-    p2s: 0.47, p2e: 0.74,
-    p3s: 0.72, p3e: 1.00
-  };
-
-  /* Heading bounds */
-  var isMob = window.innerWidth < 768;
-  var H_BIG_PX  = isMob ?  60 : 150;
-  var H_SMALL_PX= isMob ?  18 :  26;
-  var H_LEFT_BIG = isMob ? '5vw' : '7vw';
-  var H_TOP_BIG  = isMob ? '12vh' : '15vh';
-  var H_LEFT_SM  = '40px';
-  var H_TOP_SM   = '44px';
+  var images   = new Array(TOTAL);
+  var loaded   = 0;
+  var ready    = false;
+  var curFrame = -1; /* -1 forces first draw */
 
   function lerp(a,b,t){ return a+(b-a)*t; }
   function clamp(v){ return Math.min(Math.max(v,0),1); }
-  function smoothstep(lo,hi,v){ var t=clamp((v-lo)/(hi-lo)); return t*t*(3-2*t); }
+  function smoothstep(lo,hi,v){ var t=clamp((v-lo)/(hi-lo||1)); return t*t*(3-2*t); }
   function pad(n){ return String(n).padStart(3,'0'); }
+
+  var W = window.innerWidth, H = window.innerHeight;
+  var isMob = W < 768;
 
   function drawFrame(idx){
     var img = images[idx];
-    if(!img||!img.naturalWidth) return;
-    var cw = canvas.width  = canvas.offsetWidth;
-    var ch = canvas.height = canvas.offsetHeight;
+    if(!img || !img.naturalWidth) return;
+    /* Use window dimensions — reliable, no offsetWidth issues */
+    var cw = canvas.width  = W;
+    var ch = canvas.height = H;
     var s  = Math.max(cw/img.naturalWidth, ch/img.naturalHeight);
-    ctx.drawImage(img,(cw-img.naturalWidth*s)/2,(ch-img.naturalHeight*s)/2,
-                  img.naturalWidth*s,img.naturalHeight*s);
+    var dw = img.naturalWidth*s, dh = img.naturalHeight*s;
+    ctx.drawImage(img,(cw-dw)/2,(ch-dh)/2,dw,dh);
   }
 
   var rafPending = false;
@@ -204,48 +167,47 @@
   }
 
   function tick(){
-    var sy   = window.scrollY;
-    var room = scene.offsetHeight - window.innerHeight;
-    var p    = clamp(sy/room); /* 0→1 across entire scene */
+    var sy = window.scrollY;
 
-    /* ── Canvas opacity ── */
-    var canvasOp = smoothstep(T.videoStart, T.videoFull, p);
-    canvas.style.opacity = canvasOp;
+    /* ── Section 1 progress (0→1) ── */
+    var s1Room = sec1.offsetHeight - H;
+    var s1p    = clamp(sy / s1Room);
 
-    /* ── Heading size + position ── */
-    var hT = smoothstep(T.videoStart, T.videoFull, p); /* 0=big, 1=small */
-    var sz = lerp(H_BIG_PX, H_SMALL_PX, hT);
+    /* Heading size: big when s1p=0, small when s1p=1 */
+    var bigSz  = isMob ? 56 : 150;
+    var smallSz= isMob ? 20 : 28;
+    var sz     = lerp(bigSz, smallSz, smoothstep(0.6, 1.0, s1p));
     heading.style.fontSize = sz + 'px';
 
-    /* Interpolate left/top — parse numeric part from vw/vh */
-    var leftBigPx = window.innerWidth  * (isMob?0.05:0.07);
-    var topBigPx  = window.innerHeight * (isMob?0.12:0.15);
-    var leftSmPx  = 40;
-    var topSmPx   = 44;
-    heading.style.left = lerp(leftBigPx, leftSmPx, hT)+'px';
-    heading.style.top  = lerp(topBigPx,  topSmPx,  hT)+'px';
+    /* Heading position: center-left → top-left corner */
+    var leftBig  = W * (isMob ? 0.05 : 0.07);
+    var topBig   = H * (isMob ? 0.10 : 0.14);
+    var leftSmall= 40;
+    var topSmall = 44;
+    var hT = smoothstep(0.6, 1.0, s1p);
+    heading.style.left = lerp(leftBig, leftSmall, hT) + 'px';
+    heading.style.top  = lerp(topBig,  topSmall,  hT) + 'px';
 
-    /* Max-width: compress as heading shrinks */
-    heading.style.maxWidth = lerp(9, 16, hT)+'ch';
+    /* Para-0: plain bg — show from 30% through sec1 */
+    togglePara(0, s1p >= 0.30 && s1p < 1.0, false);
 
-    /* ── Paragraph visibility ──
-       Para-0: plain bg phase (desc slides in, goes away as video starts)
-       Para-1,2,3: on video canvas */
-    var p0 = p >= T.descIn && p < T.videoFull;
-    var p1 = p >= T.p1s    && p < T.p1e;
-    var p2 = p >= T.p2s    && p < T.p2e;
-    var p3 = p >= T.p3s;
+    /* ── Section 2 progress (0→1) ── */
+    var s2Start = sec2.offsetTop;
+    var s2Room  = sec2.offsetHeight - H;
+    var s2p     = clamp((sy - s2Start) / s2Room);
 
-    togglePara(0, p0, false);
-    togglePara(1, p1, true);
-    togglePara(2, p2, true);
-    togglePara(3, p3, true);
+    /* Para 1-3 on video, evenly split */
+    togglePara(1, s2p >= 0.00 && s2p < 0.34, true);
+    togglePara(2, s2p >= 0.32 && s2p < 0.67, true);
+    togglePara(3, s2p >= 0.65,                true);
 
     /* ── Frame scrub ── */
     if(!ready) return;
-    var videoP = clamp((p - T.videoFull)/(1 - T.videoFull));
-    var frame  = Math.min(Math.floor(videoP*(TOTAL-1)), TOTAL-1);
-    if(frame !== curFrame){ curFrame=frame; drawFrame(frame); }
+    var frame = Math.min(Math.floor(s2p*(TOTAL-1)), TOTAL-1);
+    if(frame !== curFrame){
+      curFrame = frame;
+      drawFrame(frame);
+    }
   }
 
   function togglePara(i, on, onVideo){
@@ -258,35 +220,35 @@
     }
   }
 
-  function loadBatch(start){
-    for(var i=0; i<TOTAL; i++){
-      (function(idx){
-        var img=new Image();
-        img.onload=img.onerror=function(){
-          loaded++;
-          fill.style.width=(loaded/TOTAL*100)+'%';
-          if(loaded===TOTAL){
-            ready=true;
-            setTimeout(function(){ corner.classList.add('done'); },300);
-            drawFrame(curFrame);
-          }
-        };
-        img.src=PATH+pad(idx+1)+EXT;
-        images[idx]=img;
-      })(i);
-    }
+  /* Load all frames in parallel */
+  for(var i=0; i<TOTAL; i++){
+    (function(idx){
+      var img = new Image();
+      img.onload = img.onerror = function(){
+        loaded++;
+        fill.style.width = (loaded/TOTAL*100)+'%';
+        if(loaded === TOTAL){
+          ready = true;
+          setTimeout(function(){ corner.classList.add('done'); },300);
+          /* Force first draw at current scroll position */
+          curFrame = -1;
+          tick();
+        }
+      };
+      img.src = PATH + pad(idx+1) + EXT;
+      images[idx] = img;
+    })(i);
   }
 
   window.addEventListener('scroll', onScroll, {passive:true});
   window.addEventListener('resize', function(){
-    isMob = window.innerWidth<768;
-    H_BIG_PX  = isMob?60:150;
-    H_SMALL_PX= isMob?18:26;
-    drawFrame(curFrame); tick();
+    W = window.innerWidth; H = window.innerHeight;
+    isMob = W < 768;
+    if(curFrame >= 0) drawFrame(curFrame);
+    tick();
   });
 
   requestAnimationFrame(function(){ heading.classList.add('visible'); });
-  loadBatch(0);
   tick();
 })();
 </script>
