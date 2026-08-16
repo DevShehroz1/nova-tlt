@@ -2149,6 +2149,76 @@
 	<div id="google_translate_element" style="display:none"></div>
 	<script src="assets/js/translate.js"></script>
 	<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+	<!-- SCROLL-VIDEO HERO: Anton font -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+	<style>
+	/* ── Scroll-Video Hero ── */
+	.sv-wrap { position: relative; height: 600vh; }
+	.sv-canvas {
+		position: sticky; top: 0;
+		width: 100vw; height: 100vh;
+		overflow: hidden;
+	}
+	.sv-canvas canvas {
+		width: 100%; height: 100%;
+		display: block;
+		opacity: 0;
+		transition: opacity 0.5s ease;
+	}
+	.sv-heading {
+		position: fixed; top: 120px; left: 48px;
+		font-family: 'Anton', 'Arial Black', sans-serif;
+		font-weight: 400;
+		text-transform: uppercase;
+		color: #f0ece0;
+		line-height: 1.0;
+		letter-spacing: 0.01em;
+		font-size: var(--sv-hs, 6vw);
+		max-width: 80vw;
+		pointer-events: none;
+		z-index: 100;
+		will-change: font-size;
+	}
+	.sv-desc {
+		position: fixed; bottom: 72px; right: 48px;
+		width: 400px; max-width: 38vw;
+		font-family: Arial, sans-serif;
+		font-size: 1.05rem; line-height: 1.65;
+		color: #fff;
+		z-index: 100;
+		pointer-events: none;
+		min-height: 120px;
+	}
+	.sv-desc p {
+		position: absolute; bottom: 0; right: 0;
+		width: 100%; opacity: 0;
+		transition: opacity 0.35s ease;
+	}
+	.sv-desc p.sv-active { opacity: 1; }
+	.sv-skip-group {
+		position: fixed; bottom: 40px; left: 48px;
+		display: flex; flex-direction: column;
+		align-items: flex-start; gap: 12px;
+		z-index: 100;
+		opacity: 0; transition: opacity 0.4s ease;
+	}
+	.sv-skip-group.sv-visible { opacity: 1; }
+	.sv-skip-link {
+		display: inline-block;
+		font-family: Arial, sans-serif;
+		font-size: 0.78rem; font-weight: 700;
+		letter-spacing: 0.14em; text-transform: uppercase;
+		color: #fff; text-decoration: none;
+		background: rgba(255,255,255,0.09);
+		border: 1px solid rgba(255,255,255,0.13);
+		padding: 14px 36px; border-radius: 50px;
+		backdrop-filter: blur(6px);
+		-webkit-backdrop-filter: blur(6px);
+	}
+	.sv-progress { width: 220px; height: 3px; background: rgba(255,255,255,0.18); border-radius: 2px; }
+	.sv-progress-bar { height: 100%; background: #fff; border-radius: 2px; width: 0%; transition: width 0.05s linear; }
+	</style>
 </head>
 
 <body class="home wp-singular page-template page-template-front-page page-template-front-page-php page page-id-70 wp-theme-mvp">
@@ -2272,7 +2342,28 @@
 	<div id="smooth-wrapper">
 		<div id="smooth-content">
 
-			<!-- Globe Hero Section -->
+			<!-- HERO: SCROLL-VIDEO (active) — to revert, swap the comment blocks below -->
+			<div class="sv-wrap">
+				<div class="sv-canvas">
+					<canvas id="sv-c" width="1920" height="1080"></canvas>
+				</div>
+			</div>
+			<div class="sv-heading">Trust Built With<br>Every Delivery</div>
+			<div class="sv-desc" id="sv-desc">
+				<p data-from="0.05" data-to="0.2">Nova TLT is Saudi Arabia's premier heavy logistics provider — operating a fleet of 50+ vehicles across the Kingdom's most active construction and infrastructure corridors.</p>
+				<p data-from="0.2"  data-to="0.4">With a 98% on-time delivery rate and live fleet tracking, we give clients real-time visibility and same-day dispatch options — no long-term commitments required.</p>
+				<p data-from="0.4"  data-to="0.6">From dump truck rentals to full earthmoving support, our 24/7 operations keep your project moving across Riyadh, Jeddah, Dammam, and beyond.</p>
+				<p data-from="0.6"  data-to="0.8">We serve construction, oil & gas, mining, and government sectors — including Vision 2030 mega-projects like NEOM and Red Sea developments.</p>
+				<p data-from="0.8"  data-to="1.01">Trusted by 500+ businesses over two decades, Nova TLT delivers with licensed operators, full HSE compliance, and a team that shows up when it matters most.</p>
+			</div>
+			<div class="sv-skip-group" id="sv-skip-group">
+				<a class="sv-skip-link" href="#sv-end">Skip Introduction</a>
+				<div class="sv-progress"><div class="sv-progress-bar" id="sv-bar"></div></div>
+			</div>
+			<div id="sv-end"></div>
+			<!-- /HERO: SCROLL-VIDEO -->
+
+			<!-- HERO: GLOBE (commented out — remove these comment tags to revert)
 			<div class="hero-sticky-outer">
 			<section class="globe-hero">
 				<div class="hero-glow-top"></div>
@@ -2295,11 +2386,11 @@
 						</button>
 					</div>
 				</div>
-
 				<canvas id="globe" aria-label="Animated globe showing live connections across the warehousing network" role="img"></canvas>
 				<div class="globe-wrap"></div>
 			</section>
 			</div>
+			/HERO: GLOBE -->
 
 			<!-- About Section -->
 			<div class="about-pin-outer">
@@ -4046,6 +4137,65 @@ import createGlobe from 'https://esm.sh/cobe@0.6.3';
 
 <script src="assets/js/mobile-menu.js"></script>
 <script src="assets/js/page-transition.js"></script>
+
+<!-- SCROLL-VIDEO HERO JS -->
+<script>
+(function () {
+  const canvas = document.getElementById('sv-c');
+  if (!canvas) return;
+  const ctx      = canvas.getContext('2d');
+  const bar      = document.getElementById('sv-bar');
+  const heading  = document.querySelector('.sv-heading');
+  const descPs   = document.querySelectorAll('#sv-desc p');
+  const skipGrp  = document.getElementById('sv-skip-group');
+  const wrap     = document.querySelector('.sv-wrap');
+  const FRAMES   = 150;
+
+  const src = i => `frames/ezgif-frame-${String(i).padStart(3,'0')}.jpg`;
+  const images = Array.from({length: FRAMES}, (_, i) => {
+    const img = new Image();
+    img.src = src(i + 1);
+    return img;
+  });
+
+  images[0].onload = () => {
+    ctx.drawImage(images[0], 0, 0, canvas.width, canvas.height);
+  };
+
+  function draw(img) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+  }
+
+  function updateHeading(p) {
+    const t = Math.min(Math.max((p - 0.15) / 0.3, 0), 1);
+    heading.style.setProperty('--sv-hs', (6 + (2.8 - 6) * t) + 'vw');
+  }
+
+  function updateDesc(p) {
+    descPs.forEach(el => {
+      const on = p >= parseFloat(el.dataset.from) && p < parseFloat(el.dataset.to);
+      el.classList.toggle('sv-active', on);
+    });
+  }
+
+  updateDesc(0); updateHeading(0);
+
+  window.addEventListener('scroll', () => {
+    const max = wrap.offsetHeight - window.innerHeight;
+    const p   = Math.min(Math.max(window.scrollY / max, 0), 1);
+    const fi  = Math.min(Math.floor(p * FRAMES), FRAMES - 1);
+
+    if (images[fi]?.complete) draw(images[fi]);
+
+    canvas.style.opacity = Math.min(Math.max((p - 0.15) / 0.1, 0), 1);
+    bar.style.width      = (p * 100) + '%';
+    skipGrp.classList.toggle('sv-visible', p > 0.04);
+    updateHeading(p);
+    updateDesc(p);
+  }, { passive: true });
+})();
+</script>
 
 </body>
 </html>
