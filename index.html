@@ -2342,7 +2342,25 @@
 	<div id="smooth-wrapper">
 		<div id="smooth-content">
 
-			<!-- HERO: SCROLL-VIDEO moved to after Industries section -->
+			<!-- HERO: SCROLL-VIDEO -->
+			<div class="sv-wrap">
+				<div class="sv-canvas">
+					<canvas id="sv-c" width="1920" height="1080"></canvas>
+				</div>
+			</div>
+			<div class="sv-heading">Trust Built With<br>Every Delivery</div>
+			<div class="sv-desc" id="sv-desc">
+				<p data-from="0.05" data-to="0.2">Nova TLT is Saudi Arabia's premier heavy logistics provider — operating a fleet of 50+ vehicles across the Kingdom's most active construction and infrastructure corridors.</p>
+				<p data-from="0.2"  data-to="0.4">With a 98% on-time delivery rate and live fleet tracking, we give clients real-time visibility and same-day dispatch options — no long-term commitments required.</p>
+				<p data-from="0.4"  data-to="0.6">From dump truck rentals to full earthmoving support, our 24/7 operations keep your project moving across Riyadh, Jeddah, Dammam, and beyond.</p>
+				<p data-from="0.6"  data-to="0.8">We serve construction, oil & gas, mining, and government sectors — including Vision 2030 mega-projects like NEOM and Red Sea developments.</p>
+				<p data-from="0.8"  data-to="1.01">Trusted by 500+ businesses over two decades, Nova TLT delivers with licensed operators, full HSE compliance, and a team that shows up when it matters most.</p>
+			</div>
+			<div class="sv-skip-group" id="sv-skip-group">
+				<a class="sv-skip-link" href="#sv-end">Skip Introduction</a>
+				<div class="sv-progress"><div class="sv-progress-bar" id="sv-bar"></div></div>
+			</div>
+			<div id="sv-end"></div>
 
 			<!-- HERO: GLOBE (commented out — remove these comment tags to revert)
 			<div class="hero-sticky-outer">
@@ -2534,26 +2552,6 @@
 
 				</div>
 			</section>
-
-			<!-- SCROLL-VIDEO section -->
-			<div class="sv-wrap">
-				<div class="sv-canvas">
-					<canvas id="sv-c" width="1920" height="1080"></canvas>
-				</div>
-			</div>
-			<div class="sv-heading">Trust Built With<br>Every Delivery</div>
-			<div class="sv-desc" id="sv-desc">
-				<p data-from="0.05" data-to="0.2">Nova TLT is Saudi Arabia's premier heavy logistics provider — operating a fleet of 50+ vehicles across the Kingdom's most active construction and infrastructure corridors.</p>
-				<p data-from="0.2"  data-to="0.4">With a 98% on-time delivery rate and live fleet tracking, we give clients real-time visibility and same-day dispatch options — no long-term commitments required.</p>
-				<p data-from="0.4"  data-to="0.6">From dump truck rentals to full earthmoving support, our 24/7 operations keep your project moving across Riyadh, Jeddah, Dammam, and beyond.</p>
-				<p data-from="0.6"  data-to="0.8">We serve construction, oil & gas, mining, and government sectors — including Vision 2030 mega-projects like NEOM and Red Sea developments.</p>
-				<p data-from="0.8"  data-to="1.01">Trusted by 500+ businesses over two decades, Nova TLT delivers with licensed operators, full HSE compliance, and a team that shows up when it matters most.</p>
-			</div>
-			<div class="sv-skip-group" id="sv-skip-group">
-				<a class="sv-skip-link" href="#sv-end">Skip Introduction</a>
-				<div class="sv-progress"><div class="sv-progress-bar" id="sv-bar"></div></div>
-			</div>
-			<div id="sv-end"></div>
 
 		<!-- ── FAQ ── -->
 			<section class="faq-sec">
@@ -4182,26 +4180,20 @@ import createGlobe from 'https://esm.sh/cobe@0.6.3';
     });
   }
 
-  // hide fixed overlays until sv-wrap is in view
-  function svVisible(p) { return p >= 0 && p <= 1; }
-
   updateDesc(0); updateHeading(0);
 
   window.addEventListener('scroll', () => {
-    const wrapTop = wrap.getBoundingClientRect().top + window.scrollY;
-    const max     = wrap.offsetHeight - window.innerHeight;
-    const p       = Math.min(Math.max((window.scrollY - wrapTop) / max, 0), 1);
-    const inView  = window.scrollY >= wrapTop && window.scrollY <= wrapTop + max;
+    const max = wrap.offsetHeight - window.innerHeight;
+    const p   = Math.min(Math.max(window.scrollY / max, 0), 1);
     const fi  = Math.min(Math.floor(p * FRAMES), FRAMES - 1);
 
     if (images[fi]?.complete) draw(images[fi]);
 
-    canvas.style.opacity          = inView ? Math.min(Math.max((p - 0.15) / 0.1, 0), 1) : 0;
-    heading.style.visibility      = inView ? 'visible' : 'hidden';
-    document.getElementById('sv-desc').style.visibility = inView ? 'visible' : 'hidden';
-    bar.style.width               = (p * 100) + '%';
-    skipGrp.classList.toggle('sv-visible', inView && p > 0.04);
-    if (inView) { updateHeading(p); updateDesc(p); }
+    canvas.style.opacity = Math.min(Math.max((p - 0.15) / 0.1, 0), 1);
+    bar.style.width      = (p * 100) + '%';
+    skipGrp.classList.toggle('sv-visible', p > 0.04);
+    updateHeading(p);
+    updateDesc(p);
   }, { passive: true });
 })();
 </script>
