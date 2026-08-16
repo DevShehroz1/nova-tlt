@@ -2167,14 +2167,14 @@
 		transition: opacity 0.5s ease;
 	}
 	.sv-heading {
-		position: fixed; top: 120px; left: 48px;
+		position: fixed; top: 160px; left: 80px;
 		font-family: 'Anton', 'Arial Black', sans-serif;
 		font-weight: 400;
 		text-transform: uppercase;
 		color: #f0ece0;
 		line-height: 1.0;
 		letter-spacing: 0.01em;
-		font-size: var(--sv-hs, 6vw);
+		font-size: var(--sv-hs, 8vw);
 		max-width: 80vw;
 		pointer-events: none;
 		z-index: 100;
@@ -4170,7 +4170,7 @@ import createGlobe from 'https://esm.sh/cobe@0.6.3';
 
   function updateHeading(p) {
     const t = Math.min(Math.max((p - 0.15) / 0.3, 0), 1);
-    heading.style.setProperty('--sv-hs', (6 + (2.8 - 6) * t) + 'vw');
+    heading.style.setProperty('--sv-hs', (8 + (2.8 - 8) * t) + 'vw');
   }
 
   function updateDesc(p) {
