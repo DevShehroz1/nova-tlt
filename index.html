@@ -4180,18 +4180,24 @@ import createGlobe from 'https://esm.sh/cobe@0.6.3';
     });
   }
 
-  updateDesc(0); updateHeading(0);
+  const allOverlays = [heading, document.getElementById('sv-desc'), skipGrp];
+  function showOverlays(v) { allOverlays.forEach(el => el.style.visibility = v ? 'visible' : 'hidden'); }
+
+  showOverlays(true); updateDesc(0); updateHeading(0);
 
   window.addEventListener('scroll', () => {
-    const max = wrap.offsetHeight - window.innerHeight;
-    const p   = Math.min(Math.max(window.scrollY / max, 0), 1);
-    const fi  = Math.min(Math.floor(p * FRAMES), FRAMES - 1);
+    const max    = wrap.offsetHeight - window.innerHeight;
+    const rawP   = window.scrollY / max;
+    const inZone = rawP >= 0 && rawP <= 1;
+    const p      = Math.min(Math.max(rawP, 0), 1);
+    const fi     = Math.min(Math.floor(p * FRAMES), FRAMES - 1);
 
     if (images[fi]?.complete) draw(images[fi]);
 
+    showOverlays(inZone);
     canvas.style.opacity = Math.min(Math.max((p - 0.15) / 0.1, 0), 1);
     bar.style.width      = (p * 100) + '%';
-    skipGrp.classList.toggle('sv-visible', p > 0.04);
+    skipGrp.classList.toggle('sv-visible', inZone && p > 0.04);
     updateHeading(p);
     updateDesc(p);
   }, { passive: true });
