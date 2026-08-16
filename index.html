@@ -4198,8 +4198,9 @@ import createGlobe from 'https://esm.sh/cobe@0.6.3';
 
   window.addEventListener('scroll', () => {
     const max = wrap.offsetHeight - window.innerHeight;
-    const p   = Math.min(Math.max((window.scrollY - wrapTop) / max, 0), 1);
-    const fi  = Math.min(Math.floor(p * FRAMES), FRAMES - 1);
+    const p      = Math.min(Math.max((window.scrollY - wrapTop) / max, 0), 1);
+    const videoP = Math.min(Math.max((p - 0.25) / 0.75, 0), 1);
+    const fi     = Math.min(Math.floor(videoP * FRAMES), FRAMES - 1);
 
     if (images[fi]?.complete) draw(images[fi]);
     canvas.style.opacity = Math.min(Math.max((p - 0.25) / 0.1, 0), 1);
