@@ -2195,9 +2195,11 @@
 	.sv-desc p {
 		position: absolute; bottom: 0; right: 0;
 		width: 100%; opacity: 0;
-		transition: opacity 0.35s ease;
+		transform: translateY(18px);
+		transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+		            transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
 	}
-	.sv-desc p.sv-active { opacity: 1; }
+	.sv-desc p.sv-active { opacity: 1; transform: translateY(0); }
 	.sv-skip-group {
 		position: absolute; bottom: 40px; left: 48px;
 		display: flex; flex-direction: column;
