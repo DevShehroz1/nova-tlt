@@ -4154,6 +4154,13 @@ import createGlobe from 'https://esm.sh/cobe@0.6.3';
   const wrap    = document.querySelector('.sv-wrap');
   const FRAMES  = 150;
 
+  // DPR-aware buffer: matches physical pixels so retina screens stay sharp
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  canvas.width  = window.innerWidth  * dpr;
+  canvas.height = window.innerHeight * dpr;
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = 'high';
+
   const src = i => `frames/ezgif-frame-${String(i).padStart(3,'0')}.jpg`;
   const images = Array.from({length: FRAMES}, (_, i) => {
     const img = new Image();
@@ -4161,15 +4168,17 @@ import createGlobe from 'https://esm.sh/cobe@0.6.3';
     return img;
   });
 
-  images[0].onload = () => {
-    canvas.style.opacity = 1;
-    ctx.drawImage(images[0], 0, 0, canvas.width, canvas.height);
-  };
-
+  // Cover-fit: fills canvas without stretching (like object-fit: cover)
   function draw(img) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    const cW = canvas.width, cH = canvas.height;
+    const scale = Math.max(cW / img.naturalWidth, cH / img.naturalHeight);
+    const x = (cW - img.naturalWidth  * scale) / 2;
+    const y = (cH - img.naturalHeight * scale) / 2;
+    ctx.clearRect(0, 0, cW, cH);
+    ctx.drawImage(img, x, y, img.naturalWidth * scale, img.naturalHeight * scale);
   }
+
+  images[0].onload = () => { canvas.style.opacity = 1; draw(images[0]); };
 
   function updateHeading(p) {
     const t = Math.min(Math.max(p / 0.4, 0), 1);
