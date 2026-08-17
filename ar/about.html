@@ -545,7 +545,7 @@
   <!-- Pinned word-reveal section -->
   <section class="wrev-sec">
     <div class="wrev-sticky">
-      <p class="wrev-inner" id="wrev-text">بخبرة تمتد لأكثر من عقدين في الدقة والالتزام، تعمل NOVA Terra على دعم مشاريع البنية التحتية الأكثر أهمية في المملكة العربية السعودية، إذ تسير ١٥٠ مركبة ثقيلة لتحقيق التميز المُثبَت في جميع مناطق المملكة.</p>
+      <p class="wrev-inner" id="wrev-text">بُنيت على ٥ سنوات من الدقة والثقة، تنقل شركة نوفا تيرا البنية التحتية الأكثر أهمية في المملكة العربية السعودية، إذ تسير ٥٠ مركبة لتحقيق أداء متميز مُثبَت في جميع أنحاء المملكة.</p>
     </div>
   </section>
   <script>
@@ -556,9 +556,9 @@
 
     /* split into word spans */
     var words = inner.textContent.trim().split(/\s+/);
-    inner.innerHTML = words.map(function (w) {
-      return '<span class="wrev-word">' + w + '</span>';
-    }).join(' ');
+    inner.innerHTML = words.map(function (w, i) {
+      return '<span class="wrev-word">' + w + (i < words.length - 1 ? ' ' : '') + '</span>';
+    }).join('');
     var allWords = Array.from(inner.querySelectorAll('.wrev-word'));
 
     function update() {
