@@ -2166,18 +2166,6 @@
 		display: block;
 		opacity: 0;
 	}
-	@media (max-width: 768px) {
-		.sv-canvas {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-		}
-		.sv-canvas canvas {
-			width: 100vw;
-			height: calc(100vw * 16 / 9);
-			flex-shrink: 0;
-		}
-	}
 	.sv-heading {
 		position: absolute; top: 160px; left: 80px;
 		font-family: 'Anton', 'Arial Black', sans-serif;
@@ -4163,9 +4151,8 @@ import createGlobe from 'https://esm.sh/cobe@0.6.3';
   const FRAMES  = 150;
 
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
-  const isMobile = window.innerWidth <= 768;
   canvas.width  = window.innerWidth  * dpr;
-  canvas.height = isMobile ? (window.innerWidth * 16 / 9) * dpr : window.innerHeight * dpr;
+  canvas.height = window.innerHeight * dpr;
   ctx.imageSmoothingEnabled = true;
   ctx.imageSmoothingQuality = 'high';
 
