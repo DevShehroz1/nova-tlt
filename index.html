@@ -2166,6 +2166,16 @@
 		display: block;
 		opacity: 0;
 	}
+	@media (max-width: 768px) {
+		.sv-canvas canvas {
+			width: 100vw;
+			height: calc(100vw * 16 / 9);
+			position: absolute;
+			top: 50%;
+			left: 0;
+			transform: translateY(-50%);
+		}
+	}
 	.sv-heading {
 		position: absolute; top: 160px; left: 80px;
 		font-family: 'Anton', 'Arial Black', sans-serif;
@@ -2350,7 +2360,7 @@
 			<div class="sv-wrap">
 				<div class="sv-canvas">
 					<canvas id="sv-c" width="1920" height="1080"></canvas>
-					<div class="sv-heading">Trust Built With<br>Every Delivery</div>
+					<div class="sv-heading">Built to Move.<br>Trusted to Deliver</div>
 					<div class="sv-desc" id="sv-desc"></div>
 					<div class="sv-skip-group" id="sv-skip-group">
 						<a class="sv-skip-link" href="#sv-end">Skip Introduction</a>
@@ -4150,10 +4160,10 @@ import createGlobe from 'https://esm.sh/cobe@0.6.3';
   const wrap    = document.querySelector('.sv-wrap');
   const FRAMES  = 150;
 
-  // DPR-aware buffer: matches physical pixels so retina screens stay sharp
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  const isMobile = window.innerWidth <= 768;
   canvas.width  = window.innerWidth  * dpr;
-  canvas.height = window.innerHeight * dpr;
+  canvas.height = isMobile ? (window.innerWidth * 16 / 9) * dpr : window.innerHeight * dpr;
   ctx.imageSmoothingEnabled = true;
   ctx.imageSmoothingQuality = 'high';
 
