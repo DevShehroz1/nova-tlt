@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="ar-SA" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=5" />
+  <title>الأخبار والتحديثات — NOVA TLT</title>
+  <link rel="preload" href="../assets/fonts/BebasNeuePro-Bold.woff" as="font" type="font/woff" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg" />
+  <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico" />
+  <link rel="stylesheet" href="../assets/css/main.css?v=1786426554" />
+  <link rel="stylesheet" href="../assets/css/cf7.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --hero-bg:#0c0b0a;--ink:#efe9df;--ink-dim:#b8b0a4;--gold:#CA953D;--gold-grad:linear-gradient(135deg,#B67C2A 0%,#CA953D 50%,#E5B85A 100%);--line:rgba(239,233,223,.16); }
+    body { background: var(--hero-bg); color: var(--ink); font-family: 'Cairo', ui-sans-serif, system-ui, sans-serif; overflow-x: hidden; }
+    body, .header__menu-item, .header__menu-item .text-hover__elem,
+    .nav-drop__trigger, .nav-drop__trigger .text-hover__elem,
+    .nav-drop__link, .header__btn .text-hover__elem,
+    .mob-nav-item, .mob-panel-link, .mob-sub-panel-title,
+    .mob-footer-cta, h1, h2, h3, h4, p, a, span, button, input {
+      font-family: 'Cairo', ui-sans-serif, system-ui, sans-serif !important;
+    }
+    a { text-decoration: none; color: inherit; }
+    @media (hover: hover) and (pointer: fine) { *, *::before, *::after { cursor: none !important; } }
+    #cursor-dot { position: fixed; pointer-events: none; z-index: 9998; width: 8px; height: 8px; background: #fff; border-radius: 50%; transform: translate(-50%,-50%); left: -100px; top: -100px; will-change: left, top; }
+    #cursor-ring { position: fixed; pointer-events: none; z-index: 9997; width: 28px; height: 28px; border: 1.5px solid rgba(255,255,255,0.7); border-radius: 50%; transform: translate(-50%,-50%); left: -100px; top: -100px; transition: width .3s ease, height .3s ease, border-color .3s ease; will-change: left, top; }
+    #cursor-ring.is-hover { width: 44px; height: 44px; border-color: #CA953D; }
+    .header { background: rgba(12,11,10,0.92) !important; backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
+    .header__menu { background-color: #141414 !important; border: 1px solid rgba(255,255,255,0.1) !important; }
+    .header__menu-item, .header__menu-item .text-hover__elem { color: rgba(255,255,255,0.82) !important; }
+    .header__menu-item:hover { color: #CA953D !important; }
+    .btn { background-color: #141414 !important; border-color: rgba(255,255,255,0.15) !important; color: rgba(255,255,255,0.88) !important; }
+    .btn:hover { color: #fff !important; }
+    .btn._accent { background: linear-gradient(135deg,#B67C2A 0%,#CA953D 50%,#E5B85A 100%) !important; border-color: transparent !important; color: #fff !important; }
+    .nav-drop { position: relative; display: flex; align-items: center; }
+    .nav-drop__trigger { display: flex; align-items: center; gap: 6px; cursor: pointer; color: rgba(255,255,255,0.85); font-size: inherit; font-family: inherit; font-weight: inherit; letter-spacing: inherit; text-transform: uppercase; background: none; border: none; padding: 0; line-height: inherit; white-space: nowrap; }
+    .nav-drop__trigger .text-hover__elem { color: rgba(255,255,255,0.85); }
+    .nav-drop__chevron { width: 10px; height: 6px; flex-shrink: 0; transition: transform 260ms cubic-bezier(0.23,1,0.32,1); }
+    .nav-drop__chevron path { stroke: rgba(255,255,255,0.7) !important; }
+    .nav-drop--open .nav-drop__chevron { transform: rotate(180deg); }
+    .nav-drop--open .nav-drop__chevron path { stroke: #CA953D !important; }
+    .nav-drop__panel { position: absolute; top: calc(100% + 16px); left: 50%; transform: translateX(-50%) translateY(-8px); background: #0f0f0f; border: 1px solid rgba(255,255,255,0.08); border-radius: 5rem; padding: 6px; min-width: 210px; box-shadow: 0 20px 60px rgba(0,0,0,.30); opacity: 0; pointer-events: none; transition: opacity 220ms ease, transform 220ms cubic-bezier(0.23,1,0.32,1); z-index: 200; }
+    .nav-drop--open .nav-drop__panel { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+    .nav-drop__panel::after { content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%); width: 12px; height: 6px; background: #0f0f0f; clip-path: polygon(50% 0%,0% 100%,100% 100%); }
+    .nav-drop__panel::before { content: ''; position: absolute; top: -16px; left: 0; right: 0; height: 16px; }
+    .nav-drop__link { display: flex; align-items: center; gap: 10px; padding: 11px 16px; border-radius: 9px; color: rgba(255,255,255,0.75); font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; transition: background 160ms ease, color 160ms ease; position: relative; }
+    .nav-drop__link::before { content: ''; display: block; width: 4px; height: 4px; border-radius: 50%; background: #CA953D; opacity: 0; flex-shrink: 0; transition: opacity 160ms ease; }
+    .nav-drop__link:hover { background: rgba(255,255,255,0.07); color: #fff; }
+    .nav-drop__link:hover::before { opacity: 1; }
+    @media (max-width: 1024px) {
+      .nav-drop__trigger { color: #fff; } .nav-drop__trigger .text-hover__elem { color: #fff; }
+      .nav-drop__chevron path { stroke: #fff; }
+      .nav-drop__panel { position: static; transform: none !important; box-shadow: none; border: none; border-radius: 8px; background: rgba(255,255,255,0.08); padding: 6px 0 6px 16px; margin-top: 8px; opacity: 1; pointer-events: auto; display: none; }
+      .nav-drop__panel::after, .nav-drop__panel::before { display: none; }
+      .nav-drop--open .nav-drop__panel { display: block; }
+      .nav-drop__link { color: rgba(255,255,255,0.8); font-size: 18px; padding: 8px 10px; letter-spacing: .05em; }
+    }
+    .text-hover { overflow: hidden; }
+    .text-hover__inner { display: block; position: relative; clip-path: inset(0 -1em 0 -1em); }
+    .text-hover__elem { display: block; }
+    .text-hover__elem-2 { position: absolute; top: 0; left: 0; width: 100%; }
+    .text-hover__char { display: inline-block; transition: transform .35s cubic-bezier(0.76,0,0.24,1); }
+    .text-hover__elem-1 .text-hover__char { transform: translateY(0); }
+    .text-hover__elem-2 .text-hover__char { transform: translateY(115%); }
+    .text-hover:hover .text-hover__elem-1 .text-hover__char { transform: translateY(-115%); }
+    .text-hover:hover .text-hover__elem-2 .text-hover__char { transform: translateY(0); }
+
+    @media (max-width: 1024px) {
+      .header__container { display:flex !important; align-items:center !important; justify-content:space-between !important; position:relative !important; padding:0 16px !important; min-height:64px !important; }
+      .header__logo { position:absolute !important; left:50% !important; transform:translateX(-50%) !important; z-index:2 !important; padding:0 !important; }
+      .header__logo-img { height:60px !important; width:auto !important; }
+      .header__actions { display:flex !important; align-items:center !important; justify-content:space-between !important; width:100% !important; gap:0 !important; }
+      .header__btn { display:none !important; }
+      .header__menu { display:none !important; }
+      .header__hamburger { display:none !important; }
+      .header__hamburger-btn.btn { display:flex !important; align-items:center !important; justify-content:center !important; width:44px !important; height:44px !important; padding:0 !important; min-width:unset !important; background:transparent !important; border:none !important; color:#fff !important; z-index:3 !important; position:relative !important; }
+      .header__lang-heading.btn { height:40px !important; width:64px !important; font-size:13px !important; }
+    }
+    #news-mobile-menu { display:none; position:fixed; top:0; left:0; right:0; bottom:0; width:100vw; max-width:100%; height:100vh; height:100dvh; z-index:9999; background:#0a0a0a; flex-direction:column; padding:0; overflow:hidden; box-sizing:border-box; }
+    #news-mobile-menu.is-open { display:flex; }
+    #news-mobile-menu .mob-topbar { display:flex; align-items:center; justify-content:space-between; padding:0 20px; height:64px; border-bottom:1px solid rgba(255,255,255,0.06); flex-shrink:0; position:relative; z-index:2; }
+    #news-mobile-menu .mob-topbar-left { display:flex; align-items:center; gap:10px; min-width:44px; }
+    #news-mobile-menu .mob-back { display:none; align-items:center; gap:6px; background:none; border:none; color:rgba(255,255,255,0.6); font-family:'Cairo',ui-sans-serif,system-ui,sans-serif; font-size:13px; font-weight:500; letter-spacing:.04em; cursor:pointer; padding:0; transition:color 0.2s; }
+    #news-mobile-menu .mob-back:hover { color:#fff; }
+    #news-mobile-menu.sub-open .mob-back { display:flex; }
+    #news-mobile-menu .mob-topbar-title { font-family:BebasNeuePro,sans-serif; font-size:16px; letter-spacing:.14em; color:rgba(255,255,255,0.35); text-transform:uppercase; position:absolute; left:50%; transform:translateX(-50%); }
+    #news-mobile-menu .mob-close { width:40px; height:40px; border-radius:50%; border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.04); display:flex; align-items:center; justify-content:center; cursor:pointer; padding:0; color:rgba(255,255,255,0.7); transition:border-color 0.2s,color 0.2s; flex-shrink:0; }
+    #news-mobile-menu .mob-close:hover { border-color:#CA953D; color:#CA953D; }
+    #news-mobile-menu .mob-panels { flex:1; position:relative; overflow:hidden; }
+    #news-mobile-menu .mob-main-panel { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; padding:20px 28px 0; overflow-y:auto; transform:translateX(0); transition:transform 0.42s cubic-bezier(0.22,1,0.36,1); }
+    #news-mobile-menu.sub-open .mob-main-panel { transform:translateX(-30%); }
+    #news-mobile-menu .mob-nav-item { font-family:BebasNeuePro,sans-serif; font-size:48px; letter-spacing:-0.01em; line-height:1; color:#f7f1ed; text-decoration:none; padding:13px 0; border-bottom:1px solid rgba(255,255,255,0.06); display:flex; align-items:center; justify-content:space-between; cursor:pointer; }
+    #news-mobile-menu .mob-nav-item:first-child { border-top:1px solid rgba(255,255,255,0.06); }
+    #news-mobile-menu .mob-nav-arrow { width:20px; height:20px; flex-shrink:0; color:rgba(255,255,255,0.3); transition:color 0.2s,transform 0.2s; }
+    #news-mobile-menu .mob-nav-item:hover .mob-nav-arrow { color:#CA953D; transform:translateX(3px); }
+    #news-mobile-menu .mob-sub-panel { position:absolute; inset:0; padding:0 28px; overflow-y:auto; transform:translateX(100%); transition:transform 0.42s cubic-bezier(0.22,1,0.36,1); display:flex; flex-direction:column; background:#0a0a0a; }
+    #news-mobile-menu .mob-sub-panel.active { transform:translateX(0); }
+    #news-mobile-menu .mob-sub-panel-title { font-family:BebasNeuePro,sans-serif; font-size:13px; letter-spacing:.14em; color:#CA953D; text-transform:uppercase; padding:24px 0 16px; border-bottom:1px solid rgba(255,255,255,0.06); }
+    #news-mobile-menu .mob-panel-link { display:flex; align-items:center; justify-content:space-between; font-family:'Cairo',ui-sans-serif,system-ui,sans-serif; font-size:17px; font-weight:500; color:rgba(255,255,255,0.65); text-decoration:none; padding:18px 0; border-bottom:1px solid rgba(255,255,255,0.06); letter-spacing:.01em; transition:color 0.2s; }
+    #news-mobile-menu .mob-panel-link:hover { color:#f7f1ed; }
+    #news-mobile-menu .mob-panel-link svg { width:16px; height:16px; color:rgba(255,255,255,0.2); flex-shrink:0; }
+    #news-mobile-menu .mob-panel-link:hover svg { color:#CA953D; }
+    #news-mobile-menu .mob-footer { padding:20px 28px 32px; border-top:1px solid rgba(255,255,255,0.06); flex-shrink:0; }
+    #news-mobile-menu .mob-footer-cta { display:inline-flex; align-items:center; gap:10px; font-family:BebasNeuePro,sans-serif; font-size:16px; letter-spacing:.1em; color:#CA953D; text-decoration:none; padding:12px 24px; border:1px solid rgba(202,149,61,0.35); border-radius:5rem; transition:background 0.25s,border-color 0.25s; }
+    #news-mobile-menu .mob-footer-cta:hover { background:rgba(202,149,61,0.1); border-color:#CA953D; }
+
+    .nova-footer { position: relative; width: 100%; overflow: hidden; background: radial-gradient(ellipse 180% 140% at 10% 110%, rgba(202,149,61,0.85) 0%, rgba(160,110,20,0.45) 38%, #0c0b0a 65%), #0c0b0a; }
+    .nf-content { position: relative; z-index: 10; width: 100%; }
+    .nf-inner-wrap { width: 100%; margin: 0 auto; max-width: 1280px; padding: 0 clamp(24px,4vw,48px); }
+    .nf-top { display: flex; flex-direction: column; gap: 32px; padding-top: 24px; padding-bottom: 40px; }
+    .nf-headline-wrap { display: flex; flex-direction: column; gap: 20px; max-width: 576px; }
+    .nf-badge { display: flex; align-items: center; gap: 10px; }
+    .nf-badge__dot-wrap { position: relative; display: flex; width: 8px; height: 8px; flex-shrink: 0; }
+    .nf-badge__pulse { position: absolute; inset: 0; border-radius: 50%; background: #CA953D; opacity: 0.75; animation: nf-ping 1.2s cubic-bezier(0,0,0.2,1) infinite; }
+    .nf-badge__core { position: relative; width: 8px; height: 8px; border-radius: 50%; background: #CA953D; }
+    @keyframes nf-ping { 0% { transform: scale(1); opacity: 0.75; } 75%, 100% { transform: scale(2.2); opacity: 0; } }
+    .nf-badge__label { font-size: 14px; font-weight: 500; color: #fff; }
+    .nf-headline { color: #fff; font-size: clamp(30px,4vw,48px); line-height: 1.25; font-weight: 300; letter-spacing: -0.02em; margin: 0; }
+    .nf-form { display: flex; width: 100%; max-width: 384px; flex-shrink: 0; align-items: center; gap: 8px; }
+    .nf-form__input { flex: 1; height: 48px; min-height: 48px; padding: 0 16px; font-size: 14px; color: #fff; background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.05); border-radius: 0; outline: none; transition: border-color 180ms ease, box-shadow 180ms ease; }
+    .nf-form__input::placeholder { color: rgba(255,255,255,0.70); }
+    .nf-form__input:focus { border-color: rgba(202,149,61,0.50); box-shadow: 0 0 0 3px rgba(202,149,61,0.30); }
+    .nf-form__btn { display: flex; align-items: center; gap: 8px; height: 48px; flex-shrink: 0; cursor: pointer; padding: 0 20px; font-size: 14px; font-weight: 600; color: #fff; background: #CA953D; border: none; border-radius: 0; box-shadow: inset 0 0 8px 0.5px rgba(255,255,255,0.30); transition: all 180ms ease; }
+    .nf-form__btn-icon { display: flex; width: 16px; height: 16px; align-items: center; justify-content: center; transition: transform 300ms ease; }
+    .nf-form__btn-icon svg { width: 100%; height: 100%; }
+    .nf-form__btn:hover .nf-form__btn-icon { transform: translateX(2px); }
+    .nf-mid { display: flex; flex-direction: column; gap: 40px; padding-bottom: 64px; }
+    .nf-brand { display: flex; flex: 1; align-items: center; gap: 12px; } .nf-brand__logo { height: 52px; width: auto; display: block; }
+    .nf-links-grid { display: grid; grid-template-columns: repeat(2, auto); gap: 32px 48px; }
+    .nf-links__title { font-size: 14px; font-weight: 500; letter-spacing: 0.05em; color: rgba(255,255,255,0.90); text-transform: uppercase; display: block; margin-bottom: 16px; }
+    .nf-links__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+    .nf-links__list a { font-size: 14px; color: rgba(255,255,255,0.70); text-decoration: none; transition: color 180ms ease; }
+    .nf-links__list a:hover { color: #fff; }
+    .nf-watermark { display: flex; width: 100%; align-items: center; justify-content: center; }
+    .nf-watermark__svg { height: auto; width: 100%; user-select: none; }
+    @media (min-width: 640px) { .nf-links-grid { grid-template-columns: repeat(3, auto); } }
+    @media (min-width: 1024px) { .nf-top { flex-direction: row; align-items: flex-end; justify-content: space-between; padding-top: 40px; padding-bottom: 56px; } .nf-headline-wrap { flex: 1; } .nf-mid { flex-direction: row; align-items: flex-start; gap: 32px; } .nf-links-grid { gap: 32px 64px; } }
+
+    /* Page sections */
+    .sec { padding: clamp(60px,8vw,100px) clamp(20px,5vw,80px); max-width: 1400px; margin: 0 auto; }
+    .sec__eyebrow { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #CA953D; margin-bottom: 14px; }
+    .sec__title { font-family: BebasNeuePro, sans-serif; font-weight: 700; font-size: clamp(38px,5.5vw,76px); line-height: 1; letter-spacing: 0.03em; text-transform: uppercase; color: var(--ink); margin-bottom: 20px; }
+    .sec__title span { background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    /* Hero */
+    .page-hero { padding-top: clamp(100px,14vh,130px); min-height: 52vh; display: flex; align-items: flex-end; position: relative; overflow: hidden; padding-bottom: 64px; padding-left: clamp(20px,5vw,80px); padding-right: clamp(20px,5vw,80px); }
+    .page-hero-bg { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(13,13,13,0.3) 0%, rgba(13,13,13,0.75) 60%, rgba(13,13,13,1) 100%), url('https://images.unsplash.com/photo-1519996529931-28324d5a630e?w=1600&q=80') center/cover no-repeat; }
+    .page-hero-content { position: relative; z-index: 2; }
+    .page-hero-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #CA953D; margin-bottom: 16px; }
+    .page-hero h1 { font-family: BebasNeuePro, sans-serif; font-size: clamp(56px, 8vw, 110px); font-weight: 700; letter-spacing: 0.03em; line-height: 0.95; text-transform: uppercase; color: var(--ink); }
+    .page-hero h1 em { font-style: normal; color: #CA953D; }
+    .page-hero-sub { font-size: 16px; color: var(--ink-dim); line-height: 1.7; max-width: 560px; margin-top: 20px; }
+
+    /* Featured */
+    .featured-card { display: grid; grid-template-columns: 1fr 1fr; gap: 0; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; overflow: hidden; margin-top: 56px; }
+    .featured-img { position: relative; min-height: 400px; background: linear-gradient(135deg, #0d1a0d 0%, #141414 100%); display: flex; align-items: flex-end; padding: 32px; }
+    .featured-img-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(13,13,13,0.85) 0%, rgba(13,13,13,0.2) 100%); }
+    .featured-img-emoji { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -60%); font-size: 80px; opacity: 0.4; }
+    .featured-img-tag { position: relative; z-index: 2; display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #fff; background: #CA953D; padding: 5px 12px; border-radius: 4px; }
+    .featured-body { padding: 48px; display: flex; flex-direction: column; justify-content: center; }
+    .featured-date { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; color: var(--ink-dim); margin-bottom: 16px; }
+    .featured-body h2 { font-family: BebasNeuePro, sans-serif; font-size: clamp(26px, 3vw, 40px); font-weight: 700; letter-spacing: 0.03em; line-height: 1.1; text-transform: uppercase; color: var(--ink); margin-bottom: 16px; }
+    .featured-body p { font-size: 14px; color: var(--ink-dim); line-height: 1.8; margin-bottom: 28px; }
+    .read-more { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; color: #CA953D; transition: gap 0.2s; }
+    .read-more:hover { gap: 12px; }
+    .read-more::before { content: '←'; }
+
+    /* News grid */
+    .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 64px; }
+    .news-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; overflow: hidden; transition: border-color 0.25s, background 0.25s; display: flex; flex-direction: column; }
+    .news-card:hover { border-color: rgba(255,255,255,0.16); background: rgba(255,255,255,0.06); }
+    .news-card-img { height: 190px; background: #1a1a1a; overflow: hidden; position: relative; }
+    .news-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; display: block; }
+    .news-card:hover .news-card-img img { transform: scale(1.04); }
+    .news-card-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+    .news-tag { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #CA953D; background: rgba(202,149,61,0.1); padding: 4px 10px; border-radius: 4px; margin-bottom: 12px; }
+    .news-date { font-size: 11px; font-weight: 500; color: var(--ink-dim); margin-bottom: 10px; }
+    .news-card-body h3 { font-size: 15px; font-weight: 700; color: var(--ink); line-height: 1.4; margin-bottom: 10px; flex: 1; }
+    .news-read { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: #CA953D; margin-top: 16px; transition: gap 0.2s; }
+    .news-read:hover { gap: 10px; }
+    .news-read::before { content: '←'; }
+
+    /* Newsletter */
+    .newsletter-section { background: #080808; border-top: 1px solid rgba(255,255,255,0.08); border-bottom: 1px solid rgba(255,255,255,0.08); padding: clamp(60px,8vw,100px) clamp(20px,5vw,80px); }
+    .newsletter-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 56px 48px; text-align: center; max-width: 600px; margin: 56px auto 0; }
+    .newsletter-card h3 { font-family: BebasNeuePro, sans-serif; font-size: 30px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink); margin-bottom: 12px; }
+    .newsletter-card p { font-size: 14px; color: var(--ink-dim); line-height: 1.7; margin-bottom: 28px; }
+    .newsletter-form { display: flex; gap: 10px; }
+    .newsletter-input { flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.16); border-radius: 6px; padding: 12px 16px; font-size: 14px; color: var(--ink); font-family: 'Cairo', sans-serif; outline: none; transition: border-color 0.2s; }
+    .newsletter-input::placeholder { color: var(--ink-dim); }
+    .newsletter-input:focus { border-color: #CA953D; }
+    .newsletter-btn { background: #CA953D; color: #0d0d0d; border: none; border-radius: 6px; padding: 12px 24px; font-size: 14px; font-weight: 700; cursor: pointer; transition: filter 0.2s; white-space: nowrap; font-family: 'Cairo', sans-serif; }
+    .newsletter-btn:hover { filter: brightness(1.1); }
+    .newsletter-note { font-size: 11px; color: var(--ink-dim); margin-top: 14px; }
+
+    /* CTA banner */
+    .cta-banner { background: #CA953D; padding: 80px clamp(20px,5vw,80px); display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+    .cta-banner h2 { font-family: BebasNeuePro, sans-serif; font-size: clamp(32px, 4vw, 56px); font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; color: #0d0d0d; max-width: 560px; line-height: 1; }
+    .cta-banner-actions { display: flex; gap: 12px; flex-shrink: 0; flex-wrap: wrap; }
+    .btn-dark { background: #0d0d0d; color: #fff; padding: 14px 28px; border-radius: 6px; font-size: 14px; font-weight: 700; border: none; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
+    .btn-dark:hover { background: #1a1a1a; }
+    .btn-wa-dark { background: #25D366; color: #fff; padding: 14px 28px; border-radius: 6px; font-size: 14px; font-weight: 700; border: none; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
+    .btn-wa-dark:hover { background: #1da851; }
+
+    @media (max-width: 1024px) {
+      .featured-card { grid-template-columns: 1fr; }
+      .featured-img { min-height: 260px; }
+      .news-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .featured-img { min-height: 200px; }
+      .featured-body { padding: 28px 24px; }
+      .news-grid { grid-template-columns: 1fr; }
+      .newsletter-form { flex-direction: column; }
+      .newsletter-card { padding: 32px 20px; }
+      .cta-banner { flex-direction: column; align-items: flex-start; gap: 28px; }
+      .cta-banner-actions { flex-direction: column; width: 100%; }
+      .btn-dark, .btn-wa-dark { justify-content: center; width: 100%; }
+    }
+  </style>
+  <link rel="stylesheet" href="../assets/css/rtl.css">
+</head>
+<body>
+
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<header class="header">
+  <div class="container header__container">
+    <a href="../index.html" class="header__logo">
+      <img src="../assets/img/logo.png" alt="نوفا TLT" class="header__logo-img" />
+    </a>
+    <nav class="header__menu" data-da=".header__hamburger, 1024, 0">
+      <a href="../index.html" class="header__menu-item text-hover">
+        <span class="text-hover__inner"><span class="text-hover__elem text-hover__elem-1">الرئيسية</span><span class="text-hover__elem text-hover__elem-2 _c-dark">الرئيسية</span></span>
+      </a>
+      <div class="nav-drop header__menu-item" data-nav-drop>
+        <button class="nav-drop__trigger text-hover" aria-expanded="false" aria-haspopup="true">
+          <span class="text-hover__inner"><span class="text-hover__elem text-hover__elem-1">الشركة</span><span class="text-hover__elem text-hover__elem-2 _c-dark">الشركة</span></span>
+          <svg class="nav-drop__chevron" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nav-drop__panel" role="menu">
+          <a href="about.html" class="nav-drop__link" role="menuitem">من نحن</a>
+          <a href="careers.html" class="nav-drop__link" role="menuitem">الوظائف</a>
+        </div>
+      </div>
+      <div class="nav-drop header__menu-item" data-nav-drop>
+        <button class="nav-drop__trigger text-hover" aria-expanded="false" aria-haspopup="true">
+          <span class="text-hover__inner"><span class="text-hover__elem text-hover__elem-1">ما نقدمه</span><span class="text-hover__elem text-hover__elem-2 _c-dark">ما نقدمه</span></span>
+          <svg class="nav-drop__chevron" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nav-drop__panel" role="menu">
+          <a href="services.html" class="nav-drop__link" role="menuitem">الخدمات</a>
+          <a href="fleet.html" class="nav-drop__link" role="menuitem">الأسطول</a>
+          <a href="industries.html" class="nav-drop__link" role="menuitem">القطاعات التي نخدمها</a>
+        </div>
+      </div>
+      <a href="projects.html" class="header__menu-item text-hover">
+        <span class="text-hover__inner"><span class="text-hover__elem text-hover__elem-1">المشاريع</span><span class="text-hover__elem text-hover__elem-2 _c-dark">المشاريع</span></span>
+      </a>
+      <a href="#" class="header__menu-item text-hover">
+        <span class="text-hover__inner"><span class="text-hover__elem text-hover__elem-1">الأخبار</span><span class="text-hover__elem text-hover__elem-2 _c-dark">الأخبار</span></span>
+      </a>
+    </nav>
+    <div class="header__actions">
+      <button type="button" class="header__hamburger-btn btn" aria-label="فتح القائمة" id="news-mob-open">
+        <svg width="22" height="16" viewBox="0 0 22 16" fill="none" aria-hidden="true"><rect y="0" width="22" height="2" rx="1" fill="currentColor"/><rect y="7" width="22" height="2" rx="1" fill="currentColor"/><rect y="14" width="22" height="2" rx="1" fill="currentColor"/></svg>
+      </button>
+      <div class="nt-lang-wrap" id="nt-lang-wrap">
+        <button type="button" class="header__lang-heading btn" id="nt-lang-btn">
+          <span class="btn__inner">
+            <span class="nt-lang-label">عربي</span>
+            <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.267 7.06149L5.84961 11.7365C6.19441 12.0878 6.80452 12.0878 7.15054 11.7365L11.7331 7.06149C12.0902 6.69643 12.0889 6.10663 11.7295 5.74406C11.37 5.38148 10.7905 5.38148 10.4322 5.74654L7.41586 8.82221V0.931267C7.41586 0.415966 7.00504 0 6.49885 0C5.99266 0 5.58184 0.415966 5.58184 0.931267V8.82221L2.56671 5.74654C2.38698 5.56401 2.15223 5.47337 1.91625 5.47337C1.68272 5.47337 1.44796 5.56401 1.26945 5.74406C0.911205 6.10663 0.909982 6.69643 1.267 7.06149Z" fill="#CA953D"/></svg>
+          </span>
+        </button>
+        <div class="nt-lang-menu" id="nt-lang-menu">
+          <a href="../news.html" class="nt-lang-option" data-lang="en">English</a>
+          <a href="#" class="nt-lang-option is-active" data-lang="ar">العربية</a>
+        </div>
+      </div>
+      <a href="contact.html" class="header__btn text-hover btn _accent" data-da=".header__hamburger, 1024, 1">
+        <span class="btn__inner text-hover__inner">
+          <span class="text-hover__elem text-hover__elem-1">اتصل بنا</span>
+          <span class="text-hover__elem text-hover__elem-2">اتصل بنا</span>
+        </span>
+      </a>
+    </div>
+  </div>
+  <div class="header__hamburger container"></div>
+</header>
+
+<!-- Mobile Menu -->
+<div id="news-mobile-menu" aria-hidden="true">
+  <div class="mob-topbar">
+    <div class="mob-topbar-left">
+      <button class="mob-back" id="news-mob-back" aria-label="رجوع">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        رجوع
+      </button>
+    </div>
+    <span class="mob-topbar-title">NOVA TLT</span>
+    <button class="mob-close" id="news-mob-close" aria-label="إغلاق">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <div class="mob-panels">
+    <div class="mob-main-panel">
+      <a href="../index.html" class="mob-nav-item">الرئيسية<svg class="mob-nav-arrow" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <div class="mob-nav-item" data-sub="company">الشركة<svg class="mob-nav-arrow" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="mob-nav-item" data-sub="services">ما نقدمه<svg class="mob-nav-arrow" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <a href="projects.html" class="mob-nav-item">المشاريع<svg class="mob-nav-arrow" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a href="#" class="mob-nav-item">الأخبار<svg class="mob-nav-arrow" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+    <div class="mob-sub-panel" id="sub-company">
+      <p class="mob-sub-panel-title">الشركة</p>
+      <a href="about.html" class="mob-panel-link">من نحن<svg viewBox="0 0 16 16" fill="none"><path d="M4 8h8M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a href="careers.html" class="mob-panel-link">الوظائف<svg viewBox="0 0 16 16" fill="none"><path d="M4 8h8M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+    <div class="mob-sub-panel" id="sub-services">
+      <p class="mob-sub-panel-title">ما نقدمه</p>
+      <a href="services.html" class="mob-panel-link">الخدمات<svg viewBox="0 0 16 16" fill="none"><path d="M4 8h8M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a href="fleet.html" class="mob-panel-link">الأسطول<svg viewBox="0 0 16 16" fill="none"><path d="M4 8h8M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a href="industries.html" class="mob-panel-link">القطاعات التي نخدمها<svg viewBox="0 0 16 16" fill="none"><path d="M4 8h8M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+  </div>
+  <div class="mob-footer">
+    <a href="contact.html" class="mob-footer-cta">اتصل بنا
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 8h8M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</div>
+
+<main>
+
+  <!-- HERO -->
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-content">
+      <div class="page-hero-eyebrow">الأخبار والتحديثات</div>
+      <h1>الأخبار<br><em>والتحديثات</em></h1>
+      <p class="page-hero-sub">توسعات الأسطول، إنجازات المشاريع، رؤى القطاع، وإعلانات الشركة من نوفا تيرا للنقل والخدمات اللوجستية.</p>
+    </div>
+  </div>
+
+  <!-- FEATURED ARTICLE -->
+  <div class="sec">
+    <p class="sec__eyebrow">القصة المميزة</p>
+    <h2 class="sec__title">آخر أخبار <span>نوفا تيرا</span></h2>
+    <div class="featured-card">
+      <div class="featured-img">
+        <div class="featured-img-overlay"></div>
+        <div class="featured-img-emoji">🚛</div>
+        <span class="featured-img-tag">أخبار الشركة</span>
+      </div>
+      <div class="featured-body">
+        <div class="featured-date">يوليو ٢٠٢٦</div>
+        <h2>NOVA Terra تُوسّع أسطولها بـ٢٠ شاحنة Volvo FMX جديدة</h2>
+        <p>أتمّت نوفا تيرا إدراج ٢٠ شاحنة قلابة ثقيلة من طراز Volvo FMX، ما رفع إجمالي طاقة الأسطول إلى أكثر من ١٥٠ مركبة. يدعم هذا التوسع الطلب المتنامي من مقاولي البناء والمشاريع العملاقة في جميع أنحاء المملكة، إذ نُشرت الوحدات الجديدة فور وصولها في مواقع NEOM وبنية الرياض التحتية. كل مركبة مجهزة بنظام تتبع كامل، ومراقبة الإجهاد، وكاميرات النقطة العمياء بشكل قياسي.</p>
+        <a href="#" class="read-more">اقرأ القصة كاملة</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEWS GRID -->
+  <div class="sec" style="padding-top:0;">
+    <p class="sec__eyebrow">جميع القصص</p>
+    <h2 class="sec__title">المزيد من <span>الميدان</span></h2>
+    <div class="news-grid">
+
+      <div class="news-card">
+        <div class="news-card-img">
+          <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=70" alt="النقل الثقيل ورؤية ٢٠٣٠" onerror="this.style.display='none'">
+        </div>
+        <div class="news-card-body">
+          <span class="news-tag">القطاع</span>
+          <div class="news-date">يونيو ٢٠٢٦</div>
+          <h3>رؤية ٢٠٣٠ ومستقبل النقل الثقيل في المملكة العربية السعودية</h3>
+          <a href="#" class="news-read">اقرأ المزيد</a>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <div class="news-card-img">
+          <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&q=70" alt="شهادة ISO 45001" onerror="this.style.display='none'">
+        </div>
+        <div class="news-card-body">
+          <span class="news-tag">إنجاز</span>
+          <div class="news-date">مايو ٢٠٢٦</div>
+          <h3>الحصول على شهادة ISO 45001 — رسم معيار السلامة</h3>
+          <a href="#" class="news-read">اقرأ المزيد</a>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <div class="news-card-img">
+          <img src="https://images.unsplash.com/photo-1519003300449-424ad0405076?w=600&q=70" alt="عقد أعمال الترابة في NEOM" onerror="this.style.display='none'">
+        </div>
+        <div class="news-card-body">
+          <span class="news-tag">عقد</span>
+          <div class="news-date">أبريل ٢٠٢٦</div>
+          <h3>نوفا تيرا تبرم عقدًا لدعم أعمال الترابة في NEOM</h3>
+          <a href="#" class="news-read">اقرأ المزيد</a>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <div class="news-card-img">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=70" alt="جائزة سلامة السائقين" onerror="this.style.display='none'">
+        </div>
+        <div class="news-card-body">
+          <span class="news-tag">السلامة</span>
+          <div class="news-date">مارس ٢٠٢٦</div>
+          <h3>جائزة سلامة السائقين: صفر حوادث في الربع الأول من ٢٠٢٦ في جميع المواقع النشطة</h3>
+          <a href="#" class="news-read">اقرأ المزيد</a>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <div class="news-card-img">
+          <img src="https://images.unsplash.com/photo-1486754735734-325b5831c3ad?w=600&q=70" alt="مكتب جدة الإقليمي" onerror="this.style.display='none'">
+        </div>
+        <div class="news-card-body">
+          <span class="news-tag">الشركة</span>
+          <div class="news-date">فبراير ٢٠٢٦</div>
+          <h3>افتتاح مكتب إقليمي جديد في جدة لدعم نمو منطقة غرب المملكة</h3>
+          <a href="#" class="news-read">اقرأ المزيد</a>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <div class="news-card-img">
+          <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=70" alt="اتجاهات سوق المعدات الثقيلة" onerror="this.style.display='none'">
+        </div>
+        <div class="news-card-body">
+          <span class="news-tag">القطاع</span>
+          <div class="news-date">يناير ٢٠٢٦</div>
+          <h3>اتجاهات سوق المعدات الثقيلة في المملكة ٢٠٢٦ — ما يحتاج المقاولون معرفته</h3>
+          <a href="#" class="news-read">اقرأ المزيد</a>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <div class="news-card-img">
+          <img src="https://images.unsplash.com/photo-1519996529931-28324d5a630e?w=600&q=70" alt="شراكة مقاول EPC" onerror="this.style.display='none'">
+        </div>
+        <div class="news-card-body">
+          <span class="news-tag">الشركة</span>
+          <div class="news-date">ديسمبر ٢٠٢٥</div>
+          <h3>الإعلان عن شراكة مع مقاول EPC رائد لمشاريع ٢٠٢٦</h3>
+          <a href="#" class="news-read">اقرأ المزيد</a>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <div class="news-card-img">
+          <img src="https://images.unsplash.com/photo-1486754735734-325b5831c3ad?w=600&q=70" alt="تجديد شهادة ISO 9001" onerror="this.style.display='none'">
+        </div>
+        <div class="news-card-body">
+          <span class="news-tag">إنجاز</span>
+          <div class="news-date">نوفمبر ٢٠٢٥</div>
+          <h3>برنامج صيانة الأسطول يحقق تجديد شهادة ISO 9001 بصفر عدم مطابقة</h3>
+          <a href="#" class="news-read">اقرأ المزيد</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- NEWSLETTER -->
+  <div class="newsletter-section">
+    <p class="sec__eyebrow" style="text-align:center;">النشرة البريدية</p>
+    <h2 class="sec__title" style="text-align:center;">ابقَ على <span>اطلاع</span></h2>
+    <div class="newsletter-card">
+      <h3>اشترك في أخبار الأسطول</h3>
+      <p>توسعات الأسطول، إنجازات المشاريع، رؤى السلامة، واتجاهات اللوجستيات في قطاع النقل الثقيل بالمملكة — مباشرةً إلى بريدك. بدون رسائل مزعجة. إلغاء الاشتراك في أي وقت.</p>
+      <form class="newsletter-form" onsubmit="event.preventDefault(); this.innerHTML='<p style=color:#CA953D;font-weight:700;>شكرًا — تم اشتراكك.</p>'">
+        <input type="email" class="newsletter-input" placeholder="بريدك@الإلكتروني.com" required>
+        <button type="submit" class="newsletter-btn">اشترك</button>
+      </form>
+      <p class="newsletter-note">نُرسل تحديثًا واحدًا شهريًا. لا نشارك بريدك مع أطراف ثالثة.</p>
+    </div>
+  </div>
+
+  <!-- CTA BANNER -->
+  <div class="cta-banner">
+    <h2>لديك خبر صحفي أو استفسار إعلامي؟</h2>
+    <div class="cta-banner-actions">
+      <a href="mailto:press@novaterra.sa" class="btn-dark">← راسل الفريق الإعلامي</a>
+      <a href="https://wa.me/966503065248" class="btn-wa-dark" target="_blank">واتساب</a>
+    </div>
+  </div>
+
+</main>
+
+<footer class="nova-footer">
+  <div class="nf-content">
+    <div class="nf-inner-wrap">
+      <div class="nf-top">
+        <div class="nf-headline-wrap">
+          <div class="nf-badge">
+            <span class="nf-badge__dot-wrap">
+              <span class="nf-badge__pulse"></span>
+              <span class="nf-badge__core"></span>
+            </span>
+            <span class="nf-badge__label">متاحون في جميع مناطق المملكة الاثنتي عشرة</span>
+          </div>
+          <h2 class="nf-headline">احصل على عرض مخصص لأسطولك بما يلائم مشروعك — خلال ٢٤ ساعة.</h2>
+        </div>
+        <form class="nf-form" onsubmit="return false;">
+          <input type="email" class="nf-form__input" placeholder="أدخل بريدك الإلكتروني" />
+          <button type="submit" class="nf-form__btn">
+            <span>احصل على عرض</span>
+            <span class="nf-form__btn-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
+          </button>
+        </form>
+      </div>
+      <div class="nf-mid">
+        <div class="nf-brand">
+          <img src="../assets/img/logo.png" alt="NOVA TLT" class="nf-brand__logo" />
+        </div>
+        <div class="nf-links-grid">
+          <div class="nf-links__col">
+            <span class="nf-links__title">الشركة</span>
+            <ul class="nf-links__list">
+              <li><a href="about.html">نبذة عنا</a></li>
+              <li><a href="careers.html">وظائف</a></li>
+              <li><a href="#">أخبار</a></li>
+            </ul>
+          </div>
+          <div class="nf-links__col">
+            <span class="nf-links__title">الخدمات</span>
+            <ul class="nf-links__list">
+              <li><a href="services.html">تأجير قلابات</a></li>
+              <li><a href="fleet.html">أسطولنا</a></li>
+              <li><a href="industries.html">القطاعات</a></li>
+            </ul>
+          </div>
+          <div class="nf-links__col">
+            <span class="nf-links__title">تواصل معنا</span>
+            <ul class="nf-links__list">
+              <li><a href="tel:+966503065248">+966 503065248</a></li>
+              <li><a href="mailto:info@novatlt.com">info@novatlt.com</a></li>
+              <li><a href="contact.html">جدة، المملكة العربية السعودية</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="nf-watermark">
+      <svg class="nf-watermark__svg" viewBox="0 0 720 110" preserveAspectRatio="xMidYMid meet" aria-label="NOVA TLT">
+        <text x="50%" y="105" dominant-baseline="alphabetic" text-anchor="middle" textLength="90%" lengthAdjust="spacing" font-size="160" font-weight="700" fill="rgba(255,255,255,0.30)" font-family="ui-sans-serif,system-ui,sans-serif" letter-spacing="-0.05em">NOVA TLT</text>
+      </svg>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){var drops=document.querySelectorAll('[data-nav-drop]');function open(d){d.classList.add('nav-drop--open');d.querySelector('.nav-drop__trigger').setAttribute('aria-expanded','true');}function close(d){d.classList.remove('nav-drop--open');d.querySelector('.nav-drop__trigger').setAttribute('aria-expanded','false');}function closeAll(){drops.forEach(close);}drops.forEach(function(drop){var trigger=drop.querySelector('.nav-drop__trigger');var mob=function(){return window.innerWidth<=1024;};drop.addEventListener('mouseenter',function(){if(!mob())open(drop);});drop.addEventListener('mouseleave',function(){if(!mob())close(drop);});trigger.addEventListener('click',function(e){e.stopPropagation();var o=drop.classList.contains('nav-drop--open');closeAll();if(!o)open(drop);});});document.addEventListener('click',closeAll);document.addEventListener('keydown',function(e){if(e.key==='Escape')closeAll();});})();
+</script>
+<script>
+(function(){var dot=document.getElementById('cursor-dot'),ring=document.getElementById('cursor-ring');if(!dot||!ring)return;var mx=-100,my=-100,rx=-100,ry=-100;document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;});document.querySelectorAll('a,button').forEach(function(el){el.addEventListener('mouseenter',function(){ring.classList.add('is-hover');});el.addEventListener('mouseleave',function(){ring.classList.remove('is-hover');});});function loop(){dot.style.left=mx+'px';dot.style.top=my+'px';rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);}loop();})();
+</script>
+<script>
+(function(){
+  var openBtn=document.getElementById('news-mob-open');
+  var menu=document.getElementById('news-mobile-menu');
+  var closeBtn=document.getElementById('news-mob-close');
+  var backBtn=document.getElementById('news-mob-back');
+  var subItems=menu.querySelectorAll('[data-sub]');
+  var subPanels=menu.querySelectorAll('.mob-sub-panel');
+  function openMenu(){menu.classList.add('is-open');menu.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
+  function closeMenu(){menu.classList.remove('is-open','sub-open');menu.setAttribute('aria-hidden','true');document.body.style.overflow='';subPanels.forEach(function(p){p.classList.remove('active');});}
+  if(openBtn)openBtn.addEventListener('click',openMenu);
+  if(closeBtn)closeBtn.addEventListener('click',closeMenu);
+  if(backBtn)backBtn.addEventListener('click',function(){menu.classList.remove('sub-open');subPanels.forEach(function(p){p.classList.remove('active');});});
+  subItems.forEach(function(item){item.addEventListener('click',function(){var sub=item.getAttribute('data-sub');var panel=document.getElementById('sub-'+sub);if(panel){subPanels.forEach(function(p){p.classList.remove('active');});panel.classList.add('active');menu.classList.add('sub-open');}});});
+})();
+</script>
+<script src="../assets/js/scroll-reveal.js"></script>
+<script src="../assets/js/mobile-menu.js"></script>
+<script src="../assets/js/page-transition.js"></script>
+</body>
+</html>

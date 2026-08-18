@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="ar-SA" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=5" />
+  <title>أسطولنا — NOVA TLT</title>
+  <link rel="preload" href="../assets/fonts/BebasNeuePro-Bold.woff" as="font" type="font/woff" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg" />
+  <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico" />
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="stylesheet" href="../assets/css/cf7.css" />
+  <link rel="stylesheet" href="../assets/css/rtl.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --hero-bg:#0c0b0a;--ink:#efe9df;--ink-dim:#b8b0a4;--gold:#CA953D;--gold-grad:linear-gradient(135deg,#B67C2A 0%,#CA953D 50%,#E5B85A 100%);--line:rgba(239,233,223,.16); }
+    body { background: var(--hero-bg); color: var(--ink); font-family: 'Cairo', ui-sans-serif, system-ui, sans-serif; overflow-x: hidden; }
+    body, .header__menu-item, .header__menu-item .text-hover__elem,
+    .nav-drop__trigger, .nav-drop__trigger .text-hover__elem,
+    .nav-drop__link, .header__btn .text-hover__elem,
+    .mob-nav-item, .mob-panel-link, .mob-sub-panel-title,
+    .mob-footer-cta, h1, h2, h3, h4, p, a, span, button, input {
+      font-family: 'Cairo', ui-sans-serif, system-ui, sans-serif !important;
+    }
+    a { text-decoration: none; color: inherit; }
+    @media (hover: hover) and (pointer: fine) { *, *::before, *::after { cursor: none !important; } }
+    #cursor-dot { position: fixed; pointer-events: none; z-index: 9998; width: 8px; height: 8px; background: #fff; border-radius: 50%; transform: translate(-50%,-50%); left: -100px; top: -100px; will-change: left, top; }
+    #cursor-ring { position: fixed; pointer-events: none; z-index: 9997; width: 28px; height: 28px; border: 1.5px solid rgba(255,255,255,0.7); border-radius: 50%; transform: translate(-50%,-50%); left: -100px; top: -100px; transition: width .3s ease, height .3s ease, border-color .3s ease; will-change: left, top; }
+    #cursor-ring.is-hover { width: 44px; height: 44px; border-color: #CA953D; }
+    .header { position: fixed !important; transform: none !important; background: transparent !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; transition: background 0.35s ease, backdrop-filter 0.35s ease !important; }
+    .header.is-scrolled { background: rgba(10,10,10,0.90) !important; backdrop-filter: blur(14px) !important; -webkit-backdrop-filter: blur(14px) !important; }
+    .header__container { position: relative !important; }
+    .header__menu { position: absolute !important; left: 50% !important; transform: translateX(-50%) !important; background-color: #141414 !important; border: 1px solid rgba(255,255,255,0.1) !important; }
+    .header__menu-item, .header__menu-item .text-hover__elem { color: rgba(255,255,255,0.85) !important; }
+    .header__menu-item:hover { color: #CA953D !important; }
+    .btn { background-color: #141414 !important; border-color: rgba(255,255,255,0.15) !important; color: rgba(255,255,255,0.88) !important; }
+    .btn:hover { color: #fff !important; }
+    .btn._accent { background: linear-gradient(135deg,#B67C2A 0%,#CA953D 50%,#E5B85A 100%) !important; border-color: transparent !important; color: #fff !important; }
+    .header__logo { background: transparent !important; padding: 0 !important; height: auto !important; }
+    .header__logo-img { width: auto !important; height: 52px !important; object-fit: contain; }
+    @media (max-width: 1024px) { .header__logo-img { height: 40px !important; } }
+    .nav-drop { position: relative; display: flex; align-items: center; }
+    .nav-drop__trigger { display: flex; align-items: center; gap: 6px; cursor: pointer; color: rgba(255,255,255,0.85); font-size: inherit; font-family: inherit; font-weight: inherit; letter-spacing: inherit; text-transform: uppercase; background: none; border: none; padding: 0; line-height: inherit; white-space: nowrap; }
+    .nav-drop__trigger .text-hover__elem { color: rgba(255,255,255,0.85); }
+    .nav-drop__chevron { width: 10px; height: 6px; flex-shrink: 0; transition: transform 260ms cubic-bezier(0.23,1,0.32,1); }
+    .nav-drop__chevron path { stroke: rgba(255,255,255,0.7) !important; }
+    .nav-drop--open .nav-drop__chevron { transform: rotate(180deg); }
+    .nav-drop--open .nav-drop__chevron path { stroke: #CA953D !important; }
+    .nav-drop__panel { position: absolute; top: calc(100% + 16px); left: 50%; transform: translateX(-50%) translateY(-8px); background: #0f0f0f; border: 1px solid rgba(255,255,255,0.08); border-radius: 5rem; padding: 6px; min-width: 210px; box-shadow: 0 20px 60px rgba(0,0,0,.30); opacity: 0; pointer-events: none; transition: opacity 220ms ease, transform 220ms cubic-bezier(0.23,1,0.32,1); z-index: 200; }
+    .nav-drop--open .nav-drop__panel { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+    .nav-drop__panel::after { content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%); width: 12px; height: 6px; background: #0f0f0f; clip-path: polygon(50% 0%,0% 100%,100% 100%); }
+    .nav-drop__panel::before { content: ''; position: absolute; top: -16px; left: 0; right: 0; height: 16px; }
+    .nav-drop__link { display: flex; align-items: center; gap: 10px; padding: 11px 16px; border-radius: 9px; color: rgba(255,255,255,0.75); font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; transition: background 160ms ease, color 160ms ease; position: relative; }
+    .nav-drop__link::before { content: ''; display: block; width: 4px; height: 4px; border-radius: 50%; background: #CA953D; opacity: 0; flex-shrink: 0; transition: opacity 160ms ease; }
+    .nav-drop__link:hover { background: rgba(255,255,255,0.07); color: #fff; }
+    .nav-drop__link:hover::before { opacity: 1; }
+    @media (max-width: 1024px) {
+      .nav-drop__trigger { color: #fff; } .nav-drop__trigger .text-hover__elem { color: #fff; }
+      .nav-drop__chevron path { stroke: #fff; }
+      .nav-drop__panel { position: static; transform: none !important; box-shadow: none; border: none; border-radius: 8px; background: rgba(255,255,255,0.08); padding: 6px 0 6px 16px; margin-top: 8px; opacity: 1; pointer-events: auto; display: none; }
+      .nav-drop__panel::after, .nav-drop__panel::before { display: none; }
+      .nav-drop--open .nav-drop__panel { display: block; }
+      .nav-drop__link { color: rgba(255,255,255,0.8); font-size: 18px; padding: 8px 10px; letter-spacing: .05em; }
+    }
+    .text-hover { overflow: hidden; }
+    .text-hover__inner { display: block; position: relative; clip-path: inset(0 -1em 0 -1em); }
+    .text-hover__elem { display: block; }
+    .text-hover__elem-2 { position: absolute; top: 0; left: 0; width: 100%; }
+    .text-hover__char { display: inline-block; transition: transform .35s cubic-bezier(0.76,0,0.24,1); }
+    .text-hover__elem-1 .text-hover__char { transform: translateY(0); }
+    .text-hover__elem-2 .text-hover__char { transform: translateY(115%); }
+    .text-hover:hover .text-hover__elem-1 .text-hover__char { transform: translateY(-115%); }
+    .text-hover:hover .text-hover__elem-2 .text-hover__char { transform: translateY(0); }
+
+    /* Hero */
+    .page-fullhero { position: relative; min-height: 92vh; display: flex; align-items: center; justify-content: center; background-image: url('../assets/img/fleet-hero.webp'); background-size: cover; background-position: center 40%; }
+    .page-fullhero__overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.85) 100%); }
+    .page-fullhero__content { position: relative; z-index: 2; text-align: center; padding: 0 clamp(20px,5vw,80px); }
+    .page-fullhero__eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #CA953D; display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 24px; }
+    .page-fullhero__eyebrow::before, .page-fullhero__eyebrow::after { display: none; }
+    .page-fullhero__title { font-size: clamp(44px,6vw,82px); font-weight: 700; line-height: 0.95; text-transform: uppercase; color: #fff; margin-bottom: 20px; }
+    .page-fullhero__desc { font-size: clamp(13px,1vw,16px); color: rgba(255,255,255,0.65); line-height: 1.65; max-width: 580px; margin: 0 auto 36px; }
+    .hero-scroll-hint { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.35); z-index: 2; }
+    .hero-scroll-hint__line { width: 1px; height: 40px; background: linear-gradient(to bottom, rgba(202,149,61,0.6), transparent); animation: scrollPulse 2s ease-in-out infinite; }
+    @keyframes scrollPulse { 0%,100% { opacity: 0.4; transform: scaleY(1); } 50% { opacity: 1; transform: scaleY(1.3); } }
+
+    /* Stats ticker */
+    .stats-ticker { overflow: hidden; border-top: 1px solid rgba(255,255,255,0.07); border-bottom: 1px solid rgba(255,255,255,0.07); background: #0a0a0a; padding: 0; }
+    .stats-ticker__track { display: flex; width: max-content; animation: tickerScroll 28s linear infinite; }
+    .stats-ticker__track:hover { animation-play-state: paused; }
+    @keyframes tickerScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    .stats-ticker__item { display: flex; align-items: center; gap: 20px; padding: clamp(20px,3vw,32px) clamp(40px,5vw,72px); border-right: 1px solid rgba(255,255,255,0.07); white-space: nowrap; flex-shrink: 0; }
+    .stats-ticker__num { font-size: clamp(28px,3vw,44px); letter-spacing: 0.03em; line-height: 1; background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .stats-ticker__label { font-size: 12px; color: rgba(255,255,255,0.35); letter-spacing: 0.08em; text-transform: uppercase; }
+    .stats-ticker__dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(202,149,61,0.4); flex-shrink: 0; }
+
+    /* Shared section layout */
+    .section-pad { padding: clamp(80px,10vw,140px) clamp(20px,5vw,80px); max-width: 1400px; margin: 0 auto; }
+    .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #CA953D; display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .eyebrow::before { display: none; }
+    .display-title { font-weight: 700; font-size: clamp(36px,4vw,64px); line-height: 0.95; letter-spacing: 0.02em; text-transform: uppercase; color: #fff; }
+    .display-title span { background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .body-text { font-size: clamp(14px,1.1vw,17px); color: var(--ink-dim); line-height: 1.7; }
+
+    /* Feature 4 */
+    .feat4-head { text-align: center; margin-bottom: 56px; }
+    .feat4-title { font-size: clamp(36px,5vw,72px); letter-spacing: 0.02em; color: #fff; line-height: 0.95; margin-bottom: 16px; }
+    .feat4-title span { background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .feat4-desc { font-size: 15px; color: var(--ink-dim); line-height: 1.65; max-width: 560px; margin: 0 auto; }
+    .feat4-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    @media(max-width:900px){ .feat4-grid { grid-template-columns: 1fr; } }
+    .feat4-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 28px; padding: 10px; display: flex; flex-direction: column; }
+    .feat4-card__head { padding: 26px 24px 16px; text-align: center; }
+    .feat4-card__title { font-size: clamp(20px,2vw,26px); letter-spacing: 0.04em; color: #fff; margin-bottom: 8px; line-height: 1; }
+    .feat4-card__desc { font-size: 12px; color: rgba(255,255,255,0.35); line-height: 1.6; }
+    .feat4-widget { flex: 1; background: #0a0a0a; border: 1px solid rgba(255,255,255,0.06); border-radius: 22px; padding: 24px; display: flex; flex-direction: column; gap: 14px; min-height: 280px; }
+    .feat4-widget__header { display: flex; align-items: center; justify-content: space-between; }
+    .feat4-widget__label { font-size: 11px; color: rgba(255,255,255,0.32); display: flex; align-items: center; gap: 6px; }
+    .feat4-widget__dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--gold-grad); }
+    .feat4-widget__badge { font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 100px; background: rgba(202,149,61,0.12); border: 1px solid rgba(202,149,61,0.2); color: #CA953D; }
+    .feat4-stat-big { font-size: 56px; letter-spacing: 0.02em; color: #fff; line-height: 1; }
+    .feat4-bars { display: flex; align-items: flex-end; gap: 5px; height: 72px; }
+    .feat4-bars__bar { flex: 1; border-radius: 3px 3px 0 0; background: rgba(202,149,61,0.25); }
+    .feat4-bars__bar.is-last { background: var(--gold-grad); }
+    .feat4-mini-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .feat4-mini-cell { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 11px 13px; }
+    .feat4-mini-cell__lbl { font-size: 9px; color: rgba(255,255,255,0.28); letter-spacing: 0.09em; text-transform: uppercase; margin-bottom: 4px; }
+    .feat4-mini-cell__val { font-size: 22px; letter-spacing: 0.04em; color: #fff; line-height: 1; }
+    .feat4-mini-cell__val.is-gold { color: #CA953D; }
+    .feat4-donut { display: flex; align-items: center; justify-content: center; }
+    .feat4-row-list { display: flex; flex-direction: column; gap: 9px; }
+    .feat4-row-item { display: flex; align-items: center; justify-content: space-between; font-size: 12px; }
+    .feat4-row-item span:first-child { color: rgba(255,255,255,0.4); }
+    .feat4-row-item span:last-child { color: #fff; font-weight: 600; }
+    .feat4-progress-bar { height: 5px; background: rgba(255,255,255,0.06); border-radius: 3px; }
+    .feat4-progress-bar__fill { height: 100%; border-radius: 3px; background: var(--gold-grad); }
+    .feat4-bottom-bar { display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 11px 14px; }
+    .feat4-bottom-bar span:first-child { font-size: 11px; color: rgba(255,255,255,0.32); }
+    .feat4-bottom-bar span:last-child { font-size: 18px; letter-spacing: 0.04em; color: #CA953D; }
+
+    /* Feature 5 */
+    .feat5-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px,6vw,100px); align-items: center; }
+    @media(max-width:960px){ .feat5-grid { grid-template-columns: 1fr; } }
+    .feat5-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 100px; background: rgba(202,149,61,0.08); border: 1px solid rgba(202,149,61,0.2); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #CA953D; margin-bottom: 20px; }
+    .feat5-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #CA953D; }
+    .feat5-title { font-size: clamp(36px,4.5vw,68px); letter-spacing: 0.02em; color: #fff; line-height: 0.95; margin-bottom: 18px; }
+    .feat5-title span { background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .feat5-desc { font-size: 15px; color: var(--ink-dim); line-height: 1.65; max-width: 440px; margin-bottom: 36px; }
+    .feat5-items { display: flex; flex-direction: column; gap: 20px; margin-bottom: 36px; }
+    .feat5-item { display: flex; align-items: flex-start; gap: 14px; }
+    .feat5-item__icon { width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0; background: rgba(202,149,61,0.1); border: 1px solid rgba(202,149,61,0.2); display: flex; align-items: center; justify-content: center; }
+    .feat5-item__icon svg { width: 18px; height: 18px; stroke: #CA953D; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .feat5-item__title { font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 3px; }
+    .feat5-item__sub { font-size: 12px; color: rgba(255,255,255,0.38); line-height: 1.5; }
+    .feat5-panel { position: relative; min-height: 460px; border-radius: 16px; padding: 32px; }
+    .feat5-panel-inner { position: relative; height: 380px; width: 100%; max-width: 420px; margin: 0 auto; }
+    .feat5-card { position: absolute; background: rgba(16,16,16,0.97); border: 1px solid rgba(255,255,255,0.09); border-radius: 10px; padding: 16px 20px; box-shadow: 0 16px 48px rgba(0,0,0,0.45); backdrop-filter: blur(4px); }
+    .feat5-card--1 { top: 0; left: 0; width: 260px; }
+    .feat5-card--2 { top: 112px; right: 0; width: 240px; z-index: 2; }
+    .feat5-card--3 { bottom: 32px; left: 40px; width: 260px; }
+    .feat5-card__label { font-size: 10px; color: #CA953D; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
+    .feat5-card__title { font-size: 15px; font-weight: 600; color: #fff; line-height: 1.2; margin-bottom: 10px; }
+    .feat5-card__tags { display: flex; gap: 6px; margin-bottom: 10px; }
+    .feat5-card__tag { font-size: 9px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; padding: 3px 8px; border-radius: 5px; }
+    .feat5-card__tag--gold { background: rgba(202,149,61,0.15); color: #CA953D; }
+    .feat5-card__tag--dim { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.45); }
+    .feat5-card__tag--green { background: rgba(34,197,94,0.10); color: #16a34a; }
+    .feat5-card__tag--purple { background: rgba(168,85,247,0.10); color: #9333ea; }
+    .feat5-card__meta { font-size: 11px; color: rgba(255,255,255,0.38); line-height: 1.7; }
+    .feat5-bar { height: 4px; border-radius: 2px; background: rgba(255,255,255,0.08); margin-bottom: 4px; }
+    .feat5-bar__fill { height: 100%; border-radius: 2px; background: var(--gold-grad); }
+    .feat5-bar-row { display: flex; justify-content: space-between; font-size: 9px; color: rgba(255,255,255,0.35); margin-bottom: 8px; }
+    @media(max-width:960px) { .feat5-panel { min-height: auto; padding: 20px; } .feat5-panel-inner { height: auto; display: flex; flex-direction: column; gap: 14px; } .feat5-card { position: static; width: 100% !important; } }
+
+    /* Fleet showcase */
+    .fleet-showcase { background: #0a0a0a; }
+    .fleet-showcase__inner { max-width: 1400px; margin: 0 auto; padding: clamp(80px,10vw,140px) clamp(20px,5vw,80px); }
+    .fleet-showcase__head { margin-bottom: 64px; text-align: center; }
+    .fleet-showcase__head .eyebrow { justify-content: center; }
+    .fleet-showcase__layout { display: grid; grid-template-columns: 380px 1fr; gap: 0; min-height: 560px; }
+    @media (max-width: 1024px) { .fleet-showcase__layout { grid-template-columns: 1fr; } }
+    .fleet-nav { border-right: 1px solid rgba(255,255,255,0.07); }
+    .fleet-nav__item { display: flex; align-items: flex-start; gap: 20px; padding: 28px 40px 28px 0; border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer; position: relative; transition: background 0.3s; }
+    .fleet-nav__item::after { content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 2px; background: var(--gold-grad); transform: scaleY(0); transition: transform 0.4s cubic-bezier(0.76,0,0.24,1); }
+    .fleet-nav__item.is-active::after, .fleet-nav__item:hover::after { transform: scaleY(1); }
+    .fleet-nav__item.is-active { background: rgba(202,149,61,0.04); }
+    .fleet-nav__num { font-size: 12px; letter-spacing: 0.1em; color: rgba(255,255,255,0.2); padding-top: 4px; flex-shrink: 0; min-width: 28px; transition: color 0.3s; }
+    .fleet-nav__item.is-active .fleet-nav__num { color: #CA953D; }
+    .fleet-nav__info { display: flex; flex-direction: column; gap: 4px; }
+    .fleet-nav__badge { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(202,149,61,0.6); transition: color 0.3s; }
+    .fleet-nav__item.is-active .fleet-nav__badge { color: #CA953D; }
+    .fleet-nav__name { font-size: clamp(20px,2vw,30px); letter-spacing: 0.03em; color: rgba(255,255,255,0.45); line-height: 1; margin: 0; transition: color 0.3s; }
+    .fleet-nav__item.is-active .fleet-nav__name, .fleet-nav__item:hover .fleet-nav__name { color: #fff; }
+    .fleet-panel { padding-right: clamp(32px,4vw,64px); }
+    .fleet-panel__pane { display: none; padding: 0 clamp(32px,4vw,64px); }
+    .fleet-panel__pane.is-active { display: block; animation: paneIn 0.45s cubic-bezier(0.23,1,0.32,1) forwards; }
+    @keyframes paneIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .fleet-panel__title { font-size: clamp(32px,3.5vw,56px); letter-spacing: 0.02em; color: #fff; line-height: 0.95; margin-bottom: 20px; }
+    .fleet-panel__desc { font-size: 15px; color: var(--ink-dim); line-height: 1.7; max-width: 520px; margin-bottom: 44px; border-right: 2px solid rgba(202,149,61,0.3); padding-right: 18px; }
+    .fleet-specs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: rgba(255,255,255,0.05); border-radius: 16px; overflow: hidden; margin-bottom: 36px; }
+    @media (max-width: 640px) { .fleet-specs-grid { grid-template-columns: 1fr 1fr; } }
+    .fleet-spec-cell { background: rgba(10,10,10,0.9); padding: 24px 20px; transition: background 0.3s; }
+    .fleet-spec-cell:hover { background: rgba(202,149,61,0.06); }
+    .fleet-spec-cell__key { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.3); margin-bottom: 8px; }
+    .fleet-spec-cell__val { font-size: clamp(24px,2.2vw,36px); letter-spacing: 0.03em; color: #fff; line-height: 1; }
+    .fleet-spec-cell__val.is-gold { background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .fleet-panel__cta { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+    .fleet-panel__cta-text { font-size: 18px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.5); transition: color 0.3s; }
+    .fleet-panel__cta:hover .fleet-panel__cta-text { color: #CA953D; }
+    .fleet-panel__cta-arrow { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; transition: border-color 0.3s, background 0.3s; }
+    .fleet-panel__cta:hover .fleet-panel__cta-arrow { border-color: #CA953D; background: rgba(202,149,61,0.1); }
+    @media (max-width: 1024px) { .fleet-nav { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); padding-right: 0; padding-bottom: 0; display: grid; grid-template-columns: 1fr 1fr; } .fleet-panel { padding-right: 0; padding-top: 40px; } .fleet-panel__pane { padding: 0; } }
+    @media (max-width: 560px) { .fleet-nav { grid-template-columns: 1fr; } }
+    @media (max-width: 768px) { .fleet-nav { display: none; } }
+
+    /* Maintenance */
+    .maint-sec { background: #080808; }
+    .maint-carousel { position: relative; margin-top: 56px; }
+    .maint-carousel-outer { border-radius: 24px; overflow: hidden; background: rgba(255,255,255,0.04); }
+    .maint-track { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .maint-carousel-nav { display: none; }
+    .maint-item { background: #0a0a0a; padding: clamp(32px,4vw,52px); display: flex; gap: 24px; transition: background 0.35s; position: relative; overflow: hidden; }
+    @media (max-width: 768px) { .maint-track { display: flex; grid-template-columns: unset; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; } .maint-track::-webkit-scrollbar { display: none; } .maint-carousel-nav { display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 28px; } .maint-item { flex: 0 0 100%; scroll-snap-align: start; } }
+    .maint-nav-btn { width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(202,149,61,0.35); background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #CA953D; transition: background 0.25s, border-color 0.25s; }
+    .maint-nav-btn:hover { background: rgba(202,149,61,0.1); border-color: rgba(202,149,61,0.7); }
+    .maint-nav-btn svg { width: 16px; height: 16px; }
+    .maint-dots { display: flex; gap: 8px; align-items: center; }
+    .maint-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.18); transition: background 0.25s, transform 0.25s; cursor: pointer; }
+    .maint-dot.is-active { background: #CA953D; transform: scale(1.4); }
+    .maint-item::before { content: ''; position: absolute; inset: 0; background: radial-gradient(60% 60% at 20% 20%, rgba(202,149,61,0.07), transparent); opacity: 0; transition: opacity 0.4s; }
+    .maint-item:hover { background: rgba(202,149,61,0.03); }
+    .maint-item:hover::before { opacity: 1; }
+    .maint-icon { width: 48px; height: 48px; border-radius: 12px; flex-shrink: 0; background: rgba(202,149,61,0.1); border: 1px solid rgba(202,149,61,0.2); display: flex; align-items: center; justify-content: center; }
+    .maint-icon svg { width: 22px; height: 22px; stroke: #CA953D; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .maint-title { font-size: clamp(18px,1.8vw,26px); letter-spacing: 0.04em; color: #fff; margin-bottom: 10px; line-height: 1; }
+    .maint-text { font-size: 13.5px; color: var(--ink-dim); line-height: 1.65; }
+
+    /* Gold CTA */
+    .gold-btn { display: inline-flex; align-items: center; gap: 8px; padding: 16px 40px; border-radius: 5rem; background: var(--gold-grad); font-size: 20px; letter-spacing: 0.04em; color: #fff; text-decoration: none; border: none; cursor: pointer; box-shadow: 0 0 14px rgba(202,149,61,0.45), 0 0 36px rgba(202,149,61,0.18); transition: filter 150ms ease; }
+    .gold-btn:hover { filter: brightness(1.1); }
+
+    /* Scroll reveal */
+    .sr { opacity: 0; transform: translateY(32px); transition: opacity 0.7s cubic-bezier(0.23,1,0.32,1), transform 0.7s cubic-bezier(0.23,1,0.32,1); }
+    .sr.is-visible { opacity: 1; transform: translateY(0); }
+    .sr-d1 { transition-delay: 0.1s; }
+    .sr-d2 { transition-delay: 0.2s; }
+
+    /* Footer */
+    .nova-footer { position: relative; width: 100%; overflow: hidden; background: radial-gradient(ellipse 180% 140% at 10% 110%, rgba(202,149,61,0.85) 0%, rgba(160,110,20,0.45) 38%, #0c0b0a 65%), #0c0b0a; }
+    .nf-content { position: relative; z-index: 10; width: 100%; }
+    .nf-inner-wrap { width: 100%; margin: 0 auto; max-width: 1280px; padding: 0 clamp(24px,4vw,48px); }
+    .nf-top { display: flex; flex-direction: column; gap: 32px; padding-top: 24px; padding-bottom: 40px; }
+    .nf-headline-wrap { display: flex; flex-direction: column; gap: 20px; max-width: 576px; }
+    .nf-badge { display: flex; align-items: center; gap: 10px; }
+    .nf-badge__dot-wrap { position: relative; display: flex; width: 8px; height: 8px; flex-shrink: 0; }
+    .nf-badge__pulse { position: absolute; inset: 0; border-radius: 50%; background: #CA953D; opacity: 0.75; animation: nf-ping 1.2s cubic-bezier(0,0,0.2,1) infinite; }
+    .nf-badge__core { position: relative; width: 8px; height: 8px; border-radius: 50%; background: #CA953D; }
+    @keyframes nf-ping { 0% { transform: scale(1); opacity: 0.75; } 75%, 100% { transform: scale(2.2); opacity: 0; } }
+    .nf-badge__label { font-size: 14px; font-weight: 500; color: #fff; }
+    .nf-headline { color: #fff; font-size: clamp(30px,4vw,48px); line-height: 1.25; font-weight: 300; letter-spacing: -0.02em; margin: 0; }
+    .nf-form { display: flex; width: 100%; max-width: 384px; flex-shrink: 0; align-items: center; gap: 8px; }
+    .nf-form__input { flex: 1; height: 48px; padding: 0 16px; font-size: 14px; color: #fff; background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.05); outline: none; transition: border-color 180ms ease; }
+    .nf-form__input::placeholder { color: rgba(255,255,255,0.70); }
+    .nf-form__btn { display: flex; align-items: center; gap: 8px; height: 48px; flex-shrink: 0; cursor: pointer; padding: 0 20px; font-size: 14px; font-weight: 600; color: #fff; background: #CA953D; border: none; transition: all 180ms ease; }
+    .nf-form__btn-icon { display: flex; width: 16px; height: 16px; align-items: center; justify-content: center; transition: transform 300ms ease; }
+    .nf-form__btn-icon svg { width: 100%; height: 100%; }
+    .nf-form__btn:hover .nf-form__btn-icon { transform: translateX(-2px); }
+    .nf-mid { display: flex; flex-direction: column; gap: 40px; padding-bottom: 64px; }
+    .nf-brand { display: flex; flex: 1; align-items: center; gap: 12px; }
+    .nf-brand__logo { height: 52px; width: auto; display: block; }
+    .nf-links-grid { display: grid; grid-template-columns: repeat(2, auto); gap: 32px 48px; }
+    .nf-links__title { font-size: 14px; font-weight: 500; letter-spacing: 0.05em; color: rgba(255,255,255,0.90); text-transform: uppercase; display: block; margin-bottom: 16px; }
+    .nf-links__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+    .nf-links__list a { font-size: 14px; color: rgba(255,255,255,0.70); text-decoration: none; transition: color 180ms ease; }
+    .nf-links__list a:hover { color: #fff; }
+    .nf-watermark { display: flex; width: 100%; align-items: center; justify-content: center; }
+    .nf-watermark__svg { height: auto; width: 100%; user-select: none; }
+    @media (min-width: 640px) { .nf-links-grid { grid-template-columns: repeat(3, auto); } }
+    @media (min-width: 1024px) { .nf-top { flex-direction: row; align-items: flex-end; justify-content: space-between; padding-top: 40px; padding-bottom: 56px; } .nf-headline-wrap { flex: 1; } .nf-mid { flex-direction: row; align-items: flex-start; gap: 32px; } .nf-links-grid { gap: 32px 64px; } }
+
+    /* Language switcher */
+    .nt-lang-wrap { position: relative; }
+    .nt-lang-menu { display: none; position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: #1a1a1a; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 6px; min-width: 120px; z-index: 300; }
+    .nt-lang-wrap.is-open .nt-lang-menu { display: block; }
+    .nt-lang-option { display: block; padding: 8px 12px; font-size: 13px; color: rgba(255,255,255,0.7); border-radius: 5px; transition: background 150ms, color 150ms; }
+    .nt-lang-option:hover, .nt-lang-option.is-active { background: rgba(255,255,255,0.08); color: #fff; }
+  </style>
+</head>
+<body>
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<header class="header">
+  <div class="container header__container">
+    <a href="../index.html" class="header__logo">
+      <img src="../assets/img/logo.png" alt="NOVA TLT" class="header__logo-img" />
+    </a>
+    <nav class="header__menu" data-da=".header__hamburger, 1024, 0">
+      <a href="../index.html" class="header__menu-item text-hover">
+        <span class="text-hover__inner">
+          <span class="text-hover__elem text-hover__elem-1">الرئيسية</span>
+          <span class="text-hover__elem text-hover__elem-2 _c-dark">الرئيسية</span>
+        </span>
+      </a>
+      <div class="nav-drop header__menu-item" data-nav-drop>
+        <button class="nav-drop__trigger text-hover" aria-expanded="false" aria-haspopup="true">
+          <span class="text-hover__inner">
+            <span class="text-hover__elem text-hover__elem-1">الشركة</span>
+            <span class="text-hover__elem text-hover__elem-2 _c-dark">الشركة</span>
+          </span>
+          <svg class="nav-drop__chevron" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nav-drop__panel" role="menu">
+          <a href="about.html" class="nav-drop__link" role="menuitem">نبذة عنا</a>
+          <a href="careers.html" class="nav-drop__link" role="menuitem">وظائف</a>
+        </div>
+      </div>
+      <div class="nav-drop header__menu-item" data-nav-drop>
+        <button class="nav-drop__trigger text-hover" aria-expanded="false" aria-haspopup="true">
+          <span class="text-hover__inner">
+            <span class="text-hover__elem text-hover__elem-1">ما نقدمه</span>
+            <span class="text-hover__elem text-hover__elem-2 _c-dark">ما نقدمه</span>
+          </span>
+          <svg class="nav-drop__chevron" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nav-drop__panel" role="menu">
+          <a href="services.html" class="nav-drop__link" role="menuitem">الخدمات</a>
+          <a href="fleet.html" class="nav-drop__link" role="menuitem">الأسطول</a>
+          <a href="industries.html" class="nav-drop__link" role="menuitem">القطاعات</a>
+        </div>
+      </div>
+      <a href="projects.html" class="header__menu-item text-hover">
+        <span class="text-hover__inner"><span class="text-hover__elem text-hover__elem-1">المشاريع</span><span class="text-hover__elem text-hover__elem-2 _c-dark">المشاريع</span></span>
+      </a>
+      <a href="news.html" class="header__menu-item text-hover">
+        <span class="text-hover__inner"><span class="text-hover__elem text-hover__elem-1">الأخبار</span><span class="text-hover__elem text-hover__elem-2 _c-dark">الأخبار</span></span>
+      </a>
+    </nav>
+    <div class="header__actions">
+      <button type="button" class="header__hamburger-btn btn" aria-label="القائمة">
+        <span class="is-not-active">القائمة</span>
+        <span class="is-active">إغلاق</span>
+      </button>
+      <a href="contact.html" class="mob-header-cta"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.47 11.47 0 003.58.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.58a1 1 0 01-.25 1.01l-2.2 2.2z"/></svg></a>
+      <div class="nt-lang-wrap" id="nt-lang-wrap">
+        <button type="button" class="header__lang-heading btn" id="nt-lang-btn">
+          <span class="btn__inner"><span class="nt-lang-label">عربي</span></span>
+        </button>
+        <div class="nt-lang-menu" id="nt-lang-menu">
+          <a href="../fleet.html" class="nt-lang-option">English</a>
+          <a href="#" class="nt-lang-option is-active">العربية</a>
+        </div>
+      </div>
+      <button type="button" class="header__btn text-hover btn _accent" aria-label="تواصل معنا" data-da=".header__hamburger, 1024, 1" data-contact-modal>
+        <span class="btn__inner text-hover__inner">
+          <span class="text-hover__elem text-hover__elem-1">تواصل معنا</span>
+          <span class="text-hover__elem text-hover__elem-2">تواصل معنا</span>
+        </span>
+      </button>
+    </div>
+  </div>
+  <div class="header__hamburger container"></div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="page-fullhero">
+    <div class="page-fullhero__overlay"></div>
+    <div class="page-fullhero__content">
+      <p class="page-fullhero__eyebrow">أسطولنا</p>
+      <h1 class="page-fullhero__title">شاحنات حديثة. صفر توقف.</h1>
+      <p class="page-fullhero__desc">تمتلك نوفا تيرا أسطولاً حديثاً من المركبات المجهزة لأقسى ظروف العمل في المواقع — من التضاريس الصحراوية إلى مواقع البناء الحضري. متاحة مع أو بدون مشغلين معتمدين.</p>
+      <a href="https://wa.me/966503065248" class="gold-btn" target="_blank" rel="noopener">احصل على عرض أسطول</a>
+    </div>
+    <div class="hero-scroll-hint">
+      <div class="hero-scroll-hint__line"></div>
+      <span>تمرير</span>
+    </div>
+  </section>
+
+  <!-- STATS TICKER -->
+  <div class="stats-ticker">
+    <div class="stats-ticker__track">
+      <div class="stats-ticker__item"><span class="stats-ticker__num">+150</span><span class="stats-ticker__label">مركبة ثقيلة</span></div>
+      <div class="stats-ticker__item"><span class="stats-ticker__num">4</span><span class="stats-ticker__label">فئات أسطول</span></div>
+      <div class="stats-ticker__item"><span class="stats-ticker__num">60 طن</span><span class="stats-ticker__label">حمولة قصوى</span></div>
+      <div class="stats-ticker__item"><span class="stats-ticker__num">12</span><span class="stats-ticker__label">منطقة في المملكة</span></div>
+      <div class="stats-ticker__item"><span class="stats-ticker__num">24/7</span><span class="stats-ticker__label">إرسال متاح</span></div>
+      <div class="stats-ticker__item"><span class="stats-ticker__num">4 ساعات</span><span class="stats-ticker__label">ضمان الاستبدال</span></div>
+      <div class="stats-ticker__item"><span class="stats-ticker__num">+500</span><span class="stats-ticker__label">مشروع منجز</span></div>
+      <div class="stats-ticker__item"><span class="stats-ticker__num">100%</span><span class="stats-ticker__label">تتبع GPS</span></div>
+      <div class="stats-ticker__item"><span class="stats-ticker__num">20 عاماً</span><span class="stats-ticker__label">خبرة في القطاع</span></div>
+      <div class="stats-ticker__item"><span class="stats-ticker__num">ISO</span><span class="stats-ticker__label">عمليات معتمدة</span></div>
+      <div class="stats-ticker__item"><span class="stats-ticker__num">+150</span><span class="stats-ticker__label">مركبة ثقيلة</span></div>
+      <div class="stats-ticker__item"><span class="stats-ticker__num">4</span><span class="stats-ticker__label">فئات أسطول</span></div>
+      <div class="stats-ticker__item"><span class="stats-ticker__num">60 طن</span><span class="stats-ticker__label">حمولة قصوى</span></div>
+      <div class="stats-ticker__item"><span class="stats-ticker__num">12</span><span class="stats-ticker__label">منطقة في المملكة</span></div>
+      <div class="stats-ticker__item"><span class="stats-ticker__num">24/7</span><span class="stats-ticker__label">إرسال متاح</span></div>
+      <div class="stats-ticker__item"><span class="stats-ticker__num">4 ساعات</span><span class="stats-ticker__label">ضمان الاستبدال</span></div>
+      <div class="stats-ticker__item"><span class="stats-ticker__num">+500</span><span class="stats-ticker__label">مشروع منجز</span></div>
+      <div class="stats-ticker__item"><span class="stats-ticker__num">100%</span><span class="stats-ticker__label">تتبع GPS</span></div>
+      <div class="stats-ticker__item"><span class="stats-ticker__num">20 عاماً</span><span class="stats-ticker__label">خبرة في القطاع</span></div>
+      <div class="stats-ticker__item"><span class="stats-ticker__num">ISO</span><span class="stats-ticker__label">عمليات معتمدة</span></div>
+    </div>
+  </div>
+
+  <!-- FEATURE-4: Fleet Stats Cards -->
+  <section style="background:#0a0a0a;border-top:1px solid rgba(255,255,255,0.06);">
+    <div class="section-pad">
+      <div class="feat4-head sr">
+        <h2 class="feat4-title">اعرف أسطولك.<br><span>تحرك بذكاء.</span></h2>
+        <p class="feat4-desc">رؤية كاملة على معدلات الانتشار والاستخدام والتسليم في الوقت المحدد — لتبقى مشاريعك دائماً في الموعد.</p>
+      </div>
+      <div class="feat4-grid">
+        <div class="feat4-card sr">
+          <div class="feat4-card__head">
+            <h3 class="feat4-card__title">الانتشار الفعلي</h3>
+            <p class="feat4-card__desc">عدد المركبات المشغّلة في الوقت الفعلي والاتجاه الشهري — تعرّف على كم شاحنة على أرض الواقع في أي لحظة.</p>
+          </div>
+          <div class="feat4-widget">
+            <div class="feat4-widget__header">
+              <span class="feat4-widget__label"><span class="feat4-widget__dot"></span>مركبات مباشرة</span>
+              <span style="font-size:11px;color:#CA953D;">● نشطة</span>
+            </div>
+            <div style="display:flex;align-items:flex-end;justify-content:space-between;">
+              <span class="feat4-stat-big">47</span>
+              <span style="font-size:13px;color:#CA953D;font-weight:600;">+18%</span>
+            </div>
+            <div class="feat4-bars">
+              <div class="feat4-bars__bar" style="height:42%;"></div>
+              <div class="feat4-bars__bar" style="height:60%;"></div>
+              <div class="feat4-bars__bar" style="height:38%;"></div>
+              <div class="feat4-bars__bar" style="height:75%;"></div>
+              <div class="feat4-bars__bar" style="height:54%;"></div>
+              <div class="feat4-bars__bar" style="height:85%;"></div>
+              <div class="feat4-bars__bar is-last" style="height:100%;"></div>
+            </div>
+            <div class="feat4-mini-grid">
+              <div class="feat4-mini-cell"><p class="feat4-mini-cell__lbl">متوسط الدورة</p><p class="feat4-mini-cell__val">3.2 س</p></div>
+              <div class="feat4-mini-cell"><p class="feat4-mini-cell__lbl">وقت التوقف</p><p class="feat4-mini-cell__val is-gold">-1.4%</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="feat4-card sr sr-d1">
+          <div class="feat4-card__head">
+            <h3 class="feat4-card__title">معدل استخدام الأسطول</h3>
+            <p class="feat4-card__desc">معدلات الاستخدام حسب فئة الأسطول — حدد أي أنواع الشاحنات تحقق أعلى كفاءة للمشروع.</p>
+          </div>
+          <div class="feat4-widget">
+            <div class="feat4-widget__header">
+              <span class="feat4-widget__label">توزيع الفئات</span>
+              <span style="font-size:11px;color:rgba(255,255,255,0.3);">4 أنواع</span>
+            </div>
+            <div class="feat4-donut">
+              <div style="position:relative;width:110px;height:110px;display:flex;align-items:center;justify-content:center;">
+                <svg viewBox="0 0 110 110" style="width:110px;height:110px;transform:rotate(-90deg);">
+                  <circle cx="55" cy="55" r="44" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="10"/>
+                  <circle cx="55" cy="55" r="44" fill="none" stroke="url(#dGold2)" stroke-width="10" stroke-dasharray="234 276" stroke-linecap="round"/>
+                  <defs><linearGradient id="dGold2" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#B67C2A"/><stop offset="100%" stop-color="#E5B85A"/></linearGradient></defs>
+                </svg>
+                <span style="position:absolute;font-size:28px;letter-spacing:0.04em;color:#fff;line-height:1;">85%</span>
+              </div>
+            </div>
+            <div class="feat4-row-list">
+              <div class="feat4-row-item"><span>شاحنات قلابة قياسية</span><span>84%</span></div>
+              <div class="feat4-row-item"><span>شاحنات ثقيلة الحمولة</span><span>91%</span></div>
+              <div class="feat4-row-item"><span>ADTs مفصلية</span><span>76%</span></div>
+            </div>
+            <div style="display:flex;gap:5px;">
+              <div style="background:var(--gold-grad);height:5px;border-radius:3px;flex:85;"></div>
+              <div style="background:rgba(255,255,255,0.1);height:5px;border-radius:3px;flex:15;"></div>
+            </div>
+            <div class="feat4-bottom-bar"><span>المتوسط العام</span><span>في تسارع</span></div>
+          </div>
+        </div>
+        <div class="feat4-card sr sr-d2">
+          <div class="feat4-card__head">
+            <h3 class="feat4-card__title">أداء التسليم</h3>
+            <p class="feat4-card__desc">التسليم في الوقت المحدد وكفاءة الحمولة والامتثال للسلامة — مؤشرات الأداء التي تحمي الجدول الزمني لمشروعك.</p>
+          </div>
+          <div class="feat4-widget">
+            <div class="feat4-widget__header">
+              <span class="feat4-widget__label">درجة الأداء</span>
+              <span class="feat4-widget__badge">+4.8%</span>
+            </div>
+            <div class="feat4-stat-big">96</div>
+            <div style="display:flex;flex-direction:column;gap:14px;">
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,0.32);margin-bottom:6px;"><span>التسليم في الوقت</span><span>94%</span></div>
+                <div class="feat4-progress-bar"><div class="feat4-progress-bar__fill" style="width:94%;"></div></div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,0.32);margin-bottom:6px;"><span>هدف الحمولة</span><span>108%</span></div>
+                <div class="feat4-progress-bar"><div class="feat4-progress-bar__fill" style="width:100%;"></div></div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,0.32);margin-bottom:6px;"><span>درجة السلامة</span><span>99%</span></div>
+                <div class="feat4-progress-bar"><div class="feat4-progress-bar__fill" style="width:99%;"></div></div>
+              </div>
+            </div>
+            <div class="feat4-bottom-bar"><span>الاتجاه العام</span><span>ممتاز</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURE-5: Fleet Intelligence -->
+  <section style="background:#080808;border-top:1px solid rgba(255,255,255,0.06);">
+    <div class="section-pad">
+      <div class="feat5-grid">
+        <div class="sr">
+          <div class="feat5-badge">ذكاء الأسطول</div>
+          <h2 class="feat5-title">كل مركبة مُتتبَّعة.<br><span>كل عمل تحت السيطرة.</span></h2>
+          <p class="feat5-desc">يمنح مركز عمليات نوفا تيرا مديري المشاريع رؤية كاملة على تحركات الأسطول وحالة الأعمال وأداء التسليم — على مدار الساعة عبر جميع مناطق المملكة الاثنتي عشرة.</p>
+          <div class="feat5-items">
+            <div class="feat5-item">
+              <div class="feat5-item__icon"><svg viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
+              <div>
+                <p class="feat5-item__title">رؤية الأسطول</p>
+                <p class="feat5-item__sub">تتبع GPS مباشر لجميع المركبات — متاح للعملاء المخولين ومديري المشاريع على مدار الساعة</p>
+              </div>
+            </div>
+            <div class="feat5-item">
+              <div class="feat5-item__icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+              <div>
+                <p class="feat5-item__title">سرعة الانتشار</p>
+                <p class="feat5-item__sub">تأكيد الشاحنات وتواجدها في الموقع خلال 4 ساعات من بدء العمل — مدعوم بضمان استبدال ملزم</p>
+              </div>
+            </div>
+            <div class="feat5-item">
+              <div class="feat5-item__icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+              <div>
+                <p class="feat5-item__title">تنبيهات استباقية</p>
+                <p class="feat5-item__sub">إشارات الصيانة التنبؤية تمنع أعطال المعدات قبل أن تؤخر الجدول الزمني لمشروعك</p>
+              </div>
+            </div>
+          </div>
+          <a href="https://wa.me/966503065248" class="gold-btn" target="_blank" rel="noopener">احصل على عرض أسطول</a>
+        </div>
+        <div class="feat5-panel sr sr-d2">
+          <div class="feat5-panel-inner">
+            <div class="feat5-card feat5-card--1">
+              <p class="feat5-card__label">الإرسال المباشر</p>
+              <p class="feat5-card__title">47 شاحنة نشطة</p>
+              <div class="feat5-card__tags">
+                <span class="feat5-card__tag feat5-card__tag--gold">مباشر</span>
+                <span class="feat5-card__tag feat5-card__tag--dim">في الطريق</span>
+              </div>
+              <div class="feat5-card__meta">
+                <div>المنطقة: المملكة (12 منطقة)</div>
+                <div>الأسطول: جميع الفئات</div>
+                <div>الحالة: يعمل بكامل طاقته</div>
+              </div>
+            </div>
+            <div class="feat5-card feat5-card--2">
+              <p class="feat5-card__label">التغطية الإقليمية</p>
+              <p class="feat5-card__title">الانتشار الفعلي</p>
+              <div class="feat5-bar"><div class="feat5-bar__fill" style="width:88%;"></div></div>
+              <div class="feat5-bar-row"><span>الرياض</span><span>88%</span></div>
+              <div class="feat5-bar"><div class="feat5-bar__fill" style="width:72%;"></div></div>
+              <div class="feat5-bar-row" style="margin-bottom:0;"><span>المنطقة الشرقية</span><span>72%</span></div>
+            </div>
+            <div class="feat5-card feat5-card--3">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+                <p class="feat5-card__label" style="margin-bottom:0;">حالة الأعمال</p>
+                <span class="feat5-card__label" style="margin-bottom:0;">اليوم</span>
+              </div>
+              <p class="feat5-card__title">مكتمل 94%</p>
+              <div class="feat5-card__tags">
+                <span class="feat5-card__tag feat5-card__tag--green">في الموعد</span>
+                <span class="feat5-card__tag feat5-card__tag--purple">متزامن</span>
+              </div>
+              <p class="feat5-card__meta">جميع الأعمال المكتملة تُرسل تلقائياً لتقارير العملاء</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLEET SHOWCASE -->
+  <section class="fleet-showcase">
+    <div class="fleet-showcase__inner">
+      <div class="fleet-showcase__head sr">
+        <p class="eyebrow">فئات الأسطول</p>
+        <h2 class="display-title">كل مركبة. <span>كل عمل.</span></h2>
+      </div>
+      <div class="fleet-showcase__layout">
+        <nav class="fleet-nav" aria-label="فئات الأسطول">
+          <div class="fleet-nav__item is-active" data-fleet="0">
+            <span class="fleet-nav__num">01</span>
+            <div class="fleet-nav__info">
+              <span class="fleet-nav__badge">السلسلة القياسية</span>
+              <h3 class="fleet-nav__name">شاحنات قلابة قياسية</h3>
+            </div>
+          </div>
+          <div class="fleet-nav__item" data-fleet="1">
+            <span class="fleet-nav__num">02</span>
+            <div class="fleet-nav__info">
+              <span class="fleet-nav__badge">السلسلة الثقيلة</span>
+              <h3 class="fleet-nav__name">شاحنات ثقيلة الحمولة</h3>
+            </div>
+          </div>
+          <div class="fleet-nav__item" data-fleet="2">
+            <span class="fleet-nav__num">03</span>
+            <div class="fleet-nav__info">
+              <span class="fleet-nav__badge">سلسلة خارج الطريق</span>
+              <h3 class="fleet-nav__name">ADTs مفصلية</h3>
+            </div>
+          </div>
+          <div class="fleet-nav__item" data-fleet="3">
+            <span class="fleet-nav__num">04</span>
+            <div class="fleet-nav__info">
+              <span class="fleet-nav__badge">سلسلة النقل البعيد</span>
+              <h3 class="fleet-nav__name">مقطورات قلابة</h3>
+            </div>
+          </div>
+        </nav>
+        <div class="fleet-panel">
+          <!-- Panel 0 -->
+          <div class="fleet-panel__pane is-active" data-fleet="0">
+            <h2 class="fleet-panel__title">شاحنات قلابة<br>قياسية</h2>
+            <p class="fleet-panel__desc">أعمال البناء العامة ونقل الركام والرمال عبر التضاريس الممهدة والمدرجة. العمود الفقري لمعظم عقود الأعمال المدنية في المملكة.</p>
+            <div class="fleet-specs-grid">
+              <div class="fleet-spec-cell"><p class="fleet-spec-cell__key">الطراز</p><p class="fleet-spec-cell__val is-gold" style="font-size:clamp(16px,1.5vw,22px);">Sino Howo</p></div>
+              <div class="fleet-spec-cell"><p class="fleet-spec-cell__key">سعة الحمولة</p><p class="fleet-spec-cell__val">25 – 40 طن</p></div>
+              <div class="fleet-spec-cell"><p class="fleet-spec-cell__key">نوع الوقود</p><p class="fleet-spec-cell__val">ديزل</p></div>
+              <div class="fleet-spec-cell"><p class="fleet-spec-cell__key">تهيئة الدفع</p><p class="fleet-spec-cell__val">6×4</p></div>
+              <div class="fleet-spec-cell"><p class="fleet-spec-cell__key">التضاريس</p><p class="fleet-spec-cell__val">على الطريق</p></div>
+              <div class="fleet-spec-cell"><p class="fleet-spec-cell__key">التأجير</p><p class="fleet-spec-cell__val">يومي / أسبوعي</p></div>
+            </div>
+            <a href="https://wa.me/966503065248" class="fleet-panel__cta" target="_blank" rel="noopener">
+              <span class="fleet-panel__cta-text">استفسر عن هذه الفئة</span>
+              <span class="fleet-panel__cta-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#CA953D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </a>
+          </div>
+          <!-- Panel 1 -->
+          <div class="fleet-panel__pane" data-fleet="1">
+            <h2 class="fleet-panel__title">شاحنات<br>ثقيلة الحمولة</h2>
+            <p class="fleet-panel__desc">التعدين والمحاجر ونقل التربة الضخم — شاحنات صلبة عالية الحمولة مصممة لدورات يومية لا هوادة فيها في أصعب تضاريس المملكة.</p>
+            <div class="fleet-specs-grid">
+              <div class="fleet-spec-cell"><p class="fleet-spec-cell__key">الطراز</p><p class="fleet-spec-cell__val is-gold" style="font-size:clamp(16px,1.5vw,22px);">Volvo FMX, Scania XT</p></div>
+              <div class="fleet-spec-cell"><p class="fleet-spec-cell__key">سعة الحمولة</p><p class="fleet-spec-cell__val">30 – 45 طن</p></div>
+              <div class="fleet-spec-cell"><p class="fleet-spec-cell__key">نوع الوقود</p><p class="fleet-spec-cell__val">ديزل</p></div>
+              <div class="fleet-spec-cell"><p class="fleet-spec-cell__key">تهيئة الدفع</p><p class="fleet-spec-cell__val">8×4</p></div>
+              <div class="fleet-spec-cell"><p class="fleet-spec-cell__key">التضاريس</p><p class="fleet-spec-cell__val">طريق / خارجه</p></div>
+              <div class="fleet-spec-cell"><p class="fleet-spec-cell__key">التأجير</p><p class="fleet-spec-cell__val">يومي / شهري</p></div>
+            </div>
+            <a href="https://wa.me/966503065248" class="fleet-panel__cta" target="_blank" rel="noopener">
+              <span class="fleet-panel__cta-text">استفسر عن هذه الفئة</span>
+              <span class="fleet-panel__cta-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#CA953D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </a>
+          </div>
+          <!-- Panel 2 -->
+          <div class="fleet-panel__pane" data-fleet="2">
+            <h2 class="fleet-panel__title">ADTs<br>مفصلية</h2>
+            <p class="fleet-panel__desc">خارج الطريق والتضاريس الوعرة والأرض الرطبة — شاحنات قلابة مفصلية مصممة لمشاريع نيوم والمشاريع العملاقة والمواقع الصحراوية النائية.</p>
+            <div class="fleet-specs-grid">
+              <div class="fleet-spec-cell"><p class="fleet-spec-cell__key">الطراز</p><p class="fleet-spec-cell__val is-gold" style="font-size:clamp(16px,1.5vw,22px);">CAT 730, Komatsu HM300</p></div>
+              <div class="fleet-spec-cell"><p class="fleet-spec-cell__key">سعة الحمولة</p><p class="fleet-spec-cell__val">28 – 32 طن</p></div>
+              <div class="fleet-spec-cell"><p class="fleet-spec-cell__key">نوع الوقود</p><p class="fleet-spec-cell__val">ديزل</p></div>
+              <div class="fleet-spec-cell"><p class="fleet-spec-cell__key">تهيئة الدفع</p><p class="fleet-spec-cell__val">6×6 AWD</p></div>
+              <div class="fleet-spec-cell"><p class="fleet-spec-cell__key">التضاريس</p><p class="fleet-spec-cell__val">خارج الطريق</p></div>
+              <div class="fleet-spec-cell"><p class="fleet-spec-cell__key">التأجير</p><p class="fleet-spec-cell__val">شهري / مشروع</p></div>
+            </div>
+            <a href="https://wa.me/966503065248" class="fleet-panel__cta" target="_blank" rel="noopener">
+              <span class="fleet-panel__cta-text">استفسر عن هذه الفئة</span>
+              <span class="fleet-panel__cta-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#CA953D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </a>
+          </div>
+          <!-- Panel 3 -->
+          <div class="fleet-panel__pane" data-fleet="3">
+            <h2 class="fleet-panel__title">مقطورات<br>قلابة</h2>
+            <p class="fleet-panel__desc">نقل ضخم بعيد المدى ومشاريع البنية التحتية — وحدات قلابة عالية الطاقة تغطي ممرات الطرق السريعة الرئيسية في المملكة بأحمال الركام والرمال والأسفلت.</p>
+            <div class="fleet-specs-grid">
+              <div class="fleet-spec-cell"><p class="fleet-spec-cell__key">التهيئة</p><p class="fleet-spec-cell__val is-gold" style="font-size:clamp(16px,1.5vw,22px);">وحدة جرارة 6×4</p></div>
+              <div class="fleet-spec-cell"><p class="fleet-spec-cell__key">سعة الحمولة</p><p class="fleet-spec-cell__val">40 – 60 طن</p></div>
+              <div class="fleet-spec-cell"><p class="fleet-spec-cell__key">نوع الوقود</p><p class="fleet-spec-cell__val">ديزل</p></div>
+              <div class="fleet-spec-cell"><p class="fleet-spec-cell__key">حالة الاستخدام</p><p class="fleet-spec-cell__val">مشاريع بنية تحتية</p></div>
+              <div class="fleet-spec-cell"><p class="fleet-spec-cell__key">التضاريس</p><p class="fleet-spec-cell__val">طريق / سريع</p></div>
+              <div class="fleet-spec-cell"><p class="fleet-spec-cell__key">التأجير</p><p class="fleet-spec-cell__val">قائم على المشروع</p></div>
+            </div>
+            <a href="https://wa.me/966503065248" class="fleet-panel__cta" target="_blank" rel="noopener">
+              <span class="fleet-panel__cta-text">استفسر عن هذه الفئة</span>
+              <span class="fleet-panel__cta-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#CA953D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAINTENANCE STANDARDS -->
+  <section class="maint-sec">
+    <div class="section-pad">
+      <p class="eyebrow sr">معايير الصيانة</p>
+      <h2 class="display-title sr sr-d1">الأسطول في<br><span>أفضل حالاته</span></h2>
+      <p class="body-text sr sr-d2" style="max-width:560px;margin-top:16px;">تتبع كل مركبة من مركبات نوفا تيرا جدول صيانة وقائياً صارماً — لضمان الموثوقية والسلامة وتقليل التوقف في مشروعك.</p>
+      <div class="maint-carousel">
+        <div class="maint-carousel-outer">
+          <div class="maint-track" id="maintTrack">
+            <div class="maint-item sr sr-d1">
+              <div class="maint-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
+              <div class="maint-body"><h3 class="maint-title">الصيانة الوقائية</h3><p class="maint-text">جميع المركبات تتبع فترات الخدمة الموصى بها من الشركة المصنّعة، مع الاحتفاظ بسجلات كاملة في نظام إدارة الأسطول.</p></div>
+            </div>
+            <div class="maint-item sr sr-d2">
+              <div class="maint-icon"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div>
+              <div class="maint-body"><h3 class="maint-title">فحص يومي قبل الرحلة</h3><p class="maint-text">يُجري المشغلون فحصاً منظماً من 20 نقطة قبل كل وردية. الوحدات غير المستوفية تُسحب من الخدمة فوراً.</p></div>
+            </div>
+            <div class="maint-item sr sr-d3">
+              <div class="maint-icon"><svg viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
+              <div class="maint-body"><h3 class="maint-title">GPS والتتبع الإلكتروني</h3><p class="maint-text">100% من الأسطول مجهز بتتبع GPS في الوقت الفعلي وتتبع إلكتروني للمحركات لرؤية أفضل وامتثال أدق.</p></div>
+            </div>
+            <div class="maint-item sr sr-d4">
+              <div class="maint-icon"><svg viewBox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg></div>
+              <div class="maint-body"><h3 class="maint-title">دعم ورشة في الموقع</h3><p class="maint-text">وحدات صيانة متنقلة وميكانيكيون في الموقع متاحون لعقود الأسطول الكبيرة لتقليل أوقات الاستجابة.</p></div>
+            </div>
+            <div class="maint-item sr sr-d5">
+              <div class="maint-icon"><svg viewBox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg></div>
+              <div class="maint-body"><h3 class="maint-title">ضمان الاستبدال خلال 4 ساعات</h3><p class="maint-text">إذا تعطّلت وحدة أثناء عقدك، يُرسَل بديل خلال 4 ساعات — بدون تأخير في المشروع ولا استثناءات.</p></div>
+            </div>
+            <div class="maint-item sr sr-d5">
+              <div class="maint-icon"><svg viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div>
+              <div class="maint-body"><h3 class="maint-title">وثائق الامتثال</h3><p class="maint-text">التسجيل الكامل والتأمين وترخيص المشغل ووثائق الفحص متاحة في جميع الأوقات للمراجعة.</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="maint-carousel-nav">
+          <button class="maint-nav-btn" id="maintPrev" aria-label="السابق"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L5 8l5 5"/></svg></button>
+          <div class="maint-dots" id="maintDots">
+            <span class="maint-dot is-active"></span>
+            <span class="maint-dot"></span>
+            <span class="maint-dot"></span>
+          </div>
+          <button class="maint-nav-btn" id="maintNext" aria-label="التالي"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3l5 5-5 5"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="nova-footer">
+  <div class="nf-content">
+    <div class="nf-inner-wrap">
+      <div class="nf-top">
+        <div class="nf-headline-wrap">
+          <div class="nf-badge">
+            <span class="nf-badge__dot-wrap"><span class="nf-badge__pulse"></span><span class="nf-badge__core"></span></span>
+            <span class="nf-badge__label">متاحون في جميع مناطق المملكة الاثنتي عشرة</span>
+          </div>
+          <h2 class="nf-headline">احصل على عرض مخصص لأسطولك بما يلائم مشروعك — خلال ٢٤ ساعة.</h2>
+        </div>
+        <form class="nf-form" onsubmit="return false;">
+          <input type="email" class="nf-form__input" placeholder="أدخل بريدك الإلكتروني" />
+          <button type="submit" class="nf-form__btn">
+            <span>احصل على عرض</span>
+            <span class="nf-form__btn-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
+          </button>
+        </form>
+      </div>
+      <div class="nf-mid">
+        <div class="nf-brand">
+          <img src="../assets/img/logo.png" alt="NOVA TLT" class="nf-brand__logo" />
+        </div>
+        <div class="nf-links-grid">
+          <div class="nf-links__col">
+            <span class="nf-links__title">الشركة</span>
+            <ul class="nf-links__list">
+              <li><a href="about.html">نبذة عنا</a></li>
+              <li><a href="careers.html">وظائف</a></li>
+              <li><a href="news.html">أخبار</a></li>
+            </ul>
+          </div>
+          <div class="nf-links__col">
+            <span class="nf-links__title">الخدمات</span>
+            <ul class="nf-links__list">
+              <li><a href="services.html">تأجير قلابات</a></li>
+              <li><a href="fleet.html">أسطولنا</a></li>
+              <li><a href="industries.html">القطاعات</a></li>
+            </ul>
+          </div>
+          <div class="nf-links__col">
+            <span class="nf-links__title">تواصل معنا</span>
+            <ul class="nf-links__list">
+              <li><a href="tel:+966503065248">+966 503065248</a></li>
+              <li><a href="mailto:info@novatlt.com">info@novatlt.com</a></li>
+              <li><a href="contact.html">جدة، المملكة العربية السعودية</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="nf-watermark">
+      <svg class="nf-watermark__svg" viewBox="0 0 720 110" preserveAspectRatio="xMidYMid meet" aria-label="NOVA TLT">
+        <text x="50%" y="105" dominant-baseline="alphabetic" text-anchor="middle" textLength="90%" lengthAdjust="spacing" font-size="160" font-weight="700" fill="rgba(255,255,255,0.30)" font-family="ui-sans-serif,system-ui,sans-serif" letter-spacing="-0.05em">NOVA TLT</text>
+      </svg>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var drops = document.querySelectorAll('[data-nav-drop]');
+  function openDrop(d){ d.classList.add('nav-drop--open'); d.querySelector('.nav-drop__trigger').setAttribute('aria-expanded','true'); }
+  function closeDrop(d){ d.classList.remove('nav-drop--open'); d.querySelector('.nav-drop__trigger').setAttribute('aria-expanded','false'); }
+  function closeAll(){ drops.forEach(closeDrop); }
+  drops.forEach(function(drop){
+    var trigger = drop.querySelector('.nav-drop__trigger');
+    var isMobile = function(){ return window.innerWidth <= 1024; };
+    drop.addEventListener('mouseenter', function(){ if(!isMobile()) openDrop(drop); });
+    drop.addEventListener('mouseleave', function(){ if(!isMobile()) closeDrop(drop); });
+    trigger.addEventListener('click', function(e){ e.stopPropagation(); var isOpen = drop.classList.contains('nav-drop--open'); closeAll(); if(!isOpen) openDrop(drop); });
+  });
+  document.addEventListener('click', closeAll);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeAll(); });
+})();
+</script>
+<script>
+(function(){
+  var dot = document.getElementById('cursor-dot');
+  var ring = document.getElementById('cursor-ring');
+  if(!dot||!ring) return;
+  var mx=-100, my=-100, rx=-100, ry=-100;
+  document.addEventListener('mousemove', function(e){ mx=e.clientX; my=e.clientY; });
+  document.querySelectorAll('a,button,[data-hover]').forEach(function(el){
+    el.addEventListener('mouseenter',function(){ ring.classList.add('is-hover'); });
+    el.addEventListener('mouseleave',function(){ ring.classList.remove('is-hover'); });
+  });
+  function loop(){ dot.style.left=mx+'px'; dot.style.top=my+'px'; rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(loop); }
+  loop();
+})();
+</script>
+<script src="../assets/js/scroll-reveal.js"></script>
+<script src="../assets/js/mobile-menu.js"></script>
+<script src="../assets/js/page-transition.js"></script>
+<script>
+(function(){
+  var header = document.querySelector('.header');
+  var hero = document.querySelector('.page-fullhero');
+  function onScroll(){ header.classList.toggle('is-scrolled', window.scrollY > hero.offsetHeight - 80); }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+<script>
+(function(){
+  var navItems = document.querySelectorAll('.fleet-nav__item');
+  var panels = document.querySelectorAll('.fleet-panel__pane');
+  function activateFleet(idx){
+    navItems.forEach(function(el){ el.classList.remove('is-active'); });
+    panels.forEach(function(el){ el.classList.remove('is-active'); });
+    navItems[idx].classList.add('is-active');
+    panels[idx].classList.add('is-active');
+  }
+  navItems.forEach(function(item, i){ item.addEventListener('click', function(){ activateFleet(i); }); });
+  var srEls = document.querySelectorAll('.sr');
+  if('IntersectionObserver' in window){
+    var obs = new IntersectionObserver(function(entries){ entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('is-visible'); obs.unobserve(e.target); } }); }, { threshold: 0.12 });
+    srEls.forEach(function(el){ obs.observe(el); });
+  } else { srEls.forEach(function(el){ el.classList.add('is-visible'); }); }
+})();
+</script>
+<script>
+(function(){
+  var track = document.getElementById('maintTrack');
+  var dots = document.querySelectorAll('#maintDots .maint-dot');
+  var pages = 3;
+  function pageWidth(){ return track.clientWidth; }
+  document.getElementById('maintPrev').addEventListener('click', function(){ track.scrollBy({ left: -pageWidth(), behavior: 'smooth' }); });
+  document.getElementById('maintNext').addEventListener('click', function(){ track.scrollBy({ left: pageWidth(), behavior: 'smooth' }); });
+  dots.forEach(function(dot, i){ dot.addEventListener('click', function(){ track.scrollTo({ left: pageWidth() * i, behavior: 'smooth' }); }); });
+  track.addEventListener('scroll', function(){ var page = Math.min(Math.round(track.scrollLeft / pageWidth()), pages - 1); dots.forEach(function(d, i){ d.classList.toggle('is-active', i === page); }); }, { passive: true });
+})();
+</script>
+</body>
+</html>

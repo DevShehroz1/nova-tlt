@@ -11,6 +11,8 @@
 	<link rel="preload" href="../assets/fonts/BebasNeuePro-Bold.woff" as="font" type="font/woff" crossorigin />
 
 	<!-- Google Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
 
 	<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg" />
 	<link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico" />
@@ -25,6 +27,14 @@
 			--ink-dim: #b8b0a4;
 			--amber: #f2a95c;
 			--line: rgba(239,233,223,.16);
+		}
+
+		body, .header__menu-item, .header__menu-item .text-hover__elem,
+		.nav-drop__trigger, .nav-drop__trigger .text-hover__elem,
+		.nav-drop__link, .header__btn .text-hover__elem,
+		.mob-nav-item, .mob-panel-link, .mob-sub-panel-title,
+		.mob-footer-cta, h1, h2, h3, h4, p, a, span, button, input {
+		  font-family: 'Cairo', ui-sans-serif, system-ui, sans-serif !important;
 		}
 
 		body { background: var(--hero-bg); }

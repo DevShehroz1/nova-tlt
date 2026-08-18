@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ar-SA" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=5" />
+  <title>الخدمات — NOVA TLT</title>
+  <link rel="preload" href="../assets/fonts/BebasNeuePro-Bold.woff" as="font" type="font/woff" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg" />
+  <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico" />
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="stylesheet" href="../assets/css/cf7.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --hero-bg:#0c0b0a;--ink:#efe9df;--ink-dim:#b8b0a4;--gold:#CA953D;--gold-grad:linear-gradient(135deg,#B67C2A 0%,#CA953D 50%,#E5B85A 100%);--line:rgba(239,233,223,.16); }
+    body { background: var(--hero-bg); color: var(--ink); font-family: 'Cairo', ui-sans-serif, system-ui, sans-serif; overflow-x: hidden; }
+    body, .header__menu-item, .header__menu-item .text-hover__elem,
+    .nav-drop__trigger, .nav-drop__trigger .text-hover__elem,
+    .nav-drop__link, .header__btn .text-hover__elem,
+    .mob-nav-item, .mob-panel-link, .mob-sub-panel-title,
+    .mob-footer-cta, h1, h2, h3, h4, p, a, span, button, input {
+      font-family: 'Cairo', ui-sans-serif, system-ui, sans-serif !important;
+    }
+    a { text-decoration: none; color: inherit; }
+    @media (hover: hover) and (pointer: fine) { *, *::before, *::after { cursor: none !important; } }
+    #cursor-dot { position: fixed; pointer-events: none; z-index: 9998; width: 8px; height: 8px; background: #fff; border-radius: 50%; transform: translate(-50%,-50%); left: -100px; top: -100px; will-change: left, top; }
+    #cursor-ring { position: fixed; pointer-events: none; z-index: 9997; width: 28px; height: 28px; border: 1.5px solid rgba(255,255,255,0.7); border-radius: 50%; transform: translate(-50%,-50%); left: -100px; top: -100px; transition: width .3s ease, height .3s ease, border-color .3s ease; will-change: left, top; }
+    #cursor-ring.is-hover { width: 44px; height: 44px; border-color: #CA953D; }
+    .header__menu { background-color: #141414 !important; border: 1px solid rgba(255,255,255,0.1) !important; }
+    .header__menu-item, .header__menu-item .text-hover__elem { color: rgba(255,255,255,0.82) !important; }
+    .header__menu-item:hover { color: #CA953D !important; }
+    .btn { background-color: #141414 !important; border-color: rgba(255,255,255,0.15) !important; color: rgba(255,255,255,0.88) !important; }
+    .btn:hover { color: #fff !important; }
+    .btn._accent { background: linear-gradient(135deg,#B67C2A 0%,#CA953D 50%,#E5B85A 100%) !important; border-color: transparent !important; color: #fff !important; }
+    .nav-drop { position: relative; display: flex; align-items: center; }
+    .nav-drop__trigger { display: flex; align-items: center; gap: 6px; cursor: pointer; color: rgba(255,255,255,0.85); font-size: inherit; font-family: inherit; font-weight: inherit; letter-spacing: inherit; text-transform: uppercase; background: none; border: none; padding: 0; line-height: inherit; white-space: nowrap; }
+    .nav-drop__trigger .text-hover__elem { color: rgba(255,255,255,0.85); }
+    .nav-drop__chevron { width: 10px; height: 6px; flex-shrink: 0; transition: transform 260ms cubic-bezier(0.23,1,0.32,1); }
+    .nav-drop__chevron path { stroke: rgba(255,255,255,0.7) !important; }
+    .nav-drop--open .nav-drop__chevron { transform: rotate(180deg); }
+    .nav-drop--open .nav-drop__chevron path { stroke: #CA953D !important; }
+    .nav-drop__panel { position: absolute; top: calc(100% + 16px); left: 50%; transform: translateX(-50%) translateY(-8px); background: #0f0f0f; border: 1px solid rgba(255,255,255,0.08); border-radius: 5rem; padding: 6px; min-width: 210px; box-shadow: 0 20px 60px rgba(0,0,0,.30); opacity: 0; pointer-events: none; transition: opacity 220ms ease, transform 220ms cubic-bezier(0.23,1,0.32,1); z-index: 200; }
+    .nav-drop--open .nav-drop__panel { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+    .nav-drop__panel::after { content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%); width: 12px; height: 6px; background: #0f0f0f; clip-path: polygon(50% 0%,0% 100%,100% 100%); }
+    .nav-drop__panel::before { content: ''; position: absolute; top: -16px; left: 0; right: 0; height: 16px; }
+    .nav-drop__link { display: flex; align-items: center; gap: 10px; padding: 11px 16px; border-radius: 9px; color: rgba(255,255,255,0.75); font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; transition: background 160ms ease, color 160ms ease; position: relative; }
+    .nav-drop__link::before { content: ''; display: block; width: 4px; height: 4px; border-radius: 50%; background: #CA953D; opacity: 0; flex-shrink: 0; transition: opacity 160ms ease; }
+    .nav-drop__link:hover { background: rgba(255,255,255,0.07); color: #fff; }
+    .nav-drop__link:hover::before { opacity: 1; }
+    @media (max-width: 1024px) {
+      .nav-drop__trigger { color: #fff; } .nav-drop__trigger .text-hover__elem { color: #fff; }
+      .nav-drop__chevron path { stroke: #fff; }
+      .nav-drop__panel { position: static; transform: none !important; box-shadow: none; border: none; border-radius: 8px; background: rgba(255,255,255,0.08); padding: 6px 0 6px 16px; margin-top: 8px; opacity: 1; pointer-events: auto; display: none; }
+      .nav-drop__panel::after, .nav-drop__panel::before { display: none; }
+      .nav-drop--open .nav-drop__panel { display: block; }
+      .nav-drop__link { color: rgba(255,255,255,0.8); font-size: 18px; padding: 8px 10px; letter-spacing: .05em; }
+    }
+    .text-hover { overflow: hidden; }
+    .text-hover__inner { display: block; position: relative; clip-path: inset(0 -1em 0 -1em); }
+    .text-hover__elem { display: block; }
+    .text-hover__elem-2 { position: absolute; top: 0; left: 0; width: 100%; }
+    .text-hover__char { display: inline-block; transition: transform .35s cubic-bezier(0.76,0,0.24,1); }
+    .text-hover__elem-1 .text-hover__char { transform: translateY(0); }
+    .text-hover__elem-2 .text-hover__char { transform: translateY(115%); }
+    .text-hover:hover .text-hover__elem-1 .text-hover__char { transform: translateY(-115%); }
+    .text-hover:hover .text-hover__elem-2 .text-hover__char { transform: translateY(0); }
+    .header { position: fixed !important; transform: none !important; background: transparent !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; transition: background 0.35s ease, backdrop-filter 0.35s ease !important; }
+    .header.is-scrolled { background: rgba(10,10,10,0.90) !important; backdrop-filter: blur(14px) !important; -webkit-backdrop-filter: blur(14px) !important; }
+    .header__container { position: relative !important; }
+    .header__menu { position: absolute !important; left: 50% !important; transform: translateX(-50%) !important; background-color: #141414 !important; border: 1px solid rgba(255,255,255,0.1) !important; }
+    .header__logo { background: transparent !important; padding: 0 !important; height: auto !important; }
+    .header__logo-img { width: auto !important; height: 52px !important; object-fit: contain; }
+    @media (max-width: 1024px) { .header__logo-img { height: 40px !important; } }
+    .page-fullhero { position: relative; min-height: 92vh; display: flex; align-items: center; justify-content: center; background-image: url('../assets/img/services-hero.webp'); background-size: cover; background-position: center 40%; }
+    .page-fullhero__overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.45) 50%, rgba(0,0,0,0.75) 100%); }
+    .page-fullhero__content { position: relative; z-index: 1; text-align: center; padding: clamp(100px,14vh,140px) clamp(24px,6vw,80px) clamp(60px,8vh,100px); width: 100%; }
+    .page-fullhero__eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #CA953D; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 12px; }
+    .page-fullhero__eyebrow::before, .page-fullhero__eyebrow::after { display: none; }
+    .page-fullhero__title { font-size: clamp(56px,9vw,110px); font-weight: 700; line-height: 0.95; color: #fff; margin-bottom: 28px; text-transform: uppercase; }
+    .page-fullhero__desc { font-size: clamp(14px,1.1vw,17px); color: rgba(255,255,255,0.65); line-height: 1.72; max-width: 560px; margin: 0 auto; }
+    /* Services section */
+    .services-sec { background: #0A0A0A; padding: clamp(60px,7vw,100px) clamp(24px,5vw,80px); }
+    .services-sec__inner { max-width: 1400px; margin: 0 auto; }
+    .services-sec__body { display: grid; grid-template-columns: 1fr 38%; gap: 0 clamp(32px,4vw,64px); align-items: start; }
+    .services-sec__rows { display: flex; flex-direction: column; }
+    .services-sec__row { display: flex; align-items: center; gap: clamp(16px,2.5vw,36px); padding: clamp(14px,1.8vw,24px) 0; cursor: pointer; user-select: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .services-sec__num { font-size: clamp(40px,4.5vw,64px); font-weight: 700; color: #fff; opacity: 0.25; min-width: clamp(60px,6vw,88px); line-height: 1; transition: opacity 250ms ease; flex-shrink: 0; }
+    .services-sec__name { font-size: clamp(32px,4vw,56px); font-weight: 700; color: #fff; opacity: 0.25; line-height: 1; transition: opacity 250ms ease; }
+    .services-sec__row--active .services-sec__num, .services-sec__row--active .services-sec__name { opacity: 1; background: linear-gradient(135deg,#B67C2A 0%,#CA953D 50%,#E5B85A 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .services-sec__panel { position: sticky; top: 100px; display: flex; flex-direction: column; gap: 20px; }
+    .services-sec__panel-img { width: 100%; aspect-ratio: 1.12; object-fit: cover; display: block; border-radius: 12px; transition: opacity 180ms ease; }
+    .services-sec__panel-desc { font-size: clamp(13px,1vw,15px); color: rgba(255,255,255,0.65); line-height: 1.65; }
+    .services-sec__panel-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: linear-gradient(135deg,#B67C2A 0%,#CA953D 50%,#E5B85A 100%); color: #fff; border: none; border-radius: 5rem; font-size: 14px; font-weight: 500; cursor: pointer; transition: filter 200ms; align-self: flex-start; text-decoration: none; }
+    .services-sec__panel-btn:hover { filter: brightness(0.88); }
+    @media (max-width: 900px) { .services-sec__body { grid-template-columns: 1fr; } .services-sec__panel { position: static; margin-top: 32px; } }
+    /* Partner band */
+    .partner-band { background: #0a0a0a; padding: clamp(48px,7vw,88px) 0 0; text-align: center; }
+    .partner-band__num { font-size: clamp(36px,5vw,72px); font-weight: 700; line-height: 1; background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .partner-band__label { font-size: clamp(14px,1.1vw,18px); color: var(--ink-dim); margin-top: 10px; margin-bottom: clamp(40px,5vw,64px); }
+    .marquee-sec { background: #0a0a0a; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .marquee-track { display: flex; width: max-content; animation: marquee-scroll 32s linear infinite; }
+    .marquee-track:hover { animation-play-state: paused; }
+    @keyframes marquee-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .marquee-item { display: flex; align-items: center; gap: 14px; padding: clamp(22px,2.5vw,34px) clamp(32px,3.5vw,56px); white-space: nowrap; border-right: 1px solid rgba(255,255,255,0.08); }
+    .marquee-logo { height: 48px; width: auto; display: block; opacity: 0.65; transition: opacity 200ms ease; }
+    .marquee-item:hover .marquee-logo { opacity: 1; }
+    /* Process steps */
+    .sec { padding: clamp(60px,8vw,100px) clamp(20px,5vw,80px); max-width: 1400px; margin: 0 auto; }
+    .sec--dark { background: #0a0a0a; }
+    .sec__eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #CA953D; margin-bottom: 14px; }
+    .sec__title { font-size: clamp(38px,5.5vw,76px); font-weight: 700; line-height: 1; color: var(--ink); margin-bottom: 20px; }
+    .sec__title span { background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .sec__sub { font-size: clamp(14px,1.1vw,17px); color: var(--ink-dim); line-height: 1.65; max-width: 620px; margin-bottom: 48px; }
+    .steps-row { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 28px; }
+    .step { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 32px; }
+    .step__num { font-size: 56px; font-weight: 700; line-height: 1; background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 16px; }
+    .step__title { font-size: 24px; font-weight: 700; color: var(--ink); margin-bottom: 10px; }
+    .step__text { font-size: 14px; color: var(--ink-dim); line-height: 1.7; }
+    /* Footer */
+    .nova-footer { position: relative; width: 100%; overflow: hidden; background: radial-gradient(ellipse 180% 140% at 10% 110%, rgba(202,149,61,0.85) 0%, rgba(160,110,20,0.45) 38%, #0c0b0a 65%), #0c0b0a; }
+    .nf-content { position: relative; z-index: 10; width: 100%; }
+    .nf-inner-wrap { width: 100%; margin: 0 auto; max-width: 1280px; padding: 0 clamp(24px,4vw,48px); }
+    .nf-top { display: flex; flex-direction: column; gap: 32px; padding-top: 24px; padding-bottom: 40px; }
+    .nf-headline-wrap { display: flex; flex-direction: column; gap: 20px; max-width: 576px; }
+    .nf-badge { display: flex; align-items: center; gap: 10px; }
+    .nf-badge__dot-wrap { position: relative; display: flex; width: 8px; height: 8px; flex-shrink: 0; }
+    .nf-badge__pulse { position: absolute; inset: 0; border-radius: 50%; background: #CA953D; opacity: 0.75; animation: nf-ping 1.2s cubic-bezier(0,0,0.2,1) infinite; }
+    .nf-badge__core { position: relative; width: 8px; height: 8px; border-radius: 50%; background: #CA953D; }
+    @keyframes nf-ping { 0% { transform: scale(1); opacity: 0.75; } 75%, 100% { transform: scale(2.2); opacity: 0; } }
+    .nf-badge__label { font-size: 14px; font-weight: 500; color: #fff; }
+    .nf-headline { color: #fff; font-size: clamp(30px,4vw,48px); line-height: 1.25; font-weight: 300; letter-spacing: -0.02em; margin: 0; }
+    .nf-form { display: flex; width: 100%; max-width: 384px; flex-shrink: 0; align-items: center; gap: 8px; }
+    .nf-form__input { flex: 1; height: 48px; min-height: 48px; padding: 0 16px; font-size: 14px; color: #fff; background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.05); border-radius: 0; outline: none; transition: border-color 180ms ease, box-shadow 180ms ease; }
+    .nf-form__input::placeholder { color: rgba(255,255,255,0.70); }
+    .nf-form__input:focus { border-color: rgba(202,149,61,0.50); box-shadow: 0 0 0 3px rgba(202,149,61,0.30); }
+    .nf-form__btn { display: flex; align-items: center; gap: 8px; height: 48px; flex-shrink: 0; cursor: pointer; padding: 0 20px; font-size: 14px; font-weight: 600; color: #fff; background: #CA953D; border: none; border-radius: 0; transition: all 180ms ease; }
+    .nf-form__btn-icon { display: flex; width: 16px; height: 16px; align-items: center; justify-content: center; transition: transform 300ms ease; }
+    .nf-form__btn-icon svg { width: 100%; height: 100%; }
+    .nf-mid { display: flex; flex-direction: column; gap: 40px; padding-bottom: 64px; }
+    .nf-brand { display: flex; flex: 1; align-items: center; gap: 12px; } .nf-brand__logo { height: 52px; width: auto; display: block; }
+    .nf-links-grid { display: grid; grid-template-columns: repeat(2, auto); gap: 32px 48px; }
+    .nf-links__title { font-size: 14px; font-weight: 500; letter-spacing: 0.05em; color: rgba(255,255,255,0.90); text-transform: uppercase; display: block; margin-bottom: 16px; }
+    .nf-links__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+    .nf-links__list a { font-size: 14px; color: rgba(255,255,255,0.70); text-decoration: none; transition: color 180ms ease; }
+    .nf-links__list a:hover { color: #fff; }
+    .nf-watermark { display: flex; width: 100%; align-items: center; justify-content: center; }
+    .nf-watermark__svg { height: auto; width: 100%; user-select: none; }
+    @media (min-width: 640px) { .nf-links-grid { grid-template-columns: repeat(3, auto); } }
+    @media (min-width: 1024px) { .nf-top { flex-direction: row; align-items: flex-end; justify-content: space-between; padding-top: 40px; padding-bottom: 56px; } .nf-headline-wrap { flex: 1; } .nf-mid { flex-direction: row; align-items: flex-start; gap: 32px; } .nf-links-grid { gap: 32px 64px; } }
+  </style>
+  <link rel="stylesheet" href="../assets/css/rtl.css">
+</head>
+<body>
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<header class="header">
+  <div class="container header__container">
+    <a href="../index.html" class="header__logo">
+      <img src="../assets/img/logo.png" alt="نوفا TLT" class="header__logo-img" />
+    </a>
+    <nav class="header__menu" data-da=".header__hamburger, 1024, 0">
+      <a href="../index.html" class="header__menu-item text-hover">
+        <span class="text-hover__inner"><span class="text-hover__elem text-hover__elem-1">الرئيسية</span><span class="text-hover__elem text-hover__elem-2 _c-dark">الرئيسية</span></span>
+      </a>
+      <div class="nav-drop header__menu-item" data-nav-drop>
+        <button class="nav-drop__trigger text-hover" aria-expanded="false" aria-haspopup="true">
+          <span class="text-hover__inner"><span class="text-hover__elem text-hover__elem-1">الشركة</span><span class="text-hover__elem text-hover__elem-2 _c-dark">الشركة</span></span>
+          <svg class="nav-drop__chevron" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nav-drop__panel" role="menu">
+          <a href="about.html" class="nav-drop__link" role="menuitem">من نحن</a>
+          <a href="careers.html" class="nav-drop__link" role="menuitem">الوظائف</a>
+        </div>
+      </div>
+      <div class="nav-drop header__menu-item" data-nav-drop>
+        <button class="nav-drop__trigger text-hover" aria-expanded="false" aria-haspopup="true">
+          <span class="text-hover__inner"><span class="text-hover__elem text-hover__elem-1">ما نقدمه</span><span class="text-hover__elem text-hover__elem-2 _c-dark">ما نقدمه</span></span>
+          <svg class="nav-drop__chevron" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nav-drop__panel" role="menu">
+          <a href="services.html" class="nav-drop__link" role="menuitem">الخدمات</a>
+          <a href="fleet.html" class="nav-drop__link" role="menuitem">الأسطول</a>
+          <a href="industries.html" class="nav-drop__link" role="menuitem">القطاعات التي نخدمها</a>
+        </div>
+      </div>
+      <a href="projects.html" class="header__menu-item text-hover">
+        <span class="text-hover__inner"><span class="text-hover__elem text-hover__elem-1">المشاريع</span><span class="text-hover__elem text-hover__elem-2 _c-dark">المشاريع</span></span>
+      </a>
+      <a href="news.html" class="header__menu-item text-hover">
+        <span class="text-hover__inner"><span class="text-hover__elem text-hover__elem-1">الأخبار</span><span class="text-hover__elem text-hover__elem-2 _c-dark">الأخبار</span></span>
+      </a>
+    </nav>
+    <div class="header__actions">
+      <button type="button" class="header__hamburger-btn btn" aria-label="فتح القائمة" id="services-mob-open">
+        <svg width="22" height="16" viewBox="0 0 22 16" fill="none" aria-hidden="true"><rect y="0" width="22" height="2" rx="1" fill="currentColor"/><rect y="7" width="22" height="2" rx="1" fill="currentColor"/><rect y="14" width="22" height="2" rx="1" fill="currentColor"/></svg>
+      </button>
+      <div class="nt-lang-wrap" id="nt-lang-wrap">
+        <button type="button" class="header__lang-heading btn" id="nt-lang-btn">
+          <span class="btn__inner"><span class="nt-lang-label">عربي</span>
+            <svg width="13" height="12" viewBox="0 0 13 12" fill="none"><path d="M1.267 7.06149L5.84961 11.7365C6.19441 12.0878 6.80452 12.0878 7.15054 11.7365L11.7331 7.06149C12.0902 6.69643 12.0889 6.10663 11.7295 5.74406C11.37 5.38148 10.7905 5.38148 10.4322 5.74654L7.41586 8.82221V0.931267C7.41586 0.415966 7.00504 0 6.49885 0C5.99266 0 5.58184 0.415966 5.58184 0.931267V8.82221L2.56671 5.74654C2.38698 5.56401 2.15223 5.47337 1.91625 5.47337C1.68272 5.47337 1.44796 5.56401 1.26945 5.74406C0.911205 6.10663 0.909982 6.69643 1.267 7.06149Z" fill="#CA953D"/></svg>
+          </span>
+        </button>
+        <div class="nt-lang-menu" id="nt-lang-menu">
+          <a href="../services.html" class="nt-lang-option" data-lang="en">English</a>
+          <a href="#" class="nt-lang-option is-active" data-lang="ar">العربية</a>
+        </div>
+      </div>
+      <a href="contact.html" class="header__btn text-hover btn _accent" data-da=".header__hamburger, 1024, 1">
+        <span class="btn__inner text-hover__inner">
+          <span class="text-hover__elem text-hover__elem-1">اتصل بنا</span>
+          <span class="text-hover__elem text-hover__elem-2">اتصل بنا</span>
+        </span>
+      </a>
+    </div>
+  </div>
+  <div class="header__hamburger container"></div>
+</header>
+
+<main>
+  <section class="page-fullhero">
+    <div class="page-fullhero__overlay"></div>
+    <div class="page-fullhero__content">
+      <p class="page-fullhero__eyebrow">ما نقدمه</p>
+      <h1 class="page-fullhero__title">خدماتنا</h1>
+      <p class="page-fullhero__desc">من إرسال قلابات في نفس اليوم إلى عقود المشاريع متعددة السنوات — المعدات المناسبة، المشغّلون المؤهلون، والدعم الشامل عبر جميع مناطق المملكة الاثنتي عشرة.</p>
+    </div>
+  </section>
+
+  <section class="services-sec">
+    <div class="services-sec__inner">
+      <div class="services-sec__body">
+        <div class="services-sec__rows" id="svc-rows">
+          <div class="services-sec__row services-sec__row--active" data-svc="0">
+            <span class="services-sec__num">01</span>
+            <span class="services-sec__name">تأجير قلابات</span>
+          </div>
+          <div class="services-sec__row" data-svc="1">
+            <span class="services-sec__num">02</span>
+            <span class="services-sec__name">أعمال الحفر وتحريك التربة</span>
+          </div>
+          <div class="services-sec__row" data-svc="2">
+            <span class="services-sec__num">03</span>
+            <span class="services-sec__name">نقل المواد بالجملة</span>
+          </div>
+          <div class="services-sec__row" data-svc="3">
+            <span class="services-sec__num">04</span>
+            <span class="services-sec__name">اللوجستيات وإدارة الأسطول</span>
+          </div>
+          <div class="services-sec__row" data-svc="4">
+            <span class="services-sec__num">05</span>
+            <span class="services-sec__name">عقود مبنية على المشاريع</span>
+          </div>
+        </div>
+        <div class="services-sec__panel" id="svc-panel">
+          <img class="services-sec__panel-img" id="svc-img" src="../assets/img/svc-dump-truck.webp" alt="تأجير قلابات" loading="lazy" />
+          <p class="services-sec__panel-desc" id="svc-panel-desc">تأجير مرن قصير وطويل الأمد للقلابات مع مشغّلين محترفين أو بدونهم، مصمّم وفق جداول المشروع ومتطلبات الحمولة.</p>
+          <a class="services-sec__panel-btn" id="svc-panel-btn" href="https://wa.me/966503065248" target="_blank" rel="noopener">
+            استفسر عن تأجير القلابات
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="partner-band">
+    <p class="partner-band__num">200+</p>
+    <p class="partner-band__label">شريك ومتعاون لوجستي.</p>
+  </div>
+  <section class="marquee-sec">
+    <div class="marquee-track">
+      <div class="marquee-item"><img src="../assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="../assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="../assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="../assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="../assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="../assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="../assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="../assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="../assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="../assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="../assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="../assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="../assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="../assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="../assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="../assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="../assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="../assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="../assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="../assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+    </div>
+  </section>
+
+  <div class="sec--dark">
+    <div class="sec">
+      <p class="sec__eyebrow">طريقة العمل</p>
+      <h2 class="sec__title">من الاتصال <span>إلى الموقع</span></h2>
+      <p class="sec__sub">ثلاث خطوات من أول تواصل حتى نشر الأسطول بالكامل.</p>
+      <div class="steps-row">
+        <div class="step">
+          <div class="step__num">01</div>
+          <h3 class="step__title">المتطلبات</h3>
+          <p class="step__text">أخبرنا عن نطاق مشروعك، الجدول الزمني، موقع الموقع، ونوع المواد. يقيّم فريق العمليات احتياجاتك خلال ساعتين ويوصي بأمثل تكوين للأسطول.</p>
+        </div>
+        <div class="step">
+          <div class="step__num">02</div>
+          <h3 class="step__title">خطة الأسطول</h3>
+          <p class="step__text">نُعدّ خطة أسطول مفصّلة تشمل عدد الشاحنات وتخصيص المشغّلين وجدول الورديات وفترات الصيانة — مع عرض سعر ثابت صالح لـ 7 أيام.</p>
+        </div>
+        <div class="step">
+          <div class="step__num">03</div>
+          <h3 class="step__title">العقد والإرسال</h3>
+          <p class="step__text">وقّع العقد وسنبدأ الفور. إرسال في نفس اليوم للإيجارات القياسية، و48 ساعة للتعبئة الكاملة للمشروع. يحصل منسّق موقعك على تواصل مباشر مع فريق الإرسال.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="nova-footer">
+  <div class="nf-content">
+    <div class="nf-inner-wrap">
+      <div class="nf-top">
+        <div class="nf-headline-wrap">
+          <div class="nf-badge">
+            <span class="nf-badge__dot-wrap"><span class="nf-badge__pulse"></span><span class="nf-badge__core"></span></span>
+            <span class="nf-badge__label">متاحون في جميع مناطق المملكة الاثنتي عشرة</span>
+          </div>
+          <h2 class="nf-headline">احصل على عرض مخصص لأسطولك بما يلائم مشروعك — خلال ٢٤ ساعة.</h2>
+        </div>
+        <form class="nf-form" onsubmit="return false;">
+          <input type="email" class="nf-form__input" placeholder="أدخل بريدك الإلكتروني" />
+          <button type="submit" class="nf-form__btn">
+            <span>احصل على عرض</span>
+            <span class="nf-form__btn-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
+          </button>
+        </form>
+      </div>
+      <div class="nf-mid">
+        <div class="nf-brand"><img src="../assets/img/logo.png" alt="NOVA TLT" class="nf-brand__logo" /></div>
+        <div class="nf-links-grid">
+          <div class="nf-links__col">
+            <span class="nf-links__title">الشركة</span>
+            <ul class="nf-links__list">
+              <li><a href="about.html">نبذة عنا</a></li>
+              <li><a href="careers.html">وظائف</a></li>
+              <li><a href="news.html">أخبار</a></li>
+            </ul>
+          </div>
+          <div class="nf-links__col">
+            <span class="nf-links__title">الخدمات</span>
+            <ul class="nf-links__list">
+              <li><a href="services.html">تأجير قلابات</a></li>
+              <li><a href="fleet.html">أسطولنا</a></li>
+              <li><a href="industries.html">القطاعات</a></li>
+            </ul>
+          </div>
+          <div class="nf-links__col">
+            <span class="nf-links__title">تواصل معنا</span>
+            <ul class="nf-links__list">
+              <li><a href="tel:+966503065248">+966 503065248</a></li>
+              <li><a href="mailto:info@novatlt.com">info@novatlt.com</a></li>
+              <li><a href="contact.html">جدة، المملكة العربية السعودية</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="nf-watermark">
+      <svg class="nf-watermark__svg" viewBox="0 0 720 110" preserveAspectRatio="xMidYMid meet" aria-label="NOVA TLT">
+        <text x="50%" y="105" dominant-baseline="alphabetic" text-anchor="middle" textLength="90%" lengthAdjust="spacing" font-size="160" font-weight="700" fill="rgba(255,255,255,0.30)" font-family="ui-sans-serif,system-ui,sans-serif" letter-spacing="-0.05em">NOVA TLT</text>
+      </svg>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){var drops=document.querySelectorAll('[data-nav-drop]');function open(d){d.classList.add('nav-drop--open');d.querySelector('.nav-drop__trigger').setAttribute('aria-expanded','true');}function close(d){d.classList.remove('nav-drop--open');d.querySelector('.nav-drop__trigger').setAttribute('aria-expanded','false');}function closeAll(){drops.forEach(close);}drops.forEach(function(drop){var trigger=drop.querySelector('.nav-drop__trigger');var mob=function(){return window.innerWidth<=1024;};drop.addEventListener('mouseenter',function(){if(!mob())open(drop);});drop.addEventListener('mouseleave',function(){if(!mob())close(drop);});trigger.addEventListener('click',function(e){e.stopPropagation();var o=drop.classList.contains('nav-drop--open');closeAll();if(!o)open(drop);});});document.addEventListener('click',closeAll);document.addEventListener('keydown',function(e){if(e.key==='Escape')closeAll();});})();
+</script>
+<script>
+(function(){var dot=document.getElementById('cursor-dot'),ring=document.getElementById('cursor-ring');if(!dot||!ring)return;var mx=-100,my=-100,rx=-100,ry=-100;document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;});document.querySelectorAll('a,button').forEach(function(el){el.addEventListener('mouseenter',function(){ring.classList.add('is-hover');});el.addEventListener('mouseleave',function(){ring.classList.remove('is-hover');});});function loop(){dot.style.left=mx+'px';dot.style.top=my+'px';rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);}loop();})();
+</script>
+<script src="../assets/js/scroll-reveal.js"></script>
+<script src="../assets/js/mobile-menu.js"></script>
+<script src="../assets/js/page-transition.js"></script>
+<script>
+(function(){
+  var services = [
+    { name: 'تأجير قلابات', img: '../assets/img/svc-dump-truck.webp', desc: 'تأجير مرن قصير وطويل الأمد للقلابات مع مشغّلين محترفين أو بدونهم، مصمّم وفق جداول المشروع ومتطلبات الحمولة.' },
+    { name: 'أعمال الحفر وتحريك التربة', img: '../assets/img/svc-earthmoving.webp', desc: 'تسوية الأراضي والتجريف ونقل المواد بالجملة بالتنسيق مع مقاولي الحفر.' },
+    { name: 'نقل المواد بالجملة', img: '../assets/img/svc-bulk-material.webp', desc: 'نقل الرمال والحصى والإسفلت والركام ومخلفات البناء عبر مواقع العمل والمسارات الإقليمية.' },
+    { name: 'اللوجستيات وإدارة الأسطول', img: '../assets/img/svc-fleet-management.webp', desc: 'تنسيق لوجستي شامل يشمل تخطيط المسارات وجدولة الأحمال وتتبع الإرسال في الوقت الفعلي.' },
+    { name: 'عقود مبنية على المشاريع', img: '../assets/img/svc-contracts.webp', desc: 'تخصيص أسطول مخصص لمشاريع البنية التحتية والصناعية الكبيرة وطويلة الأمد.' }
+  ];
+  var rows = document.querySelectorAll('.services-sec__row');
+  var imgEl = document.getElementById('svc-img');
+  var descEl = document.getElementById('svc-panel-desc');
+  var btnEl = document.getElementById('svc-panel-btn');
+  if (!rows.length || !imgEl) return;
+  var currentIdx = 0;
+  function activate(idx) {
+    if (idx === currentIdx) return;
+    currentIdx = idx;
+    rows.forEach(function(el, i) { el.classList.toggle('services-sec__row--active', i === idx); });
+    var svc = services[idx];
+    imgEl.style.opacity = '0';
+    var newImg = new Image();
+    newImg.src = svc.img;
+    newImg.onload = function() { imgEl.src = svc.img; imgEl.alt = svc.name; imgEl.style.opacity = '1'; };
+    descEl.textContent = svc.desc;
+    btnEl.textContent = 'استفسر عن ' + svc.name;
+  }
+  rows.forEach(function(el) {
+    el.addEventListener('mouseenter', function() { activate(+el.dataset.svc); });
+    el.addEventListener('click', function() { activate(+el.dataset.svc); });
+  });
+})();
+</script>
+<script>
+(function(){
+  var header = document.querySelector('.header');
+  var hero = document.querySelector('.page-fullhero');
+  function onScroll(){ header.classList.toggle('is-scrolled', window.scrollY > hero.offsetHeight - 80); }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+</body>
+</html>
