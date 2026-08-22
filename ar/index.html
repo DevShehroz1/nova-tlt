@@ -3356,19 +3356,7 @@
 	</script>
 
 	<script>
-	(function () {
-		document.querySelectorAll('.text-hover').forEach(function (el) {
-			el.querySelectorAll('.text-hover__elem').forEach(function (elem) {
-				var chars = elem.textContent.split('');
-				elem.innerHTML = chars.map(function (ch, i) {
-					var safe = ch === ' ' ? '&nbsp;' : ch.replace(/[<>&"]/g, function (c) {
-						return { '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;' }[c];
-					});
-					return '<span class="text-hover__char" style="transition-delay:' + (i * 28) + 'ms">' + safe + '</span>';
-				}).join('');
-			});
-		});
-	})();
+	/* Skip char-split on RTL: per-character spans break Arabic ligatures */
 	</script>
 
 	<script>
