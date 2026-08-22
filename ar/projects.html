@@ -392,7 +392,7 @@
 <script>(function(){var dot=document.getElementById('cursor-dot'),ring=document.getElementById('cursor-ring');if(!dot||!ring)return;var mx=-100,my=-100,rx=-100,ry=-100;document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;});document.querySelectorAll('a,button').forEach(function(el){el.addEventListener('mouseenter',function(){ring.classList.add('is-hover');});el.addEventListener('mouseleave',function(){ring.classList.remove('is-hover');});});function loop(){dot.style.left=mx+'px';dot.style.top=my+'px';rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);}loop();})();</script>
 <script>(function(){var menu=document.getElementById('projects-mobile-menu');var openBtn=document.getElementById('projects-mob-open');var closeBtn=document.getElementById('projects-mob-close');if(!menu||!openBtn||!closeBtn)return;openBtn.addEventListener('click',function(){menu.classList.add('is-open');});closeBtn.addEventListener('click',function(){menu.classList.remove('is-open');});})();</script>
 <script src="../assets/js/scroll-reveal.js"></script>
-<script src="../assets/js/mobile-menu.js"></script>
+<script src="../assets/js/mobile-menu-ar.js"></script>
 <script src="../assets/js/page-transition.js"></script>
 </body>
 </html>
