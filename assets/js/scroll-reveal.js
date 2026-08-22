@@ -2,17 +2,20 @@
   'use strict';
 
   /* ── 1. Nav char-split hover animation ── */
-  document.querySelectorAll('.text-hover').forEach(function (el) {
-    el.querySelectorAll('.text-hover__elem').forEach(function (elem) {
-      var chars = elem.textContent.split('');
-      elem.innerHTML = chars.map(function (ch, i) {
-        var safe = ch === ' ' ? '&nbsp;' : ch.replace(/[<>&"]/g, function (c) {
-          return { '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;' }[c];
-        });
-        return '<span class="text-hover__char" style="transition-delay:' + (i * 28) + 'ms">' + safe + '</span>';
-      }).join('');
+  /* Skip on RTL: per-character spans break Arabic ligatures */
+  if (document.documentElement.getAttribute('dir') !== 'rtl') {
+    document.querySelectorAll('.text-hover').forEach(function (el) {
+      el.querySelectorAll('.text-hover__elem').forEach(function (elem) {
+        var chars = elem.textContent.split('');
+        elem.innerHTML = chars.map(function (ch, i) {
+          var safe = ch === ' ' ? '&nbsp;' : ch.replace(/[<>&"]/g, function (c) {
+            return { '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;' }[c];
+          });
+          return '<span class="text-hover__char" style="transition-delay:' + (i * 28) + 'ms">' + safe + '</span>';
+        }).join('');
+      });
     });
-  });
+  }
 
   /* ── 2. Hero entrance (fires immediately on load) ── */
   var HERO_SEL = [
