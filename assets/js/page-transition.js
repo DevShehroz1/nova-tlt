@@ -13,7 +13,7 @@
     'z-index:9999',
     'background:#0a0a0a',
     'transform:translateY(100%)',
-    'transition:transform 0.55s cubic-bezier(0.76,0,0.24,1)',
+    'transition:transform 0.3s cubic-bezier(0.76,0,0.24,1)',
     'pointer-events:none'
   ].join(';');
   document.body.appendChild(curtain);
@@ -123,7 +123,7 @@
   function navigate(href) {
     curtain.style.pointerEvents = 'all';
     curtain.style.transform = 'translateY(0)';
-    setTimeout(function () { window.location.href = href; }, 560);
+    setTimeout(function () { window.location.href = href; }, 310);
   }
 
   function revealPage() {
@@ -132,7 +132,7 @@
     curtain.style.transform = 'translateY(0)';
     requestAnimationFrame(function () {
       requestAnimationFrame(function () {
-        curtain.style.transition = 'transform 0.55s cubic-bezier(0.76,0,0.24,1)';
+        curtain.style.transition = 'transform 0.3s cubic-bezier(0.76,0,0.24,1)';
         curtain.style.transform = 'translateY(-100%)';
       });
     });
