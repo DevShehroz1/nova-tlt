@@ -59,8 +59,11 @@
       opt.addEventListener('click', function (e) {
         e.preventDefault();
         var toAr = opt.getAttribute('data-lang') === 'ar';
-        if (toAr) { setCookie(COOKIE, AR_VAL); } else { deleteCookie(COOKIE); }
-        location.reload();
+        if (toAr) {
+          var page = window.location.pathname.split('/').pop() || 'index.html';
+          if (!page || !page.endsWith('.html')) page = 'index.html';
+          window.location.href = 'ar/' + page;
+        }
       });
     });
 
