@@ -240,17 +240,22 @@
 /* ── Career tabs: RTL flow (already natural), count stays left of Arabic label ── */
 .career-tabs { direction: rtl; }
 
-/* ── Career row: RTL order — body right, badges center, arrow left ── */
-.career-row { flex-direction: row; }
+/* ── Career row: RTL — body right, badges center, arrow left ── */
+.career-row { flex-direction: row; direction: rtl; }
+.career-row__body { text-align: right; }
+.career-row__title-row { direction: rtl; }
+.career-row__badges { direction: rtl; }
+.career-row__title,
+.career-row__desc { text-align: right; }
 
-/* Mobile career-row: body right, arrow far right (start in RTL), badges below */
+/* Mobile career-row: body+title on right (order:1 = RTL flex-start), arrow on left (order:2) */
 @media (max-width: 640px) {
   .career-row {
     flex-direction: row !important;
     flex-wrap: wrap;
   }
-  .career-row__body  { order: 2; flex: 1; min-width: 0; }
-  .career-row__arrow { order: 1; align-self: flex-start; flex-shrink: 0; }
+  .career-row__body  { order: 1; flex: 1; min-width: 0; }
+  .career-row__arrow { order: 2; align-self: flex-start; flex-shrink: 0; }
   .career-row__badges { order: 3; width: 100%; margin-top: 4px; }
 }
 
