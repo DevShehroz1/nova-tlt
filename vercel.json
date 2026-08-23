@@ -1,3 +1,7 @@
 {
-  "outputDirectory": "."
+  "outputDirectory": ".",
+  "redirects": [
+    { "source": "/ar/index.html", "destination": "/ar.html", "permanent": true },
+    { "source": "/ar/", "destination": "/ar.html", "permanent": true }
+  ]
 }
