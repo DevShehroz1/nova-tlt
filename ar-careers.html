@@ -240,24 +240,22 @@
 /* ── Career tabs: RTL flow (already natural), count stays left of Arabic label ── */
 .career-tabs { direction: rtl; }
 
-/* ── Career row: restore flex (rtl.css forces inline-block on mailto: anchors) ── */
-.career-row { display: flex !important; flex-direction: row !important; align-items: center !important; direction: rtl !important; }
-.career-row__body { text-align: right; }
-.career-row__title-row { direction: rtl; }
-.career-row__badges { direction: rtl; }
-.career-row__title,
-.career-row__desc { text-align: right; }
-
-/* Mobile career-row: body+title on right (order:1 = RTL flex-start), arrow on left (order:2) */
-@media (max-width: 640px) {
-  .career-row {
-    flex-direction: row !important;
-    flex-wrap: wrap;
-  }
-  .career-row__body  { order: 1; flex: 1; min-width: 0; }
-  .career-row__arrow { order: 2; align-self: flex-start; flex-shrink: 0; }
-  .career-row__badges { order: 3; width: 100%; margin-top: 4px; }
+/* ── Career row: grid layout beats rtl.css mailto rule (specificity 20 vs 11)
+   Col 1 (auto) = arrow on LEFT | Col 2 (1fr) = body on RIGHT | row 2 = badges below body ── */
+[dir="rtl"] .career-row {
+  display: grid !important;
+  grid-template-areas: "arrow body" ". badges" !important;
+  grid-template-columns: auto 1fr !important;
+  direction: ltr !important; /* LTR grid so col1=left, col2=right */
+  unicode-bidi: normal !important;
+  align-items: start !important;
+  gap: 0 16px !important;
 }
+.career-row__arrow  { grid-area: arrow; align-self: start; padding-top: 2px; }
+.career-row__body   { grid-area: body; direction: rtl !important; text-align: right; }
+.career-row__badges { grid-area: badges; direction: rtl !important; margin-top: 8px; }
+.career-row__title, .career-row__desc { text-align: right; }
+.career-row__title-row { direction: rtl !important; }
 
 /* ── Process steps: RTL grid flows right→left; use border-left for dividers ── */
 .process-step {
