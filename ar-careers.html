@@ -240,8 +240,8 @@
 /* ── Career tabs: RTL flow (already natural), count stays left of Arabic label ── */
 .career-tabs { direction: rtl; }
 
-/* ── Career row: RTL — body right, badges center, arrow left ── */
-.career-row { flex-direction: row; direction: rtl; }
+/* ── Career row: restore flex (rtl.css forces inline-block on mailto: anchors) ── */
+.career-row { display: flex !important; flex-direction: row !important; align-items: center !important; direction: rtl !important; }
 .career-row__body { text-align: right; }
 .career-row__title-row { direction: rtl; }
 .career-row__badges { direction: rtl; }
