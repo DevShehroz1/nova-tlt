@@ -185,6 +185,126 @@
     @media (min-width: 1024px) { .nf-top { flex-direction: row; align-items: flex-end; justify-content: space-between; padding-top: 40px; padding-bottom: 56px; } .nf-headline-wrap { flex: 1; } .nf-mid { flex-direction: row; align-items: flex-start; gap: 32px; } .nf-links-grid { gap: 32px 64px; } }
   </style>
 <link rel="stylesheet" href="assets/css/rtl.css">
+<style>
+/* ═══════════════════════════════════════════════
+   ar-careers RTL comprehensive fixes
+   ═══════════════════════════════════════════════ */
+
+/* ── Mobile header: absolute-centered logo, full-width actions ── */
+@media (max-width: 1024px) {
+  .header__container {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    position: relative !important;
+    padding: 0 16px !important;
+    min-height: 64px !important;
+  }
+  .header__logo {
+    position: absolute !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 2 !important;
+    padding: 0 !important;
+  }
+  .header__actions {
+    display: flex !important;
+    align-items: center !important;
+    width: 100% !important;
+    gap: 0 !important;
+    flex-direction: row !important;
+  }
+  .header__btn { display: none !important; }
+  .header__menu { display: none !important; }
+  .header__hamburger { display: none !important; }
+  .header__hamburger-btn.btn {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 44px !important;
+    height: 44px !important;
+    padding: 0 !important;
+    min-width: unset !important;
+    background: transparent !important;
+    border: none !important;
+    color: #fff !important;
+    z-index: 3 !important;
+    position: relative !important;
+  }
+}
+
+/* ── Section text: right-aligned ── */
+.section-sub { text-align: right; }
+.careers-hero__desc { text-align: right; }
+
+/* ── Career tabs: RTL flow (already natural), count stays left of Arabic label ── */
+.career-tabs { direction: rtl; }
+
+/* ── Career row: RTL order — body right, badges center, arrow left ── */
+.career-row { flex-direction: row; }
+
+/* Mobile career-row: body right, arrow far right (start in RTL), badges below */
+@media (max-width: 640px) {
+  .career-row {
+    flex-direction: row !important;
+    flex-wrap: wrap;
+  }
+  .career-row__body  { order: 2; flex: 1; min-width: 0; }
+  .career-row__arrow { order: 1; align-self: flex-start; flex-shrink: 0; }
+  .career-row__badges { order: 3; width: 100%; margin-top: 4px; }
+}
+
+/* ── Process steps: RTL grid flows right→left; use border-left for dividers ── */
+.process-step {
+  border-right: none !important;
+  border-left: 1px solid rgba(255,255,255,0.08);
+  text-align: right;
+}
+.process-step:last-child { border-left: none !important; }
+/* Mobile: revert to bottom borders */
+@media (max-width: 768px) {
+  .process-step {
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+  }
+  .process-step:last-child { border-bottom: none !important; }
+}
+
+/* ── Footer: right-align all text ── */
+.nf-headline,
+.nf-badge__label,
+.nf-links__title,
+.nf-links__list { text-align: right; }
+
+/* ── Footer email input: LTR ── */
+.nf-form__input {
+  direction: ltr !important;
+  text-align: left !important;
+}
+
+/* ── Footer desktop: headline right, form left (natural RTL) ── */
+@media (min-width: 1024px) {
+  .nf-top { flex-direction: row-reverse; }
+}
+
+/* ── Footer phone/email: LTR isolation ── */
+.nf-links__list a[href^="tel:"],
+.nf-links__list a[href^="mailto:"] {
+  direction: ltr;
+  unicode-bidi: isolate;
+  display: inline-block;
+  text-align: left;
+}
+
+/* ── Mobile: no overflow ── */
+@media (max-width: 640px) {
+  .career-row__desc { white-space: normal; overflow: visible; text-overflow: unset; }
+  .cta2-card { padding-left: 24px; padding-right: 24px; border-radius: 16px; }
+  .cta2-card__title { font-size: clamp(24px,7vw,34px); }
+  .process-steps { margin-top: 24px; }
+}
+</style>
 </head>
 <body>
 <div id="cursor-dot"></div>
@@ -276,7 +396,7 @@
       <a href="mailto:info@novatlt.com?subject=طلب%20توظيف%20—%20مشغّل%20معدات%20ثقيلة" class="career-row" data-dept="Operations">
         <div class="career-row__body">
           <div class="career-row__title-row"><span class="career-row__title">مشغّل معدات ثقيلة</span></div>
-          <p class="career-row__desc">مشغّل معتمَد للشاحنات القلابة والشاحنات المفصلية. رخصة قيادة سعودية سارية فئة 6 أو 7، ويُفضَّل وجود خبرة في الصحة والسلامة والبيئة.</p>
+          <p class="career-row__desc">مشغّل معتمَد للشاحنات القلابة والشاحنات المفصلية. رخصة قيادة سعودية سارية فئة <bdi>6</bdi> أو <bdi>7</bdi>، ويُفضَّل وجود خبرة في الصحة والسلامة والبيئة.</p>
         </div>
         <div class="career-row__badges">
           <span class="career-badge career-badge--loc"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1C3.34 1 2 2.34 2 4c0 2.25 3 5 3 5s3-2.75 3-5c0-1.66-1.34-3-3-3zm0 4a1 1 0 110-2 1 1 0 010 2z" fill="currentColor"/></svg>مواقع متعددة</span>
@@ -291,7 +411,7 @@
             <span class="career-row__title">مسؤول إرسال الأسطول</span>
             <span class="career-row__hot">🔥 مطلوب بشدة</span>
           </div>
-          <p class="career-row__desc">تنسيق لحظي لحركة الأسطول ومراقبة GPS وإعداد تقارير العملاء. يجب امتلاك القدرة على التعامل مع بيئات متعددة المواقع وعالية الضغط.</p>
+          <p class="career-row__desc">تنسيق لحظي لحركة الأسطول ومراقبة <bdi>GPS</bdi> وإعداد تقارير العملاء. يجب امتلاك القدرة على التعامل مع بيئات متعددة المواقع وعالية الضغط.</p>
         </div>
         <div class="career-row__badges">
           <span class="career-badge career-badge--loc"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1C3.34 1 2 2.34 2 4c0 2.25 3 5 3 5s3-2.75 3-5c0-1.66-1.34-3-3-3zm0 4a1 1 0 110-2 1 1 0 010 2z" fill="currentColor"/></svg>جدة</span>
@@ -350,12 +470,12 @@
       <div class="process-step">
         <div class="process-step__num">٠١</div>
         <div class="process-step__title">أرسل سيرتك الذاتية</div>
-        <div class="process-step__text">أرسل سيرتك الذاتية إلى info@novatlt.com مع ذكر المسمى الوظيفي في عنوان الرسالة — نراجع كل طلب خلال 48 ساعة.</div>
+        <div class="process-step__text">أرسل سيرتك الذاتية إلى <bdi dir="ltr">info@novatlt.com</bdi> مع ذكر المسمى الوظيفي في عنوان الرسالة — نراجع كل طلب خلال <bdi>48</bdi> ساعة.</div>
       </div>
       <div class="process-step">
         <div class="process-step__num">٠٢</div>
         <div class="process-step__title">المقابلة الهاتفية</div>
-        <div class="process-step__text">مكالمة مدتها 20 دقيقة مع فريق الموارد البشرية للتأكد من مؤهلاتك وجاهزيتك للعمل وتوقعاتك للراتب.</div>
+        <div class="process-step__text">مكالمة مدتها <bdi>20</bdi> دقيقة مع فريق الموارد البشرية للتأكد من مؤهلاتك وجاهزيتك للعمل وتوقعاتك للراتب.</div>
       </div>
       <div class="process-step">
         <div class="process-step__num">٠٣</div>
@@ -365,7 +485,7 @@
       <div class="process-step">
         <div class="process-step__num">٠٤</div>
         <div class="process-step__title">العرض والالتحاق بالعمل</div>
-        <div class="process-step__text">عرض وظيفي مكتوب خلال 5 أيام عمل من المقابلة النهائية. ويبدأ الالتحاق ببرنامج تعريفي في الصحة والسلامة والبيئة مدته 40 ساعة.</div>
+        <div class="process-step__text">عرض وظيفي مكتوب خلال <bdi>5</bdi> أيام عمل من المقابلة النهائية. ويبدأ الالتحاق ببرنامج تعريفي في الصحة والسلامة والبيئة مدته <bdi>40</bdi> ساعة.</div>
       </div>
     </div>
   </section>
@@ -424,8 +544,8 @@
           <div class="nf-links__col">
             <span class="nf-links__title">تواصل معنا</span>
             <ul class="nf-links__list">
-              <li><a href="tel:+966503065248">+966 503065248</a></li>
-              <li><a href="mailto:info@novatlt.com">info@novatlt.com</a></li>
+              <li><a href="tel:+966503065248" dir="ltr" style="display:inline-block;">+966 503065248</a></li>
+              <li><a href="mailto:info@novatlt.com" dir="ltr" style="display:inline-block;">info@novatlt.com</a></li>
               <li><a href="ar-contact.html">جدة، المملكة العربية السعودية</a></li>
             </ul>
           </div>
