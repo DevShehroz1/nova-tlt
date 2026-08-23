@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=5" />
+  <title>الوظائف — نوفا TLT</title>
+  <link rel="preload" href="assets/fonts/BebasNeuePro-Bold.woff" as="font" type="font/woff" crossorigin />
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/cf7.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --hero-bg:#0c0b0a;--ink:#efe9df;--ink-dim:#b8b0a4;--line:rgba(239,233,223,.16);--gold:#CA953D;--gold-grad:linear-gradient(135deg,#B67C2A 0%,#CA953D 50%,#E5B85A 100%); }
+    body { background: var(--hero-bg); color: var(--ink); font-family: 'Tajawal', sans-serif; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    @media (hover: hover) and (pointer: fine) { *, *::before, *::after { cursor: none !important; } }
+    #cursor-dot { position: fixed; pointer-events: none; z-index: 9998; width: 8px; height: 8px; background: #fff; border-radius: 50%; transform: translate(-50%,-50%); left: -100px; top: -100px; will-change: left, top; }
+    #cursor-ring { position: fixed; pointer-events: none; z-index: 9997; width: 28px; height: 28px; border: 1.5px solid rgba(255,255,255,0.7); border-radius: 50%; transform: translate(-50%,-50%); left: -100px; top: -100px; transition: width .3s ease, height .3s ease, border-color .3s ease; will-change: left, top; }
+    #cursor-ring.is-hover { width: 44px; height: 44px; border-color: #CA953D; }
+
+    .btn { background-color: #141414 !important; border-color: rgba(255,255,255,0.15) !important; color: rgba(255,255,255,0.88) !important; }
+    .btn._accent { background: var(--gold-grad) !important; border-color: transparent !important; color: #fff !important; }
+
+    /* Nav dropdown */
+    .nav-drop { position: relative; display: flex; align-items: center; }
+    .nav-drop__trigger { display: flex; align-items: center; gap: 6px; cursor: pointer; color: rgba(255,255,255,0.85); font-size: inherit; font-family: inherit; font-weight: inherit; background: none; border: none; padding: 0; line-height: inherit; white-space: nowrap; }
+    .nav-drop__chevron { width: 10px; height: 6px; flex-shrink: 0; transition: transform 260ms cubic-bezier(0.23,1,0.32,1); }
+    .nav-drop__chevron path { stroke: rgba(255,255,255,0.7) !important; }
+    .nav-drop--open .nav-drop__chevron { transform: rotate(180deg); }
+    .nav-drop--open .nav-drop__chevron path { stroke: #CA953D !important; }
+    .nav-drop__panel { position: absolute; top: calc(100% + 16px); right: 50%; transform: translateX(50%) translateY(-8px); background: #0f0f0f; border: 1px solid rgba(255,255,255,0.08); border-radius: 5rem; padding: 6px; min-width: 210px; box-shadow: 0 20px 60px rgba(0,0,0,.30); opacity: 0; pointer-events: none; transition: opacity 220ms ease, transform 220ms cubic-bezier(0.23,1,0.32,1); z-index: 200; }
+    .nav-drop--open .nav-drop__panel { opacity: 1; pointer-events: auto; transform: translateX(50%) translateY(0); }
+    .nav-drop__panel::after { content: ''; position: absolute; top: -6px; right: 50%; transform: translateX(50%); width: 12px; height: 6px; background: #0f0f0f; clip-path: polygon(50% 0%,0% 100%,100% 100%); }
+    .nav-drop__panel::before { content: ''; position: absolute; top: -16px; left: 0; right: 0; height: 16px; }
+    .nav-drop__link { display: flex; align-items: center; gap: 10px; padding: 11px 16px; border-radius: 9px; color: rgba(255,255,255,0.75); font-size: 15px; font-weight: 600; white-space: nowrap; transition: background 160ms ease, color 160ms ease; position: relative; }
+    .nav-drop__link::before { content: ''; display: block; width: 4px; height: 4px; border-radius: 50%; background: #CA953D; opacity: 0; flex-shrink: 0; transition: opacity 160ms ease; }
+    .nav-drop__link:hover { background: rgba(255,255,255,0.07); color: #fff; }
+    .nav-drop__link:hover::before { opacity: 1; }
+    @media (max-width: 1024px) {
+      .nav-drop__trigger { color: #fff; }
+      .nav-drop__chevron path { stroke: #fff; }
+      .nav-drop__panel { position: static; transform: none !important; box-shadow: none; border: none; border-radius: 8px; background: rgba(255,255,255,0.08); padding: 6px 0 6px 16px; margin-top: 8px; opacity: 1; pointer-events: auto; display: none; }
+      .nav-drop__panel::after, .nav-drop__panel::before { display: none; }
+      .nav-drop--open .nav-drop__panel { display: block; }
+      .nav-drop__link { color: rgba(255,255,255,0.8); font-size: 18px; padding: 8px 10px; }
+    }
+
+    /* RTL overrides */
+    * { font-family: 'Tajawal', sans-serif !important; letter-spacing: 0 !important; }
+    .text-hover__elem-2 { display: none !important; }
+    .text-hover__inner { clip-path: none !important; }
+    .header__container { flex-direction: row-reverse !important; }
+    .header__actions { flex-direction: row !important; }
+    body { text-align: right; }
+    .ar-nav-item { color: rgba(255,255,255,0.82); background: none; border: none; cursor: pointer; font-size: 16px; font-family: 'Tajawal', sans-serif !important; padding: 0; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+    .ar-nav-item:hover { color: #CA953D !important; }
+
+    /* Header — transparent over hero, frosted on scroll */
+    .header { position: fixed !important; transform: none !important; background: transparent !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; transition: background 0.35s ease, backdrop-filter 0.35s ease !important; }
+    .header.is-scrolled { background: rgba(10,10,10,0.90) !important; backdrop-filter: blur(14px) !important; -webkit-backdrop-filter: blur(14px) !important; }
+    .header__container { position: relative !important; }
+    .header__menu { position: absolute !important; right: 50% !important; left: auto !important; transform: translateX(50%) !important; background-color: #141414 !important; border: 1px solid rgba(255,255,255,0.1) !important; font-family: 'Tajawal', sans-serif !important; font-weight: 700 !important; }
+    .header__menu-item, .header__menu-item .text-hover__elem { color: rgba(255,255,255,0.82) !important; }
+    .header__menu-item:hover { color: #CA953D !important; }
+    .header__logo { background: transparent !important; padding: 0 !important; height: auto !important; }
+    .header__logo-img { width: auto !important; height: 52px !important; object-fit: contain; }
+    @media (max-width: 1024px) { .header__logo-img { height: 40px !important; } }
+
+    .nt-lang-wrap { position: relative; }
+    .nt-lang-menu { display: none; position: absolute; top: calc(100% + 8px); right: 0; background: #141414; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; min-width: 130px; z-index: 300; padding: 4px; }
+    .nt-lang-wrap.open .nt-lang-menu { display: block; }
+    .nt-lang-option { display: block; padding: 8px 14px; font-size: 14px; color: rgba(255,255,255,0.7); border-radius: 6px; transition: background 150ms, color 150ms; text-decoration: none; }
+    .nt-lang-option:hover, .nt-lang-option.is-active { background: rgba(202,149,61,0.12); color: #CA953D; }
+    .header__lang-heading { font-size: 13px !important; font-weight: 600 !important; }
+
+    /* Hero */
+    .careers-hero { position: relative; min-height: 88vh; display: flex; align-items: center; justify-content: center; background-image: url('assets/img/about-hero.jpg'); background-size: cover; background-position: center 40%; }
+    .careers-hero__overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.60) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.88) 100%); }
+    .careers-hero__content { position: relative; z-index: 2; text-align: center; padding: 0 clamp(20px,5vw,80px); }
+    .careers-hero__eyebrow { font-family: 'Tajawal', sans-serif; font-size: 13px; font-weight: 700; color: #CA953D; margin-bottom: 24px; }
+    .careers-hero__title { font-family: 'Tajawal', sans-serif; font-weight: 700; font-size: clamp(34px,5vw,62px); line-height: 1.2; color: #fff; margin-bottom: 22px; }
+    .careers-hero__desc { font-family: 'Tajawal', sans-serif; font-size: clamp(14px,1.1vw,17px); color: rgba(255,255,255,0.65); line-height: 1.65; max-width: 560px; margin: 0 auto 36px; }
+    .careers-hero__btn { background: #fff; color: #1a1000; font-family: 'Tajawal', sans-serif; font-size: 16px; font-weight: 700; padding: 16px 44px; border-radius: 5rem; text-decoration: none; display: inline-flex; align-items: center; transition: background 150ms ease; }
+    .careers-hero__btn:hover { background: #f0f0f0; }
+    .careers-hero__scroll { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; font-family: 'Tajawal', sans-serif; font-size: 11px; color: rgba(255,255,255,0.35); z-index: 2; }
+    .careers-hero__scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, rgba(202,149,61,0.6), transparent); animation: scrollPulse 2s ease-in-out infinite; }
+    @keyframes scrollPulse { 0%,100%{opacity:.4;transform:scaleY(1);} 50%{opacity:1;transform:scaleY(1.3);} }
+
+    /* Sections */
+    .section-inner { max-width: 1400px; margin: 0 auto; padding: clamp(48px,6vw,80px) clamp(20px,5vw,80px); }
+    .section-eyebrow { font-family: 'Tajawal', sans-serif; font-size: 20px; font-weight: 700; color: #CA953D; margin-bottom: 16px; }
+    .section-title { font-family: 'Tajawal', sans-serif; font-weight: 700; font-size: clamp(32px,4vw,60px); line-height: 1.3; color: var(--ink); margin-bottom: 24px; }
+    .section-sub { font-family: 'Tajawal', sans-serif; font-size: clamp(14px,1.1vw,17px); color: var(--ink-dim); line-height: 1.65; max-width: 640px; margin-bottom: 40px; }
+
+    /* Career tabs */
+    .career-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+    .career-tab { display: inline-flex; align-items: center; gap: 6px; padding: 7px 16px; border-radius: 5rem; font-family: 'Tajawal', sans-serif; font-size: 14px; font-weight: 600; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.45); cursor: pointer; transition: all 200ms ease; outline: none; }
+    .career-tab:hover { color: rgba(255,255,255,0.8); border-color: rgba(255,255,255,0.18); }
+    .career-tab.is-active { background: #fff; color: #0a0a0a; border-color: #fff; }
+    .career-tab__count { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; font-size: 11px; font-weight: 700; background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.45); }
+    .career-tab.is-active .career-tab__count { background: rgba(0,0,0,0.14); color: #0a0a0a; }
+
+    /* Career list rows */
+    .career-list { border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; overflow: hidden; }
+    .career-row { display: flex; align-items: center; gap: 16px; padding: 20px 24px; border-bottom: 1px solid rgba(255,255,255,0.06); text-decoration: none; color: inherit; transition: background 150ms ease; }
+    .career-row:last-of-type { border-bottom: none; }
+    .career-row:hover { background: rgba(202,149,61,0.05); }
+    .career-row__body { flex: 1; min-width: 0; }
+    .career-row__title-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 4px; }
+    .career-row__title { font-family: 'Tajawal', sans-serif; font-size: clamp(16px,1.6vw,20px); font-weight: 700; color: #fff; line-height: 1; }
+    .career-row__hot { display: inline-flex; align-items: center; gap: 3px; font-family: 'Tajawal', sans-serif; font-size: 11px; font-weight: 700; color: #D97706; background: rgba(251,191,36,0.12); border: 1px solid rgba(251,191,36,0.22); border-radius: 5rem; padding: 3px 8px; }
+    .career-row__desc { font-family: 'Tajawal', sans-serif; font-size: 13px; color: rgba(255,255,255,0.38); line-height: 1.5; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .career-row__badges { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+    .career-badge { display: inline-flex; align-items: center; gap: 5px; font-family: 'Tajawal', sans-serif; font-size: 12px; font-weight: 500; padding: 5px 10px; border-radius: 5rem; border: 1px solid; white-space: nowrap; }
+    .career-badge--loc { color: #CA953D; background: rgba(202,149,61,0.08); border-color: rgba(202,149,61,0.2); }
+    .career-badge--type { color: rgba(255,255,255,0.45); background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08); }
+    .career-row__arrow { width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 200ms ease, border-color 200ms ease; }
+    .career-row:hover .career-row__arrow { background: #fff; border-color: #fff; }
+    .career-row:hover .career-row__arrow path { stroke: #0a0a0a; }
+    /* RTL arrow points left */
+    .career-row__arrow svg { transform: scaleX(-1); }
+    .career-empty { display: none; flex-direction: column; align-items: center; gap: 12px; padding: 56px 20px; text-align: center; }
+    .career-empty__title { font-family: 'Tajawal', sans-serif; font-size: 22px; font-weight: 700; color: #fff; }
+    .career-empty__sub { font-family: 'Tajawal', sans-serif; font-size: 13px; color: rgba(255,255,255,0.3); max-width: 260px; line-height: 1.6; }
+    @media (max-width: 640px) {
+      .career-row { flex-wrap: wrap; padding: 16px; gap: 6px; align-items: flex-start; }
+      .career-row__body { flex: 1; min-width: 0; order: 1; }
+      .career-row__desc { white-space: normal; overflow: visible; text-overflow: unset; }
+      .career-row__badges { order: 2; width: 100%; margin-top: 4px; }
+      .career-row__arrow { order: 1; align-self: flex-start; flex-shrink: 0; }
+    }
+
+    /* Process steps */
+    .process-steps { display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap: 0; border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; overflow: hidden; margin-top: 40px; }
+    .process-step { padding: 28px; border-right: 1px solid rgba(255,255,255,0.08); }
+    .process-step:last-child { border-right: none; }
+    .process-step__num { font-family: 'Tajawal', sans-serif; font-size: 40px; font-weight: 700; line-height: 1; background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 10px; }
+    .process-step__title { font-family: 'Tajawal', sans-serif; font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+    .process-step__text { font-family: 'Tajawal', sans-serif; font-size: 13px; color: var(--ink-dim); line-height: 1.6; }
+    @media (max-width: 768px) { .process-steps { grid-template-columns: 1fr; } .process-step { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); } .process-step:last-child { border-bottom: none; } }
+
+    /* CTA bottom section */
+    .cta2-sec { background: #0a0a0a; padding: clamp(80px,12vw,160px) clamp(20px,5vw,60px); position: relative; overflow: hidden; }
+    .cta2-ring { position: absolute; top: 50%; left: 50%; border-radius: 50%; border: none; pointer-events: none; -webkit-mask: radial-gradient(circle at center, transparent calc(50% - 2px), #000 calc(50% - 1px), #000 calc(50% + 1px), transparent calc(50% + 2px)); mask: radial-gradient(circle at center, transparent calc(50% - 2px), #000 calc(50% - 1px), #000 calc(50% + 1px), transparent calc(50% + 2px)); background: conic-gradient(rgba(202,149,61,0.85) 0deg, rgba(202,149,61,0.45) 35deg, rgba(202,149,61,0.12) 90deg, transparent 140deg, transparent 360deg); animation: cta2-spin 18s linear infinite; }
+    .cta2-ring--1 { width: clamp(800px,95vw,1100px); height: clamp(800px,95vw,1100px); margin-left: calc(clamp(800px,95vw,1100px) / -2); margin-top: calc(clamp(800px,95vw,1100px) / -2); }
+    .cta2-ring--2 { width: clamp(620px,76vw,870px); height: clamp(620px,76vw,870px); margin-left: calc(clamp(620px,76vw,870px) / -2); margin-top: calc(clamp(620px,76vw,870px) / -2); background: conic-gradient(rgba(202,149,61,0.6) 0deg, rgba(202,149,61,0.25) 45deg, rgba(202,149,61,0.05) 100deg, transparent 155deg, transparent 360deg); animation-direction: reverse; animation-duration: 28s; }
+    @keyframes cta2-spin { from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+    .cta2-card { position: relative; z-index: 2; max-width: 1400px; margin: 0 auto; border-radius: 24px; background: linear-gradient(135deg,#a8721e 0%,#CA953D 45%,#d4a84e 75%,#b5832e 100%); padding: clamp(64px,9vw,110px) clamp(32px,6vw,80px); text-align: center; overflow: hidden; }
+    .cta2-card__title { font-family: 'Tajawal', sans-serif; font-size: clamp(28px,4vw,54px); font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 20px; }
+    .cta2-card__sub { font-family: 'Tajawal', sans-serif; font-size: clamp(14px,1.1vw,17px); color: rgba(255,255,255,0.75); max-width: 540px; margin: 0 auto 36px; line-height: 1.7; }
+    .cta2-card__btn { display: inline-flex; align-items: center; padding: 16px 36px; background: #fff; border: none; border-radius: 5rem; font-family: 'Tajawal', sans-serif; font-size: 16px; font-weight: 700; color: #111; cursor: pointer; text-decoration: none; transition: background 160ms ease; }
+    .cta2-card__btn:hover { background: #f0f0f0; }
+
+    /* Footer */
+    .nova-footer { position: relative; width: 100%; overflow: hidden; background: radial-gradient(ellipse 180% 140% at 10% 110%, rgba(202,149,61,0.85) 0%, rgba(160,110,20,0.45) 38%, #0c0b0a 65%), #0c0b0a; }
+    .nf-content { position: relative; z-index: 10; width: 100%; }
+    .nf-inner-wrap { width: 100%; margin: 0 auto; max-width: 1280px; padding: 0 clamp(24px,4vw,48px); }
+    .nf-top { display: flex; flex-direction: column; gap: 32px; padding-top: 24px; padding-bottom: 40px; }
+    .nf-headline-wrap { display: flex; flex-direction: column; gap: 20px; max-width: 576px; }
+    .nf-badge { display: flex; align-items: center; gap: 10px; }
+    .nf-badge__dot-wrap { position: relative; display: flex; width: 8px; height: 8px; flex-shrink: 0; }
+    .nf-badge__pulse { position: absolute; inset: 0; border-radius: 50%; background: #CA953D; opacity: 0.75; animation: nf-ping 1.2s cubic-bezier(0,0,0.2,1) infinite; }
+    .nf-badge__core { position: relative; width: 8px; height: 8px; border-radius: 50%; background: #CA953D; }
+    @keyframes nf-ping { 0% { transform: scale(1); opacity: 0.75; } 75%, 100% { transform: scale(2.2); opacity: 0; } }
+    .nf-badge__label { font-size: 14px; font-weight: 500; color: #fff; }
+    .nf-headline { color: #fff; font-size: clamp(24px,3.5vw,42px); line-height: 1.4; font-weight: 400; margin: 0; }
+    .nf-form { display: flex; width: 100%; max-width: 384px; flex-shrink: 0; align-items: center; gap: 8px; }
+    .nf-form__input { flex: 1; height: 48px; padding: 0 16px; font-size: 14px; font-family: 'Tajawal', sans-serif; color: #fff; background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.05); border-radius: 0; outline: none; transition: border-color 180ms ease; }
+    .nf-form__input::placeholder { color: rgba(255,255,255,0.70); }
+    .nf-form__btn { display: flex; align-items: center; height: 48px; flex-shrink: 0; cursor: pointer; padding: 0 20px; font-size: 14px; font-weight: 700; font-family: 'Tajawal', sans-serif; color: #fff; background: #CA953D; border: none; border-radius: 0; transition: all 180ms ease; }
+    .nf-mid { display: flex; flex-direction: column; gap: 40px; padding-bottom: 64px; }
+    .nf-brand { display: flex; flex: 1; align-items: center; gap: 12px; } .nf-brand__logo { height: 52px; width: auto; display: block; }
+    .nf-links-grid { display: grid; grid-template-columns: repeat(2, auto); gap: 32px 48px; }
+    .nf-links__title { font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.90); display: block; margin-bottom: 16px; }
+    .nf-links__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+    .nf-links__list a { font-size: 14px; color: rgba(255,255,255,0.70); text-decoration: none; transition: color 180ms ease; }
+    .nf-links__list a:hover { color: #fff; }
+    .nf-watermark { display: flex; width: 100%; align-items: center; justify-content: center; }
+    .nf-watermark__svg { height: auto; width: 100%; user-select: none; }
+    @media (min-width: 640px) { .nf-links-grid { grid-template-columns: repeat(3, auto); } }
+    @media (min-width: 1024px) { .nf-top { flex-direction: row; align-items: flex-end; justify-content: space-between; padding-top: 40px; padding-bottom: 56px; } .nf-headline-wrap { flex: 1; } .nf-mid { flex-direction: row; align-items: flex-start; gap: 32px; } .nf-links-grid { gap: 32px 64px; } }
+  </style>
+<link rel="stylesheet" href="assets/css/rtl.css">
+</head>
+<body>
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<header class="header">
+  <div class="container header__container">
+    <a href="ar.html" class="header__logo">
+      <img src="assets/img/logo.png" alt="NOVA TLT" class="header__logo-img" />
+    </a>
+    <nav class="header__menu" data-da=".header__hamburger, 1024, 0">
+      <a href="ar.html" class="header__menu-item ar-nav-item">الرئيسية</a>
+      <div class="nav-drop header__menu-item" data-nav-drop>
+        <button class="nav-drop__trigger ar-nav-item" aria-expanded="false" aria-haspopup="true">
+          الشركة
+          <svg class="nav-drop__chevron" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nav-drop__panel" role="menu">
+          <a href="ar-about.html" class="nav-drop__link" role="menuitem">من نحن</a>
+          <a href="ar-careers.html" class="nav-drop__link" role="menuitem">الوظائف</a>
+        </div>
+      </div>
+      <div class="nav-drop header__menu-item" data-nav-drop>
+        <button class="nav-drop__trigger ar-nav-item" aria-expanded="false" aria-haspopup="true">
+          ما نقدّمه
+          <svg class="nav-drop__chevron" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nav-drop__panel" role="menu">
+          <a href="ar-services.html" class="nav-drop__link" role="menuitem">الخدمات</a>
+          <a href="ar-fleet.html" class="nav-drop__link" role="menuitem">الأسطول</a>
+          <a href="ar-industries.html" class="nav-drop__link" role="menuitem">القطاعات التي نخدمها</a>
+        </div>
+      </div>
+      <a href="ar-projects.html" class="header__menu-item ar-nav-item">المشاريع</a>
+    </nav>
+    <div class="header__actions">
+      <button type="button" class="header__hamburger-btn btn" aria-label="فتح القائمة" id="nova-mob-open">
+        <svg width="22" height="16" viewBox="0 0 22 16" fill="none" aria-hidden="true"><rect y="0" width="22" height="2" rx="1" fill="currentColor"/><rect y="7" width="22" height="2" rx="1" fill="currentColor"/><rect y="14" width="22" height="2" rx="1" fill="currentColor"/></svg>
+      </button>
+      <div class="nt-lang-wrap" id="nt-lang-wrap">
+        <button type="button" class="header__lang-heading btn" id="nt-lang-btn">
+          <span class="btn__inner">
+            <span class="nt-lang-label">عر</span>
+            <svg width="13" height="12" viewBox="0 0 13 12" fill="none"><path d="M1.267 7.06149L5.84961 11.7365C6.19441 12.0878 6.80452 12.0878 7.15054 11.7365L11.7331 7.06149C12.0902 6.69643 12.0889 6.10663 11.7295 5.74406C11.37 5.38148 10.7905 5.38148 10.4322 5.74654L7.41586 8.82221V0.931267C7.41586 0.415966 7.00504 0 6.49885 0C5.99266 0 5.58184 0.415966 5.58184 0.931267V8.82221L2.56671 5.74654C2.38698 5.56401 2.15223 5.47337 1.91625 5.47337C1.68272 5.47337 1.44796 5.56401 1.26945 5.74406C0.911205 6.10663 0.909982 6.69643 1.267 7.06149Z" fill="#CA953D"/></svg>
+          </span>
+        </button>
+        <div class="nt-lang-menu" id="nt-lang-menu">
+          <a href="careers.html" class="nt-lang-option" data-lang="en">English</a>
+          <a href="ar-careers.html" class="nt-lang-option is-active" data-lang="ar">العربية</a>
+        </div>
+      </div>
+      <a href="ar-contact.html" class="header__btn btn" data-da=".header__hamburger, 1024, 1">
+        <span class="btn__inner">اتصل بنا</span>
+      </a>
+    </div>
+  </div>
+  <div class="header__hamburger container"></div>
+</header>
+
+<main>
+  <section class="careers-hero">
+    <div class="careers-hero__overlay"></div>
+    <div class="careers-hero__content">
+      <p class="careers-hero__eyebrow">الوظائف</p>
+      <h1 class="careers-hero__title">انضم إلى الفريق الذي يحرّك المملكة</h1>
+      <p class="careers-hero__desc">بُنيت نوفا تيرا على الانضباط والخبرة وثقافة السلامة أولاً. نوظّف أشخاصاً يفخرون بعملهم — ونعتني بمن يفعلون ذلك.</p>
+      <a href="mailto:info@novatlt.com" class="careers-hero__btn">استعرض الوظائف الشاغرة</a>
+    </div>
+    <div class="careers-hero__scroll">
+      <div class="careers-hero__scroll-line"></div>
+      <span>مرِّر للأسفل</span>
+    </div>
+  </section>
+
+  <section class="section-inner" style="padding-top:0;margin-top:60px;">
+    <p class="section-eyebrow">الوظائف الشاغرة</p>
+    <h2 class="section-title">الشواغر الحالية.</h2>
+    <p class="section-sub">نوظّف على أساس الجدارة والانضباط ونهج السلامة أولاً. ونرحّب بتقديم المواطنين السعوديين والمقيمين المؤهلين على حد سواء.</p>
+
+    <div class="career-tabs">
+      <button class="career-tab is-active" data-dept="all">جميع الوظائف</button>
+      <button class="career-tab" data-dept="Operations">العمليات <span class="career-tab__count">٢</span></button>
+      <button class="career-tab" data-dept="Logistics">الخدمات اللوجستية <span class="career-tab__count">٢</span></button>
+      <button class="career-tab" data-dept="HSE">الصحة والسلامة والبيئة <span class="career-tab__count">١</span></button>
+      <button class="career-tab" data-dept="Workshop">الورشة <span class="career-tab__count">١</span></button>
+    </div>
+
+    <div class="career-list">
+      <a href="mailto:info@novatlt.com?subject=طلب%20توظيف%20—%20مشغّل%20معدات%20ثقيلة" class="career-row" data-dept="Operations">
+        <div class="career-row__body">
+          <div class="career-row__title-row"><span class="career-row__title">مشغّل معدات ثقيلة</span></div>
+          <p class="career-row__desc">مشغّل معتمَد للشاحنات القلابة والشاحنات المفصلية. رخصة قيادة سعودية سارية فئة 6 أو 7، ويُفضَّل وجود خبرة في الصحة والسلامة والبيئة.</p>
+        </div>
+        <div class="career-row__badges">
+          <span class="career-badge career-badge--loc"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1C3.34 1 2 2.34 2 4c0 2.25 3 5 3 5s3-2.75 3-5c0-1.66-1.34-3-3-3zm0 4a1 1 0 110-2 1 1 0 010 2z" fill="currentColor"/></svg>مواقع متعددة</span>
+          <span class="career-badge career-badge--type"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="3.5" stroke="currentColor" stroke-width="1.2"/><path d="M5 3v2l1.25 1.25" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>دوام كامل</span>
+        </div>
+        <div class="career-row__arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </a>
+
+      <a href="mailto:info@novatlt.com?subject=طلب%20توظيف%20—%20مسؤول%20إرسال%20الأسطول" class="career-row" data-dept="Logistics">
+        <div class="career-row__body">
+          <div class="career-row__title-row">
+            <span class="career-row__title">مسؤول إرسال الأسطول</span>
+            <span class="career-row__hot">🔥 مطلوب بشدة</span>
+          </div>
+          <p class="career-row__desc">تنسيق لحظي لحركة الأسطول ومراقبة GPS وإعداد تقارير العملاء. يجب امتلاك القدرة على التعامل مع بيئات متعددة المواقع وعالية الضغط.</p>
+        </div>
+        <div class="career-row__badges">
+          <span class="career-badge career-badge--loc"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1C3.34 1 2 2.34 2 4c0 2.25 3 5 3 5s3-2.75 3-5c0-1.66-1.34-3-3-3zm0 4a1 1 0 110-2 1 1 0 010 2z" fill="currentColor"/></svg>جدة</span>
+          <span class="career-badge career-badge--type"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="3.5" stroke="currentColor" stroke-width="1.2"/><path d="M5 3v2l1.25 1.25" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>دوام كامل</span>
+        </div>
+        <div class="career-row__arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </a>
+
+      <a href="mailto:info@novatlt.com?subject=طلب%20توظيف%20—%20منسّق%20لوجستي" class="career-row" data-dept="Logistics">
+        <div class="career-row__body">
+          <div class="career-row__title-row"><span class="career-row__title">منسّق لوجستي</span></div>
+          <p class="career-row__desc">دعم مديري المشاريع في الجدولة وتنسيق المورّدين والتوثيق. شهادة جامعية في الخدمات اللوجستية أو خبرة معادلة.</p>
+        </div>
+        <div class="career-row__badges">
+          <span class="career-badge career-badge--loc"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1C3.34 1 2 2.34 2 4c0 2.25 3 5 3 5s3-2.75 3-5c0-1.66-1.34-3-3-3zm0 4a1 1 0 110-2 1 1 0 010 2z" fill="currentColor"/></svg>الرياض / جدة</span>
+          <span class="career-badge career-badge--type"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="3.5" stroke="currentColor" stroke-width="1.2"/><path d="M5 3v2l1.25 1.25" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>دوام كامل</span>
+        </div>
+        <div class="career-row__arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </a>
+
+      <a href="mailto:info@novatlt.com?subject=طلب%20توظيف%20—%20مسؤول%20الصحة%20والسلامة%20والبيئة" class="career-row" data-dept="HSE">
+        <div class="career-row__body">
+          <div class="career-row__title-row"><span class="career-row__title">مسؤول الصحة والسلامة والبيئة</span></div>
+          <p class="career-row__desc">عمليات تفتيش ميدانية، وتقارير الحوادث، ومراقبة التزام السائقين. شهادة نيبوش أو ما يعادلها مطلوبة.</p>
+        </div>
+        <div class="career-row__badges">
+          <span class="career-badge career-badge--loc"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1C3.34 1 2 2.34 2 4c0 2.25 3 5 3 5s3-2.75 3-5c0-1.66-1.34-3-3-3zm0 4a1 1 0 110-2 1 1 0 010 2z" fill="currentColor"/></svg>في الموقع</span>
+          <span class="career-badge career-badge--type"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="3.5" stroke="currentColor" stroke-width="1.2"/><path d="M5 3v2l1.25 1.25" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>دوام كامل</span>
+        </div>
+        <div class="career-row__arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </a>
+
+      <a href="mailto:info@novatlt.com?subject=طلب%20توظيف%20—%20فني%20صيانة%20مركبات%20ثقيلة" class="career-row" data-dept="Workshop">
+        <div class="career-row__body">
+          <div class="career-row__title-row"><span class="career-row__title">فني صيانة مركبات ثقيلة</span></div>
+          <p class="career-row__desc">صيانة وقائية وتصحيحية للشاحنات القلابة الثقيلة والشاحنات المفصلية. شهادة مهنية في المركبات الثقيلة مطلوبة.</p>
+        </div>
+        <div class="career-row__badges">
+          <span class="career-badge career-badge--loc"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1C3.34 1 2 2.34 2 4c0 2.25 3 5 3 5s3-2.75 3-5c0-1.66-1.34-3-3-3zm0 4a1 1 0 110-2 1 1 0 010 2z" fill="currentColor"/></svg>ورشة الرياض</span>
+          <span class="career-badge career-badge--type"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="3.5" stroke="currentColor" stroke-width="1.2"/><path d="M5 3v2l1.25 1.25" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>دوام كامل</span>
+        </div>
+        <div class="career-row__arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </a>
+
+      <div class="career-empty" id="career-empty">
+        <p class="career-empty__title">لا توجد شواغر حالياً</p>
+        <p class="career-empty__sub">لا توجد وظائف شاغرة في هذا القسم في الوقت الحالي — تفقَّد الصفحة لاحقاً أو أرسل طلب توظيف مفتوحاً أدناه.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-inner" style="padding-top:0;">
+    <p class="section-eyebrow">كيفية التقديم</p>
+    <h2 class="section-title">بسيط. مباشر. سريع.</h2>
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="process-step__num">٠١</div>
+        <div class="process-step__title">أرسل سيرتك الذاتية</div>
+        <div class="process-step__text">أرسل سيرتك الذاتية إلى info@novatlt.com مع ذكر المسمى الوظيفي في عنوان الرسالة — نراجع كل طلب خلال 48 ساعة.</div>
+      </div>
+      <div class="process-step">
+        <div class="process-step__num">٠٢</div>
+        <div class="process-step__title">المقابلة الهاتفية</div>
+        <div class="process-step__text">مكالمة مدتها 20 دقيقة مع فريق الموارد البشرية للتأكد من مؤهلاتك وجاهزيتك للعمل وتوقعاتك للراتب.</div>
+      </div>
+      <div class="process-step">
+        <div class="process-step__num">٠٣</div>
+        <div class="process-step__title">المقابلة الشخصية</div>
+        <div class="process-step__text">مقابلة في الموقع أو المكتب مع مدير العمليات المعني — مع تقييم عملي للوظائف الفنية.</div>
+      </div>
+      <div class="process-step">
+        <div class="process-step__num">٠٤</div>
+        <div class="process-step__title">العرض والالتحاق بالعمل</div>
+        <div class="process-step__text">عرض وظيفي مكتوب خلال 5 أيام عمل من المقابلة النهائية. ويبدأ الالتحاق ببرنامج تعريفي في الصحة والسلامة والبيئة مدته 40 ساعة.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta2-sec">
+    <div class="cta2-ring cta2-ring--1"></div>
+    <div class="cta2-ring cta2-ring--2"></div>
+    <div class="cta2-card">
+      <h2 class="cta2-card__title">ابنِ مسيرتك المهنية مع الأسطول الرائد في المملكة العربية السعودية</h2>
+      <p class="cta2-card__sub">نبحث عن سائقين ومشغّلين ومنسّقين لوجستيين ومختصين في الصحة والسلامة والبيئة يفخرون بعملهم. قدِّم اليوم وانضم إلى فريق يحرّك المملكة.</p>
+      <a href="mailto:info@novatlt.com" class="cta2-card__btn">قدِّم الآن</a>
+    </div>
+  </section>
+</main>
+
+<footer class="nova-footer">
+  <div class="nf-content">
+    <div class="nf-inner-wrap">
+      <div class="nf-top">
+        <div class="nf-headline-wrap">
+          <div class="nf-badge">
+            <span class="nf-badge__dot-wrap">
+              <span class="nf-badge__pulse"></span>
+              <span class="nf-badge__core"></span>
+            </span>
+            <span class="nf-badge__label">متاحون في جميع مناطق المملكة الاثنتي عشرة</span>
+          </div>
+          <h2 class="nf-headline">احصل على عرض أسطول مخصص لمشروعك — خلال 24 ساعة.</h2>
+        </div>
+        <form class="nf-form" onsubmit="return false;">
+          <input type="email" class="nf-form__input" placeholder="أدخل بريدك الإلكتروني" />
+          <button type="submit" class="nf-form__btn">احصل على عرض</button>
+        </form>
+      </div>
+      <div class="nf-mid">
+        <div class="nf-brand">
+          <img src="assets/img/logo.png" alt="NOVA TLT" class="nf-brand__logo" />
+        </div>
+        <div class="nf-links-grid">
+          <div class="nf-links__col">
+            <span class="nf-links__title">الشركة</span>
+            <ul class="nf-links__list">
+              <li><a href="ar-about.html">من نحن</a></li>
+              <li><a href="ar-careers.html">الوظائف</a></li>
+              <li><a href="news.html">الأخبار</a></li>
+            </ul>
+          </div>
+          <div class="nf-links__col">
+            <span class="nf-links__title">الخدمات</span>
+            <ul class="nf-links__list">
+              <li><a href="ar-services.html">تأجير الشاحنات القلابة</a></li>
+              <li><a href="ar-fleet.html">أسطولنا</a></li>
+              <li><a href="ar-industries.html">القطاعات</a></li>
+            </ul>
+          </div>
+          <div class="nf-links__col">
+            <span class="nf-links__title">تواصل معنا</span>
+            <ul class="nf-links__list">
+              <li><a href="tel:+966503065248">+966 503065248</a></li>
+              <li><a href="mailto:info@novatlt.com">info@novatlt.com</a></li>
+              <li><a href="ar-contact.html">جدة، المملكة العربية السعودية</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="nf-watermark">
+      <svg class="nf-watermark__svg" viewBox="0 0 720 110" preserveAspectRatio="xMidYMid meet" aria-label="NOVA TLT">
+        <text x="50%" y="105" dominant-baseline="alphabetic" text-anchor="middle" textLength="90%" lengthAdjust="spacing" font-size="160" font-weight="700" fill="rgba(255,255,255,0.30)" font-family="ui-sans-serif,system-ui,sans-serif" letter-spacing="-0.05em">NOVA TLT</text>
+      </svg>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){var drops=document.querySelectorAll('[data-nav-drop]');function open(d){d.classList.add('nav-drop--open');d.querySelector('.nav-drop__trigger').setAttribute('aria-expanded','true');}function close(d){d.classList.remove('nav-drop--open');d.querySelector('.nav-drop__trigger').setAttribute('aria-expanded','false');}function closeAll(){drops.forEach(close);}drops.forEach(function(drop){var trigger=drop.querySelector('.nav-drop__trigger');var mob=function(){return window.innerWidth<=1024;};drop.addEventListener('mouseenter',function(){if(!mob())open(drop);});drop.addEventListener('mouseleave',function(){if(!mob())close(drop);});trigger.addEventListener('click',function(e){e.stopPropagation();var o=drop.classList.contains('nav-drop--open');closeAll();if(!o)open(drop);});});document.addEventListener('click',closeAll);document.addEventListener('keydown',function(e){if(e.key==='Escape')closeAll();});})();
+</script>
+<script>
+(function(){var wrap=document.getElementById('nt-lang-wrap'),btn=document.getElementById('nt-lang-btn');if(!wrap||!btn)return;btn.addEventListener('click',function(e){e.stopPropagation();wrap.classList.toggle('open');});document.addEventListener('click',function(){wrap.classList.remove('open');});})();
+</script>
+<script>
+(function(){
+  var header=document.querySelector('.header');
+  var hero=document.querySelector('.careers-hero');
+  if(!header||!hero)return;
+  function onScroll(){header.classList.toggle('is-scrolled',window.scrollY>hero.offsetHeight-80);}
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+})();
+</script>
+<script>
+(function(){
+  var tabs=document.querySelectorAll('.career-tab');
+  var rows=document.querySelectorAll('.career-row');
+  var empty=document.getElementById('career-empty');
+  tabs.forEach(function(tab){
+    tab.addEventListener('click',function(){
+      tabs.forEach(function(t){t.classList.remove('is-active');});
+      tab.classList.add('is-active');
+      var dept=tab.getAttribute('data-dept');
+      var visible=0;
+      rows.forEach(function(row){
+        var show=dept==='all'||row.getAttribute('data-dept')===dept;
+        row.style.display=show?'':'none';
+        if(show)visible++;
+      });
+      if(empty)empty.style.display=visible===0?'flex':'none';
+    });
+  });
+})();
+</script>
+<script>
+(function(){var dot=document.getElementById('cursor-dot'),ring=document.getElementById('cursor-ring');if(!dot||!ring)return;var mx=-100,my=-100,rx=-100,ry=-100;document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;});document.querySelectorAll('a,button').forEach(function(el){el.addEventListener('mouseenter',function(){ring.classList.add('is-hover');});el.addEventListener('mouseleave',function(){ring.classList.remove('is-hover');});});function loop(){dot.style.left=mx+'px';dot.style.top=my+'px';rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);}loop();})();
+</script>
+<script src="assets/js/scroll-reveal.js"></script>
+<script src="assets/js/mobile-menu.js"></script>
+<script src="assets/js/ar-mobile-menu.js"></script>
+<script src="assets/js/page-transition.js"></script>
+</body>
+</html>

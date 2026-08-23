@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=5" />
+  <title>الخدمات — نوفا TLT</title>
+  <link rel="preload" href="assets/fonts/BebasNeuePro-Bold.woff" as="font" type="font/woff" crossorigin />
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/cf7.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --hero-bg:#0c0b0a;--ink:#efe9df;--ink-dim:#b8b0a4;--gold:#CA953D;--gold-grad:linear-gradient(135deg,#B67C2A 0%,#CA953D 50%,#E5B85A 100%);--line:rgba(239,233,223,.16); }
+    body { background: var(--hero-bg); color: var(--ink); font-family: 'Tajawal', sans-serif; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    @media (hover: hover) and (pointer: fine) { *, *::before, *::after { cursor: none !important; } }
+    #cursor-dot { position: fixed; pointer-events: none; z-index: 9998; width: 8px; height: 8px; background: #fff; border-radius: 50%; transform: translate(-50%,-50%); left: -100px; top: -100px; will-change: left, top; }
+    #cursor-ring { position: fixed; pointer-events: none; z-index: 9997; width: 28px; height: 28px; border: 1.5px solid rgba(255,255,255,0.7); border-radius: 50%; transform: translate(-50%,-50%); left: -100px; top: -100px; transition: width .3s ease, height .3s ease, border-color .3s ease; will-change: left, top; }
+    #cursor-ring.is-hover { width: 44px; height: 44px; border-color: #CA953D; }
+
+    .header__menu { background-color: #141414 !important; border: 1px solid rgba(255,255,255,0.1) !important; }
+    .header__menu-item, .header__menu-item .text-hover__elem { color: rgba(255,255,255,0.82) !important; }
+    .header__menu-item:hover { color: #CA953D !important; }
+    .btn { background-color: #141414 !important; border-color: rgba(255,255,255,0.15) !important; color: rgba(255,255,255,0.88) !important; }
+    .btn:hover { color: #fff !important; }
+    .btn._accent { background: linear-gradient(135deg,#B67C2A 0%,#CA953D 50%,#E5B85A 100%) !important; border-color: transparent !important; color: #fff !important; }
+    .nav-drop { position: relative; display: flex; align-items: center; }
+    .nav-drop__trigger { display: flex; align-items: center; gap: 6px; cursor: pointer; color: rgba(255,255,255,0.85); font-size: inherit; font-family: inherit; font-weight: inherit; letter-spacing: inherit; background: none; border: none; padding: 0; line-height: inherit; white-space: nowrap; }
+    .nav-drop__chevron { width: 10px; height: 6px; flex-shrink: 0; transition: transform 260ms cubic-bezier(0.23,1,0.32,1); }
+    .nav-drop__chevron path { stroke: rgba(255,255,255,0.7) !important; }
+    .nav-drop--open .nav-drop__chevron { transform: rotate(180deg); }
+    .nav-drop--open .nav-drop__chevron path { stroke: #CA953D !important; }
+    .nav-drop__panel { position: absolute; top: calc(100% + 16px); right: 50%; transform: translateX(50%) translateY(-8px); background: #0f0f0f; border: 1px solid rgba(255,255,255,0.08); border-radius: 5rem; padding: 6px; min-width: 210px; box-shadow: 0 20px 60px rgba(0,0,0,.30); opacity: 0; pointer-events: none; transition: opacity 220ms ease, transform 220ms cubic-bezier(0.23,1,0.32,1); z-index: 200; }
+    .nav-drop--open .nav-drop__panel { opacity: 1; pointer-events: auto; transform: translateX(50%) translateY(0); }
+    .nav-drop__panel::after { content: ''; position: absolute; top: -6px; right: 50%; transform: translateX(50%); width: 12px; height: 6px; background: #0f0f0f; clip-path: polygon(50% 0%,0% 100%,100% 100%); }
+    .nav-drop__panel::before { content: ''; position: absolute; top: -16px; left: 0; right: 0; height: 16px; }
+    .nav-drop__link { display: flex; align-items: center; gap: 10px; padding: 11px 16px; border-radius: 9px; color: rgba(255,255,255,0.75); font-size: 15px; font-weight: 600; white-space: nowrap; transition: background 160ms ease, color 160ms ease; position: relative; }
+    .nav-drop__link::before { content: ''; display: block; width: 4px; height: 4px; border-radius: 50%; background: #CA953D; opacity: 0; flex-shrink: 0; transition: opacity 160ms ease; }
+    .nav-drop__link:hover { background: rgba(255,255,255,0.07); color: #fff; }
+    .nav-drop__link:hover::before { opacity: 1; }
+    @media (max-width: 1024px) {
+      .nav-drop__trigger { color: #fff; }
+      .nav-drop__chevron path { stroke: #fff; }
+      .nav-drop__panel { position: static; transform: none !important; box-shadow: none; border: none; border-radius: 8px; background: rgba(255,255,255,0.08); padding: 6px 0 6px 16px; margin-top: 8px; opacity: 1; pointer-events: auto; display: none; }
+      .nav-drop__panel::after, .nav-drop__panel::before { display: none; }
+      .nav-drop--open .nav-drop__panel { display: block; }
+      .nav-drop__link { color: rgba(255,255,255,0.8); font-size: 18px; padding: 8px 10px; }
+    }
+    .text-hover { overflow: hidden; }
+    .text-hover__inner { display: block; position: relative; clip-path: inset(0 -1em 0 -1em); }
+    .text-hover__elem { display: block; }
+    .text-hover__elem-2 { position: absolute; top: 0; left: 0; width: 100%; }
+    .text-hover__char { display: inline-block; transition: transform .35s cubic-bezier(0.76,0,0.24,1); }
+    .text-hover__elem-1 .text-hover__char { transform: translateY(0); }
+    .text-hover__elem-2 .text-hover__char { transform: translateY(115%); }
+    .text-hover:hover .text-hover__elem-1 .text-hover__char { transform: translateY(-115%); }
+    .text-hover:hover .text-hover__elem-2 .text-hover__char { transform: translateY(0); }
+
+    /* Header */
+    .header { position: fixed !important; transform: none !important; background: rgba(10,10,10,0.90) !important; backdrop-filter: blur(14px) !important; -webkit-backdrop-filter: blur(14px) !important; }
+    .header.is-scrolled { background: rgba(10,10,10,0.95) !important; }
+    .header__container { position: relative !important; }
+    .header__menu { position: absolute !important; right: 50% !important; left: auto !important; transform: translateX(50%) !important; background-color: #141414 !important; border: 1px solid rgba(255,255,255,0.1) !important; font-family: 'Tajawal', sans-serif !important; font-weight: 700 !important; }
+    .header__logo { background: transparent !important; padding: 0 !important; height: auto !important; }
+    .header__logo-img { width: auto !important; height: 52px !important; object-fit: contain; }
+    @media (max-width: 1024px) { .header__logo-img { height: 40px !important; } }
+
+    /* Hero */
+    .page-fullhero { position: relative; min-height: 92vh; display: flex; align-items: center; justify-content: center; background-image: url('assets/img/services-hero.webp'); background-size: cover; background-position: center 40%; }
+    .page-fullhero__overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.45) 50%, rgba(0,0,0,0.75) 100%); }
+    .page-fullhero__content { position: relative; z-index: 1; text-align: center; padding: clamp(100px,14vh,140px) clamp(24px,6vw,80px) clamp(60px,8vh,100px); width: 100%; }
+    .page-fullhero__eyebrow { font-family: 'Tajawal', sans-serif; font-size: 20px; font-weight: 700; letter-spacing: 0; text-transform: none; color: #CA953D; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 12px; }
+    .page-fullhero__eyebrow::before, .page-fullhero__eyebrow::after { display: none; }
+    .page-fullhero__title { font-family: 'Tajawal', sans-serif; font-weight: 700; font-size: clamp(64px,10vw,130px); line-height: 1.1; letter-spacing: 0; color: #fff; margin-bottom: 28px; overflow: visible; }
+    .page-fullhero__desc { font-family: 'Tajawal', sans-serif; font-size: clamp(15px,1.2vw,18px); color: rgba(255,255,255,0.65); line-height: 1.72; max-width: 560px; margin: 0 auto; }
+
+    /* Sections */
+    .sec { padding: clamp(60px,8vw,100px) clamp(20px,5vw,80px); max-width: 1400px; margin: 0 auto; }
+    .sec--dark { background: #0a0a0a; }
+    .sec__eyebrow { font-family: 'Tajawal', sans-serif; font-size: 20px; font-weight: 700; letter-spacing: 0; text-transform: none; color: #CA953D; margin-bottom: 14px; }
+    .sec__title { font-family: 'Tajawal', sans-serif; font-weight: 700; font-size: clamp(38px,5.5vw,76px); line-height: 1.4; letter-spacing: 0; text-transform: none; color: var(--ink); margin-bottom: 36px; overflow: visible; }
+    .sec__title span { background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .sec__sub { font-family: 'Tajawal', sans-serif; font-size: clamp(15px,1.2vw,18px); color: var(--ink-dim); line-height: 1.65; max-width: 620px; margin-bottom: 48px; }
+    .gold-rule { display: none; }
+
+    /* Services interactive */
+    .services-sec { background: #0A0A0A; padding: clamp(60px,7vw,100px) clamp(24px,5vw,80px); }
+    .services-sec__inner { max-width: 1400px; margin: 0 auto; }
+    .services-sec__body { display: grid; grid-template-columns: 1fr 38%; gap: 0 clamp(32px,4vw,64px); align-items: start; }
+    .services-sec__rows { display: flex; flex-direction: column; }
+    .services-sec__row { display: flex; align-items: center; gap: clamp(16px,2.5vw,36px); padding: clamp(14px,1.8vw,24px) 0; cursor: pointer; user-select: none; border-bottom: 1px solid rgba(255,255,255,0.07); width: 100%; }
+    .services-sec__num { font-family: 'Tajawal', sans-serif; font-size: clamp(32px,3.5vw,52px); font-weight: 700; color: #fff; opacity: 0.25; min-width: clamp(50px,5vw,72px); text-align: center; line-height: 1; transition: opacity 250ms ease; flex-shrink: 0; }
+    .services-sec__name { font-family: 'Tajawal', sans-serif; font-size: clamp(24px,3vw,46px); font-weight: 700; color: #fff; opacity: 0.25; line-height: 1.3; transition: opacity 250ms ease; flex: 1; text-align: right; }
+    .services-sec__row--active .services-sec__num, .services-sec__row--active .services-sec__name { opacity: 1; background: linear-gradient(135deg,#B67C2A 0%,#CA953D 50%,#E5B85A 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .services-sec__panel { position: sticky; top: 100px; display: flex; flex-direction: column; gap: 20px; }
+    .services-sec__panel-img { width: 100%; aspect-ratio: 1.12; object-fit: cover; display: block; border-radius: 12px; transition: opacity 180ms ease; }
+    .services-sec__panel-desc { font-family: 'Tajawal', sans-serif; font-size: clamp(14px,1.1vw,16px); color: rgba(255,255,255,0.65); line-height: 1.75; }
+    .services-sec__panel-btn { display: inline-flex; align-items: center; flex-direction: row-reverse; gap: 8px; padding: 12px 24px; background: linear-gradient(135deg,#B67C2A 0%,#CA953D 50%,#E5B85A 100%); color: #fff; border: none; border-radius: 5rem; font-family: 'Tajawal', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; transition: filter 200ms, transform 120ms ease-out; align-self: flex-start; text-decoration: none; }
+    .services-sec__panel-btn:hover { filter: brightness(0.88); }
+    .services-sec__panel-btn:active { transform: scale(0.97); }
+    @media (max-width: 900px) { .services-sec__body { grid-template-columns: 1fr; } .services-sec__panel { position: static; margin-top: 32px; } }
+
+    /* Partner band */
+    .partner-band { background: #0a0a0a; padding: clamp(48px,7vw,88px) 0 0; text-align: center; }
+    .partner-band__num { font-family: 'Tajawal', sans-serif; font-size: clamp(36px,5vw,72px); font-weight: 700; line-height: 1; background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .partner-band__label { font-family: 'Tajawal', sans-serif; font-size: clamp(14px,1.1vw,18px); color: var(--ink-dim); margin-top: 10px; margin-bottom: clamp(40px,5vw,64px); }
+
+    /* Marquee */
+    .marquee-sec { background: #0a0a0a; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .marquee-track { display: flex; width: max-content; animation: marquee-scroll 32s linear infinite; }
+    .marquee-track:hover { animation-play-state: paused; }
+    @keyframes marquee-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .marquee-item { display: flex; align-items: center; gap: 14px; padding: clamp(22px,2.5vw,34px) clamp(32px,3.5vw,56px); white-space: nowrap; border-right: 1px solid rgba(255,255,255,0.08); }
+    .marquee-logo { height: 48px; width: auto; display: block; opacity: 0.65; transition: opacity 200ms ease; }
+    .marquee-item:hover .marquee-logo { opacity: 1; }
+
+    /* Steps */
+    .steps-row { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 28px; }
+    .step { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 32px; }
+    .step__num { font-family: 'Tajawal', sans-serif; font-size: 56px; font-weight: 700; line-height: 1; background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 16px; }
+    .step__title { font-family: 'Tajawal', sans-serif; font-size: 22px; font-weight: 700; color: var(--ink); margin-bottom: 10px; }
+    .step__text { font-family: 'Tajawal', sans-serif; font-size: 15px; color: var(--ink-dim); line-height: 1.7; }
+
+    /* Footer */
+    .nova-footer { position: relative; width: 100%; overflow: hidden; background: radial-gradient(ellipse 180% 140% at 10% 110%, rgba(202,149,61,0.85) 0%, rgba(160,110,20,0.45) 38%, #0c0b0a 65%), #0c0b0a; }
+    .nf-bg-img { pointer-events: none; position: absolute; inset: 0; height: 100%; width: 100%; object-fit: cover; user-select: none; }
+    .nf-content { position: relative; z-index: 10; width: 100%; }
+    .nf-inner-wrap { width: 100%; margin: 0 auto; max-width: 1280px; padding: 0 clamp(24px,4vw,48px); }
+    .nf-top { display: flex; flex-direction: column; gap: 32px; padding-top: 24px; padding-bottom: 40px; }
+    .nf-headline-wrap { display: flex; flex-direction: column; gap: 20px; max-width: 576px; }
+    .nf-badge { display: flex; align-items: center; gap: 10px; }
+    .nf-badge__dot-wrap { position: relative; display: flex; width: 8px; height: 8px; flex-shrink: 0; }
+    .nf-badge__pulse { position: absolute; inset: 0; border-radius: 50%; background: #CA953D; opacity: 0.75; animation: nf-ping 1.2s cubic-bezier(0,0,0.2,1) infinite; }
+    .nf-badge__core { position: relative; width: 8px; height: 8px; border-radius: 50%; background: #CA953D; }
+    @keyframes nf-ping { 0% { transform: scale(1); opacity: 0.75; } 75%, 100% { transform: scale(2.2); opacity: 0; } }
+    .nf-badge__label { font-size: 14px; font-weight: 500; color: #fff; }
+    .nf-headline { color: #fff; font-size: clamp(24px,3.5vw,42px); line-height: 1.4; font-weight: 400; margin: 0; }
+    .nf-form { display: flex; width: 100%; max-width: 384px; flex-shrink: 0; align-items: center; gap: 8px; }
+    .nf-form__input { flex: 1; height: 48px; min-height: 48px; padding: 0 16px; font-size: 14px; font-family: 'Tajawal', sans-serif; color: #fff; background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.05); border-radius: 0; outline: none; transition: border-color 180ms ease, box-shadow 180ms ease; }
+    .nf-form__input::placeholder { color: rgba(255,255,255,0.70); }
+    .nf-form__input:focus { border-color: rgba(202,149,61,0.50); box-shadow: 0 0 0 3px rgba(202,149,61,0.30); }
+    .nf-form__btn { display: flex; align-items: center; gap: 8px; height: 48px; flex-shrink: 0; cursor: pointer; padding: 0 20px; font-size: 14px; font-weight: 600; font-family: 'Tajawal', sans-serif; color: #fff; background: #CA953D; border: none; border-radius: 0; box-shadow: inset 0 0 8px 0.5px rgba(255,255,255,0.30); transition: all 180ms ease; }
+    .nf-mid { display: flex; flex-direction: column; gap: 40px; padding-bottom: 64px; }
+    .nf-brand { display: flex; flex: 1; align-items: center; gap: 12px; } .nf-brand__logo { height: 52px; width: auto; display: block; }
+    .nf-links-grid { display: grid; grid-template-columns: repeat(2, auto); gap: 32px 48px; }
+    .nf-links__title { font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.90); display: block; margin-bottom: 16px; }
+    .nf-links__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+    .nf-links__list a { font-size: 14px; color: rgba(255,255,255,0.70); text-decoration: none; transition: color 180ms ease; }
+    .nf-links__list a:hover { color: #fff; }
+    .nf-watermark { display: flex; width: 100%; align-items: center; justify-content: center; }
+    .nf-watermark__svg { height: auto; width: 100%; user-select: none; }
+    @media (min-width: 640px) { .nf-links-grid { grid-template-columns: repeat(3, auto); } }
+    @media (min-width: 1024px) { .nf-top { flex-direction: row; align-items: flex-end; justify-content: space-between; padding-top: 40px; padding-bottom: 56px; } .nf-headline-wrap { flex: 1; } .nf-mid { flex-direction: row; align-items: flex-start; gap: 32px; } .nf-links-grid { gap: 32px 64px; } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+  </style>
+  <style>
+    /* RTL overrides */
+    * { font-family: 'Tajawal', sans-serif !important; letter-spacing: 0 !important; }
+    .text-hover__elem-2 { display: none !important; }
+    .text-hover__inner { clip-path: none !important; }
+    .header__container { flex-direction: row-reverse !important; }
+    .header__actions { flex-direction: row !important; }
+    body { text-align: right; }
+    .ar-nav-item { color: rgba(255,255,255,0.82); background: none; border: none; cursor: pointer; font-size: 16px; font-family: 'Tajawal', sans-serif !important; padding: 0; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+    .ar-nav-item:hover { color: #CA953D !important; }
+    .nt-lang-wrap { position: relative; }
+    .nt-lang-menu { display: none; position: absolute; top: calc(100% + 8px); right: 0; background: #141414; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; min-width: 130px; z-index: 300; padding: 4px; }
+    .nt-lang-wrap.open .nt-lang-menu { display: block; }
+    .nt-lang-option { display: block; padding: 8px 14px; font-size: 14px; color: rgba(255,255,255,0.7); border-radius: 6px; transition: background 150ms, color 150ms; text-decoration: none; }
+    .nt-lang-option:hover, .nt-lang-option.is-active { background: rgba(202,149,61,0.12); color: #CA953D; }
+    .header__lang-heading { font-size: 13px !important; font-weight: 600 !important; }
+  </style>
+<link rel="stylesheet" href="assets/css/rtl.css">
+</head>
+<body>
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<header class="header" id="ar-header">
+  <div class="container header__container">
+    <a href="ar.html" class="header__logo">
+      <img src="assets/img/logo.png" alt="NOVA TLT" class="header__logo-img" />
+    </a>
+    <nav class="header__menu" data-da=".header__hamburger, 1024, 0">
+      <a href="ar.html" class="header__menu-item ar-nav-item">الرئيسية</a>
+      <div class="nav-drop header__menu-item" data-nav-drop>
+        <button class="nav-drop__trigger ar-nav-item" aria-expanded="false" aria-haspopup="true">
+          الشركة
+          <svg class="nav-drop__chevron" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L5 5L9 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nav-drop__panel" role="menu">
+          <a href="ar-about.html" class="nav-drop__link" role="menuitem">من نحن</a>
+          <a href="ar-careers.html" class="nav-drop__link" role="menuitem">الوظائف</a>
+        </div>
+      </div>
+      <div class="nav-drop header__menu-item" data-nav-drop>
+        <button class="nav-drop__trigger ar-nav-item" aria-expanded="false" aria-haspopup="true">
+          ما نقدّمه
+          <svg class="nav-drop__chevron" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L5 5L9 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nav-drop__panel" role="menu">
+          <a href="ar-services.html" class="nav-drop__link" role="menuitem">الخدمات</a>
+          <a href="ar-fleet.html" class="nav-drop__link" role="menuitem">الأسطول</a>
+          <a href="ar-industries.html" class="nav-drop__link" role="menuitem">القطاعات التي نخدمها</a>
+        </div>
+      </div>
+      <a href="ar-projects.html" class="header__menu-item ar-nav-item">المشاريع</a>
+    </nav>
+    <div class="header__actions">
+      <button type="button" class="header__hamburger-btn btn" aria-label="فتح القائمة" id="nova-mob-open">
+        <svg width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect y="0" width="22" height="2" rx="1" fill="currentColor"/><rect y="7" width="22" height="2" rx="1" fill="currentColor"/><rect y="14" width="22" height="2" rx="1" fill="currentColor"/></svg>
+      </button>
+      <div class="nt-lang-wrap" id="nt-lang-wrap">
+        <button type="button" class="header__lang-heading btn" id="nt-lang-btn">
+          <span class="btn__inner">
+            <span class="nt-lang-label">عر</span>
+            <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.267 7.06149L5.84961 11.7365C6.19441 12.0878 6.80452 12.0878 7.15054 11.7365L11.7331 7.06149C12.0902 6.69643 12.0889 6.10663 11.7295 5.74406C11.37 5.38148 10.7905 5.38148 10.4322 5.74654L7.41586 8.82221V0.931267C7.41586 0.415966 7.00504 0 6.49885 0C5.99266 0 5.58184 0.415966 5.58184 0.931267V8.82221L2.56671 5.74654C2.38698 5.56401 2.15223 5.47337 1.91625 5.47337C1.68272 5.47337 1.44796 5.56401 1.26945 5.74406C0.911205 6.10663 0.909982 6.69643 1.267 7.06149Z" fill="#CA953D"/></svg>
+          </span>
+        </button>
+        <div class="nt-lang-menu" id="nt-lang-menu">
+          <a href="services.html" class="nt-lang-option" data-lang="en">English</a>
+          <a href="ar-services.html" class="nt-lang-option is-active" data-lang="ar">العربية</a>
+        </div>
+      </div>
+      <a href="ar-contact.html" class="header__btn btn" data-da=".header__hamburger, 1024, 1">
+        <span class="btn__inner">اتصل بنا</span>
+      </a>
+    </div>
+  </div>
+  <div class="header__hamburger container"></div>
+</header>
+
+<main>
+  <section class="page-fullhero">
+    <div class="page-fullhero__overlay"></div>
+    <div class="page-fullhero__content">
+      <p class="page-fullhero__eyebrow">خدماتنا</p>
+      <h1 class="page-fullhero__title">خدماتنا</h1>
+      <p class="page-fullhero__desc">من إرسال الشاحنات القلابة في نفس اليوم إلى عقود المشاريع الممتدة لسنوات — المعدات المناسبة، والمشغّلون المناسبون، والدعم المناسب في مناطق المملكة الـ١٢ جميعها.</p>
+    </div>
+  </section>
+
+  <section class="services-sec">
+    <div class="services-sec__inner">
+      <div class="services-sec__body">
+        <div class="services-sec__rows" id="svc-rows">
+          <div class="services-sec__row services-sec__row--active" data-svc="0">
+            <span class="services-sec__num">٠١</span>
+            <span class="services-sec__name">تأجير الشاحنات القلابة</span>
+          </div>
+          <div class="services-sec__row" data-svc="1">
+            <span class="services-sec__num">٠٢</span>
+            <span class="services-sec__name">أعمال الحفر ونقل الأتربة</span>
+          </div>
+          <div class="services-sec__row" data-svc="2">
+            <span class="services-sec__num">٠٣</span>
+            <span class="services-sec__name">نقل المواد السائبة</span>
+          </div>
+          <div class="services-sec__row" data-svc="3">
+            <span class="services-sec__num">٠٤</span>
+            <span class="services-sec__name">الخدمات اللوجستية وإدارة الأساطيل</span>
+          </div>
+          <div class="services-sec__row" data-svc="4">
+            <span class="services-sec__num">٠٥</span>
+            <span class="services-sec__name">العقود القائمة على المشاريع</span>
+          </div>
+        </div>
+        <div class="services-sec__panel" id="svc-panel">
+          <img class="services-sec__panel-img" id="svc-img" src="assets/img/svc-dump-truck.webp" alt="تأجير الشاحنات القلابة" loading="lazy" />
+          <p class="services-sec__panel-desc" id="svc-panel-desc">العمود الفقري لعملياتنا. نرسل شاحنات قلابة معتمدة إلى موقعك في اليوم نفسه الذي تتصل فيه — مع مشغّلين أو بدونهم.</p>
+          <a class="services-sec__panel-btn" id="svc-panel-btn" href="https://wa.me/966503065248" target="_blank" rel="noopener">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h10M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            استكشف تأجير الشاحنات القلابة
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="partner-band">
+    <p class="partner-band__num">+٢٠٠</p>
+    <p class="partner-band__label">شريك ومتعاون في المجال اللوجستي.</p>
+  </div>
+  <section class="marquee-sec">
+    <div class="marquee-track">
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+      <div class="marquee-item"><img src="assets/img/logo.png" alt="NOVA TLT" class="marquee-logo"></div>
+    </div>
+  </section>
+
+  <div class="sec--dark">
+    <div class="sec">
+      <p class="sec__eyebrow">آلية العمل</p>
+      <h2 class="sec__title">من الاتصال إلى <span>الموقع</span></h2>
+      <p class="sec__sub">ثلاث خطوات من أول تواصل إلى نشر الأسطول بالكامل.</p>
+      <div class="steps-row">
+        <div class="step">
+          <div class="step__num">٠١</div>
+          <h3 class="step__title">المتطلبات</h3>
+          <p class="step__text">شارِكنا نطاق مشروعك وجدوله الزمني وموقعه ونوع المواد. يقيّم فريق العمليات لدينا احتياجاتك خلال ساعتين ويوصي بالتشكيلة المثلى للأسطول.</p>
+        </div>
+        <div class="step">
+          <div class="step__num">٠٢</div>
+          <h3 class="step__title">خطة الأسطول</h3>
+          <p class="step__text">نُعِدّ خطة أسطول تفصيلية تشمل عدد الشاحنات وتوزيع المشغّلين وجدول الورديات وفترات الصيانة — إلى جانب عرض سعر ثابت صالح لمدة ٧ أيام.</p>
+        </div>
+        <div class="step">
+          <div class="step__num">٠٣</div>
+          <h3 class="step__title">التعاقد والإرسال</h3>
+          <p class="step__text">وقّع العقد ونبدأ النشر. إرسال في نفس اليوم لعمليات التأجير الاعتيادية، وتعبئة خلال ٤٨ ساعة لعقود المشاريع الكاملة. ويحصل منسّق موقعك على تواصل مباشر مع فريق الإرسال لدينا.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="nova-footer">
+  <div class="nf-content">
+    <div class="nf-inner-wrap">
+      <div class="nf-top">
+        <div class="nf-headline-wrap">
+          <div class="nf-badge">
+            <span class="nf-badge__dot-wrap">
+              <span class="nf-badge__pulse"></span>
+              <span class="nf-badge__core"></span>
+            </span>
+            <span class="nf-badge__label">متاح في جميع مناطق المملكة الـ١٢</span>
+          </div>
+          <h2 class="nf-headline">احصل على عرض أسطول مخصَّص يتناسب مع مشروعك — خلال ٢٤ ساعة.</h2>
+        </div>
+        <form class="nf-form" onsubmit="return false;">
+          <input type="email" class="nf-form__input" placeholder="أدخل بريدك الإلكتروني" />
+          <button type="submit" class="nf-form__btn">
+            <span>احصل على عرض</span>
+          </button>
+        </form>
+      </div>
+      <div class="nf-mid">
+        <div class="nf-brand">
+          <img src="assets/img/logo.png" alt="NOVA TLT" class="nf-brand__logo" />
+        </div>
+        <div class="nf-links-grid">
+          <div class="nf-links__col">
+            <span class="nf-links__title">الشركة</span>
+            <ul class="nf-links__list">
+              <li><a href="ar-about.html">من نحن</a></li>
+              <li><a href="ar-careers.html">الوظائف</a></li>
+              <li><a href="news.html">الأخبار</a></li>
+            </ul>
+          </div>
+          <div class="nf-links__col">
+            <span class="nf-links__title">الخدمات</span>
+            <ul class="nf-links__list">
+              <li><a href="ar-services.html">تأجير الشاحنات القلابة</a></li>
+              <li><a href="ar-fleet.html">أسطولنا</a></li>
+              <li><a href="ar-industries.html">القطاعات</a></li>
+            </ul>
+          </div>
+          <div class="nf-links__col">
+            <span class="nf-links__title">تواصل معنا</span>
+            <ul class="nf-links__list">
+              <li><a href="tel:+966503065248">+966 503065248</a></li>
+              <li><a href="mailto:info@novatlt.com">info@novatlt.com</a></li>
+              <li><a href="ar-contact.html">جدة، المملكة العربية السعودية</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="nf-watermark">
+      <svg class="nf-watermark__svg" viewBox="0 0 720 110" preserveAspectRatio="xMidYMid meet" aria-label="NOVA TLT">
+        <text x="50%" y="105" dominant-baseline="alphabetic" text-anchor="middle" textLength="90%" lengthAdjust="spacing" font-size="160" font-weight="700" fill="rgba(255,255,255,0.30)" font-family="ui-sans-serif,system-ui,sans-serif" letter-spacing="-0.05em">NOVA TLT</text>
+      </svg>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){var drops=document.querySelectorAll('[data-nav-drop]');function open(d){d.classList.add('nav-drop--open');d.querySelector('.nav-drop__trigger').setAttribute('aria-expanded','true');}function close(d){d.classList.remove('nav-drop--open');d.querySelector('.nav-drop__trigger').setAttribute('aria-expanded','false');}function closeAll(){drops.forEach(close);}drops.forEach(function(drop){var trigger=drop.querySelector('.nav-drop__trigger');var mob=function(){return window.innerWidth<=1024;};drop.addEventListener('mouseenter',function(){if(!mob())open(drop);});drop.addEventListener('mouseleave',function(){if(!mob())close(drop);});trigger.addEventListener('click',function(e){e.stopPropagation();var o=drop.classList.contains('nav-drop--open');closeAll();if(!o)open(drop);});});document.addEventListener('click',closeAll);document.addEventListener('keydown',function(e){if(e.key==='Escape')closeAll();});})();
+</script>
+<script>
+(function(){
+  var wrap = document.getElementById('nt-lang-wrap');
+  var btn = document.getElementById('nt-lang-btn');
+  if (!wrap || !btn) return;
+  btn.addEventListener('click', function(e) { e.stopPropagation(); wrap.classList.toggle('open'); });
+  document.addEventListener('click', function() { wrap.classList.remove('open'); });
+})();
+</script>
+<script>
+(function(){var dot=document.getElementById('cursor-dot'),ring=document.getElementById('cursor-ring');if(!dot||!ring)return;var mx=-100,my=-100,rx=-100,ry=-100;document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;});document.querySelectorAll('a,button').forEach(function(el){el.addEventListener('mouseenter',function(){ring.classList.add('is-hover');});el.addEventListener('mouseleave',function(){ring.classList.remove('is-hover');});});function loop(){dot.style.left=mx+'px';dot.style.top=my+'px';rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);}loop();})();
+</script>
+<script src="assets/js/scroll-reveal.js"></script>
+<script src="assets/js/mobile-menu.js"></script>
+<script src="assets/js/ar-mobile-menu.js"></script>
+<script src="assets/js/page-transition.js"></script>
+<script>
+(function(){
+  var services = [
+    { name: 'تأجير الشاحنات القلابة', img: 'assets/img/svc-dump-truck.webp', desc: 'العمود الفقري لعملياتنا. نرسل شاحنات قلابة معتمدة إلى موقعك في اليوم نفسه الذي تتصل فيه — مع مشغّلين أو بدونهم. وتغطي وحداتنا القياسية التي يزيد عددها عن ٦٠ وحدة، إضافةً إلى ٤٥ شاحنة نقل ثقيل، كل متطلبات السعة في مناطق المملكة الـ١٢. جميعها مزوّدة بتتبّع GPS، ومتوافقة مع معايير الصحة والسلامة والبيئة، ومتاحة بعقود يومية أو شهرية.' },
+    { name: 'أعمال الحفر ونقل الأتربة', img: 'assets/img/svc-earthmoving.webp', desc: 'أعمال حفر ونقل أتربة دقيقة لمشاريع البناء وتنظيف الأراضي والتسوية. نتعامل مع الرمل والحصى والصخور ومواد الردم الهندسية — بالتنسيق المباشر مع مشرف موقعك. وجميع المركبات مزوّدة بأنظمة تتبّع GPS كتجهيز أساسي، ومشغّلونا مدرَّبون على سلامة الموقع والالتزام بحدود التفاوت في مناسيب التسوية.' },
+    { name: 'نقل المواد السائبة', img: 'assets/img/svc-bulk-material.webp', desc: 'نقل سائب بين المناطق لمواد الركام والرمل والأسفلت ومواد الردم الإنشائية. وتستطيع نوفا تيرا إرسال قوافل تصل إلى ٣٠ شاحنة مع توثيق كامل للأوزان وبيانات الحمولة ومسارات متوافقة مع الأنظمة. كما نتولّى تصاريح العبور بين المناطق وننسّق نوافذ التسليم مع الجدول الزمني لمشروعك.' },
+    { name: 'الخدمات اللوجستية وإدارة الأساطيل', img: 'assets/img/svc-fleet-management.webp', desc: 'خدمات لوجستية مُدارة للمقاولين الذين يشغّلون عدة مواقع في وقت واحد. ينسّق فريق الإرسال لدينا، العامل على مدار الساعة، ما يصل إلى ٨ مواقع متزامنة، مع تحسين توزيع الشاحنات وجدولة الورديات ونوافذ الصيانة. وتتوفر لوحات تتبّع GPS اللحظية لمديري مشاريعكم عبر الوصول الإلكتروني.' },
+    { name: 'العقود القائمة على المشاريع', img: 'assets/img/svc-contracts.webp', desc: 'أسطول مخصَّص طويل الأجل للمشاريع العملاقة وعمليات التعدين وعقود البنية التحتية الحكومية. الحد الأدنى للتعاقد ٣ أشهر، مع مدير أسطول مخصَّص في الموقع، وتسعير ثابت، وضمانات استجابة مدعومة باتفاقية مستوى خدمة. مع إمكانية زيادة الحجم أو تقليصه خلال ٤٨ ساعة بحسب تغيّر متطلبات المشروع.' }
+  ];
+  var rows = document.querySelectorAll('.services-sec__row');
+  var imgEl = document.getElementById('svc-img');
+  var descEl = document.getElementById('svc-panel-desc');
+  var btnEl = document.getElementById('svc-panel-btn');
+  if (!rows.length || !imgEl) return;
+  var currentIdx = 0;
+  var preloaded = services.map(function(s) { var i = new Image(); i.src = s.img; return i; });
+  function activate(idx) {
+    if (idx === currentIdx) return;
+    currentIdx = idx;
+    rows.forEach(function(el, i) { el.classList.toggle('services-sec__row--active', i === idx); });
+    var svc = services[idx];
+    imgEl.src = svc.img;
+    imgEl.alt = svc.name;
+    descEl.textContent = svc.desc;
+    btnEl.innerHTML = '<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h10M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> استكشف ' + svc.name;
+  }
+  rows.forEach(function(el) {
+    el.addEventListener('mouseenter', function() { activate(+el.dataset.svc); });
+    el.addEventListener('click', function() { activate(+el.dataset.svc); });
+  });
+})();
+</script>
+<script>
+(function(){
+  var header = document.querySelector('.header');
+  var hero = document.querySelector('.page-fullhero');
+  function onScroll(){ header.classList.toggle('is-scrolled', window.scrollY > hero.offsetHeight - 80); }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+</body>
+</html>

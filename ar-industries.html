@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=5" />
+  <title>القطاعات التي نخدمها — نوفا TLT</title>
+  <link rel="preload" href="assets/fonts/BebasNeuePro-Bold.woff" as="font" type="font/woff" crossorigin />
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/cf7.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --hero-bg:#0c0b0a;--ink:#efe9df;--ink-dim:#b8b0a4;--line:rgba(239,233,223,.16);--gold:#CA953D;--gold-grad:linear-gradient(135deg,#B67C2A 0%,#CA953D 50%,#E5B85A 100%); }
+    body { background: var(--hero-bg); color: var(--ink); font-family: 'Tajawal', sans-serif; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    @media (hover: hover) and (pointer: fine) { *, *::before, *::after { cursor: none !important; } }
+    #cursor-dot { position: fixed; pointer-events: none; z-index: 9998; width: 8px; height: 8px; background: #fff; border-radius: 50%; transform: translate(-50%,-50%); left: -100px; top: -100px; will-change: left, top; }
+    #cursor-ring { position: fixed; pointer-events: none; z-index: 9997; width: 28px; height: 28px; border: 1.5px solid rgba(255,255,255,0.7); border-radius: 50%; transform: translate(-50%,-50%); left: -100px; top: -100px; transition: width .3s ease, height .3s ease, border-color .3s ease; will-change: left, top; }
+    #cursor-ring.is-hover { width: 44px; height: 44px; border-color: #CA953D; }
+
+    .btn { background-color: #141414 !important; border-color: rgba(255,255,255,0.15) !important; color: rgba(255,255,255,0.88) !important; }
+    .btn._accent { background: var(--gold-grad) !important; border-color: transparent !important; color: #fff !important; }
+    .nav-drop { position: relative; display: flex; align-items: center; }
+    .nav-drop__trigger { display: flex; align-items: center; gap: 6px; cursor: pointer; color: rgba(255,255,255,0.85); font-size: inherit; font-family: inherit; font-weight: inherit; background: none; border: none; padding: 0; line-height: inherit; white-space: nowrap; }
+    .nav-drop__chevron { width: 10px; height: 6px; flex-shrink: 0; transition: transform 260ms cubic-bezier(0.23,1,0.32,1); }
+    .nav-drop__chevron path { stroke: rgba(255,255,255,0.7) !important; }
+    .nav-drop--open .nav-drop__chevron { transform: rotate(180deg); }
+    .nav-drop--open .nav-drop__chevron path { stroke: #CA953D !important; }
+    .nav-drop__panel { position: absolute; top: calc(100% + 16px); right: 50%; transform: translateX(50%) translateY(-8px); background: #0f0f0f; border: 1px solid rgba(255,255,255,0.08); border-radius: 5rem; padding: 6px; min-width: 210px; box-shadow: 0 20px 60px rgba(0,0,0,.30); opacity: 0; pointer-events: none; transition: opacity 220ms ease, transform 220ms cubic-bezier(0.23,1,0.32,1); z-index: 200; }
+    .nav-drop--open .nav-drop__panel { opacity: 1; pointer-events: auto; transform: translateX(50%) translateY(0); }
+    .nav-drop__panel::after { content: ''; position: absolute; top: -6px; right: 50%; transform: translateX(50%); width: 12px; height: 6px; background: #0f0f0f; clip-path: polygon(50% 0%,0% 100%,100% 100%); }
+    .nav-drop__panel::before { content: ''; position: absolute; top: -16px; left: 0; right: 0; height: 16px; }
+    .nav-drop__link { display: flex; align-items: center; gap: 10px; padding: 11px 16px; border-radius: 9px; color: rgba(255,255,255,0.75); font-size: 15px; font-weight: 600; white-space: nowrap; transition: background 160ms ease, color 160ms ease; position: relative; }
+    .nav-drop__link::before { content: ''; display: block; width: 4px; height: 4px; border-radius: 50%; background: #CA953D; opacity: 0; flex-shrink: 0; transition: opacity 160ms ease; }
+    .nav-drop__link:hover { background: rgba(255,255,255,0.07); color: #fff; }
+    .nav-drop__link:hover::before { opacity: 1; }
+    @media (max-width: 1024px) {
+      .nav-drop__trigger { color: #fff; }
+      .nav-drop__chevron path { stroke: #fff; }
+      .nav-drop__panel { position: static; transform: none !important; box-shadow: none; border: none; border-radius: 8px; background: rgba(255,255,255,0.08); padding: 6px 0 6px 16px; margin-top: 8px; opacity: 1; pointer-events: auto; display: none; }
+      .nav-drop__panel::after, .nav-drop__panel::before { display: none; }
+      .nav-drop--open .nav-drop__panel { display: block; }
+      .nav-drop__link { color: rgba(255,255,255,0.8); font-size: 18px; padding: 8px 10px; }
+    }
+
+    /* RTL overrides */
+    * { font-family: 'Tajawal', sans-serif !important; letter-spacing: 0 !important; }
+    .text-hover__elem-2 { display: none !important; }
+    .text-hover__inner { clip-path: none !important; }
+    .header__container { flex-direction: row-reverse !important; }
+    .header__actions { flex-direction: row !important; }
+    body { text-align: right; }
+    .ar-nav-item { color: rgba(255,255,255,0.82); background: none; border: none; cursor: pointer; font-size: 16px; font-family: 'Tajawal', sans-serif !important; padding: 0; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+    .ar-nav-item:hover { color: #CA953D !important; }
+
+    /* Header */
+    .header { position: fixed !important; transform: none !important; background: rgba(10,10,10,0.90) !important; backdrop-filter: blur(14px) !important; -webkit-backdrop-filter: blur(14px) !important; }
+    .header__container { position: relative !important; }
+    .header__menu { position: absolute !important; right: 50% !important; left: auto !important; transform: translateX(50%) !important; background-color: #141414 !important; border: 1px solid rgba(255,255,255,0.1) !important; font-family: 'Tajawal', sans-serif !important; font-weight: 700 !important; }
+    .header__menu-item, .header__menu-item .text-hover__elem { color: rgba(255,255,255,0.82) !important; }
+    .header__menu-item:hover { color: #CA953D !important; }
+    .header__logo { background: transparent !important; padding: 0 !important; height: auto !important; }
+    .header__logo-img { width: auto !important; height: 52px !important; object-fit: contain; }
+    @media (max-width: 1024px) { .header__logo-img { height: 40px !important; } }
+
+    .nt-lang-wrap { position: relative; }
+    .nt-lang-menu { display: none; position: absolute; top: calc(100% + 8px); right: 0; background: #141414; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; min-width: 130px; z-index: 300; padding: 4px; }
+    .nt-lang-wrap.open .nt-lang-menu { display: block; }
+    .nt-lang-option { display: block; padding: 8px 14px; font-size: 14px; color: rgba(255,255,255,0.7); border-radius: 6px; transition: background 150ms, color 150ms; text-decoration: none; }
+    .nt-lang-option:hover, .nt-lang-option.is-active { background: rgba(202,149,61,0.12); color: #CA953D; }
+    .header__lang-heading { font-size: 13px !important; font-weight: 600 !important; }
+
+    /* Page layout */
+    .inner-hero { padding-top: 120px; padding-bottom: clamp(48px,6vw,80px); padding-right: clamp(20px,5vw,80px); padding-left: clamp(20px,5vw,80px); max-width: 1400px; margin: 0 auto; }
+    .inner-hero__eyebrow { font-family: 'Tajawal', sans-serif; font-size: 20px; font-weight: 700; color: #CA953D; margin-bottom: 20px; }
+    .inner-hero__title { font-family: 'Tajawal', sans-serif; font-weight: 700; font-size: clamp(36px,5vw,68px); line-height: 1.3; color: var(--ink); max-width: 900px; }
+    .inner-hero__sub { font-family: 'Tajawal', sans-serif; font-size: clamp(15px,1.2vw,18px); color: var(--ink-dim); line-height: 1.65; max-width: 600px; margin-top: 24px; }
+    .section-inner { max-width: 1400px; margin: 0 auto; padding: clamp(48px,6vw,80px) clamp(20px,5vw,80px); }
+    .section-eyebrow { font-family: 'Tajawal', sans-serif; font-size: 20px; font-weight: 700; color: #CA953D; margin-bottom: 16px; }
+    .section-title { font-family: 'Tajawal', sans-serif; font-weight: 700; font-size: clamp(32px,4vw,60px); line-height: 1.3; color: var(--ink); margin-bottom: 24px; }
+    .section-sub { font-family: 'Tajawal', sans-serif; font-size: clamp(14px,1.1vw,17px); color: var(--ink-dim); line-height: 1.65; max-width: 640px; margin-bottom: 40px; }
+
+    /* Industry cards */
+    .industry-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 36px; margin-bottom: 24px; transition: border-color 200ms ease; }
+    .industry-card:hover { border-color: rgba(202,149,61,0.3); }
+    .industry-card__header { display: flex; align-items: center; gap: 18px; margin-bottom: 20px; }
+    .industry-card__icon { font-size: 36px; flex-shrink: 0; }
+    .industry-card__name { font-family: 'Tajawal', sans-serif; font-size: clamp(26px,3vw,40px); font-weight: 700; color: var(--ink); line-height: 1.2; }
+    .industry-card__sub { font-family: 'Tajawal', sans-serif; font-size: 15px; color: var(--ink-dim); line-height: 1.7; margin-bottom: 24px; }
+    .industry-meta { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 20px; }
+    @media (max-width: 600px) { .industry-meta { grid-template-columns: 1fr; } }
+    .industry-meta__key { font-family: 'Tajawal', sans-serif; font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.3); margin-bottom: 4px; }
+    .industry-meta__val { font-family: 'Tajawal', sans-serif; font-size: 14px; font-weight: 600; color: var(--ink); }
+    .industry-pill { display: inline-block; font-family: 'Tajawal', sans-serif; font-size: 13px; font-weight: 700; padding: 6px 14px; border-radius: 5rem; background: rgba(202,149,61,0.15); color: #CA953D; border: 1px solid rgba(202,149,61,0.25); }
+
+    /* Compliance table */
+    .compliance-table { width: 100%; border-collapse: collapse; margin-top: 32px; }
+    .compliance-table th { font-family: 'Tajawal', sans-serif; font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.35); padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.08); text-align: right; }
+    .compliance-table td { font-family: 'Tajawal', sans-serif; font-size: 14px; color: var(--ink-dim); padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .compliance-table tr:last-child td { border-bottom: none; }
+    .compliance-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .compliance-tick { color: #CA953D; font-size: 16px; }
+    .compliance-dash { color: rgba(255,255,255,0.18); font-size: 16px; }
+    .compliance-table td:not(:first-child) { text-align: center; }
+    .compliance-table th:not(:first-child) { text-align: center; }
+
+    /* Case studies */
+    .case-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 24px; margin-top: 40px; }
+    .case-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 32px; transition: border-color 200ms ease; }
+    .case-card:hover { border-color: rgba(202,149,61,0.3); }
+    .case-card__label { font-family: 'Tajawal', sans-serif; font-size: 13px; font-weight: 700; color: #CA953D; margin-bottom: 14px; }
+    .case-card__title { font-family: 'Tajawal', sans-serif; font-size: clamp(20px,2vw,28px); font-weight: 700; color: var(--ink); margin-bottom: 12px; line-height: 1.3; }
+    .case-card__text { font-family: 'Tajawal', sans-serif; font-size: 14px; color: var(--ink-dim); line-height: 1.7; }
+
+    /* CTA */
+    .inner-cta { background: linear-gradient(135deg,rgba(182,124,42,0.12) 0%,rgba(202,149,61,0.08) 100%); border: 1px solid rgba(202,149,61,0.2); border-radius: 24px; padding: clamp(40px,5vw,64px) clamp(24px,4vw,56px); text-align: center; margin: 48px 0; }
+    .inner-cta__title { font-family: 'Tajawal', sans-serif; font-size: clamp(32px,4.5vw,56px); font-weight: 700; color: var(--ink); margin-bottom: 16px; line-height: 1.3; }
+    .inner-cta__sub { font-family: 'Tajawal', sans-serif; font-size: 16px; color: var(--ink-dim); margin-bottom: 32px; line-height: 1.65; }
+    .gold-btn { display: inline-flex; align-items: center; gap: 8px; padding: 16px 40px; border-radius: 5rem; background: var(--gold-grad); font-family: 'Tajawal', sans-serif; font-size: 18px; font-weight: 700; color: #fff; text-decoration: none; border: none; cursor: pointer; box-shadow: 0 0 14px rgba(202,149,61,0.45), 0 0 36px rgba(202,149,61,0.18); transition: filter 150ms ease; }
+    .gold-btn:hover { filter: brightness(1.1); }
+    .ghost-btn { display: inline-flex; align-items: center; gap: 8px; padding: 15px 36px; border-radius: 5rem; border: 1px solid rgba(255,255,255,0.18); font-family: 'Tajawal', sans-serif; font-size: 18px; font-weight: 700; color: var(--ink); text-decoration: none; background: transparent; cursor: pointer; transition: border-color 200ms ease, color 200ms ease; }
+    .ghost-btn:hover { border-color: #CA953D; color: #CA953D; }
+    .btn-row { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+
+    /* Stats row */
+    .stats-row { display: flex; flex-wrap: wrap; gap: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin: 48px 0; }
+    .stat-item { flex: 1 1 160px; padding: 32px 28px; border-right: 1px solid var(--line); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: 'Tajawal', sans-serif; font-size: clamp(40px,5vw,68px); font-weight: 700; line-height: 1; background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .stat-label { font-family: 'Tajawal', sans-serif; font-size: 13px; color: var(--ink-dim); margin-top: 6px; }
+    @media (max-width: 768px) { .stats-row { flex-direction: column; } .stat-item { border-right: none; border-bottom: 1px solid var(--line); } .stat-item:last-child { border-bottom: none; } }
+
+    /* Footer */
+    .nova-footer { position: relative; width: 100%; overflow: hidden; background: radial-gradient(ellipse 180% 140% at 10% 110%, rgba(202,149,61,0.85) 0%, rgba(160,110,20,0.45) 38%, #0c0b0a 65%), #0c0b0a; }
+    .nf-content { position: relative; z-index: 10; width: 100%; }
+    .nf-inner-wrap { width: 100%; margin: 0 auto; max-width: 1280px; padding: 0 clamp(24px,4vw,48px); }
+    .nf-top { display: flex; flex-direction: column; gap: 32px; padding-top: 24px; padding-bottom: 40px; }
+    .nf-headline-wrap { display: flex; flex-direction: column; gap: 20px; max-width: 576px; }
+    .nf-badge { display: flex; align-items: center; gap: 10px; }
+    .nf-badge__dot-wrap { position: relative; display: flex; width: 8px; height: 8px; flex-shrink: 0; }
+    .nf-badge__pulse { position: absolute; inset: 0; border-radius: 50%; background: #CA953D; opacity: 0.75; animation: nf-ping 1.2s cubic-bezier(0,0,0.2,1) infinite; }
+    .nf-badge__core { position: relative; width: 8px; height: 8px; border-radius: 50%; background: #CA953D; }
+    @keyframes nf-ping { 0% { transform: scale(1); opacity: 0.75; } 75%, 100% { transform: scale(2.2); opacity: 0; } }
+    .nf-badge__label { font-size: 14px; font-weight: 500; color: #fff; }
+    .nf-headline { color: #fff; font-size: clamp(24px,3.5vw,42px); line-height: 1.4; font-weight: 400; margin: 0; }
+    .nf-form { display: flex; width: 100%; max-width: 384px; flex-shrink: 0; align-items: center; gap: 8px; }
+    .nf-form__input { flex: 1; height: 48px; padding: 0 16px; font-size: 14px; font-family: 'Tajawal', sans-serif; color: #fff; background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.05); border-radius: 0; outline: none; transition: border-color 180ms ease; }
+    .nf-form__input::placeholder { color: rgba(255,255,255,0.70); }
+    .nf-form__btn { display: flex; align-items: center; height: 48px; flex-shrink: 0; cursor: pointer; padding: 0 20px; font-size: 14px; font-weight: 700; font-family: 'Tajawal', sans-serif; color: #fff; background: #CA953D; border: none; border-radius: 0; transition: all 180ms ease; }
+    .nf-mid { display: flex; flex-direction: column; gap: 40px; padding-bottom: 64px; }
+    .nf-brand { display: flex; flex: 1; align-items: center; gap: 12px; } .nf-brand__logo { height: 52px; width: auto; display: block; }
+    .nf-links-grid { display: grid; grid-template-columns: repeat(2, auto); gap: 32px 48px; }
+    .nf-links__title { font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.90); display: block; margin-bottom: 16px; }
+    .nf-links__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+    .nf-links__list a { font-size: 14px; color: rgba(255,255,255,0.70); text-decoration: none; transition: color 180ms ease; }
+    .nf-links__list a:hover { color: #fff; }
+    .nf-watermark { display: flex; width: 100%; align-items: center; justify-content: center; }
+    .nf-watermark__svg { height: auto; width: 100%; user-select: none; }
+    @media (min-width: 640px) { .nf-links-grid { grid-template-columns: repeat(3, auto); } }
+    @media (min-width: 1024px) { .nf-top { flex-direction: row; align-items: flex-end; justify-content: space-between; padding-top: 40px; padding-bottom: 56px; } .nf-headline-wrap { flex: 1; } .nf-mid { flex-direction: row; align-items: flex-start; gap: 32px; } .nf-links-grid { gap: 32px 64px; } }
+  </style>
+<link rel="stylesheet" href="assets/css/rtl.css">
+</head>
+<body>
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<header class="header">
+  <div class="container header__container">
+    <a href="ar.html" class="header__logo">
+      <img src="assets/img/logo.png" alt="NOVA TLT" class="header__logo-img" />
+    </a>
+    <nav class="header__menu" data-da=".header__hamburger, 1024, 0">
+      <a href="ar.html" class="header__menu-item ar-nav-item">الرئيسية</a>
+      <div class="nav-drop header__menu-item" data-nav-drop>
+        <button class="nav-drop__trigger ar-nav-item" aria-expanded="false" aria-haspopup="true">
+          الشركة
+          <svg class="nav-drop__chevron" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nav-drop__panel" role="menu">
+          <a href="ar-about.html" class="nav-drop__link" role="menuitem">من نحن</a>
+          <a href="ar-careers.html" class="nav-drop__link" role="menuitem">الوظائف</a>
+        </div>
+      </div>
+      <div class="nav-drop header__menu-item" data-nav-drop>
+        <button class="nav-drop__trigger ar-nav-item" aria-expanded="false" aria-haspopup="true">
+          ما نقدّمه
+          <svg class="nav-drop__chevron" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nav-drop__panel" role="menu">
+          <a href="ar-services.html" class="nav-drop__link" role="menuitem">الخدمات</a>
+          <a href="ar-fleet.html" class="nav-drop__link" role="menuitem">الأسطول</a>
+          <a href="ar-industries.html" class="nav-drop__link" role="menuitem">القطاعات التي نخدمها</a>
+        </div>
+      </div>
+      <a href="ar-projects.html" class="header__menu-item ar-nav-item">المشاريع</a>
+    </nav>
+    <div class="header__actions">
+      <button type="button" class="header__hamburger-btn btn" aria-label="فتح القائمة" id="nova-mob-open">
+        <svg width="22" height="16" viewBox="0 0 22 16" fill="none" aria-hidden="true"><rect y="0" width="22" height="2" rx="1" fill="currentColor"/><rect y="7" width="22" height="2" rx="1" fill="currentColor"/><rect y="14" width="22" height="2" rx="1" fill="currentColor"/></svg>
+      </button>
+      <div class="nt-lang-wrap" id="nt-lang-wrap">
+        <button type="button" class="header__lang-heading btn" id="nt-lang-btn">
+          <span class="btn__inner">
+            <span class="nt-lang-label">عر</span>
+            <svg width="13" height="12" viewBox="0 0 13 12" fill="none"><path d="M1.267 7.06149L5.84961 11.7365C6.19441 12.0878 6.80452 12.0878 7.15054 11.7365L11.7331 7.06149C12.0902 6.69643 12.0889 6.10663 11.7295 5.74406C11.37 5.38148 10.7905 5.38148 10.4322 5.74654L7.41586 8.82221V0.931267C7.41586 0.415966 7.00504 0 6.49885 0C5.99266 0 5.58184 0.415966 5.58184 0.931267V8.82221L2.56671 5.74654C2.38698 5.56401 2.15223 5.47337 1.91625 5.47337C1.68272 5.47337 1.44796 5.56401 1.26945 5.74406C0.911205 6.10663 0.909982 6.69643 1.267 7.06149Z" fill="#CA953D"/></svg>
+          </span>
+        </button>
+        <div class="nt-lang-menu" id="nt-lang-menu">
+          <a href="ar-industries.html" class="nt-lang-option" data-lang="en">English</a>
+          <a href="ar-industries.html" class="nt-lang-option is-active" data-lang="ar">العربية</a>
+        </div>
+      </div>
+      <a href="ar-contact.html" class="header__btn btn" data-da=".header__hamburger, 1024, 1">
+        <span class="btn__inner">اتصل بنا</span>
+      </a>
+    </div>
+  </div>
+  <div class="header__hamburger container"></div>
+</header>
+
+<main>
+  <div class="inner-hero">
+    <p class="inner-hero__eyebrow">القطاعات التي نخدمها</p>
+    <h1 class="inner-hero__title">مصمَّمون لقطاعات المملكة</h1>
+    <p class="inner-hero__sub">تعمل نوفا تيرا في أكثر القطاعات تطلّباً في المملكة العربية السعودية — من حقول أرامكو النفطية إلى مشاريع نيوم العملاقة، نعرف تضاريسك ومتطلبات الالتزام لديك ومواعيدك النهائية.</p>
+  </div>
+
+  <section class="section-inner" style="padding-top:0;">
+    <p class="section-eyebrow">خبرة القطاعات</p>
+    <h2 class="section-title">خمسة قطاعات. أسطول واحد.</h2>
+
+    <div class="industry-card">
+      <div class="industry-card__header">
+        <span class="industry-card__icon">🏗️</span>
+        <h3 class="industry-card__name">الإنشاءات</h3>
+      </div>
+      <p class="industry-card__sub">تتطلب الطفرة الإنشائية في المملكة قدرات حفر ونقل أتربة موثوقة وعالية الحجم. وتدعم نوفا تيرا المقاولين من مرحلة تنظيف الموقع حتى التسوية النهائية — بتوفير الشاحنات والمشغّلين والوثائق المناسبة لكل مرحلة من مراحل المشروع.</p>
+      <div class="industry-meta">
+        <div><div class="industry-meta__key">مدة العقد المعتادة</div><div class="industry-meta__val">٣ إلى ٢٤ شهراً</div></div>
+        <div><div class="industry-meta__key">فئة الأسطول</div><div class="industry-meta__val">قياسية وشاحنات نقل ثقيل</div></div>
+        <div><div class="industry-meta__key">التغطية</div><div class="industry-meta__val">مناطق المملكة الـ١٢ جميعها</div></div>
+      </div>
+      <span class="industry-pill">٤٥٪ من إيرادات نوفا تيرا</span>
+    </div>
+
+    <div class="industry-card">
+      <div class="industry-card__header">
+        <span class="industry-card__icon">🛢️</span>
+        <h3 class="industry-card__name">النفط والغاز</h3>
+      </div>
+      <p class="industry-card__sub">مشغّلون معتمدون من أرامكو، ومحركات مطابقة لمعيار يورو 5، ووثائق متوافقة مع معايير الصحة والسلامة والبيئة. وتدعم نوفا تيرا تطوير مواقع الإنتاج، وأعمال الحفر في ممرات خطوط الأنابيب، والخدمات اللوجستية للبنية التحتية للمخيمات النائية.</p>
+      <div class="industry-meta">
+        <div><div class="industry-meta__key">الالتزام الرئيسي</div><div class="industry-meta__val">معتمد من أرامكو والصحة والسلامة والبيئة</div></div>
+        <div><div class="industry-meta__key">فئة الأسطول</div><div class="industry-meta__val">الشاحنات المفصلية وشاحنات النقل الثقيل</div></div>
+        <div><div class="industry-meta__key">المناطق</div><div class="industry-meta__val">المنطقة الشرقية والمواقع النائية</div></div>
+      </div>
+      <span class="industry-pill">مسجَّل كمورِّد لدى أرامكو</span>
+    </div>
+
+    <div class="industry-card">
+      <div class="industry-card__header">
+        <span class="industry-card__icon">⛏️</span>
+        <h3 class="industry-card__name">التعدين</h3>
+      </div>
+      <p class="industry-card__sub">تتطلب عمليات معادن للفوسفات والبوكسايت والذهب شاحنات قلابة مفصلية مصنَّفة للتضاريس الوعرة والانحدارات الشديدة. ويتعامل أسطول نوفا تيرا للطرق الوعرة مع أصعب ظروف مواقع التعدين في المملكة.</p>
+      <div class="industry-meta">
+        <div><div class="industry-meta__key">نطاق الحمولة</div><div class="industry-meta__val">٣٠ إلى ٦٠ طناً</div></div>
+        <div><div class="industry-meta__key">فئة الأسطول</div><div class="industry-meta__val">الشاحنات القلابة المفصلية</div></div>
+        <div><div class="industry-meta__key">العملاء الرئيسيون</div><div class="industry-meta__val">شركاء معادن</div></div>
+      </div>
+      <span class="industry-pill">٢٠٪ من إيرادات نوفا تيرا</span>
+    </div>
+
+    <div class="industry-card">
+      <div class="industry-card__header">
+        <span class="industry-card__icon">🛣️</span>
+        <h3 class="industry-card__name">البنية التحتية</h3>
+      </div>
+      <p class="industry-card__sub">توسعة الطرق، وإنشاء الطرق السريعة، وأساسات الجسور، وتجهيز مسارات السكك الحديدية — توفّر نوفا تيرا قدرات نقل المواد السائبة وأعمال الحفر لبرنامج توسعة البنية التحتية في المملكة العربية السعودية.</p>
+      <div class="industry-meta">
+        <div><div class="industry-meta__key">المواد المتداولة</div><div class="industry-meta__val">ركام، رمل، أسفلت</div></div>
+        <div><div class="industry-meta__key">فئة الأسطول</div><div class="industry-meta__val">المقطورات القلابة</div></div>
+        <div><div class="industry-meta__key">الاعتماد</div><div class="industry-meta__val">متوافق مع وزارة الموارد البشرية وهيئة الزكاة</div></div>
+      </div>
+      <span class="industry-pill">١٨٪ من إيرادات نوفا تيرا</span>
+    </div>
+
+    <div class="industry-card">
+      <div class="industry-card__header">
+        <span class="industry-card__icon">🏛️</span>
+        <h3 class="industry-card__name">القطاع الحكومي والمشاريع العملاقة</h3>
+      </div>
+      <p class="industry-card__sub">نيوم، وذا لاين، والقدية، وبوابة الدرعية — تتطلب مشاريع رؤية 2030 العملاقة شركاء أساطيل قابلين للتوسّع وملتزمين بالأنظمة وقادرين على التعبئة السريعة. وتمتلك نوفا تيرا الاعتمادات والسجل اللازمين لأطر المناقصات الحكومية.</p>
+      <div class="industry-meta">
+        <div><div class="industry-meta__key">الالتزام</div><div class="industry-meta__val">متوائم مع رؤية 2030</div></div>
+        <div><div class="industry-meta__key">الحجم</div><div class="industry-meta__val">حتى أكثر من ١٠٠ وحدة</div></div>
+        <div><div class="industry-meta__key">التعبئة</div><div class="industry-meta__val">٤٨ إلى ٧٢ ساعة</div></div>
+      </div>
+      <span class="industry-pill">معتمَد للمشاريع العملاقة</span>
+    </div>
+  </section>
+
+  <section class="section-inner" style="padding-top:0;">
+    <p class="section-eyebrow">مصفوفة الالتزام</p>
+    <h2 class="section-title">كل اعتماد. كل قطاع.</h2>
+    <p class="section-sub">تحافظ نوفا تيرا على الالتزام التنظيمي الكامل ضمن أكثر الأطر القطاعية صرامة في المملكة العربية السعودية — لتجتاز عمليات تدقيق مشروعك من المرة الأولى.</p>
+    <div style="overflow-x:auto;">
+      <table class="compliance-table">
+        <thead>
+          <tr>
+            <th>الاعتماد / المعيار</th>
+            <th>الإنشاءات</th>
+            <th>النفط والغاز</th>
+            <th>التعدين</th>
+            <th>البنية التحتية</th>
+            <th>المشاريع العملاقة</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>التسجيل في التأمينات الاجتماعية (GOSI)</td><td><span class="compliance-tick">✓</span></td><td><span class="compliance-tick">✓</span></td><td><span class="compliance-tick">✓</span></td><td><span class="compliance-tick">✓</span></td><td><span class="compliance-tick">✓</span></td></tr>
+          <tr><td>الالتزام بأنظمة العمل (وزارة الموارد البشرية)</td><td><span class="compliance-tick">✓</span></td><td><span class="compliance-tick">✓</span></td><td><span class="compliance-tick">✓</span></td><td><span class="compliance-tick">✓</span></td><td><span class="compliance-tick">✓</span></td></tr>
+          <tr><td>هيئة الزكاة والضريبة والجمارك</td><td><span class="compliance-tick">✓</span></td><td><span class="compliance-tick">✓</span></td><td><span class="compliance-tick">✓</span></td><td><span class="compliance-tick">✓</span></td><td><span class="compliance-tick">✓</span></td></tr>
+          <tr><td>المناطق الصناعية (مدن)</td><td><span class="compliance-tick">✓</span></td><td><span class="compliance-tick">✓</span></td><td><span class="compliance-dash">—</span></td><td><span class="compliance-tick">✓</span></td><td><span class="compliance-tick">✓</span></td></tr>
+          <tr><td>نظام إدارة الصحة والسلامة والبيئة</td><td><span class="compliance-tick">✓</span></td><td><span class="compliance-tick">✓</span></td><td><span class="compliance-tick">✓</span></td><td><span class="compliance-tick">✓</span></td><td><span class="compliance-tick">✓</span></td></tr>
+          <tr><td>التسجيل كمورِّد لدى أرامكو</td><td><span class="compliance-dash">—</span></td><td><span class="compliance-tick">✓</span></td><td><span class="compliance-tick">✓</span></td><td><span class="compliance-dash">—</span></td><td><span class="compliance-tick">✓</span></td></tr>
+          <tr><td>معيار محركات يورو 5</td><td><span class="compliance-tick">✓</span></td><td><span class="compliance-tick">✓</span></td><td><span class="compliance-tick">✓</span></td><td><span class="compliance-tick">✓</span></td><td><span class="compliance-tick">✓</span></td></tr>
+          <tr><td>تتبّع GPS والتتبّع عن بُعد</td><td><span class="compliance-tick">✓</span></td><td><span class="compliance-tick">✓</span></td><td><span class="compliance-tick">✓</span></td><td><span class="compliance-tick">✓</span></td><td><span class="compliance-tick">✓</span></td></tr>
+          <tr><td>آيزو 9001:2015</td><td><span class="compliance-tick">✓</span></td><td><span class="compliance-tick">✓</span></td><td><span class="compliance-tick">✓</span></td><td><span class="compliance-tick">✓</span></td><td><span class="compliance-tick">✓</span></td></tr>
+          <tr><td>إطار موردي رؤية 2030</td><td><span class="compliance-dash">—</span></td><td><span class="compliance-dash">—</span></td><td><span class="compliance-dash">—</span></td><td><span class="compliance-tick">✓</span></td><td><span class="compliance-tick">✓</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section-inner" style="padding-top:0;">
+    <p class="section-eyebrow">دراسات حالة</p>
+    <h2 class="section-title">أدلّة، لا وعود.</h2>
+    <div class="case-grid">
+      <div class="case-card">
+        <p class="case-card__label">الإنشاءات — الرياض</p>
+        <h3 class="case-card__title">تجهيز موقع برج الرياض</h3>
+        <p class="case-card__text">نشر ٣٥ شاحنة قلابة قياسية و١٢ شاحنة نقل ثقيل على مدى ٨ أشهر من أعمال تنظيف الموقع وتوريد الركام المتواصلة — صفر حوادث سلامة، والتزام بنسبة ١٠٠٪ بمواعيد التسليم.</p>
+      </div>
+      <div class="case-card">
+        <p class="case-card__label">البنية التحتية — الطريق الدائري الشمالي</p>
+        <h3 class="case-card__title">توسعة الطريق الدائري الشمالي</h3>
+        <p class="case-card__text">وفّر أسطول المقطورات القلابة ٤٢٠٬٠٠٠ طن من ركام الطبقة الأساسية على مدى جدول زمني من ١٤ شهراً، بالتنسيق مع ٦ مقاولين من الباطن و٣ محاجر مواد.</p>
+      </div>
+      <div class="case-card">
+        <p class="case-card__label">مشروع عملاق — نيوم</p>
+        <h3 class="case-card__title">أعمال الحفر في المرحلة الأولى من نيوم</h3>
+        <p class="case-card__text">تعبئة أسطول من ٦٠ شاحنة مفصلية خلال ٧٢ ساعة لأعمال الحفر السائب في المرحلة الأولى من نيوم — بالعمل في تضاريس بالغة القسوة، مع إرسال على مدار الساعة وإشراف على الصحة والسلامة والبيئة وتقارير GPS لحظية.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-inner" style="padding-top:0;">
+    <div class="inner-cta">
+      <h2 class="inner-cta__title">في أي قطاع تعمل؟</h2>
+      <p class="inner-cta__sub">لنبنِ خطة أسطولك. أخبرنا بقطاعك ونطاق مشروعك وجدوله الزمني — وسنوفّر لك المركبات المناسبة وحزمة الالتزام المناسبة.</p>
+      <div class="btn-row">
+        <a href="https://wa.me/966503065248" class="gold-btn" target="_blank" rel="noopener">ابنِ خطة أسطولي</a>
+        <a href="ar-fleet.html" class="ghost-btn">استعرض أسطولنا</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="nova-footer">
+  <div class="nf-content">
+    <div class="nf-inner-wrap">
+      <div class="nf-top">
+        <div class="nf-headline-wrap">
+          <div class="nf-badge">
+            <span class="nf-badge__dot-wrap"><span class="nf-badge__pulse"></span><span class="nf-badge__core"></span></span>
+            <span class="nf-badge__label">متاح في جميع مناطق المملكة الـ١٢</span>
+          </div>
+          <h2 class="nf-headline">احصل على عرض أسطول مخصَّص يتناسب مع مشروعك — خلال ٢٤ ساعة.</h2>
+        </div>
+        <form class="nf-form" onsubmit="return false;">
+          <input type="email" class="nf-form__input" placeholder="أدخل بريدك الإلكتروني" />
+          <button type="submit" class="nf-form__btn"><span>احصل على عرض</span></button>
+        </form>
+      </div>
+      <div class="nf-mid">
+        <div class="nf-brand">
+          <img src="assets/img/logo.png" alt="NOVA TLT" class="nf-brand__logo" />
+        </div>
+        <div class="nf-links-grid">
+          <div class="nf-links__col">
+            <span class="nf-links__title">الشركة</span>
+            <ul class="nf-links__list">
+              <li><a href="ar-about.html">من نحن</a></li>
+              <li><a href="ar-careers.html">الوظائف</a></li>
+              <li><a href="news.html">الأخبار</a></li>
+            </ul>
+          </div>
+          <div class="nf-links__col">
+            <span class="nf-links__title">الخدمات</span>
+            <ul class="nf-links__list">
+              <li><a href="ar-services.html">تأجير الشاحنات القلابة</a></li>
+              <li><a href="ar-fleet.html">أسطولنا</a></li>
+              <li><a href="ar-industries.html">القطاعات</a></li>
+            </ul>
+          </div>
+          <div class="nf-links__col">
+            <span class="nf-links__title">تواصل معنا</span>
+            <ul class="nf-links__list">
+              <li><a href="tel:+966503065248">+966 503065248</a></li>
+              <li><a href="mailto:info@novatlt.com">info@novatlt.com</a></li>
+              <li><a href="ar-contact.html">جدة، المملكة العربية السعودية</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="nf-watermark">
+      <svg class="nf-watermark__svg" viewBox="0 0 720 110" preserveAspectRatio="xMidYMid meet" aria-label="NOVA TLT">
+        <text x="50%" y="105" dominant-baseline="alphabetic" text-anchor="middle" textLength="90%" lengthAdjust="spacing" font-size="160" font-weight="700" fill="rgba(255,255,255,0.30)" font-family="ui-sans-serif,system-ui,sans-serif" letter-spacing="-0.05em">NOVA TLT</text>
+      </svg>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){var drops=document.querySelectorAll('[data-nav-drop]');function open(d){d.classList.add('nav-drop--open');d.querySelector('.nav-drop__trigger').setAttribute('aria-expanded','true');}function close(d){d.classList.remove('nav-drop--open');d.querySelector('.nav-drop__trigger').setAttribute('aria-expanded','false');}function closeAll(){drops.forEach(close);}drops.forEach(function(drop){var trigger=drop.querySelector('.nav-drop__trigger');var mob=function(){return window.innerWidth<=1024;};drop.addEventListener('mouseenter',function(){if(!mob())open(drop);});drop.addEventListener('mouseleave',function(){if(!mob())close(drop);});trigger.addEventListener('click',function(e){e.stopPropagation();var o=drop.classList.contains('nav-drop--open');closeAll();if(!o)open(drop);});});document.addEventListener('click',closeAll);document.addEventListener('keydown',function(e){if(e.key==='Escape')closeAll();});})();
+</script>
+<script>
+(function(){var wrap=document.getElementById('nt-lang-wrap'),btn=document.getElementById('nt-lang-btn');if(!wrap||!btn)return;btn.addEventListener('click',function(e){e.stopPropagation();wrap.classList.toggle('open');});document.addEventListener('click',function(){wrap.classList.remove('open');});})();
+</script>
+<script>
+(function(){var dot=document.getElementById('cursor-dot'),ring=document.getElementById('cursor-ring');if(!dot||!ring)return;var mx=-100,my=-100,rx=-100,ry=-100;document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;});document.querySelectorAll('a,button').forEach(function(el){el.addEventListener('mouseenter',function(){ring.classList.add('is-hover');});el.addEventListener('mouseleave',function(){ring.classList.remove('is-hover');});});function loop(){dot.style.left=mx+'px';dot.style.top=my+'px';rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);}loop();})();
+</script>
+<script src="assets/js/scroll-reveal.js"></script>
+<script src="assets/js/mobile-menu.js"></script>
+<script src="assets/js/ar-mobile-menu.js"></script>
+<script src="assets/js/page-transition.js"></script>
+</body>
+</html>

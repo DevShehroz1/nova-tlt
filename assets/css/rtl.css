@@ -63,22 +63,15 @@ body { top: 0 !important; }
   word-spacing: 0 !important;
 }
 
-/* ── 4. Arabic font for ALL elements — Cairo covers Arabic Unicode fully ── */
+/* ── 4. Arabic font for ALL elements ── */
 [dir="rtl"],
 [dir="rtl"] * {
-  font-family: 'Cairo', 'Noto Sans Arabic', Arial, sans-serif !important;
+  font-family: 'Tajawal', sans-serif !important;
 }
 
-/* ── 5. Header RTL layout ── */
-[dir="rtl"] .header__container {
-  flex-direction: row-reverse !important;
-}
-[dir="rtl"] .header__actions {
-  flex-direction: row-reverse !important;
-}
-[dir="rtl"] .header__menu {
-  flex-direction: row-reverse;
-}
+/* ── 5. Header RTL layout ──
+   dir="rtl" on <html> makes flex row flow right→left naturally.
+   Do NOT add row-reverse here — that cancels out RTL and produces LTR visual order. */
 
 /* ── 5b. Gfeat heading: tighter line-height for Arabic ── */
 [dir="rtl"] .gfeat-heading {
@@ -119,24 +112,11 @@ body { top: 0 !important; }
   display: inline-block;
 }
 
-/* ── 8. Footer RTL ── */
-[dir="rtl"] .footer__inner,
-[dir="rtl"] .footer__cols {
-  flex-direction: row-reverse;
-}
+/* ── 8. Footer RTL ── text-align and link alignment handled by global [dir="rtl"] rule */
 
-/* ── 9. Section flex rows ── */
-[dir="rtl"] .stats-split__inner,
-[dir="rtl"] .gfeat__inner,
-[dir="rtl"] .ctab__tabs {
-  flex-direction: row-reverse;
-}
+/* ── 9. Section flex rows ── RTL flex row already flows right→left; no row-reverse needed */
 
-/* ── 10. Icon + text pairs ── */
-[dir="rtl"] .contact-info__item,
-[dir="rtl"] .footer__contact-item {
-  flex-direction: row-reverse;
-}
+/* ── 10. Icon + text pairs ── RTL flex row handles ordering naturally */
 
 /* ── 11. Form inputs ── */
 [dir="rtl"] input,
@@ -145,7 +125,47 @@ body { top: 0 !important; }
   text-align: right;
   direction: rtl;
 }
+/* Email/phone inputs stay LTR so addresses render correctly */
+[dir="rtl"] input[type="email"],
+[dir="rtl"] input[type="tel"] {
+  direction: ltr !important;
+  text-align: left !important;
+}
 
 /* ── 12. General text alignment ── */
 [dir="rtl"] { text-align: right; }
 [dir="rtl"] li { text-align: right; }
+
+/* ── 13. Grid sections: swap column order for RTL visual reading order ──
+   CSS grid ignores dir="rtl" for column order; use order to put text first (right) */
+[dir="rtl"] .gfeat-inner .gfeat-text       { order: 2; }
+[dir="rtl"] .gfeat-inner .gfeat-globe-wrap { order: 1; }
+
+/* ── 14. Mobile header: row-reverse cancels RTL; reset to row so dir=rtl handles order naturally ── */
+@media (max-width: 1024px) {
+  [dir="rtl"] .header__actions { flex-direction: row !important; }
+  [dir="rtl"] .header__menu {
+    align-items: center !important;
+    text-align: center !important;
+  }
+}
+
+/* ── 15. FAQ: text right, icon on left (natural RTL flex — last child goes left) ── */
+[dir="rtl"] .faq-item__btn {
+  text-align: right;
+}
+
+/* ── 16. Testimonials: right-align all text ── */
+[dir="rtl"] .testi-card__text,
+[dir="rtl"] .testi-card__name,
+[dir="rtl"] .testi-card__role {
+  text-align: right;
+}
+[dir="rtl"] .testi-card__author {
+  justify-content: flex-start;
+}
+/* Stars: keep LTR order (decorative, don't reverse) */
+[dir="rtl"] .testi-card__stars {
+  direction: ltr;
+  display: inline-block;
+}
