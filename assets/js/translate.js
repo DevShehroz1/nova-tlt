@@ -23,8 +23,7 @@
   }
 
   function isArabic() {
-    var c = getCookie(COOKIE);
-    return c === AR_VAL || c === '/ar/ar';
+    return document.documentElement.lang.startsWith('ar');
   }
 
   /* ── direction + lang ── */

@@ -2178,7 +2178,7 @@
 		background-clip: text;
 		line-height: 1.0;
 		letter-spacing: 0.01em;
-		font-size: var(--sv-hs, 8vw);
+		font-size: var(--sv-hs, 5vw);
 		max-width: 80vw;
 		pointer-events: none;
 		z-index: 10;
@@ -2224,6 +2224,7 @@
 	.sv-progress { width: 220px; height: 3px; background: rgba(255,255,255,0.18); border-radius: 2px; }
 	.sv-progress-bar { height: 100%; background: #fff; border-radius: 2px; width: 0%; transition: width 0.05s linear; }
 	@media (max-width: 768px) {
+		.sv-wrap { height: 320vh; }
 		.sv-heading { top: 200px; left: 24px; max-width: 70vw; }
 		.sv-skip-group { left: 24px; bottom: 32px; align-items: flex-start; }
 		.sv-skip-link { padding: 12px 24px; font-size: 11px; }
@@ -4340,8 +4341,8 @@ import createGlobe from 'https://esm.sh/cobe@0.6.3';
   function updateHeading(p) {
     const t = Math.min(Math.max(p / 0.4, 0), 1);
     const isMob = window.innerWidth <= 768;
-    const start = isMob ? 10 : 8;
-    const end   = isMob ? 6  : 2.8;
+    const start = isMob ? 7  : 5;
+    const end   = isMob ? 4  : 2.8;
     heading.style.setProperty('--sv-hs', (start + (end - start) * t) + 'vw');
   }
 
