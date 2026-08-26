@@ -1079,6 +1079,11 @@ textarea {
 	padding: 0;
 	font-size: 16rem;
 }
+.header__lang-heading.btn {
+	height: 40px !important;
+	width: 64px !important;
+	font-size: 13px !important;
+}
 .header__lang-heading svg {
 	width: 13rem;
 	height: 12rem;

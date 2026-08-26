@@ -108,6 +108,11 @@
     
     
     .footer-links-col__link:hover { color: #CA953D; }
+    .nt-lang-wrap { position: relative; }
+    .nt-lang-menu { display: none; position: absolute; top: calc(100% + 8px); right: 0; background: #141414; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; min-width: 130px; z-index: 300; padding: 4px; }
+    .nt-lang-wrap.open .nt-lang-menu { display: block; }
+    .nt-lang-option { display: block; padding: 8px 14px; font-size: 14px; color: rgba(255,255,255,0.7); border-radius: 6px; transition: background 150ms, color 150ms; text-decoration: none; }
+    .nt-lang-option:hover, .nt-lang-option.is-active { background: rgba(202,149,61,0.12); color: #CA953D; }
     @media(max-width:768px){
       
       
@@ -277,6 +282,10 @@
           </nav>
     <div class="header__actions">
       <button type="button" class="header__hamburger-btn btn" aria-label="Open hamburger menu"><span class="is-not-active">Menu</span><span class="is-active">Close</span></button>
+			<div class="nt-lang-wrap" id="nt-lang-wrap">
+				<button type="button" class="header__lang-heading btn" id="nt-lang-btn"><span class="btn__inner"><span class="nt-lang-label">ENG</span><svg width="13" height="12" viewBox="0 0 13 12" fill="none"><path d="M1.267 7.06149L5.84961 11.7365C6.19441 12.0878 6.80452 12.0878 7.15054 11.7365L11.7331 7.06149C12.0902 6.69643 12.0889 6.10663 11.7295 5.74406C11.37 5.38148 10.7905 5.38148 10.4322 5.74654L7.41586 8.82221V0.931267C7.41586 0.415966 7.00504 0 6.49885 0C5.99266 0 5.58184 0.415966 5.58184 0.931267V8.82221L2.56671 5.74654C2.38698 5.56401 2.15223 5.47337 1.91625 5.47337C1.68272 5.47337 1.44796 5.56401 1.26945 5.74406C0.911205 6.10663 0.909982 6.69643 1.267 7.06149Z" fill="#CA953D"/></svg></span></button>
+				<div class="nt-lang-menu" id="nt-lang-menu"><a href="services.html" class="nt-lang-option is-active" data-lang="en">English</a><a href="ar-services.html" class="nt-lang-option" data-lang="ar">العربية</a></div>
+			</div>
 				<a href="contact.html" class="mob-header-cta"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.47 11.47 0 003.58.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.58a1 1 0 01-.25 1.01l-2.2 2.2z"/></svg></a>
       <button type="button" class="header__btn text-hover btn _accent" data-da=".header__hamburger, 1024, 1" data-contact-modal><span class="btn__inner text-hover__inner"><span class="text-hover__elem text-hover__elem-1">Contact Us</span><span class="text-hover__elem text-hover__elem-2">Contact Us</span></span></button>
     </div>
@@ -542,6 +551,7 @@
 (function(){var drops=document.querySelectorAll('[data-nav-drop]');function open(d){d.classList.add('nav-drop--open');d.querySelector('.nav-drop__trigger').setAttribute('aria-expanded','true');}function close(d){d.classList.remove('nav-drop--open');d.querySelector('.nav-drop__trigger').setAttribute('aria-expanded','false');}function closeAll(){drops.forEach(close);}drops.forEach(function(drop){var trigger=drop.querySelector('.nav-drop__trigger');var mob=function(){return window.innerWidth<=1024;};drop.addEventListener('mouseenter',function(){if(!mob())open(drop);});drop.addEventListener('mouseleave',function(){if(!mob())close(drop);});trigger.addEventListener('click',function(e){e.stopPropagation();var o=drop.classList.contains('nav-drop--open');closeAll();if(!o)open(drop);});});document.addEventListener('click',closeAll);document.addEventListener('keydown',function(e){if(e.key==='Escape')closeAll();});})();
 </script>
 <script>
+var ntLangWrap=document.getElementById("nt-lang-wrap");var ntLangBtn=document.getElementById("nt-lang-btn");if(ntLangWrap&&ntLangBtn){ntLangBtn.addEventListener("click",function(e){e.stopPropagation();ntLangWrap.classList.toggle("open");});document.addEventListener("click",function(){ntLangWrap.classList.remove("open");});}
 (function(){var dot=document.getElementById('cursor-dot'),ring=document.getElementById('cursor-ring');if(!dot||!ring)return;var mx=-100,my=-100,rx=-100,ry=-100;document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;});document.querySelectorAll('a,button').forEach(function(el){el.addEventListener('mouseenter',function(){ring.classList.add('is-hover');});el.addEventListener('mouseleave',function(){ring.classList.remove('is-hover');});});function loop(){dot.style.left=mx+'px';dot.style.top=my+'px';rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);}loop();})();
 </script>
 <script>
@@ -549,6 +559,7 @@
 </script>
 <script src="assets/js/scroll-reveal.js"></script>
 <script src="assets/js/mobile-menu.js"></script>
+<script src="assets/js/translate.js?v=2"></script>
 <script src="assets/js/page-transition.js"></script>
 <script>
 (function(){
