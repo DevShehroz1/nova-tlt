@@ -91,7 +91,8 @@
     .ccard__title span{background:var(--gold-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
     .ccard__desc{font-family:'Tajawal',sans-serif;font-size:clamp(14px,1.1vw,16px);color:var(--ink-dim);line-height:1.72;max-width:460px;}
 
-    .ccard__info-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 16px;}
+    .ccard__info-grid{display:grid;grid-template-columns:1fr;gap:0;}
+    @media(min-width:768px){.ccard__info-grid{grid-template-columns:1fr 1fr;gap:0 16px;}}
     @media(min-width:1024px){.ccard__info-grid{grid-template-columns:repeat(3,1fr);}}
     .cinfo{display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.05);text-decoration:none;color:inherit;}
     .cinfo:last-child{border-bottom:none;}
@@ -101,7 +102,8 @@
     .cinfo__label{font-family:'Tajawal',sans-serif;font-size:13px;font-weight:600;color:var(--ink);transition:color 180ms;}
     .cinfo:hover .cinfo__label{color:#CA953D;}
     .cinfo__value{font-family:'Tajawal',sans-serif;font-size:11px;color:var(--ink-dim);margin-top:2px;}
-    .cinfo--wide{grid-column:span 2;}
+    .cinfo--wide{grid-column:span 1;}
+    @media(min-width:768px){.cinfo--wide{grid-column:span 2;}}
     @media(min-width:1024px){.cinfo--wide{grid-column:span 1;}}
 
     /* Right panel — form (in RTL this sits on the left visually) */
@@ -152,6 +154,7 @@
     @media(min-width:1024px){.nf-top{flex-direction:row;align-items:flex-end;justify-content:space-between;padding-top:40px;padding-bottom:56px;}.nf-headline-wrap{flex:1;}.nf-mid{flex-direction:row;align-items:flex-start;gap:32px;}.nf-links-grid{gap:32px 64px;}}
   </style>
 <link rel="stylesheet" href="assets/css/rtl.css">
+	<script src="assets/js/translate.js"></script>
 </head>
 <body>
 <div id="cursor-dot"></div>

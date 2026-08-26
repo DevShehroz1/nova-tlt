@@ -145,8 +145,11 @@
     /* Contact info items */
     .ccard__info-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0 16px;
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    @media (min-width: 768px) {
+      .ccard__info-grid { grid-template-columns: 1fr 1fr; gap: 0 16px; }
     }
     @media (min-width: 1024px) {
       .ccard__info-grid { grid-template-columns: repeat(3, 1fr); }
@@ -187,7 +190,8 @@
       margin-top: 2px;
       letter-spacing: 0.01em;
     }
-    .cinfo--wide { grid-column: span 2; }
+    .cinfo--wide { grid-column: span 1; }
+    @media (min-width: 768px) { .cinfo--wide { grid-column: span 2; } }
     @media (min-width: 1024px) { .cinfo--wide { grid-column: span 1; } }
 
     /* Right panel — form */
@@ -364,7 +368,7 @@
         </button>
         <div class="nt-lang-menu" id="nt-lang-menu">
           <a href="#" class="nt-lang-option is-active" data-lang="en">English</a>
-          <a href="ar/contact.html" class="nt-lang-option" data-lang="ar">العربية</a>
+          <a href="ar-contact.html" class="nt-lang-option" data-lang="ar">العربية</a>
         </div>
       </div>
       <a href="contact.html" class="header__btn text-hover btn _accent" data-da=".header__hamburger, 1024, 1">
