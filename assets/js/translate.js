@@ -129,14 +129,6 @@
     obs.observe(document.body, { childList: true, subtree: true, characterData: true });
   }
 
-  /* ── Google Translate init ── */
-  window.googleTranslateElementInit = function () {
-    new google.translate.TranslateElement(
-      { pageLanguage: 'en', includedLanguages: 'ar', autoDisplay: false, layout: 0 },
-      'google_translate_element'
-    );
-  };
-
   /* ── sync elem-2 hover spans from elem-1 after GT translation ── */
   function syncHoverSpans() {
     document.querySelectorAll('.text-hover__inner').forEach(function (wrap) {
